@@ -18,8 +18,8 @@ endif()
 #Type de la bibliothèque de sortie
 set(TYPE_LIB STATIQUE CACHE STRING "Choisir le type la bibliothèque (STATIQUE ou DYNAMIQUE)")
 
-#Dossier CommunsCE
-set(BIBLIO_PATH "${CMAKE_SOURCE_DIR}/../Biblio" CACHE PATH "Chemin vers la librarie Bibliothèque")
+#Dossier biblio
+set(BIBLIO_PATH "${CMAKE_SOURCE_DIR}/../biblio" CACHE PATH "Chemin vers la librarie Bibliothèque")
 
 ## Option de compilation pour g++
 if(CMAKE_COMPILER_IS_GNUCXX)

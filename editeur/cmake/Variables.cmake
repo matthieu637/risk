@@ -15,11 +15,11 @@ if(WINDOWS)
 	set(LINK_SFML_MAIN FALSE CACHE BOOL "Linker la bibliothèque main?")
 endif()
 
-#Dossier CommunsCE
-set(COMMUNSCE_PATH "${CMAKE_SOURCE_DIR}/../CommunsCE" CACHE PATH "Chemin vers la librarie CommunsCE")
+#Dossier communscs
+set(COMMUNSCE_PATH "${CMAKE_SOURCE_DIR}/../communsce" CACHE PATH "Chemin vers la librarie CommunsCE")
 
-#Dossier CommunsCE
-set(BIBLIO_PATH "${CMAKE_SOURCE_DIR}/../Biblio" CACHE PATH "Chemin vers la librarie Bibliothèque")
+#Dossier biblio
+set(BIBLIO_PATH "${CMAKE_SOURCE_DIR}/../biblio" CACHE PATH "Chemin vers la librarie Bibliothèque")
 
 #Debug / Release
 set(CEGUI_DEBUG Release CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
