@@ -1,0 +1,6 @@
+*.o
+*.kdev4
+*~
+*/build/
+*.swp
+*/.kdev4/
