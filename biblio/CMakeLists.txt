@@ -16,19 +16,21 @@ find_package(Boost)
 include_directories(${CMAKE_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS} )
 
 #Source & headers
-file ( GLOB_RECURSE sources src/*.cpp include/*.hpp)
+file ( GLOB_RECURSE sources_lib src/bib/*.cpp include/bib/*.hpp)
+file ( GLOB_RECURSE sources_tests src/*.cpp include/*.hpp)
 
 #### Création de la librarie ####
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/lib")
 
 if(TYPE_LIB MATCHES DYNAMIQUE)
-  add_library(biblio SHARED ${sources})
+  add_library(biblio SHARED ${sources_lib})
 else()
-  add_library(biblio STATIC ${sources})
+  add_library(biblio STATIC ${sources_lib})
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
   set_target_properties(biblio PROPERTIES DEBUG_POSTFIX -d)
 endif()
 
+add_executable(biblio_test ${sources_tests})
