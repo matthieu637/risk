@@ -12,6 +12,7 @@ int main(){
   /** Add further tests here */
   XMLEngineTest t;
   tests.push_back(&t);
+  /** */
   
   for (list<ITest*>::iterator it = tests.begin(); it != tests.end(); it++)
       (*it)->run();
