@@ -4,3 +4,7 @@
 */build/
 *.swp
 */.kdev4/
+*.a
+*.so
+*.dll
+*.lib
