@@ -10,7 +10,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/OS.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/Variables.cmake)
 
 #Trouve Boost
-find_package(Boost)
+find_package(Boost COMPONENTS serialization)
 
 #Include
 include_directories(${CMAKE_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS} )
@@ -29,8 +29,12 @@ else()
   add_library(biblio STATIC ${sources_lib})
 endif()
 
+target_link_libraries(biblio ${Boost_LIBRARIES})
+
 if(CMAKE_BUILD_TYPE MATCHES Debug)
   set_target_properties(biblio PROPERTIES DEBUG_POSTFIX -d)
 endif()
 
+
 add_executable(biblio_test ${sources_tests})
+target_link_libraries(biblio_test ${Boost_LIBRARIES})
