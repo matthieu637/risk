@@ -1,6 +1,7 @@
 #ifndef REPERE_HPP
 #define REPERE_HPP
 
+#include <math.h>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Shape.hpp>
 #include "Tile.hpp"
@@ -29,16 +30,8 @@ public:
 ///        x,y : coordonnes de la tile en pixels
 ///
     void setTile(const TileTemplate *tt, const int x, const int y);
-
-///
-///\brief Supprime la texture d'une tile
-///\param x,y : coordonnes de la tile en pixels
-///
-    void unsetTile(const int x, const int y); //EDITEUR
     
     void dessiner(RenderTarget& cible);
-    
-    void redimensionner(const int x, const int y); //EDITEUR
 
 protected:
 ///

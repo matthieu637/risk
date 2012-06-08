@@ -88,7 +88,6 @@ int Repere::getIndice(int x, int y) const{
 
   int indice = 2*largeur * y/h_tile + x/l_tile;
   int x_rect = x % l_tile, y_rect = y % h_tile;
-  bool l_paire = y % h_tile < h_tile_demi;
   
   if (y_rect <= h_tile_demi )
     if (x_rect <= l_tile_demi)
