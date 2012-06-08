@@ -13,7 +13,8 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <test/SampleData.hpp>
+#include "test/SampleData.hpp"
+#include "bib/Logger.hpp"
 
 using std::ofstream;
 using std::ifstream;
@@ -36,6 +37,8 @@ public:
 ///
   template<class T>
   static void save(const T object, const char* name, const string file_name){
+    LOG_INFO("Enregistrement du fichier XML " << file_name);
+    
     ofstream outputFile(file_name);
     xml_oarchive xml(outputFile);
     xml << make_nvp(name, object);
@@ -49,6 +52,8 @@ public:
 ///
   template<class T>
   static T load(const char* name, const string file_name){
+    LOG_INFO("Lecture du fichier XML " << file_name);
+    
     T object;
     ifstream inputFile(file_name);
     xml_iarchive xml(inputFile);
