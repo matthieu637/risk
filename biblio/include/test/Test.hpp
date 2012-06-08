@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <typeinfo>
+#include "bib/StringUtils.hpp"
 
 using namespace std;
 
@@ -17,13 +18,14 @@ class Test
 {
 public:
   void run(){
-   cout <<"Starting " << typeid(*this).name() << endl;
+   cout <<"Starting " << bib::rmFirstNumber(typeid(*this).name()) << endl;
    runtest(); 
-   cout << typeid(*this).name() << " done !" << endl;
+   cout << bib::rmFirstNumber(typeid(*this).name()) << " done !" << endl << endl;
   }
   
 protected:
   virtual void runtest() = 0;
+
 };
 
 #endif // ITEST_HPP
