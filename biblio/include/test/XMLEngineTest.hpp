@@ -1,6 +1,6 @@
 #ifndef XMLENGINETEST_HPP
 #define XMLENGINETEST_HPP
-#include "ITest.hpp"
+#include "Test.hpp"
 #include "SampleData.hpp"
 #include "bib/XMLEngine.hpp"
 
@@ -14,12 +14,10 @@ using bib::XMLEngine;
 ///
 
 
-class XMLEngineTest : public ITest
+class XMLEngineTest : public Test
 {
 public:
-  void run(){
-    cout <<"Stating XMLEngineTest" << endl;
-    
+  void runtest(){
     /** Saving a file */
     SampleData data1("Olivia","Megan", true, 51);
     XMLEngine::save<SampleData>(data1, "ofc", "osti.txt");

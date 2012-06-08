@@ -1,23 +1,23 @@
 #include <iostream>
 #include <list>
-#include "test/ITest.hpp"
+#include "test/Test.hpp"
 #include "test/XMLEngineTest.hpp"
 
 using namespace std;
 
 int main(){
   
-  list<ITest*> tests;
+  list<Test*> tests;
   
   /** Add further tests here */
   XMLEngineTest t;
   tests.push_back(&t);
   /** */
   
-  for (list<ITest*>::iterator it = tests.begin(); it != tests.end(); it++)
+  for (list<Test*>::iterator it = tests.begin(); it != tests.end(); it++)
       (*it)->run();
   
-  cout << "Tests ... Done !" << endl;
+  cout << "Tests ... done !" << endl;
   
   return 0;
 }
