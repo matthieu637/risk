@@ -35,7 +35,7 @@ public:
     
     void dessiner(RenderTarget& cible);
 
-public:
+protected:
 ///
 ///\brief Retourne l'indice selon les coordonees en pixels
 ///\param x,y : coordonnes de la tile
