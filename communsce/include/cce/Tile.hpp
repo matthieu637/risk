@@ -23,7 +23,7 @@ public:
 ///	  x : ligne de la tile
 ///	  y : colonne de la tile
 ///
-    void init(const TileTemplate *tt, int x, int y);
+    void init(TileTemplate *tt, int x, int y);
     
 
 public:
@@ -37,7 +37,7 @@ public:
 ///\brief Defini la texture de la tile
 ///\param id : id de la texture 
 ///
-    void setTemplate(const TileTemplate *_tt);
+    void setTemplate(TileTemplate *_tt);
 
 ///
 ///\brief Supprime la texture de la tile

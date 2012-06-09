@@ -1,7 +1,8 @@
-#ifndef REPERE_HPP
-#define REPERE_HPP
+#ifndef REPEREEDITEUR_HPP
+#define REPEREEDITEUR_HPP
 
 #include <cce/Repere.hpp>
+#include <cce/Tile.hpp>
 
 using cce::Tile;
 
@@ -11,7 +12,7 @@ class Repere : public cce::Repere
 {
 
 public:
-    Repere();
+    Repere(int x, int y);
     virtual ~Repere();
 
 ///

@@ -7,6 +7,8 @@
 #include "Tile.hpp"
 #include "TileTemplate.hpp"
 
+using sf::RenderTarget;
+
 namespace cce{
 
 class Repere
@@ -29,11 +31,11 @@ public:
 ///\param tt : TileTemplate à associer
 ///        x,y : coordonnes de la tile en pixels
 ///
-    void setTile(const TileTemplate *tt, const int x, const int y);
+    void setTile(TileTemplate *tt, const int x, const int y);
     
     void dessiner(RenderTarget& cible);
 
-protected:
+public:
 ///
 ///\brief Retourne l'indice selon les coordonees en pixels
 ///\param x,y : coordonnes de la tile

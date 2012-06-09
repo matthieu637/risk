@@ -1,8 +1,8 @@
-#include "edt/Repere.hpp"
+#include "../../include/edt/Repere.hpp"
 
 namespace edt{
 
-Repere::Repere()
+Repere::Repere(int x, int y) : cce::Repere(x, y)
 {
 
 }
@@ -14,13 +14,13 @@ Repere::~Repere()
 
 void Repere::unsetTile(const int x, const int y)
 {
-  getTile(x, y);
+  getTile(x, y).unsetTemplate();
 }
 
 void Repere::redimensionner(const int x, const int y)
 {
     int i, j;
-    Tile* tiles_new;
+    Tile* tiles_new = new Tile[x*y];
     
     if(hauteur <= y)
       if(largeur <= x)
@@ -43,7 +43,9 @@ void Repere::redimensionner(const int x, const int y)
     
     largeur = x;
     hauteur = y;
-    nbTiles = largeur * hauteur;
+    nbTiles = x * y;
+    nbTiles_sans_derniere_ligne = nbTiles - largeur;
+    tiles = tiles_new;
 }
 
 }

@@ -1,11 +1,12 @@
 #include <iostream>
-#include "cce/Tile.hpp"
-#include "cce/Repere.hpp"
+#include <cce/Tile.hpp>
+#include <edt/Repere.hpp>
 
 int main()
 {
-    Repere r = new Repere(5,5);
-    std::cout("");
+    edt::Repere *r = new edt::Repere(5,8);
+    std::cout << r->largeur << " " << r->hauteur << std::endl;;
+    r->redimensionner(3,6);
+    std::cout << r->largeur << " " << r->hauteur << std::endl;;
     return EXIT_SUCCESS;
 }
-

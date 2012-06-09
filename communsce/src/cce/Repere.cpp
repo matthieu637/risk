@@ -24,7 +24,7 @@ Tile& Repere::getTile (const int x, const int y) const
   return tiles[getIndice(x, y)];
 }
 
-void Repere::setTile(const TileTemplate *tt, const int x, const int y)
+void Repere::setTile(TileTemplate *tt, const int x, const int y)
 {
   int x_tile, y_tile;
   int i = getIndice(x, y);

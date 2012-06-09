@@ -27,15 +27,24 @@ public:
     int getID();
     
 ///
+///\brief Decalage en hauteur pour les tiles qui dépasse la hauteur conforme (brins d'herbe , ...)
+///\return Retourne le decalage en pixels
+///
+    int getDecalageHauteur();
+    
+///
 ///\brief La tile est-elle passable?
 ///\return Retourne true si la Tile bloque le pathing
 ///
     bool bloquante();
     
 private:
-    int id;
-    bool bloquante;
+    int id, decalage_hauteur_image;
+    bool bloquante_;
     Texture *texture;
+    
+public:
+    static const int hauteurTile = 88;
 };
 
 }
