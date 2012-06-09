@@ -34,8 +34,8 @@ public:
     TileTemplate* getTemplate() const;
     
 ///
-///\brief Defini la texture de la tile
-///\param id : id de la texture 
+///\brief Defini le TileTemplate associe
+///\param _tt : TileTemplate
 ///
     void setTemplate(TileTemplate *_tt);
 
