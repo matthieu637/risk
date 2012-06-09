@@ -86,11 +86,11 @@ public:
             if( succes )
             {
                 assets_.insert( std::pair<int,T*>(ID, asset) );
-		LOG_DEBUG("Chargement du fichier " << filename << " avec l'id " << id);
+		LOG_DEBUG("Chargement du fichier " << filename << " avec l'id " << ID);
                 return;
             }
         }
-        LOG_ERROR("Impossible de charger le fichier "<< filename << " ID " << id);
+        LOG_ERROR("Impossible de charger le fichier "<< filename << " ID " << ID);
         assets_.insert( std::pair<int,T*>(ID, asset) );
     }
 
