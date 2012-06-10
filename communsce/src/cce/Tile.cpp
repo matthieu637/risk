@@ -12,10 +12,10 @@ Tile::~Tile()
 
 }
 
-void Tile::init(TileTemplate *_tt, int _x, int _y)
+void Tile::init(TileTemplate *_tt, int x, int y)
 {
     setTemplate(_tt);
-    setCoordonnes(_x,_y);
+    setPosition(x,y);
 }
 
 TileTemplate* Tile::getTemplate() const
@@ -25,8 +25,10 @@ TileTemplate* Tile::getTemplate() const
 
 void Tile::setTemplate(TileTemplate *_tt)
 {
+    y += tt->getDecalageHauteur();
     tt = _tt;
     setTexture(*tt->getTexture());
+    y -= tt->getDecalageHauteur();
 }
 
 void Tile::unsetTemplate()
@@ -35,17 +37,11 @@ void Tile::unsetTemplate()
     //setTexture(nullptr);
 }
 
-void Tile::setCoordonnes(const int x_rect, const int y_rect)
+void Tile::setPosition(float x, float y)
 {
-    y = y_rect;
-    x = x_rect;
+    Sprite::setPosition(x, y);
     //retire un peu de hauteur pour les tiles qui dépasse la hauteur conforme ( brins d'herbe , ...)
-    y -= tt->getDecalageHauteur();
-
-#ifndef NDEBUG
-    //std::cout << "read id : " << _id << " x : " << x<< " y : " << y << "\t\t";
-    //std::cout << "write coord x : " << GetPosition().x << " y : " << GetPosition().y << std::endl;
-#endif
+    move(0, tt->getDecalageHauteur());
 
 }
 

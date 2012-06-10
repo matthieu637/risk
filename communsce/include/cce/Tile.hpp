@@ -25,8 +25,6 @@ public:
 ///
     void init(TileTemplate *tt, int x, int y);
     
-
-public:
 ///
 ///\brief Retourne le Template de la tile
 ///\return Retourne le Template de la tile
@@ -43,18 +41,9 @@ public:
 ///\brief Supprime la texture de la tile
 ///
     void unsetTemplate();
-    
-///
-///\brief Definir les coordonnees de la tile en pixels
-///
-    void setCoordonnes(const int x, const int y);
 
 private:
     TileTemplate *tt;
-
-public:
-private:
-  int x, y;
 };
 
 }
