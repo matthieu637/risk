@@ -16,7 +16,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/Variables.cmake)
 find_package(Biblio REQUIRED)
 
 #Trouve Boost
-find_package(Boost)
+find_package(Boost COMPONENTS serialization)
 
 #Trouver SFML
 find_package(SFML 2.0 COMPONENTS system REQUIRED)
@@ -44,9 +44,9 @@ endif()
 
 #Linker
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_DEBUG} ${SFML_GRAPHICS_LIBRARY_DEBUG})
+	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_DEBUG} ${SFML_GRAPHICS_LIBRARY_DEBUG} ${Boost_LIBRARIES})
 else()
-	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_RELEASE} ${SFML_GRAPHICS_LIBRARY_RELEASE})
+	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_RELEASE} ${SFML_GRAPHICS_LIBRARY_RELEASE} ${Boost_LIBRARIES})
 endif()
 
 #link-main pour windows

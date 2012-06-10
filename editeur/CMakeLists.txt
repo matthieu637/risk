@@ -14,7 +14,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/OS.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/Variables.cmake)
 
 #Trouve Boost
-find_package(Boost)
+find_package(Boost COMPONENTS serialization)
 
 #Source & headers
 file ( GLOB_RECURSE sources src/*.cpp include/*.hpp)
@@ -47,10 +47,10 @@ include_directories(${CMAKE_SOURCE_DIR}/include ${SFML_INCLUDE_DIRS} ${COMMUNSCE
 #Linker
 if(CMAKE_BUILD_TYPE MATCHES Debug)
 	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_DEBUG} ${SFML_WINDOW_LIBRARY_DEBUG} ${SFML_GRAPHICS_LIBRARY_DEBUG}
-		  ${COMMUNSCE_LIBRARY} ${BIBLIO_LIBRARY})
+		  ${COMMUNSCE_LIBRARY} ${BIBLIO_LIBRARY} ${Boost_LIBRARIES})
 else()
 	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_RELEASE} ${SFML_WINDOW_LIRARY_RELEASE} ${SFML_GRAPHICS_LIBRARY_RELEASE}
-			  ${COMMUNSCE_LIBRARY} ${BIBLIO_LIBRARY} )
+			  ${COMMUNSCE_LIBRARY} ${BIBLIO_LIBRARY} ${Boost_LIBRARIES})
 endif()
 
 if(CEGUI_DEBUG MATCHES Debug)
