@@ -2,15 +2,15 @@
 #define UNIVERS_HPP
 
 #include <map>
-#include "TileTemplate.hpp"
-#include "DecorTemplate.hpp"
-#include "UnitTemplate.hpp"
-#include "UpgradeTemplate.hpp"
-
 using std::map;
 
 namespace cce{
 
+class TileTemplate;
+class DecorTemplate;
+class UnitTemplate;
+class UpgradeTemplate;
+  
 class Univers
 {
 

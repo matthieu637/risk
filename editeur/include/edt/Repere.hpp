@@ -2,7 +2,6 @@
 #define REPEREEDITEUR_HPP
 
 #include <cce/Repere.hpp>
-#include <cce/Tile.hpp>
 
 using cce::Tile;
 
