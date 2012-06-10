@@ -21,16 +21,21 @@ public:
 ///\brief Retourne le Template de la tile
 ///\return Retourne le Template de la tile
 ///
-    TileTemplate* getTemplate() const;
+    DecorTemplate* getTemplate() const;
+    
+    void setTexture(const Texture& texture, bool resetRect = false);
     
 ///
-///\brief Redefinir les coordonnees en pixels
+///\brief Comparaison pour la position dans l'arbre
+///\return True si ce decor vient avant d2
 ///
-    void setCoordonnees(const int x, const int y);
+    bool operator <(const Decor& d) const;
 
+public:
+    int yCompare;
+    
 private:
     DecorTemplate *dt;
-    int x, y;
 };
 
 }

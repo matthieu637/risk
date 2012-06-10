@@ -9,7 +9,7 @@ class Flag : public Decor
 {
 
 public:
-    Flag();
+    Flag(DecorTemplate *_dt, int _x, int _y);
     virtual ~Flag();
 };
 

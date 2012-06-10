@@ -1,6 +1,10 @@
 #ifndef DECORTEMPLATE_HPP
 #define DECORTEMPLATE_HPP
 
+#include <SFML/Graphics/Texture.hpp>
+
+using sf::Texture;
+
 namespace cce{
 
 class DecorTemplate

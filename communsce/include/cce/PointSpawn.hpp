@@ -9,7 +9,7 @@ class PointSpawn : public Decor
 {
 
 public:
-    PointSpawn();
+    PointSpawn(DecorTemplate *_dt, int _x, int _y);
     virtual ~PointSpawn();
 };
 
