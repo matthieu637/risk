@@ -1,4 +1,4 @@
-#include "../../include/cce/PointSpawn.hpp"
+#include "cce/PointSpawn.hpp"
 
 namespace cce{
 
