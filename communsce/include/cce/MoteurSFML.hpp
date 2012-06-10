@@ -1,5 +1,13 @@
 #ifndef CCE_MOTEURSFML_HPP
 #define CCE_MOTEURSFML_HPP
+
+
+///
+///\file MoteurSFML.hpp
+///\brief Contient toutes la gestion de SFML
+///\author matthieu
+///
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 #include "bib/Logger.hpp"
@@ -19,7 +27,11 @@ public:
 	LOG_INFO("Chargement d'une fenetre " << 1440 << "x" << 900);
         fenetre.setFramerateLimit(60);
     }
-
+    
+    
+///
+///\brief Méthode générale du rendu graphique
+///
     template<class T>
     void render(const T& drawable) {
         fenetre.clear();

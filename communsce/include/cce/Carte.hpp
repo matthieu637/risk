@@ -1,21 +1,27 @@
 #ifndef CCE_CARTE_HPP
 #define CCE_CARTE_HPP
 
+
+///
+///\file Carte.hpp
+///\brief Contient les informations necessaire pour une carte
+///\author matthieu
+///
+
 #include <boost/serialization/nvp.hpp>
 #include <SFML/Graphics/Drawable.hpp>
-#include "Repere.hpp"
 
 using boost::serialization::make_nvp;
 
 namespace cce {
 
+  
 class Carte : public sf::Drawable
 {
 
 public:
-  ///
-///\brief Méthode à définir obligatoirement pour la serialization
-///       BOOST_SERIALIZATION_NVP(id) <=> make_nvp("id", hot);
+///
+///\brief Méthode de serialization pour l'écriture et la lecture en XML
 ///
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version)
@@ -25,6 +31,9 @@ public:
     }
   
 protected:
+///
+///\brief Méthode d'affichage SFML
+///
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 public:

@@ -1,4 +1,4 @@
-#include "../../include/cce/Tile.hpp"
+#include "cce/Tile.hpp"
 
 namespace cce{
 

@@ -11,8 +11,8 @@ int main()
     cce::Carte c;
     bib::XMLEngine::save<cce::Carte>(c,"Carte", "map.bidon");
     
-    //cce::DaGame game;
-    //game.gameloop();
+    cce::DaGame game;
+    game.gameloop();
     
     return EXIT_SUCCESS;
 }

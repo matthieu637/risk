@@ -1,4 +1,4 @@
-#include "../../include/cce/Flag.hpp"
+#include "cce/Flag.hpp"
 
 namespace cce{
 
