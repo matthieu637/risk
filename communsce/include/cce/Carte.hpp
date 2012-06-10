@@ -10,12 +10,12 @@
 
 #include <boost/serialization/nvp.hpp>
 #include <SFML/Graphics/Drawable.hpp>
+#include "Repere.hpp"
 
 using boost::serialization::make_nvp;
 
 namespace cce {
 
-  
 class Carte : public sf::Drawable
 {
 

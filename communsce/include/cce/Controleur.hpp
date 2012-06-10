@@ -1,8 +1,5 @@
 #ifndef CONTROLEUR_HPP
 #define CONTROLEUR_HPP
-#include "Modele.hpp"
-#include "MoteurSFML.hpp"
-#include "GUI.hpp"
 
 ///
 ///\file Controleur.hpp
@@ -12,6 +9,10 @@
 
 namespace cce{
 
+class Modele;
+class MoteurSFML;
+class GUI;
+  
 class Controleur
 {
 

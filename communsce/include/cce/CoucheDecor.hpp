@@ -4,7 +4,6 @@
 #include <set>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Decor.hpp"
-#include "Tile.hpp"
 
 using sf::RenderTarget;
 

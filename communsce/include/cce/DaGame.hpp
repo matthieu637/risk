@@ -2,6 +2,7 @@
 #define DAGAME_HPP
 #include "Controleur.hpp"
 #include "Vue.hpp"
+#include "Modele.hpp"
 
 ///
 ///\file DaGame.hpp
