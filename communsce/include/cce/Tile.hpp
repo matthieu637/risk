@@ -41,6 +41,11 @@ public:
 ///\brief Supprime la texture de la tile
 ///
     void unsetTemplate();
+    
+///
+///\brief redefinition de Sprite::setPosition
+///
+void setPosition(float x, float y);
 
 private:
     TileTemplate *tt;

@@ -81,7 +81,7 @@ int Repere::getIndice(int x, int y) const{
   int indice = 2*largeur * y/h_tile + x/l_tile;
   int x_rect = x % l_tile, y_rect = y % h_tile;
   
-  if (y_rect <= h_tile_demi )
+  if (y_rect <= h_tile_demi ){
     if (x_rect <= l_tile_demi){
       if ((h_tile_demi - y_rect) > (float)(h_sur_l * x_rect))
 	//triangle haut gauche
@@ -93,6 +93,7 @@ int Repere::getIndice(int x, int y) const{
 	//triangle haut droite
 	if (indice >= largeur) //ne pas déborder du tableau
 	  indice -= largeur;
+  }
   else
     if (x_rect <= l_tile_demi){
       if ((int)(h_tile_demi - y) < -(float)(h_sur_l * x))

@@ -25,10 +25,10 @@ TileTemplate* Tile::getTemplate() const
 
 void Tile::setTemplate(TileTemplate *_tt)
 {
-    y += tt->getDecalageHauteur();
+    move(0, -tt->getDecalageHauteur());
     tt = _tt;
     setTexture(*tt->getTexture());
-    y -= tt->getDecalageHauteur();
+    move(0, tt->getDecalageHauteur());
 }
 
 void Tile::unsetTemplate()
