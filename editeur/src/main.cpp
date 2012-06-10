@@ -5,7 +5,7 @@
 
 int main()
 {
-    edt::Repere *r = new edt::Repere(5,8);
+    new edt::Repere(5,8);
     
     cce::DaGame game;
     game.gameloop();

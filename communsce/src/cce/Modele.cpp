@@ -14,5 +14,6 @@ void Modele::update()
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-  
+    (void)(target);
+    (void)(states);
 }

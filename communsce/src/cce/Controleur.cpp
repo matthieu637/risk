@@ -14,7 +14,7 @@ void Controleur::init(MoteurSFML* engine, GUI* gui)
 }
 
 void Controleur::appliquer_events(const Modele& m){
-  
+    (void)m;
 }
 
 }
