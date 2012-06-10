@@ -46,7 +46,7 @@ public:
     }
 
 protected:
-    Logger():level(INFO) {}
+    Logger():level(DEBUGGING) {}
 
 private :
     LogLevel level;

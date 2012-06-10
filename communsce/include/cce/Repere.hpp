@@ -11,7 +11,7 @@ using sf::RenderTarget;
 
 namespace cce{
 
-class Repere
+class Repere : public sf::Drawable
 {
 
 public:
@@ -42,6 +42,8 @@ protected:
 ///\return Retourne l'indice de la tile dans le tableau
 ///
     int getIndice(int x, int y) const;
+    
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 ///
 ///\brief Tableau de tiles
 ///
