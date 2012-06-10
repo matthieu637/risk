@@ -20,7 +20,8 @@ void Repere::unsetTile(const int x, const int y)
 void Repere::redimensionner(const int x, const int y)
 {
     int i, j;
-    Tile* tiles_new = new Tile[x*y];
+    vector<Tile> tiles_new(x*y);
+    
     
     if(hauteur <= y)
       if(largeur <= x)

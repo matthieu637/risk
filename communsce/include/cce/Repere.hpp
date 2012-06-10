@@ -2,12 +2,18 @@
 #define REPERE_HPP
 
 #include <math.h>
+#include <vector>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/vector.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Shape.hpp>
 #include "Tile.hpp"
 #include "TileTemplate.hpp"
 
 using sf::RenderTarget;
+using boost::serialization::make_nvp;
+using std::vector;
+
 
 namespace cce{
 
@@ -24,7 +30,7 @@ public:
 ///	  Y : ordonnee en pixels
 ///\return Retourne la tile correspondante
 ///
-    Tile& getTile (const int x, const int y) const;
+    Tile& getTile (const int x, const int y);
 
 ///
 ///\brief Defini le TileTemplate d'une tile
@@ -35,6 +41,16 @@ public:
     
     void dessiner(RenderTarget& cible);
 
+    template<class Archive>
+    void serialize(Archive& ar, const unsigned int version){
+        (void) version;
+        ar & make_nvp("largeur", largeur);
+	ar & make_nvp("hauteur", hauteur);
+	ar & make_nvp("nbTiles", nbTiles);
+	ar & make_nvp("nbTiles_sans_derniere_ligne", nbTiles_sans_derniere_ligne);
+	ar & make_nvp("tiles", tiles);
+    }
+    
 protected:
 ///
 ///\brief Retourne l'indice selon les coordonees en pixels
@@ -47,7 +63,7 @@ protected:
 ///
 ///\brief Tableau de tiles
 ///
-    Tile* tiles;
+    vector<Tile> tiles;
     int largeur;
     int hauteur;
     int nbTiles;

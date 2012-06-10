@@ -1,12 +1,14 @@
 #ifndef TILE_HPP
 #define TILE_HPP
 
+#include <boost/serialization/nvp.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "TileTemplate.hpp"
 
 using sf::Texture;
 using sf::Sprite;
+using boost::serialization::make_nvp;
 
 namespace cce{
   
@@ -47,8 +49,16 @@ public:
 ///
 void setPosition(float x, float y);
 
+
+    template<class Archive>
+    void serialize(Archive& ar, const unsigned int version){
+        (void) version;
+        ar & make_nvp("id", id);
+    }
+
 private:
     TileTemplate *tt;
+    int id;
 };
 
 }

@@ -36,7 +36,7 @@ public:
 ///    file_name : chemin vers le fichier à écrire
 ///
   template<class T>
-  static void save(const T object, const char* name, const string file_name){
+  static void save(const T& object, const char* name, const string& file_name){
     LOG_INFO("Enregistrement du fichier XML " << file_name);
     
     ofstream outputFile(file_name);
@@ -51,7 +51,7 @@ public:
 ///    file_name : chemin vers le fichier XML à lire
 ///
   template<class T>
-  static T load(const char* name, const string file_name){
+  static T load(const char* name, const string& file_name){
     LOG_INFO("Lecture du fichier XML " << file_name);
     
     T object;

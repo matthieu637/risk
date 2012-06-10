@@ -6,13 +6,12 @@ using cce::Tile;
 
 namespace cce {
 
-Repere::Repere(int x, int y)
+Repere::Repere(int x, int y):tiles(x*y)
 {
     largeur = x;
     hauteur = y;
     nbTiles = x * y;
     nbTiles_sans_derniere_ligne = nbTiles - largeur;
-    tiles = new Tile[nbTiles];
 }
 
 Repere::~Repere()
@@ -20,7 +19,7 @@ Repere::~Repere()
 
 }
 
-Tile& Repere::getTile (const int x, const int y) const
+Tile& Repere::getTile (const int x, const int y)
 {
     return tiles[getIndice(x, y)];
 }
