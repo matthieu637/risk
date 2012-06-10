@@ -7,8 +7,6 @@
 #include <boost/serialization/vector.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Shape.hpp>
-#include "Tile.hpp"
-#include "TileTemplate.hpp"
 
 using sf::RenderTarget;
 using boost::serialization::make_nvp;
@@ -16,6 +14,9 @@ using std::vector;
 
 
 namespace cce{
+  
+class Tile;
+class TileTemplate;
 
 class Repere : public sf::Drawable
 {

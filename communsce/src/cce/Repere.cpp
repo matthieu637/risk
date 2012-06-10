@@ -1,5 +1,6 @@
 #include "cce/Repere.hpp"
 #include "bib/Logger.hpp"
+#include "cce/Tile.hpp"
 
 using sf::Vector2f;
 using cce::Tile;

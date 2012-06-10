@@ -1,4 +1,5 @@
 #include "cce/Vue.hpp"
+#include "cce/MoteurSFML.hpp"
 
 using cce::Vue;
 

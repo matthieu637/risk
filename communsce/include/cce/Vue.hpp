@@ -7,12 +7,11 @@
 ///\author matthieu
 ///
 
-#include "Modele.hpp"
-#include "MoteurSFML.hpp"
-#include "GUI.hpp"
-
 namespace cce
 {
+class MoteurSFML;
+class GUI;
+class Modele;
 
 class Vue
 {

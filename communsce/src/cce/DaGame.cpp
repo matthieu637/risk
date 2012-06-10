@@ -1,4 +1,6 @@
 #include "cce/DaGame.hpp"
+#include "cce/MoteurSFML.hpp"
+#include "cce/GUI.hpp"
 
 namespace cce {
 

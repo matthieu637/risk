@@ -4,13 +4,14 @@
 #include <boost/serialization/nvp.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "TileTemplate.hpp"
 
 using sf::Texture;
 using sf::Sprite;
 using boost::serialization::make_nvp;
 
 namespace cce{
+  
+class TileTemplate;
   
 class Tile : public Sprite
 {

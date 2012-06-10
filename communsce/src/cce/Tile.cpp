@@ -1,4 +1,5 @@
 #include "cce/Tile.hpp"
+#include "cce/TileTemplate.hpp"
 
 namespace cce{
 

@@ -13,11 +13,11 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/serialization/nvp.hpp>
-#include "test/SampleData.hpp"
 #include "bib/Logger.hpp"
 
 using std::ofstream;
 using std::ifstream;
+using std::string;
 using boost::archive::xml_oarchive;
 using boost::archive::xml_iarchive;
 using boost::serialization::make_nvp;

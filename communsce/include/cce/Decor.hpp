@@ -3,12 +3,13 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "DecorTemplate.hpp"
 
 using sf::Texture;
 using sf::Sprite;
 
 namespace cce{
+  
+class DecorTemplate;
 
 class Decor : public Sprite
 {
