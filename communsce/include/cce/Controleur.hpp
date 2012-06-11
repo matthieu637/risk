@@ -26,10 +26,13 @@ public:
 ///
 ///\brief Récupère les events de SFML et les applique au modèle ou à la GUI
 ///
-    void appliquer_events(const Modele& m);
+    void appliquer_events(Modele& m);
+  
 private:
-  MoteurSFML* engine;
-  GUI* gui;
+    MoteurSFML* engine;
+    GUI* gui;
+    bool rightPressed;
+    int curseurX, curseurY;
 };
 
 }

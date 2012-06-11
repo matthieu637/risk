@@ -45,6 +45,16 @@ public:
         fenetre.display();
     }
 
+///
+///\brief Fenetre pricipale SFML
+///
+    RenderWindow* getFenetre(){return &fenetre;}
+
+///
+///\brief Fenetre pricipale SFML
+///
+    View* getView(){return &camera;}
+    
 private:
     RenderWindow fenetre;
     View camera;

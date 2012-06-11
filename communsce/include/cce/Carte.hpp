@@ -29,6 +29,8 @@ public:
         (void) version;
         ar & make_nvp("Repere", repere);
     }
+    
+    Repere* getRepere(){return &repere;}
   
 protected:
 ///

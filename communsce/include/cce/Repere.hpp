@@ -40,6 +40,9 @@ public:
 ///
     void setTile(TileTemplate *tt, const int x, const int y);
     
+    int getLargeur(){return largeur;}
+    int getHauteur(){return hauteur;}
+    
     void dessiner(RenderTarget& cible);
 
     template<class Archive>

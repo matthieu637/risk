@@ -11,6 +11,7 @@ DaGame::DaGame()
 
     vue.init(ms, g);
     control.init(ms, g);
+    modele.init(ms);
 }
 
 void DaGame::gameloop() {
