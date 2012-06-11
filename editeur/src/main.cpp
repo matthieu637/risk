@@ -1,15 +1,12 @@
 #include <iostream>
-#include <cce/Tile.hpp>
-#include <edt/Repere.hpp>
 #include "cce/DaGame.hpp"
-#include "bib/XMLEngine.hpp"
+#include "cce/ImageManager.hpp"
+
+using namespace cce;
 
 int main()
 {
-    new edt::Repere(5,8);
-    
-    cce::Carte c;
-    bib::XMLEngine::save<cce::Carte>(c,"Carte", "map.bidon");
+    ImageManager::getInstance()->add_resource_directory("data/texture/");
     
     cce::DaGame game;
     game.gameloop();

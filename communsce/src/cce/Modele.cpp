@@ -1,5 +1,7 @@
 #include "cce/Modele.hpp"
 #include "cce/Vue.hpp"
+#include "cce/Univers.hpp"
+#include "bib/XMLEngine.hpp"
 
 using cce::Modele;
 
@@ -7,7 +9,13 @@ namespace cce{
 
 Modele::Modele()
 {
-    
+  //univ = bib::XMLEngine::load<Univers>("Univers", "data/sf.univ");
+}
+
+Modele::~Modele()
+{
+  delete univ;
+>>>>>>> matt
 }
 
 void Modele::update()

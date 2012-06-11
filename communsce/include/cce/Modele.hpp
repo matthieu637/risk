@@ -18,11 +18,14 @@ namespace cce {
 class MoteurSFML;
 class Vue;
 
+class Univers;
+  
 class Modele : public sf::Drawable
 {
 
 public:
     Modele();
+    ~Modele();
 ///
 ///\brief engine doit être le même que celui de la vue et du controle
 ///
@@ -57,6 +60,7 @@ private:
     MoteurSFML* engine;
     Carte carte;
     int cameraX, cameraY;
+    Univers* univ;
 };
 
 }

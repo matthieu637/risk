@@ -36,5 +36,5 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
 endif()
 
 
-#add_executable(biblio_test ${sources_tests})
-#target_link_libraries(biblio_test ${Boost_LIBRARIES})
+add_executable(biblio_test ${sources_tests})
+target_link_libraries(biblio_test ${Boost_LIBRARIES})

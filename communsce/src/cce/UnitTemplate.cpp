@@ -2,7 +2,12 @@
 
 namespace cce{
 
-UnitTemplate::UnitTemplate(int id, string nom, bool collision)
+UnitTemplate::UnitTemplate()
+{
+  
+}
+
+void UnitTemplate::init(int id, string nom, bool collision)
 {
   this->id = id;
   this->nom = nom;
