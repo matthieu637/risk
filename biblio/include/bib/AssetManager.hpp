@@ -45,7 +45,7 @@ public:
         }
 
         // Ajoute le repertoire
-        LOG_DEBUG("Répertoire " << directory << " ");
+        LOG_DEBUG("Répertoire " << directory << " ajouté");
         resource_directories_.push_back( directory );
     }
 

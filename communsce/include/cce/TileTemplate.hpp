@@ -18,7 +18,7 @@ class TileTemplate
 
 public:
     TileTemplate();
-    void init(int _id, bool _bloquante, Texture *_texture);
+    void init(int _id, bool _bloquante, string path);
     virtual ~TileTemplate();
     
 ///
@@ -55,7 +55,7 @@ public:
     }
     
     template<class Archive>
-    void save(Archive& ar, const unsigned int version) {
+    void save(Archive& ar, const unsigned int version) const {
         (void) version;
 	(void) ar;
     }

@@ -6,7 +6,7 @@ using cce::Modele;
 
 Modele::Modele()
 {
-  univ = bib::XMLEngine::load<Univers>("Univers", "data/sf.univ");
+  //univ = bib::XMLEngine::load<Univers>("Univers", "data/sf.univ");
 }
 
 Modele::~Modele()
