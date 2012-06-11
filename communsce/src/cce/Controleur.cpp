@@ -28,7 +28,7 @@ void Controleur::appliquer_events(Modele& m){
 	}
 
 	if(rightPressed && event.type == sf::Event::MouseMoved) {
-	    m.moveView(curseurX - event.mouseMove.x, curseurY - event.mouseMove.y);
+	    m.moveView(curseurX - event.mouseMove.x, curseurY - event.mouseMove.y, (int)engine->getView()->getSize().x, (int)engine->getView()->getSize().y);
 	    curseurX = event.mouseMove.x;
 	    curseurY = event.mouseMove.y;
 	}

@@ -51,7 +51,7 @@ public:
     RenderWindow* getFenetre(){return &fenetre;}
 
 ///
-///\brief Fenetre pricipale SFML
+///\brief Camera
 ///
     View* getView(){return &camera;}
     

@@ -16,6 +16,7 @@
 namespace cce {
   
 class MoteurSFML;
+class Vue;
 
 class Modele : public sf::Drawable
 {
@@ -31,12 +32,21 @@ public:
 ///\brief Calculs à effectuer par le modèle à chaque pas de boucle
 ///
     void update();
-    void saveCarte(const std::string& chemin);
     
 ///
-///\brief Bouger la camera
+///\brief Ajouter une vue
 ///
-    void moveView(int dx, int dy);
+    void addVue(Vue* vue);
+    
+///
+///\brief Changer les coordonées par (dx,dy) de la caméra selon sa largeur et sa hauteur.
+///
+    void moveView(int dx, int dy, int cameraL, int cameraH);
+    
+    void saveCarte(const std::string& chemin);
+
+    int getCameraX();
+    int getCameraY();
     
 protected:
 ///
@@ -46,6 +56,7 @@ protected:
 private:
     MoteurSFML* engine;
     Carte carte;
+    int cameraX, cameraY;
 };
 
 }

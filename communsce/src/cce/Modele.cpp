@@ -1,19 +1,21 @@
 #include "cce/Modele.hpp"
-#include "cce/MoteurSFML.hpp"
+#include "cce/Vue.hpp"
 
 using cce::Modele;
+
+namespace cce{
 
 Modele::Modele()
 {
     
 }
 
-void Modele::init(MoteurSFML* engine)
+void Modele::update()
 {
-    this->engine = engine;
+  
 }
 
-void Modele::update()
+void Modele::addVue(Vue* vue)
 {
   
 }
@@ -28,22 +30,25 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(carte,states);
 }
 
-void Modele::moveView(int dx, int dy)
+void Modele::moveView(int dx, int dy, int cameraL, int cameraH)
 {
-    int centreX = engine->getView()->getCenter().x;
-    int centreY = engine->getView()->getCenter().y;
-    int largeur = engine->getView()->getSize().x;
-    int hauteur = engine->getView()->getSize().y;
+    if(cameraX + dx < cameraL/2)
+	dx = 0;
+    else if(cameraX + dx > carte.getRepere()->getLargeur() - cameraL/2 + 88)
+	dx = 0;
+
+    if(cameraY + dy < cameraH/2)
+	dy = 0;
+    else if(cameraY + dy > carte.getRepere()->getHauteur() - cameraH/2 + 44)
+	dy = 0;
     
-    if(centreX + dx < largeur/2)
-	dx = 0;
-    else if(centreX + dx > carte.getRepere()->getLargeur()*158 - largeur/2 + 88)
-	dx = 0;
+    cameraX += dx;
+    cameraY += dy;
+}
 
-    if(centreY + dy < hauteur/2)
-	dy = 0;
-    else if(centreY + dy > carte.getRepere()->getHauteur()*44 - hauteur/2 + 44)
-	dy = 0;
 
-    engine->getView()->setCenter(centreX + dx, centreY + dy);
+
+int Modele::getCameraX(){return cameraX;}
+int Modele::getCameraY(){return cameraY;}
+
 }

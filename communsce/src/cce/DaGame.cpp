@@ -9,9 +9,8 @@ DaGame::DaGame()
     MoteurSFML* ms = new MoteurSFML();
     GUI* g = new GUI();
 
-    vue.init(ms, g);
+    vue.init(ms, g, &modele);
     control.init(ms, g);
-    modele.init(ms);
 }
 
 void DaGame::gameloop() {

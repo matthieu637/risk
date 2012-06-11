@@ -21,14 +21,20 @@ public:
 ///
 ///\brief Simple setter, engine et gui doivent être les mêmes que celui du controleur
 ///
-    void init(MoteurSFML* engine, GUI* gui);
+    void init(MoteurSFML* engine, GUI* gui, Modele* m);
 ///
 ///\brief Rend le modèle et la gui
 ///
-    void dessiner(const Modele& m);
+    void dessiner(Modele& m);
+///
+///\brief Repositionne la cam selon le modele
+///
+    void updateCamera();
+    
 private:
     MoteurSFML* engine;
     GUI* gui;
+    Modele* modele;
 };
 
 }
