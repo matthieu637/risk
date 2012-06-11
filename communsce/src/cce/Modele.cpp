@@ -15,7 +15,6 @@ Modele::Modele()
 Modele::~Modele()
 {
   delete univ;
->>>>>>> matt
 }
 
 void Modele::update()
