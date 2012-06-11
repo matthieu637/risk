@@ -15,11 +15,14 @@
 
 namespace cce {
 
+class Univers;
+  
 class Modele : public sf::Drawable
 {
 
 public:
     Modele();
+    ~Modele();
 ///
 ///\brief Calculs à effectuer par le modèle à chaque pas de boucle
 ///
@@ -32,6 +35,7 @@ protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 private:
     Carte carte;
+    Univers* univ;
 };
 
 }

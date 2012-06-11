@@ -1,9 +1,15 @@
 #ifndef TILETEMPLATE_HPP
 #define TILETEMPLATE_HPP
 
+#include <string>
 #include <SFML/Graphics/Texture.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/split_member.hpp>
+#include "bib/Logger.hpp"
 
 using sf::Texture;
+using boost::serialization::make_nvp;
+using std::string;
 
 namespace cce{
 
@@ -11,7 +17,8 @@ class TileTemplate
 {
 
 public:
-    TileTemplate(int _id, bool _bloquante, Texture *_texture);
+    TileTemplate();
+    void init(int _id, bool _bloquante, Texture *_texture);
     virtual ~TileTemplate();
     
 ///
@@ -38,8 +45,33 @@ public:
 ///
     bool bloquante();
     
+    friend class ::boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+      	ar & make_nvp("id", id);
+	ar & make_nvp("path", path);
+	ar & make_nvp("bloquante", bloquante_);
+        boost::serialization::split_member(ar, *this, version);
+    }
+    
+    template<class Archive>
+    void save(Archive& ar, const unsigned int version) {
+        (void) version;
+	(void) ar;
+    }
+    
+    template<class Archive>
+    void load( Archive & ar, const unsigned int file_version ) {
+	(void) file_version;
+	(void) ar;
+	LOG_DEBUG("fucking here");
+	std::cout << std::flush;
+    }
+
+    
 private:
     int id, decalage_hauteur_image;
+    string path;
     bool bloquante_;
     Texture *texture;
     

@@ -23,7 +23,8 @@ class UnitTemplate
 {
 
 public:
-    UnitTemplate(int _id, string nom, bool collision = true);
+    UnitTemplate();
+    void init(int _id, string nom, bool collision = true);
     virtual ~UnitTemplate();
     
 ///

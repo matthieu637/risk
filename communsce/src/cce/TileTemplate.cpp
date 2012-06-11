@@ -2,7 +2,12 @@
 
 namespace cce{
 
-TileTemplate::TileTemplate(int _id, bool _bloquante, Texture *_texture)
+TileTemplate::TileTemplate()
+{
+  
+}
+
+void TileTemplate::init(int _id, bool _bloquante, Texture *_texture)
 {
   id = _id;
   bloquante_ = _bloquante;

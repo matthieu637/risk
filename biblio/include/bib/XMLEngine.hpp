@@ -51,10 +51,10 @@ public:
 ///    file_name : chemin vers le fichier XML à lire
 ///
   template<class T>
-  static T load(const char* name, const string& file_name){
+  static T* load(const char* name, const string& file_name){
     LOG_INFO("Lecture du fichier XML " << file_name);
     
-    T object;
+    T* object = new T;
     ifstream inputFile(file_name);
     xml_iarchive xml(inputFile);
     xml >> make_nvp(name, object);

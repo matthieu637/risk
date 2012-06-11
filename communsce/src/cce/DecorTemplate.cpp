@@ -2,7 +2,12 @@
 
 namespace cce{
 
-DecorTemplate::DecorTemplate(int _id, bool _bloquant, Texture *_texture)
+DecorTemplate::DecorTemplate()
+{
+  
+}
+
+void DecorTemplate::init(int _id, bool _bloquant, Texture *_texture)
 {
   id = _id;
   bloquant_ = _bloquant;

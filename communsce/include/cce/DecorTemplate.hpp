@@ -11,7 +11,8 @@ class DecorTemplate
 {
 
 public:
-    DecorTemplate(int _id, bool _bloquant, Texture *_texture);
+    DecorTemplate();
+    void init(int _id, bool _bloquant, Texture *_texture);
     virtual ~DecorTemplate();
     
 ///

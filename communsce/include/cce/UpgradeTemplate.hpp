@@ -11,7 +11,8 @@ class UpgradeTemplate
 {
 
 public:
-    UpgradeTemplate(int _id, string nom);
+    UpgradeTemplate();
+    void init(int _id, string nom);
     virtual ~UpgradeTemplate();
     
 ///
