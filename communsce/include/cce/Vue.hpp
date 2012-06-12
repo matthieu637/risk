@@ -29,7 +29,11 @@ public:
 ///
 ///\brief Repositionne la cam selon le modele
 ///
-    void updateCamera(int x, int y);
+    void updateCameraPosition(int x, int y);
+///
+///\brief Zoom par un facteur
+///
+    void updateCameraZoom(float factor);
     
 private:
     MoteurSFML* engine;

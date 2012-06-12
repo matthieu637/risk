@@ -55,7 +55,14 @@ void Modele::moveView(int dx, int dy, int cameraX, int cameraY, int cameraL, int
     
     vector<Vue>::iterator it;
     for (it=vues.begin() ; it < vues.end(); it++)
-	it->updateCamera(cameraX, cameraY);
+	it->updateCameraPosition(cameraX, cameraY);
+}
+
+void Modele::zoom(int ticks)
+{
+    vector<Vue>::iterator it;
+    for (it=vues.begin() ; it < vues.end(); it++)
+	it->updateCameraZoom(1 + ticks * 0.05);
 }
 
 }

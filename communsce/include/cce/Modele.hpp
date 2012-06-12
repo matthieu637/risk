@@ -47,6 +47,11 @@ public:
 ///
     void moveView(int dx, int dy, int cameraX, int cameraY, int cameraL, int cameraH);
     
+///
+///\brief Ajuster le zoom en fonction du nombre de ticks scrollé et du champ couvert par la caméra.
+///
+    void zoom(int ticks);
+    
     void saveCarte(const std::string& chemin);
     
 protected:

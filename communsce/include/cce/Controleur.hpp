@@ -33,6 +33,7 @@ public:
     void appliquer_events();
     
     void onMoveCamera(thor::ActionContext<string> context);
+    void onZoom(thor::ActionContext<string> context);
     
   
 private:
