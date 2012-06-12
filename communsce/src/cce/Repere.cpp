@@ -13,11 +13,12 @@ Repere::Repere(int x, int y):tiles(x*y)
     hauteur = y;
     nbTiles = x * y;
     nbTiles_sans_derniere_ligne = nbTiles - largeur;
-    
-    
-    setTile(Univers::getInstance()->getTileTemplate(1000000000), 0, 0);
-    setTile(Univers::getInstance()->getTileTemplate(1000000000), 0, 5);
-    setTile(Univers::getInstance()->getTileTemplate(1000000001), 10, 5); 
+
+    TileTemplate* tt = Univers::getInstance()->getTileTemplate(1000000000);
+
+    setTile(tt, 500, 250);
+    setTile(Univers::getInstance()->getTileTemplate(1000000000), 76, 44);
+    setTile(Univers::getInstance()->getTileTemplate(1000000001), 1000, 44);
 }
 
 Repere::~Repere()
@@ -30,18 +31,21 @@ Tile& Repere::getTile (const int x, const int y)
     return tiles[getIndice(x, y)];
 }
 
-void Repere::setTile(TileTemplate *tt, const int x, const int y)
+void Repere::setTile(TileTemplate *_tt, const int x, const int y)
 {
     int x_tile, y_tile;
     int i = getIndice(x, y);
-    Tile t = tiles[i];
-    t.setTemplate(tt);
+    Tile *t = &tiles[i];
+    t->setTemplate(_tt);
 
-    y_tile = i/largeur;
+    y_tile = i/largeur - 1;
+    y_tile *= h_tile_demi;
     //x_tile decale pour une ligne sur 2
-    x_tile = l_tile * i%largeur + y_tile%2 * l_tile_demi;
+    x_tile = l_tile * (i%largeur) + (y_tile%2) * l_tile_demi;
 
-    t.setPosition(x_tile,y_tile);
+
+    t->setPosition(x_tile,y_tile);
+    LOG_DEBUG(x_tile << " " << y_tile);
 }
 
 int Repere::getIndice(int x, int y) const {
@@ -105,8 +109,10 @@ void Repere::draw(sf::RenderTarget& target, sf::RenderStates states) const
     }
 
     for(int indice_ligne= indice_debut ; indice_ligne < nbTileHauteur*2 ; indice_ligne++)
-        for(int indice_colonne= 0; indice_colonne < nbTileLargeur ; indice_colonne++)
+        for(int indice_colonne= indice_debut; indice_colonne < indice_debut + nbTileLargeur ; indice_colonne++)
             target.draw(tiles[indice_ligne*largeur + indice_colonne], states);
+
+
 }
 
 

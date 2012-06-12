@@ -10,6 +10,8 @@ TileTemplate::TileTemplate():id(0)
 
 void TileTemplate::loadAfterXML(int id)
 {
+  this->id = id;
+  
   //à supprimer pour ne pas charger toutes les tiles en mémoire
   ImageManager::getInstance()->load_asset(id, path);
   

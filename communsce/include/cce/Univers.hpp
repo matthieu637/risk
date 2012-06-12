@@ -17,7 +17,7 @@ class Univers : public bib::Singleton<Univers>
 {
     friend class bib::Singleton<Univers>;
 
-private:
+protected:
     Univers();
     virtual ~Univers();
     

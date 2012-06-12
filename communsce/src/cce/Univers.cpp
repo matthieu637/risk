@@ -5,8 +5,6 @@
 #include "cce/DecorTemplate.hpp"
 #include "cce/UnitTemplate.hpp"
 #include "cce/UpgradeTemplate.hpp"
-
-
 #include "bib/XMLEngine.hpp"
 #include "cce/ImageManager.hpp"
 
@@ -14,6 +12,7 @@ namespace cce {
 
 Univers::Univers()
 {
+    LOG_DEBUG("Début chargement univers sf");
     ImageManager::getInstance()->add_resource_directory("data/texture/");
     tileTemplate = bib::XMLEngine::load< map<int, TileTemplate>>("TileTemplates", "data/univ/sf.tiletemplates");
     
@@ -22,6 +21,10 @@ Univers::Univers()
     
     for(;it != itEnd; ++it)
       it->second.loadAfterXML(it->first);
+    
+    
+    //bib::XMLEngine::save<map <int, TileTemplate>>(*tileTemplate, "TileTemplates", "tamere.xml");
+    LOG_DEBUG("Univers sf chargé");
 }
 
 Univers::~Univers()

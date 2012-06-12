@@ -35,8 +35,6 @@ public:
 ///
     TileTemplate* getTemplate() const;
     
-    int getID() const;
-    
 ///
 ///\brief Defini le TileTemplate associe
 ///\param _tt : TileTemplate

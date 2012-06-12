@@ -16,6 +16,7 @@ using namespace cce;
 
 int main()
 { 
+    ImageManager::getInstance();
     cce::DaGame game;
     game.gameloop();
     
