@@ -16,6 +16,7 @@ find_path(THOR_INCLUDE_DIR Thor/Config.hpp
   ~/Library/Frameworks
   /Library/Frameworks
   /usr/local
+  /usr/local/lib
   /usr
   /sw          # Fink
   /opt/local   # DarwinPorts
@@ -31,6 +32,7 @@ find_library(THOR_LIBRARY_DEBUG
   ~/Library/Frameworks
   /Library/Frameworks
   /usr/local
+  /usr/local/lib
   /usr
   /sw          # Fink
   /opt/local   # DarwinPorts
@@ -46,6 +48,7 @@ find_library(THOR_LIBRARY_RELEASE
   ~/Library/Frameworks
   /Library/Frameworks
   /usr/local
+  /usr/local/lib
   /usr
   /sw          # Fink
   /opt/local   # DarwinPorts

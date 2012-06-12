@@ -22,6 +22,9 @@ find_package(Boost COMPONENTS serialization)
 find_package(SFML 2.0 COMPONENTS system REQUIRED)
 find_package(SFML 2.0 COMPONENTS graphics REQUIRED)
 
+#Trouver Thor
+find_package(Thor REQUIRED)
+
 #Include
 include_directories(${CMAKE_SOURCE_DIR}/include ${SFML_INCLUDE_DIRS} ${BIBLIO_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${THOR_INCLUDE_DIR})
 

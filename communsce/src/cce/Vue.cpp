@@ -18,14 +18,14 @@ void Vue::init(MoteurSFML* engine, GUI* gui, Modele* m)
     this->modele = m;
 }
 
-void Vue::dessiner(cce::Modele& m)
+void Vue::dessiner(cce::Modele* m)
 {
-    engine->render<cce::Modele>(m);
+    engine->render<cce::Modele>(*m);
 }
 
-void Vue::updateCamera()
+void Vue::updateCamera(int x, int y)
 {
-    engine->getView()->setCenter(modele->getCameraX(), modele->getCameraY());
+    engine->getView()->setCenter(x, y);
 }
 
 }

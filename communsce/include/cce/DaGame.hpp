@@ -3,6 +3,7 @@
 #include "Controleur.hpp"
 #include "Vue.hpp"
 #include "Modele.hpp"
+#include "cce/MoteurSFML.hpp"
 
 ///
 ///\file DaGame.hpp
@@ -23,9 +24,10 @@ public:
 ///
     void gameloop();
 private:
-    Controleur control;
-    Modele modele;
-    Vue vue;
+    MoteurSFML* ms;
+    Controleur* control;
+    Modele* modele;
+    Vue* vue;
 };
 
 }
