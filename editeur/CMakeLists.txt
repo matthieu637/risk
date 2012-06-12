@@ -16,6 +16,9 @@ include(${CMAKE_SOURCE_DIR}/cmake/Variables.cmake)
 #Trouve Boost
 find_package(Boost COMPONENTS serialization)
 
+#Trouver Thor
+find_package(Thor REQUIRED)
+
 #Source & headers
 file ( GLOB_RECURSE sources src/*.cpp include/*.hpp)
 

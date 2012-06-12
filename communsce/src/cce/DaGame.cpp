@@ -1,23 +1,24 @@
 #include "cce/DaGame.hpp"
-#include "cce/MoteurSFML.hpp"
 #include "cce/GUI.hpp"
 
 namespace cce {
 
 DaGame::DaGame()
 {
-    MoteurSFML* ms = new MoteurSFML();
     GUI* g = new GUI();
+    MoteurSFML* ms = new MoteurSFML();
 
-    vue.init(ms, g, &modele);
-    control.init(ms, g);
+    modele = new Modele();
+    vue = new Vue();
+    control = new Controleur(ms, modele, g);
+    vue->init(ms, g, modele);
 }
 
 void DaGame::gameloop() {
     while(true) {
-        control.appliquer_events(modele);
-        modele.update();
-        vue.dessiner(modele);
+        control->appliquer_events();
+        modele->update();
+        vue->dessiner(modele);
     }
 }
 

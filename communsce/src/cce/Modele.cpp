@@ -4,6 +4,7 @@
 #include "bib/XMLEngine.hpp"
 
 using cce::Modele;
+using std::vector;
 
 namespace cce{
 
@@ -24,7 +25,7 @@ void Modele::update()
 
 void Modele::addVue(Vue* vue)
 {
-  
+  vues.push_back(*vue);
 }
 
 void Modele::saveCarte(const std::string& chemin)
@@ -37,7 +38,7 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(carte,states);
 }
 
-void Modele::moveView(int dx, int dy, int cameraL, int cameraH)
+void Modele::moveView(int dx, int dy, int cameraX, int cameraY, int cameraL, int cameraH)
 {
     if(cameraX + dx < cameraL/2)
 	dx = 0;
@@ -51,11 +52,10 @@ void Modele::moveView(int dx, int dy, int cameraL, int cameraH)
     
     cameraX += dx;
     cameraY += dy;
+    
+    vector<Vue>::iterator it;
+    for (it=vues.begin() ; it < vues.end(); it++)
+	it->updateCamera(cameraX, cameraY);
 }
-
-
-
-int Modele::getCameraX(){return cameraX;}
-int Modele::getCameraY(){return cameraY;}
 
 }

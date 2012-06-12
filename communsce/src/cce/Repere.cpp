@@ -15,9 +15,9 @@ Repere::Repere(int x, int y):tiles(x*y)
     nbTiles_sans_derniere_ligne = nbTiles - largeur;
     
     
-    /*setTile(Univers::getInstance()->getTileTemplate(1000000000), 0, 0);
+    setTile(Univers::getInstance()->getTileTemplate(1000000000), 0, 0);
     setTile(Univers::getInstance()->getTileTemplate(1000000000), 0, 5);
-    setTile(Univers::getInstance()->getTileTemplate(1000000001), 10, 5); */
+    setTile(Univers::getInstance()->getTileTemplate(1000000001), 10, 5); 
 }
 
 Repere::~Repere()

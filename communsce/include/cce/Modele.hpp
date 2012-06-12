@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <string>
+#include <vector>
 #include "Carte.hpp"
 
 namespace cce {
@@ -42,12 +43,9 @@ public:
 ///
 ///\brief Changer les coordonées par (dx,dy) de la caméra selon sa largeur et sa hauteur.
 ///
-    void moveView(int dx, int dy, int cameraL, int cameraH);
+    void moveView(int dx, int dy, int cameraX, int cameraY, int cameraL, int cameraH);
     
     void saveCarte(const std::string& chemin);
-
-    int getCameraX();
-    int getCameraY();
     
 protected:
 ///
@@ -58,6 +56,7 @@ private:
     MoteurSFML* engine;
     Carte carte;
     int cameraX, cameraY;
+    vector<Vue> vues;
 };
 
 }

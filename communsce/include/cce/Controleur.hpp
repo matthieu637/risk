@@ -1,5 +1,10 @@
 #ifndef CONTROLEUR_HPP
 #define CONTROLEUR_HPP
+#include <string.h>
+#include <Thor/Events/ActionMap.hpp>
+#include <Thor/Events/EventSystem.hpp>
+
+using std::string;
 
 ///
 ///\file Controleur.hpp
@@ -17,22 +22,28 @@ class Controleur
 {
 
 public:
-    Controleur();
 ///
 ///\brief Simple setter, engine et gui doivent être les mêmes que celui de la vue
 ///
-    void init(MoteurSFML* engine, GUI* gui);
+    Controleur(MoteurSFML* engine, Modele* m, GUI* gui);
     
 ///
 ///\brief Récupère les events de SFML et les applique au modèle ou à la GUI
 ///
-    void appliquer_events(Modele& m);
+    void appliquer_events();
+    
+    void onMoveCamera(thor::ActionContext<string> context);
+    
   
 private:
     MoteurSFML* engine;
     GUI* gui;
-    bool rightPressed;
-    int curseurX, curseurY;
+    Modele* m;
+    thor::ActionMap<std::string> map;
+    int clickX, clickY;
+    thor::ActionMap<string>::CallbackSystem system;
+    
+    
 };
 
 }

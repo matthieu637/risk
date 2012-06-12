@@ -25,11 +25,11 @@ public:
 ///
 ///\brief Rend le modèle et la gui
 ///
-    void dessiner(Modele& m);
+    void dessiner(Modele* m);
 ///
 ///\brief Repositionne la cam selon le modele
 ///
-    void updateCamera();
+    void updateCamera(int x, int y);
     
 private:
     MoteurSFML* engine;
