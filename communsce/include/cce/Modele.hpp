@@ -17,8 +17,6 @@ namespace cce {
   
 class MoteurSFML;
 class Vue;
-
-class Univers;
   
 class Modele : public sf::Drawable
 {
@@ -60,7 +58,6 @@ private:
     MoteurSFML* engine;
     Carte carte;
     int cameraX, cameraY;
-    Univers* univ;
 };
 
 }

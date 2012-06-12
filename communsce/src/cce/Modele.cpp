@@ -9,12 +9,12 @@ namespace cce{
 
 Modele::Modele()
 {
-  //univ = bib::XMLEngine::load<Univers>("Univers", "data/sf.univ");
+
 }
 
 Modele::~Modele()
 {
-  delete univ;
+  
 }
 
 void Modele::update()

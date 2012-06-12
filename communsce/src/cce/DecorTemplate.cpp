@@ -1,4 +1,5 @@
 #include "cce/DecorTemplate.hpp"
+#include "cce/ImageManager.hpp"
 
 namespace cce{
 
@@ -7,11 +8,12 @@ DecorTemplate::DecorTemplate()
   
 }
 
-void DecorTemplate::init(int _id, bool _bloquant, Texture *_texture)
+void DecorTemplate::loadTexture()
 {
-  id = _id;
-  bloquant_ = _bloquant;
-  texture = _texture;
+  //à supprimer pour ne pas charger tous les décors en mémoire
+  ImageManager::getInstance()->load_asset(id, path);
+  
+  texture = &ImageManager::getInstance()->get_asset(id);
 }
 
 DecorTemplate::~DecorTemplate()

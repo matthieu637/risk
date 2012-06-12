@@ -13,9 +13,8 @@ Tile::~Tile()
 
 }
 
-void Tile::init(TileTemplate *_tt, int x, int y)
+void Tile::init(int x, int y)
 {
-    setTemplate(_tt);
     setPosition(x,y);
 }
 

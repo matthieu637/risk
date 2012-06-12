@@ -4,7 +4,6 @@
 #include <string>
 #include <SFML/Graphics/Texture.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/split_member.hpp>
 #include "bib/Logger.hpp"
 
 using sf::Texture;
@@ -18,7 +17,6 @@ class TileTemplate
 
 public:
     TileTemplate();
-    void init(int _id, bool _bloquante, string path);
     virtual ~TileTemplate();
     
 ///
@@ -31,7 +29,7 @@ public:
 ///\brief ID de la tile
 ///\return Retourne l'id de la TileTemplate
 ///
-    int getID();
+    int getID() const;
     
 ///
 ///\brief Decalage en hauteur pour les tiles qui dépasse la hauteur conforme (brins d'herbe , ...)
@@ -48,26 +46,12 @@ public:
     friend class ::boost::serialization::access;
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
-      	ar & make_nvp("id", id);
+	(void) version;
 	ar & make_nvp("path", path);
 	ar & make_nvp("bloquante", bloquante_);
-        boost::serialization::split_member(ar, *this, version);
-    }
-    
-    template<class Archive>
-    void save(Archive& ar, const unsigned int version) const {
-        (void) version;
-	(void) ar;
-    }
-    
-    template<class Archive>
-    void load( Archive & ar, const unsigned int file_version ) {
-	(void) file_version;
-	(void) ar;
-	LOG_DEBUG("fucking here");
-	std::cout << std::flush;
     }
 
+  void loadAfterXML(int id);
     
 private:
     int id, decalage_hauteur_image;

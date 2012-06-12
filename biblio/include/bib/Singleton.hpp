@@ -28,7 +28,7 @@ public:
 ///
     static T* getInstance()
     {
-        assert(_singleton != NULL);
+        assert(_singleton != nullptr);
         return _singleton;
     }
 ///

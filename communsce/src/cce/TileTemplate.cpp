@@ -3,20 +3,17 @@
 
 namespace cce{
 
-TileTemplate::TileTemplate()
+TileTemplate::TileTemplate():id(0)
 {
   
 }
 
-void TileTemplate::init(int _id, bool _bloquante, string _path)
+void TileTemplate::loadAfterXML(int id)
 {
   //à supprimer pour ne pas charger toutes les tiles en mémoire
-  ImageManager::getInstance()->load_asset(_id, _path);
+  ImageManager::getInstance()->load_asset(id, path);
   
-  id = _id;
-  path = _path;
-  bloquante_ = _bloquante;
-  texture = &ImageManager::getInstance()->get_asset(_id);
+  texture = &ImageManager::getInstance()->get_asset(id);
   decalage_hauteur_image = (texture->getSize().y - hauteurTile);
 }
 
@@ -30,7 +27,7 @@ Texture* TileTemplate::getTexture()
   return texture;
 }
 
-int TileTemplate::getID()
+int TileTemplate::getID() const
 {
   return id;
 }
