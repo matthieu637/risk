@@ -7,6 +7,11 @@ using cce::Tile;
 
 namespace cce {
 
+Repere::Repere()
+{
+  
+}
+  
 Repere::Repere(int x, int y):tiles(x*y)
 {
     largeur = x;
@@ -16,6 +21,7 @@ Repere::Repere(int x, int y):tiles(x*y)
 
     TileTemplate* tt = Univers::getInstance()->getTileTemplate(1000000000);
 
+    LOG_DEBUG("ouioui");
     setTile(tt, 500, 250);
     setTile(Univers::getInstance()->getTileTemplate(1000000000), 76, 44);
     setTile(Univers::getInstance()->getTileTemplate(1000000001), 1000, 44);

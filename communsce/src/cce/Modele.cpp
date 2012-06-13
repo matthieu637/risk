@@ -10,7 +10,9 @@ namespace cce{
 
 Modele::Modele()
 {
-
+ // carte = new Carte(50,50);
+ // bib::XMLEngine::save<Carte>(*carte, "Carte", "alpha.map");
+  carte = bib::XMLEngine::load<Carte>("Carte", "data/map/sf/alpha.map");
 }
 
 Modele::~Modele()
@@ -35,19 +37,19 @@ void Modele::saveCarte(const std::string& chemin)
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(carte,states);
+    target.draw(*carte,states);
 }
 
 void Modele::moveView(int dx, int dy, int cameraX, int cameraY, int cameraL, int cameraH)
 {
     if(cameraX + dx < cameraL/2)
 	dx = 0;
-    else if(cameraX + dx > carte.getRepere()->getLargeur() - cameraL/2 + 88)
+    else if(cameraX + dx > carte->getRepere()->getLargeur() - cameraL/2 + 88)
 	dx = 0;
 
     if(cameraY + dy < cameraH/2)
 	dy = 0;
-    else if(cameraY + dy > carte.getRepere()->getHauteur() - cameraH/2 + 44)
+    else if(cameraY + dy > carte->getRepere()->getHauteur() - cameraH/2 + 44)
 	dy = 0;
     
     cameraX += dx;

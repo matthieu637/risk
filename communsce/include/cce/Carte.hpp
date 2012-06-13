@@ -40,6 +40,7 @@ protected:
 
 public:
     Carte();
+    Carte(int x, int y);
 private:
     Repere repere;
 };
