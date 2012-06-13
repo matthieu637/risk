@@ -7,14 +7,133 @@
 	<item class_id="1" tracking_level="0" version="0">
 		<first>1000000000</first>
 		<second class_id="2" tracking_level="0" version="0">
-			<path>texture13.png</path>
+			<path>texture1.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>1000000001</first>
 		<second>
+			<path>texture2.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000002</first>
+		<second>
+			<path>texture3.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000003</first>
+		<second>
+			<path>texture4.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000004</first>
+		<second>
+			<path>texture5.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000005</first>
+		<second>
+			<path>texture6.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000006</first>
+		<second>
+			<path>texture7.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000007</first>
+		<second>
+			<path>texture8.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000008</first>
+		<second>
+			<path>texture9.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000009</first>
+		<second>
+			<path>texture10.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000010</first>
+		<second>
+			<path>texture11.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000011</first>
+		<second>
 			<path>texture12.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000012</first>
+		<second>
+			<path>texture13.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000013</first>
+		<second>
+			<path>texture14.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000014</first>
+		<second>
+			<path>texture15.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000015</first>
+		<second>
+			<path>texture16.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000016</first>
+		<second>
+			<path>texture17.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000017</first>
+		<second>
+			<path>texture18.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>1000000018</first>
+		<second>
+			<path>texture19.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>

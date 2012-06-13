@@ -10,3 +10,8 @@
 *.lib
 *.kate-swp
 map.bidon
+*/.directory
+*/*/.directory
+*/*/*/.directory
+*/*/*/*/.directory
+*/*/*/*/*/.directory
