@@ -21,6 +21,10 @@ class Carte : public sf::Drawable
 
 public:
 ///
+///\brief Carte vide pour la créer via XML
+///
+  Carte();
+///
 ///\brief Méthode de serialization pour l'écriture et la lecture en XML
 ///
     template<class Archive>
@@ -37,10 +41,8 @@ protected:
 ///\brief Méthode d'affichage SFML
 ///
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-public:
-    Carte();
-private:
+    
+protected:
     Repere repere;
 };
 

@@ -1,7 +1,6 @@
 #ifndef REPERE_HPP
 #define REPERE_HPP
 
-#include <math.h>
 #include <vector>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/vector.hpp>
@@ -25,7 +24,10 @@ class Repere : public sf::Drawable
 {
 
 public:
-    Repere(int x, int y);
+///
+///\brief Repere vide pour le créer via XML
+///
+    Repere();
     virtual ~Repere();
 
 ///
@@ -35,13 +37,6 @@ public:
 ///\return Retourne la tile correspondante
 ///
     Tile& getTile (const int x, const int y);
-
-///
-///\brief Defini le TileTemplate d'une tile
-///\param tt : TileTemplate à associer
-///        x,y : coordonnes de la tile en pixels
-///
-    void setTile(TileTemplate *tt, const int x, const int y);
 
     int getLargeur() {
         return largeur;
@@ -55,9 +50,8 @@ public:
         (void) version;
         ar & make_nvp("largeur", largeur);
         ar & make_nvp("hauteur", hauteur);
-        ar & make_nvp("nbTiles", nbTiles);
-        ar & make_nvp("nbTiles_sans_derniere_ligne", nbTiles_sans_derniere_ligne);
-        ar & make_nvp("tiles", tiles);
+
+        ar & make_nvp("Tiles", tiles);
         boost::serialization::split_member(ar, *this, version);
     }
 
@@ -71,9 +65,17 @@ public:
     void load( Archive & ar, const unsigned int file_version ) {
         (void) file_version;
         (void) ar;
-        for(int i=0; i<hauteur; i++)
-            for(int j=0; j<largeur; j++)
-                tiles[i*largeur+j].init(i, j);
+        nbTiles = largeur * hauteur;
+        nbTiles_sans_derniere_ligne = nbTiles - largeur;
+
+        for(int i=0; i<nbTiles; i++) {
+            int y_tile, x_tile;
+            y_tile = i/largeur - 1;
+            y_tile *= h_tile_demi;
+            //x_tile decale pour une ligne sur 2
+            x_tile = l_tile * (i%largeur) + (y_tile%2) * l_tile_demi;
+            tiles[i].init(x_tile, y_tile);
+        }
     }
 
 protected:

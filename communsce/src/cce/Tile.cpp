@@ -15,7 +15,7 @@ Tile::~Tile()
 
 void Tile::init(int x, int y)
 {
-    setPosition(x,y);
+    this->setPosition(x,y);
 }
 
 TileTemplate* Tile::getTemplate() const
@@ -39,7 +39,8 @@ void Tile::setPosition(float x, float y)
 {
     Sprite::setPosition(x, y);
     //retire un peu de hauteur pour les tiles qui dépasse la hauteur conforme ( brins d'herbe , ...)
-    move(0, - tt->getDecalageHauteur());
+    if(tt != nullptr)
+      move(0, - tt->getDecalageHauteur());
 }
 
 }

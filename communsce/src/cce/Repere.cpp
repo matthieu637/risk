@@ -7,18 +7,9 @@ using cce::Tile;
 
 namespace cce {
 
-Repere::Repere(int x, int y):tiles(x*y)
+Repere::Repere()
 {
-    largeur = x;
-    hauteur = y;
-    nbTiles = x * y;
-    nbTiles_sans_derniere_ligne = nbTiles - largeur;
-
-    TileTemplate* tt = Univers::getInstance()->getTileTemplate(1000000000);
-
-    setTile(tt, 500, 250);
-    setTile(Univers::getInstance()->getTileTemplate(1000000000), 76, 44);
-    setTile(Univers::getInstance()->getTileTemplate(1000000001), 1000, 44);
+  
 }
 
 Repere::~Repere()
@@ -29,23 +20,6 @@ Repere::~Repere()
 Tile& Repere::getTile (const int x, const int y)
 {
     return tiles[getIndice(x, y)];
-}
-
-void Repere::setTile(TileTemplate *_tt, const int x, const int y)
-{
-    int x_tile, y_tile;
-    int i = getIndice(x, y);
-    Tile *t = &tiles[i];
-    t->setTemplate(_tt);
-
-    y_tile = i/largeur - 1;
-    y_tile *= h_tile_demi;
-    //x_tile decale pour une ligne sur 2
-    x_tile = l_tile * (i%largeur) + (y_tile%2) * l_tile_demi;
-
-
-    t->setPosition(x_tile,y_tile);
-    LOG_DEBUG(x_tile << " " << y_tile);
 }
 
 int Repere::getIndice(int x, int y) const {

@@ -59,7 +59,7 @@ protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 private:
     MoteurSFML* engine;
-    Carte carte;
+    Carte* carte;
     int cameraX, cameraY;
     vector<Vue> vues;
 };
