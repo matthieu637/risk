@@ -24,8 +24,10 @@ class Repere : public sf::Drawable
 {
 
 public:
+///
+///\brief Repere vide pour le créer via XML
+///
     Repere();
-    Repere(int x, int y);
     virtual ~Repere();
 
 ///
@@ -35,13 +37,6 @@ public:
 ///\return Retourne la tile correspondante
 ///
     Tile& getTile (const int x, const int y);
-
-///
-///\brief Defini le TileTemplate d'une tile
-///\param tt : TileTemplate à associer
-///        x,y : coordonnes de la tile en pixels
-///
-    void setTile(TileTemplate *tt, const int x, const int y);
 
     int getLargeur() {
         return largeur;

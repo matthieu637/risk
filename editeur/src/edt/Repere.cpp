@@ -1,16 +1,36 @@
 #include "edt/Repere.hpp"
 #include "cce/Tile.hpp"
+#include "cce/TileTemplate.hpp"
 
 namespace edt{
 
-Repere::Repere(int x, int y) : cce::Repere(x, y)
+Repere::Repere(int x, int y)
 {
-
+    largeur = x;
+    hauteur = y;
+    nbTiles = x * y;
+    nbTiles_sans_derniere_ligne = nbTiles - largeur;
 }
 
 Repere::~Repere()
 {
 
+}
+
+void Repere::setTile(cce::TileTemplate *_tt, const int x, const int y)
+{
+    int x_tile, y_tile;
+    int i = getIndice(x, y);
+    Tile *t = &tiles[i];
+    t->setTemplate(_tt);
+
+    y_tile = i/largeur - 1;
+    y_tile *= h_tile_demi;
+    //x_tile decale pour une ligne sur 2
+    x_tile = l_tile * (i%largeur) + (y_tile%2) * l_tile_demi;
+
+
+    t->setPosition(x_tile,y_tile);
 }
 
 void Repere::unsetTile(const int x, const int y)

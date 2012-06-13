@@ -5,8 +5,13 @@
 
 using cce::Tile;
 
+namespace cce{
+class TileTemplate;
+}
+
 namespace edt{
 
+  
 class Repere : public cce::Repere
 {
 
@@ -19,6 +24,14 @@ public:
 ///\param x,y : coordonnes de la tile en pixels
 ///
     void unsetTile(const int x, const int y);
+
+///
+///\brief Defini le TileTemplate d'une tile
+///\param tt : TileTemplate à associer
+///        x,y : coordonnes de la tile en pixels
+///
+    void setTile(cce::TileTemplate *tt, const int x, const int y);
+
     
 ///
 ///\brief Redimensionne le repere
