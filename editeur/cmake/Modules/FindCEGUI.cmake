@@ -51,33 +51,10 @@ if(CEGUI_DEBUG MATCHES Debug)
 				  /opt/csw/lib
 				  /opt/lib
 				)
-				
-	find_library( CEGUI_LIBRARY_LUA_DEBUG
-				  NAMES CEGUILuaScriptModule-d
-				  PATHS
-				  /usr/local/lib
-				  /usr/lib
-				  /sw/lib
-				  /opt/local/lib
-				  /opt/csw/lib
-				  /opt/lib
-				)
-
-	find_library( CEGUI_LIBRARY_TOLUA_DEBUG
-				  NAMES tolua-d
-				  PATHS
-			      	  /usr/local/lib
-				  /usr/lib
-				  /sw/lib
-				  /opt/local/lib
-				  /opt/csw/lib
-				  /opt/lib
-			)
 
 	find_package_handle_standard_args(CEGUI  DEFAULT_MSG
 		CEGUI_LIBRARY_BASE_DEBUG 
 		CEGUI_LIBRARY_OPENGL_DEBUG
-		CEGUI_LIBRARY_TOLUA_DEBUG
 		CEGUI_INCLUDE_DIR
 		)
 
@@ -109,32 +86,11 @@ else()
 				  /opt/csw/lib
 				  /opt/lib
 				)
-				
-	find_library( CEGUI_LIBRARY_LUA
-				  NAMES CEGUILuaScriptModule
-				  PATHS
-				  /usr/local/lib
-				  /usr/lib
-				  /sw/lib
-				  /opt/local/lib
-				  /opt/csw/lib
-				  /opt/lib
-				)
-	find_library( CEGUI_LIBRARY_TOLUA
-				  NAMES tolua
-				  PATHS
-			      	  /usr/local/lib
-				  /usr/lib
-				  /sw/lib
-				  /opt/local/lib
-				  /opt/csw/lib
-				  /opt/lib
-			)
 
 	
 
 	find_package_handle_standard_args(CEGUI  DEFAULT_MSG
-				      CEGUI_LIBRARY_BASE CEGUI_LIBRARY_OPENGL CEGUI_INCLUDE_DIR  CEGUI_LIBRARY_TOLUA)
+				      CEGUI_LIBRARY_BASE CEGUI_LIBRARY_OPENGL CEGUI_INCLUDE_DIR)
 
-	mark_as_advanced(CEGUI_INCLUDE_DIR CEGUI_LIBRARY_BASE CEGUI_LIBRARY_OPENGL CEGUI_LIBRARY_LUA CEGUI_LIBRARY_TOLUA)
+	mark_as_advanced(CEGUI_INCLUDE_DIR CEGUI_LIBRARY_BASE CEGUI_LIBRARY_OPENGL)
 endif()

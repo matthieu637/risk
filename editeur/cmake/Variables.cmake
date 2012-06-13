@@ -31,7 +31,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       set(CMAKE_CXX_FLAGS "-O2")        ## Optimisation
       set(CMAKE_EXE_LINKER_FLAGS "-s")  ## Strip binary
     else()
-      set(CMAKE_CXX_FLAGS "-g -DDEBUG -Wall -pedantic -Wextra -ansi -std=c++11")
+      set(CMAKE_CXX_FLAGS "-g -DDEBUG -Wall -pedantic -Wextra -ansi -std=c++0x")
     endif()
 endif()
 

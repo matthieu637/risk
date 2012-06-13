@@ -93,11 +93,11 @@ protected:
     int hauteur;
     int nbTiles;
     int nbTiles_sans_derniere_ligne;
-    const int h_tile = 88;
-    const int l_tile = 158;
-    const int h_tile_demi = 44;
-    const int l_tile_demi = 79;
-    const float h_sur_l = 88/158;
+    static constexpr int h_tile = 88;
+    static constexpr int l_tile = 158;
+    static constexpr int h_tile_demi = 44;
+    static constexpr int l_tile_demi = 79;
+    static constexpr float h_sur_l = 88/158;
 };
 
 }
