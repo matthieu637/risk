@@ -34,6 +34,10 @@ public:
 ///\brief Zoom par un facteur
 ///
     void updateCameraZoom(float factor);
+///
+///\brief Remet le zoom à 0
+///
+    void resetCameraZoom();
     
 private:
     MoteurSFML* engine;

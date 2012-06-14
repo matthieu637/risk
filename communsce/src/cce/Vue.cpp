@@ -16,6 +16,7 @@ void Vue::init(MoteurSFML* engine, GUI* gui, Modele* m)
     this->engine = engine;
     this->gui = gui;
     this->modele = m;
+    m->addVue(this);
 }
 
 void Vue::dessiner(cce::Modele* m)
@@ -31,6 +32,11 @@ void Vue::updateCameraPosition(int x, int y)
 void Vue::updateCameraZoom(float factor)
 {
     engine->getView()->zoom(factor);
+}
+
+void Vue::resetCameraZoom()
+{
+    engine->getView()->setSize(engine->getFenetre()->getSize().x, engine->getFenetre()->getSize().y);
 }
 
 }

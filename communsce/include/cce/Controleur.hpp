@@ -32,8 +32,11 @@ public:
 ///
     void appliquer_events();
     
+    void onStartCam(thor::ActionContext<string> context);
+    void onStopCam(thor::ActionContext<string> context);
     void onMoveCamera(thor::ActionContext<string> context);
     void onZoom(thor::ActionContext<string> context);
+    void onResetZoom(thor::ActionContext<string> context);
     
   
 private:
@@ -41,10 +44,9 @@ private:
     GUI* gui;
     Modele* m;
     thor::ActionMap<std::string> map;
-    int clickX, clickY;
     thor::ActionMap<string>::CallbackSystem system;
-    
-    
+    int clickX, clickY;
+    bool moveCam;
 };
 
 }

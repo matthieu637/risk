@@ -46,9 +46,19 @@ public:
     void moveView(int dx, int dy, int cameraX, int cameraY, int cameraL, int cameraH);
     
 ///
+///\brief stocker le point d'origine de la caméra avant de commencer le déplacement par drag
+///
+    void setCamOrigine(int cameraX, int cameraY);
+    
+///
 ///\brief Ajuster le zoom en fonction du nombre de ticks scrollé et du champ couvert par la caméra.
 ///
     void zoom(int ticks);
+    
+///
+///\brief Remettre le zoom à 0
+///
+    void resetZoom();
     
     void saveCarte(const std::string& chemin);
     
@@ -60,7 +70,8 @@ protected:
 private:
     MoteurSFML* engine;
     Carte* carte;
-    int cameraX, cameraY;
+    int cameraOrigineX, cameraOrigineY;
+    float coeff_zoom;
     vector<Vue> vues;
 };
 

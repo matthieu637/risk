@@ -81,11 +81,13 @@ void Repere::draw(sf::RenderTarget& target, sf::RenderStates states) const
     if ( indice_debut/largeur + nbTileHauteur*2 >= hauteur) { //réduit la hauteur
         nbTileHauteur = (hauteur - (indice_debut/largeur))/2;
     }
-
+/*
     for(int indice_ligne= indice_debut ; indice_ligne < nbTileHauteur*2 ; indice_ligne++)
         for(int indice_colonne= indice_debut; indice_colonne < indice_debut + nbTileLargeur ; indice_colonne++)
             target.draw(tiles[indice_ligne*largeur + indice_colonne], states);
-
+    */
+    for(int i=0;i<nbTiles;i++)
+       target.draw(tiles[i], states);
 
 }
 

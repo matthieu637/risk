@@ -36,6 +36,7 @@ public:
     template<class T>
     void render(const T& drawable) {
         fenetre.clear();
+	fenetre.setView(camera);
 
         fenetre.pushGLStates();
         fenetre.draw(drawable);
