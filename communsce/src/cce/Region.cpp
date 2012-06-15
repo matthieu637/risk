@@ -1,5 +1,4 @@
 #include "cce/Region.hpp"
-#include "cce/Flag.hpp"
 
 namespace cce{
 
@@ -7,7 +6,7 @@ Region::Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemp
 
 	income = _income;
 	nom = _nom;
-	zone = zone;	
+	zone = _zone;	
 	upgrades = _upgrades;
 	tiles = _tiles;
 	flag = _flag;
