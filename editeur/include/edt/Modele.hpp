@@ -54,7 +54,6 @@ public:
 private:
     int cameraOrigineX, cameraOrigineY;
     float coeff_zoom;
-    vector<Vue> vues;
 };
 
 }

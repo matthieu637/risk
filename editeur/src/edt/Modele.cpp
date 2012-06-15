@@ -4,9 +4,9 @@
 #include "edt/Vue.hpp"
 #include "bib/XMLEngine.hpp"
 #include "cce/ImageManager.hpp"
-#include <vector>
+#include <list>
 
-using std::vector;
+using std::list;
 
 namespace edt{
 
@@ -52,25 +52,28 @@ void Modele::moveView(int dx, int dy, int cameraX, int cameraY)
     if((y < 0 && cameraY < 0) || (y > y_max && cameraY > y_max))
 	y = cameraY;
     
-    vector<Vue>::iterator it;
-    for (it=vues.begin() ; it < vues.end(); it++)
-	it->updateCameraPosition(x, y);
+    list<cce::Vue*>::iterator it;
+    vues.end();
+    for (it=vues.begin() ; it != vues.end(); it++)
+	(*it)->updateCameraPosition(x, y);
 }
 
 void Modele::zoom(int ticks)
 {
     coeff_zoom *= 1 - ticks * 0.05;
-    vector<Vue>::iterator it;
-    for (it=vues.begin() ; it < vues.end(); it++)
-	it->updateCameraZoom(1 - ticks * 0.05);
+    list<cce::Vue*>::iterator it;
+    for (it=vues.begin() ; it != vues.end(); it++)
+	(*it)->updateCameraZoom(1 - ticks * 0.05);
 }
 
 void Modele::resetZoom()
 {
     coeff_zoom = 1;
-    vector<Vue>::iterator it;
-    for (it=vues.begin() ; it < vues.end(); it++)
-	it->resetCameraZoom();
+    list<cce::Vue*>::iterator it;
+    for (it=vues.begin() ; it != vues.end(); it++)
+	(*it)->resetCameraZoom();
 }
 
 }
+
+

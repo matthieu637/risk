@@ -11,7 +11,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <string>
-#include <vector>
+#include <list>
 #include "cce/Carte.hpp"
 
 namespace cce {
@@ -44,7 +44,7 @@ protected:
     
 protected:
     Carte* carte;
-    vector<Vue> vues;
+    std::list<Vue*> vues;
 };
 
 }

@@ -27,7 +27,7 @@ void Modele::update()
 
 void Modele::addVue(Vue* vue)
 {
-  vues.push_back(*vue);
+  vues.push_back(vue);
 }
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
