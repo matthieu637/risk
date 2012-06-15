@@ -3,13 +3,14 @@
 
 #include <string>
 #include <list>
-#include "cce/Region.hpp"
-#include "cce/PointSpawn.hpp"
+
 
 using std::string;
 using std::list;
 
 namespace cce{
+class Region; 
+class PointSpawn;
 class Pays
 {
 
