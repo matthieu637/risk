@@ -40,27 +40,13 @@ public:
     friend class ::boost::serialization::access;
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
-      	ar & make_nvp("id", id);
+	(void) version;
+      
 	ar & make_nvp("path", path);
-	ar & make_nvp("bloquante", bloquant_);
-        boost::serialization::split_member(ar, *this, version);
+	ar & make_nvp("bloquant", bloquant_);
     }
     
-    template<class Archive>
-    void save(Archive& ar, const unsigned int version) const {
-        (void) version;
-	(void) ar;
-    }
-    
-    template<class Archive>
-    void load( Archive & ar, const unsigned int file_version ) {
-	(void) file_version;
-	(void) ar;
-	loadTexture();
-    }
-    
-private:
-  void loadTexture();
+    void loadAfterXML(int id);
     
 private:
     int id;

@@ -8,8 +8,10 @@ DecorTemplate::DecorTemplate()
   
 }
 
-void DecorTemplate::loadTexture()
+void DecorTemplate::loadAfterXML(int id)
 {
+  this->id = id;
+  
   //à supprimer pour ne pas charger tous les décors en mémoire
   ImageManager::getInstance()->load_asset(id, path);
   
