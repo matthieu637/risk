@@ -34,7 +34,6 @@ pair <int, int> Repere::getCoordonnees(int indice)
 {
     if(indice<0 || indice>nbTiles)
       return pair <int, int> (-1, -1);
-    int x, y;
 
     int x_tile, y_tile, ligne;
     ligne = (indice/largeur);

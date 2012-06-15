@@ -27,31 +27,31 @@ int Repere::getIndice(int x, int y) const {
       return -1;
 
     int indice = largeur_double * (y/h_tile) + x/l_tile;
-    int x_rect = x % l_tile, y_rect = y % h_tile; //coord du clic à l'intérieur du rectangle de la tile
-    if(x!=0)
-    LOG_DEBUG(x << " " << y << " " << indice);
+    float x_rect = x % l_tile, y_rect = y % h_tile; //coord du clic à l'intérieur du rectangle de la tile
+    
+    float demi_h_sur_demi_l = ((float)h_tile_demi/(float)l_tile_demi);
 
     if (y_rect <= h_tile_demi ) {
         if (x_rect <= l_tile_demi) {
-            if ((h_tile_demi - y_rect) > (float)(h_sur_l * x_rect))
+            if (y_rect < h_tile_demi - demi_h_sur_demi_l * x_rect)
                 //triangle haut gauche
                 if (indice >= largeur) //ne pas déborder du tableau
                     {indice -= largeur + 1;LOG_DEBUG("hg");}
         }
-        else if (-y_rect > - (float)(h_sur_l*(x_rect - l_tile_demi)))
+        else if (y_rect < demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
 		//triangle haut droite
 		if (indice >= largeur) //ne pas déborder du tableau
 		    {indice -= largeur;LOG_DEBUG("hd");}
     }
     else if (x_rect <= l_tile_demi) {
-	    if ((h_tile_demi - y_rect) < -(float)(h_sur_l * x_rect))
+	    if (y_rect - h_tile_demi > demi_h_sur_demi_l * x_rect)
 		//triangle bas gauche
 		if (indice <= nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
 		    {indice += largeur - 1;LOG_DEBUG("bg");}
 	  }
-	else if (h_tile - y_rect < (float)(h_sur_l *(x_rect-l_tile_demi)))
+	else if (y_rect > h_tile_demi - demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
 		//triangle bas droite
-		if (indice <= nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
+		if (indice < nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
 		    {indice += largeur;LOG_DEBUG("bd");}
 
     return indice;
