@@ -7,12 +7,9 @@ using cce::Tile;
 
 namespace cce {
 
-Repere::Repere(int x, int y):tiles(x*y)
+Repere::Repere()
 {
-    largeur = x;
-    hauteur = y;
-    nbTiles = x * y;
-    nbTiles_sans_derniere_ligne = nbTiles - largeur;
+  
 }
 
 Repere::~Repere()
@@ -23,20 +20,6 @@ Repere::~Repere()
 Tile& Repere::getTile (const int x, const int y)
 {
     return tiles[getIndice(x, y)];
-}
-
-void Repere::setTile(TileTemplate *tt, const int x, const int y)
-{
-    int x_tile, y_tile;
-    int i = getIndice(x, y);
-    Tile t = tiles[i];
-    t.setTemplate(tt);
-
-    y_tile = i/largeur;
-    //x_tile decale pour une ligne sur 2
-    x_tile = l_tile * i%largeur + y_tile%2 * l_tile_demi;
-
-    t.setPosition(x_tile,y_tile);
 }
 
 int Repere::getIndice(int x, int y) const {
@@ -98,10 +81,14 @@ void Repere::draw(sf::RenderTarget& target, sf::RenderStates states) const
     if ( indice_debut/largeur + nbTileHauteur*2 >= hauteur) { //réduit la hauteur
         nbTileHauteur = (hauteur - (indice_debut/largeur))/2;
     }
-
+/*
     for(int indice_ligne= indice_debut ; indice_ligne < nbTileHauteur*2 ; indice_ligne++)
-        for(int indice_colonne= 0; indice_colonne < nbTileLargeur ; indice_colonne++)
+        for(int indice_colonne= indice_debut; indice_colonne < indice_debut + nbTileLargeur ; indice_colonne++)
             target.draw(tiles[indice_ligne*largeur + indice_colonne], states);
+    */
+    for(int i=0;i<nbTiles;i++)
+       target.draw(tiles[i], states);
+
 }
 
 

@@ -22,8 +22,11 @@ find_package(Boost COMPONENTS serialization)
 find_package(SFML 2.0 COMPONENTS system REQUIRED)
 find_package(SFML 2.0 COMPONENTS graphics REQUIRED)
 
+#Trouver Thor
+find_package(Thor REQUIRED)
+
 #Include
-include_directories(${CMAKE_SOURCE_DIR}/include ${SFML_INCLUDE_DIRS} ${BIBLIO_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(${CMAKE_SOURCE_DIR}/include ${SFML_INCLUDE_DIRS} ${BIBLIO_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${THOR_INCLUDE_DIR})
 
 #Source & headers
 file ( GLOB_RECURSE sources src/*.cpp include/*.hpp)
@@ -44,9 +47,9 @@ endif()
 
 #Linker
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_DEBUG} ${SFML_GRAPHICS_LIBRARY_DEBUG} ${Boost_LIBRARIES})
+	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_DEBUG} ${SFML_GRAPHICS_LIBRARY_DEBUG} ${Boost_LIBRARIES} ${THOR_LIBRARY_DEBUG})
 else()
-	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_RELEASE} ${SFML_GRAPHICS_LIBRARY_RELEASE} ${Boost_LIBRARIES})
+	set(LINK_LIB ${SFML_SYSTEM_LIBRARY_RELEASE} ${SFML_GRAPHICS_LIBRARY_RELEASE} ${Boost_LIBRARIES} ${THOR_LIBRARY_RELEASE})
 endif()
 
 #link-main pour windows

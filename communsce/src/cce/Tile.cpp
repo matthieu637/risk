@@ -3,7 +3,7 @@
 
 namespace cce{
 
-Tile::Tile()
+Tile::Tile():tt(nullptr)
 {
 
 }
@@ -13,10 +13,9 @@ Tile::~Tile()
 
 }
 
-void Tile::init(TileTemplate *_tt, int x, int y)
+void Tile::init(int x, int y)
 {
-    setTemplate(_tt);
-    setPosition(x,y);
+    this->setPosition(x,y);
 }
 
 TileTemplate* Tile::getTemplate() const
@@ -26,10 +25,8 @@ TileTemplate* Tile::getTemplate() const
 
 void Tile::setTemplate(TileTemplate *_tt)
 {
-    move(0, -tt->getDecalageHauteur());
     tt = _tt;
-    setTexture(*tt->getTexture());
-    move(0, tt->getDecalageHauteur());
+    setTexture(*(tt->getTexture()));
 }
 
 void Tile::unsetTemplate()
@@ -42,8 +39,8 @@ void Tile::setPosition(float x, float y)
 {
     Sprite::setPosition(x, y);
     //retire un peu de hauteur pour les tiles qui dépasse la hauteur conforme ( brins d'herbe , ...)
-    move(0, tt->getDecalageHauteur());
-
+    if(tt != nullptr)
+      move(0, - tt->getDecalageHauteur());
 }
 
 }

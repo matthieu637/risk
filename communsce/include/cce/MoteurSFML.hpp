@@ -11,7 +11,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 #include "bib/Logger.hpp"
-#include "cce/Modele.hpp"
 
 
 namespace cce {
@@ -36,7 +35,7 @@ public:
     template<class T>
     void render(const T& drawable) {
         fenetre.clear();
-        //fenetre.setView(camera);
+	fenetre.setView(camera);
 
         fenetre.pushGLStates();
         fenetre.draw(drawable);
@@ -51,7 +50,7 @@ public:
     RenderWindow* getFenetre(){return &fenetre;}
 
 ///
-///\brief Fenetre pricipale SFML
+///\brief Camera
 ///
     View* getView(){return &camera;}
     

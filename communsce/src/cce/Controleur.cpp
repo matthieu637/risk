@@ -1,46 +1,33 @@
 #include "cce/Controleur.hpp"
 #include "cce/MoteurSFML.hpp"
 #include <SFML/Window/Event.hpp>
+#include <Thor/Events/Action.hpp>
+#include <Thor/Events/EventSystem.hpp>
+
+
+using thor::Action;
 
 namespace cce{
-
-Controleur::Controleur()
-{
-
-}
-
-void Controleur::init(MoteurSFML* engine, GUI* gui)
+  
+Controleur::Controleur(MoteurSFML* engine, GUI* gui) : map(*(engine->getFenetre()))
 {
     this->engine = engine;
     this->gui = gui;
+    
+    // Evenements Thor
+    Action close(sf::Event::Closed);
+    
+    // Map
+    map["quit"] = close;
 }
 
-void Controleur::appliquer_events(Modele& m){
-    (void)m;
-  
-    sf::Event event;
-    while (engine->getFenetre()->pollEvent(event))
-    {
-	if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
-	    rightPressed = true;
-	    curseurX = event.mouseButton.x;
-	    curseurY = event.mouseButton.y;
-	}
-
-	if(rightPressed && event.type == sf::Event::MouseMoved) {
-	    m.moveView(curseurX - event.mouseMove.x, curseurY - event.mouseMove.y);
-	    curseurX = event.mouseMove.x;
-	    curseurY = event.mouseMove.y;
-	}
-
-	if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Right) {
-	    rightPressed = false;
-	}
-	
-	if (event.type == sf::Event::Closed) {
-	    engine->getFenetre()->close();
-        }
-    }
+void Controleur::appliquer_events()
+{
+    map.update();
+    map.invokeCallbacks(system);
+    
+    if (map.isActive("quit"))
+        engine->getFenetre()->close();
 }
 
 }

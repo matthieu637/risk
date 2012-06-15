@@ -1,13 +1,22 @@
 #include "cce/TileTemplate.hpp"
+#include "cce/ImageManager.hpp"
 
 namespace cce{
 
-TileTemplate::TileTemplate(int _id, bool _bloquante, Texture *_texture)
+TileTemplate::TileTemplate():id(0)
 {
-  id = _id;
-  bloquante_ = _bloquante;
-  texture = _texture;
-  decalage_hauteur_image = (_texture->getSize().y - hauteurTile);
+  
+}
+
+void TileTemplate::loadAfterXML(int id)
+{
+  this->id = id;
+  
+  //à supprimer pour ne pas charger toutes les tiles en mémoire
+  ImageManager::getInstance()->load_asset(id, path);
+  
+  texture = &ImageManager::getInstance()->get_asset(id);
+  decalage_hauteur_image = (texture->getSize().y - hauteurTile);
 }
 
 TileTemplate::~TileTemplate()
@@ -20,7 +29,7 @@ Texture* TileTemplate::getTexture()
   return texture;
 }
 
-int TileTemplate::getID()
+int TileTemplate::getID() const
 {
   return id;
 }

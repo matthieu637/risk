@@ -1,8 +1,8 @@
 #ifndef DAGAME_HPP
 #define DAGAME_HPP
-#include "Controleur.hpp"
-#include "Vue.hpp"
-#include "Modele.hpp"
+#include "edt/Modele.hpp"
+#include "edt/Vue.hpp"
+#include "edt/Controleur.hpp"
 
 ///
 ///\file DaGame.hpp
@@ -10,7 +10,7 @@
 ///\author matthieu
 ///
 
-namespace cce{
+namespace edt{
 
 class DaGame
 {
@@ -22,10 +22,11 @@ public:
 ///       et d'affichage du rendu
 ///
     void gameloop();
+    
 private:
-    Controleur control;
-    Modele modele;
-    Vue vue;
+    Controleur* control;
+    Modele* modele;
+    Vue* vue;
 };
 
 }

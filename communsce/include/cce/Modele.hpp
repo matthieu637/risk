@@ -4,48 +4,47 @@
 ///
 ///\file Modele.hpp
 ///\brief Modele général de l'application
-///\author matthieu
+///\author matthieu, aymeric
 ///
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <string>
-#include "Carte.hpp"
+#include <list>
+#include "cce/Carte.hpp"
 
 namespace cce {
   
 class MoteurSFML;
-
+class Vue;
+  
 class Modele : public sf::Drawable
 {
 
 public:
     Modele();
-///
-///\brief engine doit être le même que celui de la vue et du controle
-///
-    void init(MoteurSFML* engine);
+    ~Modele();
     
 ///
 ///\brief Calculs à effectuer par le modèle à chaque pas de boucle
 ///
     void update();
-    void saveCarte(const std::string& chemin);
     
 ///
-///\brief Bouger la camera
+///\brief Ajouter une vue
 ///
-    void moveView(int dx, int dy);
+    void addVue(Vue* vue);
     
 protected:
 ///
 ///\brief Méthode d'affichage SFML
 ///
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-private:
-    MoteurSFML* engine;
-    Carte carte;
+    
+protected:
+    Carte* carte;
+    std::list<Vue*> vues;
 };
 
 }

@@ -1,1 +1,9 @@
+#!/bin/bash
+
+if [ ! -e ./biblio ]; then
+        echo "Placez vous dans risk/"
+        exit 1
+fi
+
 rm -rf ./*/build
+find ./*/lib/* | grep -v keepme | xargs rm

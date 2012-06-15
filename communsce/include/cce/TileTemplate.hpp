@@ -1,9 +1,14 @@
 #ifndef TILETEMPLATE_HPP
 #define TILETEMPLATE_HPP
 
+#include <string>
 #include <SFML/Graphics/Texture.hpp>
+#include <boost/serialization/nvp.hpp>
+#include "bib/Logger.hpp"
 
 using sf::Texture;
+using boost::serialization::make_nvp;
+using std::string;
 
 namespace cce{
 
@@ -11,7 +16,7 @@ class TileTemplate
 {
 
 public:
-    TileTemplate(int _id, bool _bloquante, Texture *_texture);
+    TileTemplate();
     virtual ~TileTemplate();
     
 ///
@@ -24,7 +29,7 @@ public:
 ///\brief ID de la tile
 ///\return Retourne l'id de la TileTemplate
 ///
-    int getID();
+    int getID() const;
     
 ///
 ///\brief Decalage en hauteur pour les tiles qui dépasse la hauteur conforme (brins d'herbe , ...)
@@ -38,8 +43,19 @@ public:
 ///
     bool bloquante();
     
+    friend class ::boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+	(void) version;
+	ar & make_nvp("path", path);
+	ar & make_nvp("bloquante", bloquante_);
+    }
+
+  void loadAfterXML(int id);
+    
 private:
     int id, decalage_hauteur_image;
+    string path;
     bool bloquante_;
     Texture *texture;
     

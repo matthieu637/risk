@@ -24,9 +24,9 @@ public:
     cout <<"\tosti.txt written" << endl;
     
     /** Loading a file */    
-    SampleData dataX = XMLEngine::load<SampleData>("ofc","osti.txt"); 
-    cout <<"\t" << dataX.getID() << endl;
-    cout <<"\t" << (dataX.getMeat().begin().operator*()) << endl;
+    SampleData* dataX = XMLEngine::load<SampleData>("ofc","osti.txt"); 
+    cout <<"\t" << dataX->getID() << endl;
+    cout <<"\t" << (dataX->getMeat().begin().operator*()) << endl;
   } 
 };
 

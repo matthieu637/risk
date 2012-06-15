@@ -1,9 +1,14 @@
 #ifndef DECORTEMPLATE_HPP
 #define DECORTEMPLATE_HPP
 
+#include <string>
 #include <SFML/Graphics/Texture.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/split_member.hpp>
 
 using sf::Texture;
+using boost::serialization::make_nvp;
+using std::string;
 
 namespace cce{
 
@@ -11,7 +16,7 @@ class DecorTemplate
 {
 
 public:
-    DecorTemplate(int _id, bool _bloquant, Texture *_texture);
+    DecorTemplate();
     virtual ~DecorTemplate();
     
 ///
@@ -32,9 +37,35 @@ public:
 ///
     bool bloquant();
     
+    friend class ::boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+      	ar & make_nvp("id", id);
+	ar & make_nvp("path", path);
+	ar & make_nvp("bloquante", bloquant_);
+        boost::serialization::split_member(ar, *this, version);
+    }
+    
+    template<class Archive>
+    void save(Archive& ar, const unsigned int version) const {
+        (void) version;
+	(void) ar;
+    }
+    
+    template<class Archive>
+    void load( Archive & ar, const unsigned int file_version ) {
+	(void) file_version;
+	(void) ar;
+	loadTexture();
+    }
+    
+private:
+  void loadTexture();
+    
 private:
     int id;
     bool bloquant_;
+    string path;
     Texture *texture;
 };
 

@@ -2,7 +2,12 @@
 
 namespace cce{
 
-UpgradeTemplate::UpgradeTemplate(int id, string nom)
+UpgradeTemplate::UpgradeTemplate()
+{
+  
+}
+
+void UpgradeTemplate::init(int id, string nom)
 {
   this->id = id;
   this->nom = nom;

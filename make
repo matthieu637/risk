@@ -1,5 +1,11 @@
 #!/bin/bash
 
+debug='-D CMAKE_BUILD_TYPE=Debug'    # debug='' pour build en release
+
+#Trouve le nombre de core
+core=`grep -c ^processor /proc/cpuinfo`
+jobs=`expr $core + 1`
+
 if [ ! -e ./biblio ]; then
 	echo "Placez vous dans risk/"
 	exit 1
@@ -18,15 +24,21 @@ if [ ! -e editeur/build ]; then
 fi
 
 cd biblio/build
-cmake ..
-make -j3
+cmake $debug ..
+if [ $? -ne 0 ]; then exit 1 ; fi 
+make -j$jobs
+if [ $? -ne 0 ]; then exit 1 ; fi 
 
 cd ../../communsce/build
-cmake ..
-make -j3
+cmake $debug ..
+if [ $? -ne 0 ]; then exit 1 ; fi 
+make -j$jobs
+if [ $? -ne 0 ]; then exit 1 ; fi 
 
 cd ../../editeur/build
-cmake ..
-make -j3
+cmake $debug ..
+if [ $? -ne 0 ]; then exit 1 ; fi 
+make -j$jobs
+if [ $? -ne 0 ]; then exit 1 ; fi 
 
 
