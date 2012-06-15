@@ -3,10 +3,11 @@
 
 #include <string>
 #include <list>
-
+#include <boost/serialization/nvp.hpp>
 
 using std::string;
 using std::list;
+using boost::serialization::make_nvp; 
 
 namespace cce{
 class Region; 
@@ -15,7 +16,7 @@ class Pays
 {
 
 public:
-Pays(int _income, string _nom, list<Region> _regions, PointSpawn* _ps);
+Pays();
 virtual ~Pays();
 
 ///
@@ -25,44 +26,34 @@ virtual ~Pays();
 	    int getIncome();
 
 ///
-///\brief definit l'income du pays
-///\param incom : income à associer
-///
-	    void setIncome(int incom);
-
-///
 ///\brief nom du pays
 ///\return Retourne le nom du pays
 ///
 	    string getNom();
-///
-///\brief definit le nom du pays
-///\param n : nom à associer
-///
-            void setNom(string n);
+
 	    
 ///\brief regions du pays
 ///\return Retourne les regions du pays
 ///
             list<Region> getRegions();
 	    
-///
-///\brief definit les regions d'un pays
-///\param r : regions a associer
-///
-            void setRegions(list<Region> r);
+
 ///	    
 ///
 ///\brief point de spawn du pays
 ///\return Retourne le point de spawn du pays
 ///
             PointSpawn* getPointSpawn();
-///
-///\brief definit le point de spawn du pays
-///\param ps : point de spawn à associer
-///
-            void setPointSpawn(PointSpawn* ps);
 	    
+
+    template<class Archive>
+    void serialize(Archive& ar, const unsigned int version)
+    {
+        ar & make_nvp("nom", nom); 
+	ar & make_nvp("income", income);
+	ar & make_nvp("pointspawn", ps);
+    }
+    
 private : 
 	    int income;
 	    string nom;
