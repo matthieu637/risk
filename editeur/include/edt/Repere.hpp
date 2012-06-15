@@ -2,8 +2,10 @@
 #define REPEREEDITEUR_HPP
 
 #include <cce/Repere.hpp>
+#include <utility>
 
 using cce::Tile;
+using std::pair;
 
 namespace cce{
 class TileTemplate;
@@ -31,8 +33,13 @@ public:
 ///        x,y : coordonnes de la tile en pixels
 ///
     void setTile(cce::TileTemplate *tt, const int x, const int y);
-
     
+///
+///\brief Redimensionne le repere
+///\param x,y : taille du repere en tiles
+///
+    pair <int, int> getCoordonnees(int indice);
+
 ///
 ///\brief Redimensionne le repere
 ///\param x,y : taille du repere en tiles

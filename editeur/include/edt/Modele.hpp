@@ -16,6 +16,7 @@
 namespace edt {
   
 class Vue;
+class Repere;
   
 class Modele : public cce::Modele
 {
@@ -49,11 +50,20 @@ public:
 ///
     void resetZoom();
     
+///
+///\brief Placer la tile actuellement sélectionné aux coordonées x,y pixels
+///
+    void placeTile(int x, int y);
+    
     void saveCarte(const std::string& chemin);
+    
+private:
+    Repere* getRepere();
     
 private:
     int cameraOrigineX, cameraOrigineY;
     float coeff_zoom;
+    cce::TileTemplate* tt;
 };
 
 }

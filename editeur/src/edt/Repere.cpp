@@ -4,7 +4,7 @@
 
 namespace edt{
 
-Repere::Repere(int x, int y)
+Repere::Repere(int x, int y) : cce::Repere()
 {
     largeur = x;
     hauteur = y;
@@ -19,18 +19,30 @@ Repere::~Repere()
 
 void Repere::setTile(cce::TileTemplate *_tt, const int x, const int y)
 {
-    int x_tile, y_tile;
     int i = getIndice(x, y);
+    if(i == -1)
+      return;
+    
     Tile *t = &tiles[i];
     t->setTemplate(_tt);
+    
+    pair <int, int> coord(getCoordonnees(i));
+    t->setPosition(coord.first,coord.second);
+}
 
-    y_tile = i/largeur - 1;
-    y_tile *= h_tile_demi;
+pair <int, int> Repere::getCoordonnees(int indice)
+{
+    if(indice<0 || indice>nbTiles)
+      return pair <int, int> (-1, -1);
+    int x, y;
+
+    int x_tile, y_tile, ligne;
+    ligne = (indice/largeur);
+    y_tile = ligne * h_tile_demi;
     //x_tile decale pour une ligne sur 2
-    x_tile = l_tile * (i%largeur) + (y_tile%2) * l_tile_demi;
-
-
-    t->setPosition(x_tile,y_tile);
+    x_tile = l_tile * (indice%largeur) + (ligne%2) * l_tile_demi;
+    
+    return pair <int, int>(x_tile, y_tile);
 }
 
 void Repere::unsetTile(const int x, const int y)

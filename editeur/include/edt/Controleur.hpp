@@ -36,10 +36,11 @@ public:
     void onMoveCamera(thor::ActionContext<string> context);
     void onZoom(thor::ActionContext<string> context);
     void onResetZoom(thor::ActionContext<string> context);
+    void onPlaceObject(thor::ActionContext<string> context);
 
 private:
     int clickX, clickY;
-    bool moveCam;
+    bool moveCam, tile;
     GUI* gui;
     Modele* m;
 };

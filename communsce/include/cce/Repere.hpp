@@ -67,6 +67,9 @@ public:
         (void) ar;
         nbTiles = largeur * hauteur;
         nbTiles_sans_derniere_ligne = nbTiles - largeur;
+	largeur_pixels = largeur * l_tile;
+	hauteur_pixels = hauteur * h_tile;
+	largeur_double = largeur * 2;
 
         for(int i=0; i<nbTiles; i++) {
             int y_tile, x_tile;
@@ -92,7 +95,10 @@ protected:
 ///
     vector<Tile> tiles;
     int largeur;
+    int largeur_double;
+    int largeur_pixels;
     int hauteur;
+    int hauteur_pixels;
     int nbTiles;
     int nbTiles_sans_derniere_ligne;
     static constexpr int h_tile = 88;

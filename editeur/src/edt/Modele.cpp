@@ -1,6 +1,8 @@
 #include "edt/Modele.hpp"
 #include "edt/Vue.hpp"
 #include "edt/Carte.hpp"
+#include "cce/Tile.hpp"
+#include "cce/Repere.hpp"
 #include "edt/Vue.hpp"
 #include "bib/XMLEngine.hpp"
 #include "cce/ImageManager.hpp"
@@ -17,6 +19,7 @@ Modele::Modele() : cce::Modele()
 
     carte = bib::XMLEngine::load<edt::Carte>("Carte", "data/map/sf/alpha.map");
     coeff_zoom = 1;
+    tt = cce::Univers::getInstance()->getTileTemplate(1000000000);
 }
 
 Modele::~Modele()
@@ -27,6 +30,11 @@ Modele::~Modele()
 void Modele::update()
 {
     cce::Modele::update();
+}
+
+Repere* Modele::getRepere()
+{
+    return (Repere*)carte->getRepere();
 }
 
 void Modele::saveCarte(const std::string& chemin)
@@ -72,6 +80,11 @@ void Modele::resetZoom()
     list<cce::Vue*>::iterator it;
     for (it=vues.begin() ; it != vues.end(); it++)
 	(*it)->resetCameraZoom();
+}
+
+void Modele::placeTile(int x, int y)
+{
+    getRepere()->setTile(tt, x, y);
 }
 
 }
