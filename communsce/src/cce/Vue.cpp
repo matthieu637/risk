@@ -2,8 +2,6 @@
 #include "cce/Modele.hpp"
 #include "cce/MoteurSFML.hpp"
 
-using cce::Vue;
-
 namespace cce{
 
 Vue::Vue()

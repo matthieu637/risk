@@ -9,7 +9,7 @@ using std::string;
 ///
 ///\file Controleur.hpp
 ///\brief Controleur du MVC principale, il sert à dispatcher et traiter les évènements
-///\author matthieu
+///\author matthieu, aymeric
 ///
 
 namespace cce{
@@ -32,21 +32,13 @@ public:
 ///
     void appliquer_events();
     
-    void onStartCam(thor::ActionContext<string> context);
-    void onStopCam(thor::ActionContext<string> context);
-    void onMoveCamera(thor::ActionContext<string> context);
-    void onZoom(thor::ActionContext<string> context);
-    void onResetZoom(thor::ActionContext<string> context);
-    
   
-private:
+protected:
     MoteurSFML* engine;
     GUI* gui;
     Modele* m;
     thor::ActionMap<std::string> map;
     thor::ActionMap<string>::CallbackSystem system;
-    int clickX, clickY;
-    bool moveCam;
 };
 
 }

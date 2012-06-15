@@ -4,7 +4,7 @@
 ///
 ///\file Modele.hpp
 ///\brief Modele général de l'application
-///\author matthieu
+///\author matthieu, aymeric
 ///
 
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -12,7 +12,7 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <string>
 #include <vector>
-#include "Carte.hpp"
+#include "cce/Carte.hpp"
 
 namespace cce {
   
@@ -25,10 +25,6 @@ class Modele : public sf::Drawable
 public:
     Modele();
     ~Modele();
-///
-///\brief engine doit être le même que celui de la vue et du controle
-///
-    void init(MoteurSFML* engine);
     
 ///
 ///\brief Calculs à effectuer par le modèle à chaque pas de boucle
@@ -40,38 +36,14 @@ public:
 ///
     void addVue(Vue* vue);
     
-///
-///\brief Changer les coordonées par (dx,dy) de la caméra selon sa largeur et sa hauteur.
-///
-    void moveView(int dx, int dy, int cameraX, int cameraY, int cameraL, int cameraH);
-    
-///
-///\brief stocker le point d'origine de la caméra avant de commencer le déplacement par drag
-///
-    void setCamOrigine(int cameraX, int cameraY);
-    
-///
-///\brief Ajuster le zoom en fonction du nombre de ticks scrollé et du champ couvert par la caméra.
-///
-    void zoom(int ticks);
-    
-///
-///\brief Remettre le zoom à 0
-///
-    void resetZoom();
-    
-    void saveCarte(const std::string& chemin);
-    
 protected:
 ///
 ///\brief Méthode d'affichage SFML
 ///
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-private:
-    MoteurSFML* engine;
+    
+protected:
     Carte* carte;
-    int cameraOrigineX, cameraOrigineY;
-    float coeff_zoom;
     vector<Vue> vues;
 };
 

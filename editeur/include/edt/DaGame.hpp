@@ -1,9 +1,8 @@
 #ifndef DAGAME_HPP
 #define DAGAME_HPP
-#include "Controleur.hpp"
-#include "Vue.hpp"
-#include "Modele.hpp"
-#include "cce/MoteurSFML.hpp"
+#include "edt/Modele.hpp"
+#include "edt/Vue.hpp"
+#include "edt/Controleur.hpp"
 
 ///
 ///\file DaGame.hpp
@@ -11,7 +10,7 @@
 ///\author matthieu
 ///
 
-namespace cce{
+namespace edt{
 
 class DaGame
 {
@@ -23,8 +22,8 @@ public:
 ///       et d'affichage du rendu
 ///
     void gameloop();
+    
 private:
-    MoteurSFML* ms;
     Controleur* control;
     Modele* modele;
     Vue* vue;

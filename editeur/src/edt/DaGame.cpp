@@ -1,13 +1,14 @@
-#include "cce/DaGame.hpp"
-#include "cce/GUI.hpp"
-#include "cce/ImageManager.hpp"
+#include "edt/DaGame.hpp"
+#include "edt/GUI.hpp"
+#include <cce/ImageManager.hpp>
+#include <cce/MoteurSFML.hpp>
 
-namespace cce {
+namespace edt {
 
 DaGame::DaGame()
 {
     GUI* g = new GUI();
-    MoteurSFML* ms = new MoteurSFML();
+    cce::MoteurSFML* ms = new cce::MoteurSFML();
     
     modele = new Modele();
     vue = new Vue();
@@ -15,7 +16,8 @@ DaGame::DaGame()
     vue->init(ms, g, modele);
 }
 
-void DaGame::gameloop() {
+void DaGame::gameloop()
+{
     while(true) {
         control->appliquer_events();
         modele->update();

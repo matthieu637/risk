@@ -39,7 +39,7 @@ public:
 ///
     void resetCameraZoom();
     
-private:
+protected:
     MoteurSFML* engine;
     GUI* gui;
     Modele* modele;
