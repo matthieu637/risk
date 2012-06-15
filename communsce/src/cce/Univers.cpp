@@ -12,7 +12,12 @@ namespace cce {
 
 Univers::Univers()
 {
-    LOG_DEBUG("Début chargement univers sf");
+
+}
+
+void Univers::init()
+{
+      LOG_DEBUG("Début chargement univers sf");
     ImageManager::getInstance()->add_resource_directory("data/texture/");
     tileTemplate = bib::XMLEngine::load< map<int, TileTemplate>>("TileTemplates", "data/univ/sf.tiletemplates");
     

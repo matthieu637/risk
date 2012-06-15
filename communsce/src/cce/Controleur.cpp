@@ -9,10 +9,9 @@ using thor::Action;
 
 namespace cce{
   
-Controleur::Controleur(MoteurSFML* engine, Modele* m, GUI* gui) : map(*(engine->getFenetre()))
+Controleur::Controleur(MoteurSFML* engine, GUI* gui) : map(*(engine->getFenetre()))
 {
     this->engine = engine;
-    this->m = m;
     this->gui = gui;
     
     // Evenements Thor

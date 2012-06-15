@@ -12,8 +12,7 @@ class Carte : public cce::Carte
 
 public:
     Carte(int x, int y);
-protected:
-    Repere repere;
+    Carte();
 };
 
 }

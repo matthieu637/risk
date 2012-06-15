@@ -2,8 +2,8 @@
 #include "edt/Vue.hpp"
 #include "edt/Carte.hpp"
 #include "edt/Vue.hpp"
-#include "cce/Univers.hpp"
 #include "bib/XMLEngine.hpp"
+#include "cce/ImageManager.hpp"
 #include <vector>
 
 using std::vector;
@@ -14,7 +14,8 @@ Modele::Modele() : cce::Modele()
 {
   // carte = new Carte(50,50);
   // bib::XMLEngine::save<Carte>(*carte, "Carte", "alpha.map");
-    carte = bib::XMLEngine::load<cce::Carte>("Carte", "data/map/sf/alpha.map");
+
+    carte = bib::XMLEngine::load<edt::Carte>("Carte", "data/map/sf/alpha.map");
     coeff_zoom = 1;
 }
 
@@ -30,7 +31,7 @@ void Modele::update()
 
 void Modele::saveCarte(const std::string& chemin)
 {
-    (void)chemin;
+    (void) chemin;
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY)

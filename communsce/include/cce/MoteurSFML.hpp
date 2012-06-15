@@ -11,7 +11,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 #include "bib/Logger.hpp"
-#include "cce/Modele.hpp"
 
 
 namespace cce {

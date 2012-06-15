@@ -10,8 +10,10 @@ using thor::Action;
 
 namespace edt{
   
-Controleur::Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui) : cce::Controleur(engine, m, gui)
-{    
+Controleur::Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui) : cce::Controleur(engine, gui)
+{
+    this->m = m;
+  
     // Evenements Thor
     Action close(sf::Event::Closed);
     Action right_press(sf::Mouse::Right, Action::PressOnce);
@@ -53,6 +55,7 @@ void Controleur::onStartCam(thor::ActionContext<string> context)
 
 void Controleur::onStopCam(thor::ActionContext<string> context)
 {
+    (void) context;
     moveCam = false;
 }
 
@@ -76,6 +79,7 @@ void Controleur::onZoom(thor::ActionContext<string> context)
 
 void Controleur::onResetZoom(thor::ActionContext<string> context)
 {
+    (void) context;
     m->resetZoom();
 }
 

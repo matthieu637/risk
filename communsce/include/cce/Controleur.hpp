@@ -14,7 +14,6 @@ using std::string;
 
 namespace cce{
 
-class Modele;
 class MoteurSFML;
 class GUI;
   
@@ -25,7 +24,7 @@ public:
 ///
 ///\brief Simple setter, engine et gui doivent être les mêmes que celui de la vue
 ///
-    Controleur(MoteurSFML* engine, Modele* m, GUI* gui);
+    Controleur(MoteurSFML* engine, GUI* gui);
     
 ///
 ///\brief Récupère les events de SFML et les applique au modèle ou à la GUI
@@ -36,7 +35,6 @@ public:
 protected:
     MoteurSFML* engine;
     GUI* gui;
-    Modele* m;
     thor::ActionMap<std::string> map;
     thor::ActionMap<string>::CallbackSystem system;
 };

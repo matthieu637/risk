@@ -1,7 +1,7 @@
 #ifndef CONTROLEUREDITEUR_HPP
 #define CONTROLEUREDITEUR_HPP
 #include <cce/Controleur.hpp>
-#include <string.h>
+#include <string>
 #include <Thor/Events/ActionMap.hpp>
 #include <Thor/Events/EventSystem.hpp>
 
@@ -13,12 +13,15 @@ using std::string;
 ///\author matthieu, aymeric
 ///
 
-namespace edt{
+namespace cce {
+class MoteurSFML;
+}
+
+namespace edt {
 
 class Modele;
-class MoteurSFML;
 class GUI;
-  
+
 class Controleur : public cce::Controleur
 {
 
@@ -27,13 +30,13 @@ public:
 ///\brief Simple setter, engine et gui doivent être les mêmes que celui de la vue
 ///
     Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui);
-    
+
     void onStartCam(thor::ActionContext<string> context);
     void onStopCam(thor::ActionContext<string> context);
     void onMoveCamera(thor::ActionContext<string> context);
     void onZoom(thor::ActionContext<string> context);
     void onResetZoom(thor::ActionContext<string> context);
-    
+
 private:
     int clickX, clickY;
     bool moveCam;

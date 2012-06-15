@@ -1,7 +1,7 @@
 #include "cce/Modele.hpp"
 #include "cce/Vue.hpp"
 #include "cce/Univers.hpp"
-#include "bib/XMLEngine.hpp"
+#include "cce/ImageManager.hpp"
 
 using std::vector;
 
@@ -9,7 +9,10 @@ namespace cce{
 
 Modele::Modele()
 {
-    
+    cce::ImageManager::getInstance();
+    cce::Univers::getInstance();
+    cce::Univers::getInstance()->init();
+
 }
 
 Modele::~Modele()

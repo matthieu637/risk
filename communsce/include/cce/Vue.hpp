@@ -17,11 +17,8 @@ class Vue
 {
 
 public:
-    Vue();
-///
-///\brief Simple setter, engine et gui doivent être les mêmes que celui du controleur
-///
-    void init(MoteurSFML* engine, GUI* gui, Modele* m);
+    Vue(MoteurSFML* engine, GUI* gui);
+
 ///
 ///\brief Rend le modèle et la gui
 ///
@@ -42,7 +39,6 @@ public:
 protected:
     MoteurSFML* engine;
     GUI* gui;
-    Modele* modele;
 };
 
 }

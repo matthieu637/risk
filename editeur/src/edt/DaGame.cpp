@@ -11,9 +11,10 @@ DaGame::DaGame()
     cce::MoteurSFML* ms = new cce::MoteurSFML();
     
     modele = new Modele();
-    vue = new Vue();
+    vue = new Vue(ms, g);
     control = new Controleur(ms, modele, g);
-    vue->init(ms, g, modele);
+    
+    modele->addVue(vue);
 }
 
 void DaGame::gameloop()

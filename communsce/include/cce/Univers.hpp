@@ -22,6 +22,10 @@ protected:
     virtual ~Univers();
     
 public:
+    //obligatoire pour éviter des problèmes d'interdépance
+    // et de singleton non initialisé
+    void init();
+    
     TileTemplate* getTileTemplate(int id);
 
     DecorTemplate* getDecorTemplate(int id);

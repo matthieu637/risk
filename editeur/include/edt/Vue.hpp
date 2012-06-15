@@ -9,17 +9,20 @@
 
 #include <cce/Vue.hpp>
 
+namespace cce {
+  class MoteurSFML;
+}
+
 namespace edt {
-  
-class MoteurSFML;
-class GUI;
+
 class Modele;
+class GUI;
 
 class Vue : public cce::Vue
 {
 
 public:
-    Vue();
+    Vue(cce::MoteurSFML* engine, GUI* gui);
     ~Vue();
     
 private:

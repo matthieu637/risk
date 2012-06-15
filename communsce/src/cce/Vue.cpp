@@ -4,17 +4,11 @@
 
 namespace cce{
 
-Vue::Vue()
-{
 
-}
-
-void Vue::init(MoteurSFML* engine, GUI* gui, Modele* m)
+Vue::Vue(MoteurSFML* engine, GUI* gui)
 {
     this->engine = engine;
     this->gui = gui;
-    this->modele = m;
-    m->addVue(this);
 }
 
 void Vue::dessiner(cce::Modele* m)
