@@ -31,11 +31,6 @@
 	  <Property Name="Tooltip" Value="Remplace toutes les tiles par celle sélectionnée" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Outils/Ajouter" >
-	  <Property Name="Text" Value="Ajouter une ressource" />
-	  <Property Name="Tooltip" Value="Permet d'utiliser de nouvelles ressources dans l'éditeur" />
-	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
-      </Window>
       <Window Type="TaharezLook/MenuItem" Name="Outils/Preferences" >
 	  <Property Name="Text" Value="Préférences" />
 	  <Property Name="Tooltip" Value="Ouvre le menu de personnalisation de l'éditeur" />

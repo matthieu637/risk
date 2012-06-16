@@ -38,11 +38,6 @@
 	  <Property Name="Tooltip" Value="Génère une image de la carte au format voulu" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Fichier/ExporterClient" >
-	  <Property Name="Text" Value="Exporter la carte" />
-	  <Property Name="Tooltip" Value="Génèrer la carte pour le client" />
-	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
-      </Window>
       <Window Type="TaharezLook/MenuItem" Name="Fichier/Quitter" >
 	  <Property Name="Text" Value="Quitter" />
 	  <Property Name="Tooltip" Value="Fermer l'éditeur" />

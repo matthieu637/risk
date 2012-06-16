@@ -38,11 +38,5 @@
 	<Property Name="VerticalAlignment" Value="Centre" />
 	<LayoutImport Filename="Menu.Palettes.layout" />
     </Window>
-    <Window Type="TaharezLook/MenuItem" Name="Menu/Aide" >
-	<Property Name="Text" Value="Aide" />
-	<Property Name="UnifiedAreaRect" Value="{{0,503},{0,0},{0,557},{0,27}}" />
-	<Property Name="AutoPopupTimeout" Value="0" />
-	<Property Name="VerticalAlignment" Value="Centre" />
-	<LayoutImport Filename="Menu.Aide.layout" />
     </Window>
 </Window>
