@@ -4,6 +4,7 @@
 #include <string>
 #include <boost/polygon/polygon.hpp>
 #include <list>
+#include <cce/Region.hpp>
 
 using boost::polygon::polygon_concept;
 using std::string;
@@ -11,14 +12,17 @@ using std::list;
 
 
 namespace cce{
-using cce::UpgradeTemplate;
-using cce::Tile;
 class Tile;
 class UpgradeTemplate;
-
+class Flag;
 }
+using cce::Tile;
+using cce::UpgradeTemplate;
+using cce::Flag;
+
+
 namespace edt{
-class Region
+class Region : public cce::Region
 {
 public :
    Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag);

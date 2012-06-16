@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <cce/Pays.hpp>
 
 
 using std::string;
@@ -11,7 +12,7 @@ using std::list;
 namespace edt{
 class Region; 
 class PointSpawn; 
-class Pays
+class Pays : public cce::Pays
 {
 public : 
 Pays(int _income, string _nom, list<Region> _regions, PointSpawn* _ps);
