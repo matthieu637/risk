@@ -1,17 +1,25 @@
-#include "../../include/cce/UnitTemplate.hpp"
+#include "cce/UnitTemplate.hpp"
 
-namespace cce{
+namespace cce {
 
 UnitTemplate::UnitTemplate()
 {
-  
+//     dmg_min = 10;
+//     dmg_max = 100;
+//     defence = 40;
+//     move_speed = 100;
+//     attack_speed = 100;
+//     nom="WOL";
+//     description = "Wake On Lan, ç é ?";
+//     collision_ = true;
+//     dmg_type = laser;
+//     def_type = acier;
 }
 
-void UnitTemplate::init(int id, string nom, bool collision)
+void UnitTemplate::loadAfterXML(int id)
 {
-  this->id = id;
-  this->nom = nom;
-  this->collision_ = collision;
+    this->id = id;
+
 }
 
 UnitTemplate::~UnitTemplate()
@@ -19,71 +27,71 @@ UnitTemplate::~UnitTemplate()
 
 }
 
-void UnitTemplate::setDamage(int dmg_min, int dmg_max){
-  this->dmg_min = dmg_min;
-  this->dmg_max = dmg_max;
-}
-    
-void UnitTemplate::setDefence(int defence){
-  this->defence = defence;
-}
-    
-void UnitTemplate::setDescription(string description){
-  this->description = description;
-}
-    
-void UnitTemplate::setMoveSpeed(int move_speed){
-  this->move_speed = move_speed;
-}
-    
-void UnitTemplate::setAttackSpeed(float attack_speed){
-  this->attack_speed = attack_speed;
-}
-    
-void UnitTemplate::setCollision(bool collision){
-  this->collision_ = collision;
-}
-    
-void UnitTemplate::setDamageType(damage_type dmg_type){
-  this->dmg_type = dmg_type;
-}
-    
-void UnitTemplate::setDefenseType(defence_type def_type){
-  this->def_type = def_type;
+void UnitTemplate::setDamage(int dmg_min, int dmg_max) {
+    this->dmg_min = dmg_min;
+    this->dmg_max = dmg_max;
 }
 
-int UnitTemplate::getID(){
-  return id;
+void UnitTemplate::setDefence(int defence) {
+    this->defence = defence;
 }
-string UnitTemplate::getNom(){
-  return nom;
+
+void UnitTemplate::setDescription(string description) {
+    this->description = description;
 }
-string UnitTemplate::getDescription(){
-  return description;
+
+void UnitTemplate::setMoveSpeed(int move_speed) {
+    this->move_speed = move_speed;
 }
-bool UnitTemplate::collision(){
-  return collision_;
+
+void UnitTemplate::setAttackSpeed(int attack_speed) {
+    this->attack_speed = attack_speed;
 }
-int UnitTemplate::getDamageMin(){
-  return dmg_min;
+
+void UnitTemplate::setCollision(bool collision) {
+    this->collision_ = collision;
 }
-int UnitTemplate::getDamageMax(){
-  return dmg_max;
+
+void UnitTemplate::setDamageType(damage_type dmg_type) {
+    this->dmg_type = dmg_type;
 }
-int UnitTemplate::getDefence(){
-  return defence;
+
+void UnitTemplate::setDefenseType(defence_type def_type) {
+    this->def_type = def_type;
 }
-damage_type UnitTemplate::getDamageType(){
-  return dmg_type;
+
+int UnitTemplate::getID() {
+    return id;
 }
-defence_type UnitTemplate::getDefenseType(){
-  return def_type;
+string UnitTemplate::getNom() {
+    return nom;
 }
-float UnitTemplate::getAttackSpeed(){
-  return attack_speed;
+string UnitTemplate::getDescription() {
+    return description;
 }
-int UnitTemplate::getMoveSpeed(){
-  return move_speed;
+bool UnitTemplate::collision() {
+    return collision_;
+}
+int UnitTemplate::getDamageMin() {
+    return dmg_min;
+}
+int UnitTemplate::getDamageMax() {
+    return dmg_max;
+}
+int UnitTemplate::getDefence() {
+    return defence;
+}
+damage_type UnitTemplate::getDamageType() {
+    return dmg_type;
+}
+defence_type UnitTemplate::getDefenseType() {
+    return def_type;
+}
+float UnitTemplate::getAttackSpeed() {
+    return attack_speed;
+}
+int UnitTemplate::getMoveSpeed() {
+    return move_speed;
 }
 
 }

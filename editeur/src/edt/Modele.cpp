@@ -19,7 +19,7 @@ Modele::Modele() : cce::Modele()
 
     carte = bib::XMLEngine::load<edt::Carte>("Carte", "data/map/sf/alpha.map");
     coeff_zoom = 1;
-    tt = cce::Univers::getInstance()->getTileTemplate(1000000000);
+    tt = cce::Univers::getInstance()->getTileTemplate(100000000);
 }
 
 Modele::~Modele()

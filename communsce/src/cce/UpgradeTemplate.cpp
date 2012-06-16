@@ -1,16 +1,16 @@
-#include "../../include/cce/UpgradeTemplate.hpp"
+#include "cce/UpgradeTemplate.hpp"
 
-namespace cce{
+namespace cce {
 
 UpgradeTemplate::UpgradeTemplate()
 {
-  
+
 }
 
 void UpgradeTemplate::init(int id, string nom)
 {
-  this->id = id;
-  this->nom = nom;
+    this->id = id;
+    this->nom = nom;
 }
 
 UpgradeTemplate::~UpgradeTemplate()
@@ -18,17 +18,17 @@ UpgradeTemplate::~UpgradeTemplate()
 
 }
 
-void UpgradeTemplate::setDescription(string description){
-  this->description = description;
+void UpgradeTemplate::setDescription(string description) {
+    this->description = description;
 }
-int UpgradeTemplate::getID(){
-  return id;
+int UpgradeTemplate::getID() {
+    return id;
 }
-string UpgradeTemplate::getNom(){
-  return nom;
+string UpgradeTemplate::getNom() {
+    return nom;
 }
-string UpgradeTemplate::getDescription(){
-  return description;
+string UpgradeTemplate::getDescription() {
+    return description;
 }
 
 }

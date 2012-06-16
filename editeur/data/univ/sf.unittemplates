@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<UnitTemplates class_id="0" tracking_level="0" version="0">
+	<count>1</count>
+	<item_version>0</item_version>
+	<item class_id="1" tracking_level="0" version="0">
+		<first>300000000</first>
+		<second class_id="2" tracking_level="0" version="0">
+			<dmg_min>10</dmg_min>
+			<dmg_max>100</dmg_max>
+			<defence>40</defence>
+			<move_speed>100</move_speed>
+			<attack_speed>100</attack_speed>
+			<nom>WOL</nom>
+			<description>Wake On Lan, ç é ?</description>
+			<collision>1</collision>
+			<dmg_type>1</dmg_type>
+			<def_type>0</def_type>
+		</second>
+	</item>
+</UnitTemplates>
+</boost_serialization>
+
