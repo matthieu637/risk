@@ -8,7 +8,7 @@ Region::Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemp
 	nom = _nom;
 	zone = _zone;	
 	upgrades = _upgrades;
-	//tiles = _tiles;
+	tiles = _tiles;
 	flag = _flag;
 }
 
@@ -28,12 +28,12 @@ void Region::setZone(polygon_concept zon){
 	zone = zon;
 }
 
-void Region::setUpgrades(list<UpgradeTemplate> upgr){
-	upgrades = upgr;
+void Region::setUpgrades(const UpgradeTemplate& upgr){
+	upgrades.push_back(upgr);
 }
 
-void Region::setTiles(list<Tile> t){
-	//tiles  = t;
+void Region::setTiles(const Tile& t){
+	tiles.push_back(t);
 }
 
 void Region::setFlag(Flag* f){

@@ -6,6 +6,7 @@
 #include <list>
 #include "cce/Tile.hpp"
 #include "cce/UpgradeTemplate.hpp"
+#include <boost/serialization/list.hpp> 
 
 using boost::polygon::polygon_concept;
 using std::string;
@@ -64,6 +65,8 @@ public:
 	ar & make_nvp("income", income);
 	ar & make_nvp("flag", flag);
 	ar & make_nvp("zone", zone);
+	ar & make_nvp("upgrades", upgrades);
+	ar & make_nvp("tiles",tiles);
     }
 
 

@@ -5,11 +5,10 @@
 
 namespace edt {
   
-Pays::Pays(int _income, string _nom, list<Region> _regions, PointSpawn* _ps)
+Pays::Pays(int _income, string _nom, PointSpawn* _ps)
 {
   income = _income;
   nom = _nom;
- // regions = _regions;
   ps = _ps;
 }
 
@@ -26,8 +25,8 @@ void Pays::setNom(string n){
 	nom = n;
 }
 
-void Pays::addRegions(list<Region> r){
-	//regions  = r;
+void Pays::addRegion(const Region& r){
+	regions.push_back(r);
 }
 
 void Pays::setPointSpawn(PointSpawn* p){

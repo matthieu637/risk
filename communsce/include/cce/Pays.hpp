@@ -4,6 +4,7 @@
 #include <string>
 #include <list>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp> 
 
 using std::string;
 using std::list;
@@ -52,6 +53,7 @@ virtual ~Pays();
         ar & make_nvp("nom", nom); 
 	ar & make_nvp("income", income);
 	ar & make_nvp("pointspawn", ps);
+	ar & make_nvp("regions", regions);
     }
     
 protected : 

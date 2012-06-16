@@ -20,7 +20,7 @@ class Region;
 class Pays : public cce::Pays
 {
 public : 
-Pays(int _income, string _nom, list<Region> _regions, PointSpawn* _ps);
+Pays(int _income, string _nom, PointSpawn* _ps);
 virtual ~Pays();
 
 ///
@@ -36,10 +36,10 @@ virtual ~Pays();
             void setNom(string n);
 	    
 ///
-///\brief definit les regions d'un pays
+///\brief ajoute une région à la liste des régions
 ///\param r : regions a associer
 ///
-            void addRegions(list<Region> r);  
+            void addRegion(const Region& r);  
 	    
 ///
 ///\brief definit le point de spawn du pays

@@ -18,11 +18,9 @@ class Flag;
 }
 using cce::UpgradeTemplate;
 using cce::Flag;
-
+using cce::Tile;
 
 namespace edt{
-class Tile;
-  
 class Region : public cce::Region
 {
 public :
@@ -48,16 +46,16 @@ public :
             void setZone(polygon_concept zon);
 	    
 ///
-///\brief Definit les upgrades d'une region
+///\brief ajoute un upgrade dans la liste e des upgrades
 ///\param upgr : upgrades à associer
 ///
-            void setUpgrades(list<UpgradeTemplate> upgr);
+            void setUpgrades(const UpgradeTemplate& upgr);
 	    
 ///
-///\brief Definit les tiles d'une region
+///\brief ajoute une tile à la liste des tiles
 ///\param t : tiles à associer
 ///
-            void setTiles(list<Tile> t);
+            void setTiles(const Tile& t);
 	    
 ///
 ///\brief Definit le flag d'une region
