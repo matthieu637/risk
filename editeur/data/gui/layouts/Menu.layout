@@ -3,8 +3,8 @@
 <Window Type="TaharezLook/Menubar" Name="MenuPrincipal" >
     <Property Name="ItemSpacing" Value="10" />
     <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{0.03,0}}" />
-    <Window Type="TaharezLook/MenuItem" Name="Menu/Fichiers" >
-	<Property Name="Text" Value="Fichiers" />
+    <Window Type="TaharezLook/MenuItem" Name="Menu/Fichier" >
+	<Property Name="Text" Value="Fichier" />
 	<Property Name="UnifiedAreaRect" Value="{{0,8},{0,0},{0,98},{0,27}}" />
 	<Property Name="AutoPopupTimeout" Value="0" />
 	<Property Name="VerticalAlignment" Value="Centre" />
