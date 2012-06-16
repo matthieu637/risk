@@ -67,7 +67,7 @@ public:
     }
 
 
-private:
+protected:
 	    int income;
 	    string nom;
 	    polygon_concept zone;

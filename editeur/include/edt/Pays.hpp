@@ -41,18 +41,7 @@ virtual ~Pays();
 ///
             void setPointSpawn(PointSpawn* ps);
 	    
-template<class Archive>
-    void serialize(Archive& ar, const unsigned int version)
-    {
-         // à compléter ici
-    }
-	    
-private : 
-	    int income;
-	    string nom;
-	    list<Region> regions;
-	    PointSpawn* ps;	  
-	    	    	    
+	    	  	    	    	    
 };
 }
 #endif // PAYS_HPP

@@ -54,7 +54,7 @@ virtual ~Pays();
 	ar & make_nvp("pointspawn", ps);
     }
     
-private : 
+protected : 
 	    int income;
 	    string nom;
 	    list<Region> regions;

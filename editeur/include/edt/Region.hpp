@@ -4,13 +4,19 @@
 #include <string>
 #include <boost/polygon/polygon.hpp>
 #include <list>
-#include "edt/Tile.hpp"
-#include "edt/UpgradeTemplate.hpp"
 
 using boost::polygon::polygon_concept;
 using std::string;
 using std::list;
 
+
+namespace cce{
+using cce::UpgradeTemplate;
+using cce::Tile;
+class Tile;
+class UpgradeTemplate;
+
+}
 namespace edt{
 class Region
 {
@@ -54,13 +60,6 @@ public :
 ///
             void setFlag(Flag* f);
 	    
-private:
-	    int income;
-	    string nom;
-	    polygon_concept zone;
-	    list<UpgradeTemplate> upgrades;
-	    list<Tile> tiles;
-	    Flag* flag;	 
 };
 }
 #endif // REGION_HPP
