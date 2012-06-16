@@ -16,12 +16,13 @@ class Tile;
 class UpgradeTemplate;
 class Flag;
 }
-using cce::Tile;
 using cce::UpgradeTemplate;
 using cce::Flag;
 
 
 namespace edt{
+class Tile;
+  
 class Region : public cce::Region
 {
 public :

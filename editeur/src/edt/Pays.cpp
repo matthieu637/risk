@@ -9,7 +9,7 @@ Pays::Pays(int _income, string _nom, list<Region> _regions, PointSpawn* _ps)
 {
   income = _income;
   nom = _nom;
-  regions = _regions;
+ // regions = _regions;
   ps = _ps;
 }
 
@@ -27,7 +27,7 @@ void Pays::setNom(string n){
 }
 
 void Pays::addRegions(list<Region> r){
-	regions  = r;
+	//regions  = r;
 }
 
 void Pays::setPointSpawn(PointSpawn* p){
