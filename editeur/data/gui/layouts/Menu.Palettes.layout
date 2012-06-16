@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window Type="TaharezLook/PopupMenu" Name="Palettes/AutoPopup" >
+      <Property Name="Visible" Value="False" />
+      <Property Name="FadeInTime" Value="0" />
+      <Property Name="FadeOutTime" Value="0" />
+      <Property Name="ItemSpacing" Value="2" />
+      <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      <Property Name="ClippedByParent" Value="False" />
+      <Property Name="AutoResizeEnabled" Value="True" />
+      <Window Type="TaharezLook/MenuItem" Name="Palettes/Terrains" >
+	  <Property Name="Text" Value="Terrains" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Palettes/Decors" >
+	  <Property Name="Text" Value="Décors" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Palettes/Personnages" >
+	  <Property Name="Text" Value="Personnages" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Palettes/Zones" >
+	  <Property Name="Text" Value="Zones" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+</Window>

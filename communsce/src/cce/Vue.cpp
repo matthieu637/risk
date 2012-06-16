@@ -1,6 +1,7 @@
 #include "cce/Vue.hpp"
 #include "cce/Modele.hpp"
 #include "cce/MoteurSFML.hpp"
+#include <cce/GUI.hpp>
 
 namespace cce{
 
@@ -13,7 +14,7 @@ Vue::Vue(MoteurSFML* engine, GUI* gui)
 
 void Vue::dessiner(cce::Modele* m)
 {
-    engine->render<cce::Modele>(*m);
+    engine->render<cce::Modele, cce::GUI>(*m, gui);
 }
 
 void Vue::updateCameraPosition(int x, int y)

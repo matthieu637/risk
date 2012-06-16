@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window Type="TaharezLook/PopupMenu" Name="Edition/AutoPopup" >
+      <Property Name="Visible" Value="False" />
+      <Property Name="FadeInTime" Value="0" />
+      <Property Name="FadeOutTime" Value="0" />
+      <Property Name="ItemSpacing" Value="2" />
+      <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      <Property Name="ClippedByParent" Value="False" />
+      <Property Name="AutoResizeEnabled" Value="True" />
+      <Window Type="TaharezLook/MenuItem" Name="Edition/Annuler" >
+	  <Property Name="Text" Value="Annuler" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Edition/Retablir" >
+	  <Property Name="Text" Value="Rétablir" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Edition/Copier" >
+	  <Property Name="Text" Value="Copier" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Edition/Couper" >
+	  <Property Name="Text" Value="Couper" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Edition/Coller" >
+	  <Property Name="Text" Value="Coller" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Edition/Supprimer" >
+	  <Property Name="Text" Value="Supprimer" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Edition/Selection">
+      <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	<Window Type="TaharezLook/Checkbox" Name="Edition/Selection/Check" >
+	  <Property Name="Text" Value="Sélection" />
+	  <Property Name="Tooltip" Value="Active ou désactive le mode sélection" />
+	  <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+      </Window>
+    </Window>
+</Window>

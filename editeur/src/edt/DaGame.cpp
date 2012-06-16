@@ -7,8 +7,9 @@ namespace edt {
 
 DaGame::DaGame()
 {
-    GUI* g = new GUI();
     cce::MoteurSFML* ms = new cce::MoteurSFML();
+    //GUI (CEGUI) doit être créer après SFML
+    GUI* g = new GUI();
     
     modele = new Modele();
     vue = new Vue(ms, g);

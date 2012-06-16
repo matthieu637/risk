@@ -32,8 +32,8 @@ public:
 ///
 ///\brief Méthode générale du rendu graphique
 ///
-    template<class T>
-    void render(const T& drawable) {
+    template<class T, class U>
+    void render(const T& drawable, U* gui_) {
         fenetre.clear();
 	fenetre.setView(camera);
 
@@ -41,6 +41,8 @@ public:
         fenetre.draw(drawable);
         fenetre.popGLStates();
 
+	gui_->dessiner();
+	
         fenetre.display();
     }
 

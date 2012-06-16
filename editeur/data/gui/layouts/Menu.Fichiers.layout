@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window Type="TaharezLook/PopupMenu" Name="Fichier/AutoPopup" >
+      <Property Name="Visible" Value="False" />
+      <Property Name="FadeInTime" Value="0" />
+      <Property Name="FadeOutTime" Value="0" />
+      <Property Name="ItemSpacing" Value="2" />
+      <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      <Property Name="ClippedByParent" Value="False" />
+      <Property Name="AutoResizeEnabled" Value="True" />
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/Nouveau" >
+	  <Property Name="Text" Value="Nouveau" />
+	  <Property Name="Tooltip" Value="Crée une nouvelle carte dans un nouvel onglet" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/Ouvrir" >
+	  <Property Name="Text" Value="Ouvrir" />
+	  <Property Name="Tooltip" Value="Ouvre une carte dans un nouvel onglet" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/Fermer" >
+	  <Property Name="Text" Value="Fermer" />
+	  <Property Name="Tooltip" Value="Ferme la carte courante" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/Enregistrer" >
+	  <Property Name="Text" Value="Enregistrer" />
+	  <Property Name="Tooltip" Value="Sauvegarde la carte sur le disque" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/EnregistrerSous" >
+	  <Property Name="Text" Value="Enregistrer Sous" />
+	  <Property Name="Tooltip" Value="Définit un nouveau chemin d'enregistrement" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/ExporterImage" >
+	  <Property Name="Text" Value="Exporter en image" />
+	  <Property Name="Tooltip" Value="Génère une image de la carte au format voulu" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/ExporterClient" >
+	  <Property Name="Text" Value="Génèrer pour client" />
+	  <Property Name="Tooltip" Value="Génèrer la carte pour le client" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Fichier/Quitter" >
+	  <Property Name="Text" Value="Quitter" />
+	  <Property Name="Tooltip" Value="Fermer l'éditeur" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="test" />
+      </Window>
+</Window>

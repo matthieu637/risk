@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout >
+    <Window Type="DefaultWindow" Name="Editeur" >
+        <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	<LayoutImport Filename="Menu.layout" />
+	<Window Type="TaharezLook/ScrollablePane" Name="Editeur/Pane" >
+	  <Property Name="UnifiedAreaRect" Value="{{0,0},{0.03,0},{1,0},{1,0}}" />
+	  <Property Name="ContentPaneAutoSized" Value="False" />
+
+		<AutoWindow NameSuffix="__auto_vscrollbar__" >
+	  		<Event Name="ScrollPosChanged" Function="gui_viewscroll_change_vertical" />
+		</AutoWindow>
+		<AutoWindow NameSuffix="__auto_hscrollbar__" >
+			<Event Name="ScrollPosChanged" Function="gui_viewscroll_change_horizontal" />
+		</AutoWindow>
+	</Window>  
+    </Window>
+</GUILayout>

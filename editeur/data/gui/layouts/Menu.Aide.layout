@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window Type="TaharezLook/PopupMenu" Name="Aide/AutoPopup" >
+      <Property Name="Visible" Value="False" />
+      <Property Name="FadeInTime" Value="0" />
+      <Property Name="FadeOutTime" Value="0" />
+      <Property Name="ItemSpacing" Value="2" />
+      <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      <Property Name="ClippedByParent" Value="False" />
+      <Property Name="AutoResizeEnabled" Value="True" />
+      <Window Type="TaharezLook/MenuItem" Name="Aide/Emploi" >
+	  <Property Name="Text" Value="Mode d'emploi" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Aide/Licence" >
+	  <Property Name="Text" Value="Licence" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Aide/APropos" >
+	  <Property Name="Text" Value="A propos" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+</Window>

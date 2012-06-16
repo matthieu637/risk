@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window Type="TaharezLook/PopupMenu" Name="Affichage/AutoPopup" >
+      <Property Name="Visible" Value="False" />
+      <Property Name="FadeInTime" Value="0" />
+      <Property Name="FadeOutTime" Value="0" />
+      <Property Name="ItemSpacing" Value="2" />
+      <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      <Property Name="ClippedByParent" Value="False" />
+      <Property Name="AutoResizeEnabled" Value="True" />
+      <Window Type="TaharezLook/MenuItem" Name="Affichage/Minimap" >
+	  <Property Name="Text" Value="Minimap" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Affichage/Repere" >
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Window Type="TaharezLook/Checkbox" Name="Affichage/Repere/Check" >
+	    <Property Name="Text" Value="Repère" />
+	    <Property Name="Tooltip" Value="Masque ou affiche le repère isométrique" />
+	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	  </Window>
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Affichage/Terrain" >
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Window Type="TaharezLook/Checkbox" Name="Affichage/Terrain/Check" >
+	    <Property Name="Text" Value="Terrain" />
+	    <Property Name="Tooltip" Value="Masque ou affiche le terrain" />
+	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	  </Window>
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Affichage/Decor" >
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Window Type="TaharezLook/Checkbox" Name="Affichage/Decor/Check" >
+	    <Property Name="Text" Value="Décor" />
+	    <Property Name="Tooltip" Value="Masque ou affiche le décor" />
+	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	  </Window>
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Affichage/Personnage" >
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Window Type="TaharezLook/Checkbox" Name="Affichage/Personnage/Check" >
+	    <Property Name="Text" Value="Personnage" />
+	    <Property Name="Tooltip" Value="Masque ou affiche les personnages" />
+	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	  </Window>
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Affichage/Zone" >
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Window Type="TaharezLook/Checkbox" Name="Affichage/Zone/Check" >
+	    <Property Name="Text" Value="Zone" />
+	    <Property Name="Tooltip" Value="Masque ou affiche les zones polygonales" />
+	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	  </Window>
+      </Window>
+</Window>
