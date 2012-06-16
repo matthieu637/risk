@@ -1,5 +1,5 @@
-#ifndef PAYS_HPP
-#define PAYS_HPP
+#ifndef CCE_PAYS_HPP
+#define CCE_PAYS_HPP
 
 #include <string>
 #include <list>

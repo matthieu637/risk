@@ -1,5 +1,5 @@
-#ifndef REGION_HPP
-#define REGION_HPP
+#ifndef CCE_REGION_HPP
+#define CCE_REGION_HPP
 
 #include <string>
 #include <boost/polygon/polygon.hpp>
