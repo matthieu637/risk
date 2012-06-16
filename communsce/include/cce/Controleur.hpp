@@ -31,6 +31,7 @@ public:
 ///
     void appliquer_events();
     
+    bool isRunning();
   
 protected:
     MoteurSFML* engine;

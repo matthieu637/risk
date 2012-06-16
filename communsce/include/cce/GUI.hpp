@@ -21,12 +21,16 @@ class GUI
 public:
     GUI();
     void dessiner();
+    bool captureEvent(const sf::Event& event);
+    void tocHorloge();
 
 private:
     void init();
     void initialiserCastEvent();
     void initialiserRessources();
     void chargerRessources();
+    CEGUI::Key::Scan toCEGUIKey(const sf::Keyboard::Key& Code) const;
+    CEGUI::MouseButton toCEGUIMouseButton(const sf::Mouse::Button& Button) const;
 
 private:
     CEGUI::Window *rootW;

@@ -1,4 +1,5 @@
 #include "cce/GUI.hpp"
+#include <bib/Logger.hpp>
 #include <CEGUI/RendererModules/OpenGL/CEGUIOpenGLRenderer.h>
 #include <CEGUI/CEGUIDefaultResourceProvider.h>
 #include <CEGUI/CEGUIImageset.h>
@@ -15,6 +16,7 @@
 #include <CEGUI/CEGUIEventArgs.h>
 #include <CEGUI/CEGUISubscriberSlot.h>
 
+
 namespace cce {
 
 using namespace cce;
@@ -28,6 +30,37 @@ GUI::GUI()
 void GUI::dessiner()
 {
     CEGUI::System::getSingleton().renderGUI();
+}
+
+void GUI::tocHorloge() {
+    cSys->injectTimePulse((float)(horloge.getElapsedTime().asSeconds()));
+    horloge.restart();
+}
+
+bool GUI::captureEvent(const sf::Event& Event)
+{
+    switch (Event.type)
+    {
+    case sf::Event::MouseLeft :
+        return cSys->injectMouseLeaves();
+    case sf::Event::TextEntered:
+        return cSys->injectChar(Event.text.unicode);
+    case sf::Event::KeyPressed:
+        return cSys->injectKeyDown(toCEGUIKey(Event.key.code));
+    case sf::Event::KeyReleased:
+        return cSys->injectKeyUp(toCEGUIKey(Event.key.code));
+    case sf::Event::MouseMoved:
+        return cSys->injectMousePosition(static_cast<float>(Event.mouseMove.x), static_cast<float>(Event.mouseMove.y));
+    case sf::Event::MouseButtonPressed:
+        return cSys->injectMouseButtonDown(toCEGUIMouseButton(Event.mouseButton.button));
+    case sf::Event::MouseButtonReleased:
+        return cSys->injectMouseButtonUp(toCEGUIMouseButton(Event.mouseButton.button));
+    case sf::Event::MouseWheelMoved:
+        return cSys->injectMouseWheelChange(static_cast<float>(Event.mouseWheel.delta));
+
+    default :
+        return false;
+    }
 }
 
 
@@ -94,6 +127,22 @@ void GUI::chargerRessources() {
     //CEGUI::LuaScriptModule* lsm = &CEGUI::LuaScriptModule::create();
     //cSys->setScriptingModule(lsm);
     //tolua_LuaInterface_open(lsm->getLuaState());
+}
+
+CEGUI::Key::Scan GUI::toCEGUIKey(const sf::Keyboard::Key& Code) const
+{
+    if (keys.find(Code) == keys.end())
+        return (CEGUI::Key::Scan)0;
+
+    return keys.at(Code);
+}
+
+CEGUI::MouseButton GUI::toCEGUIMouseButton(const sf::Mouse::Button& Button) const
+{
+    if (mouses.find(Button) == mouses.end())
+        return (CEGUI::MouseButton)0;
+
+    return mouses.at(Button);
 }
 
 void GUI::initialiserCastEvent()

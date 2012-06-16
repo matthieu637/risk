@@ -20,7 +20,7 @@ DaGame::DaGame()
 
 void DaGame::gameloop()
 {
-    while(true) {
+    while(control->isRunning()) {
         control->appliquer_events();
         modele->update();
         vue->dessiner(modele);

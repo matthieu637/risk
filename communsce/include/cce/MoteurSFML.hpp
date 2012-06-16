@@ -26,6 +26,7 @@ public:
     {
 	LOG_INFO("Chargement d'une fenetre " << 1440 << "x" << 900);
         fenetre.setFramerateLimit(60);
+	fenetre.setMouseCursorVisible(false);
     }
     
     
