@@ -49,7 +49,7 @@ int Repere::getIndice(int x, int y) const {
 		if (indice <= nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
 		    {indice += largeur - 1;LOG_DEBUG("bg");}
 	  }
-	else if (y_rect > h_tile_demi - demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
+	else if (y_rect - h_tile_demi > h_tile_demi - demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
 		//triangle bas droite
 		if (indice < nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
 		    {indice += largeur;LOG_DEBUG("bd");}
