@@ -17,15 +17,19 @@ Univers::Univers()
 
 void Univers::init()
 {
-      LOG_DEBUG("Début chargement univers sf");
+    LOG_DEBUG("Début chargement univers sf");
     ImageManager::getInstance()->add_resource_directory("data/texture/");
     tileTemplate = bib::XMLEngine::load< map<int, TileTemplate>>("TileTemplates", "data/univ/sf.tiletemplates");
+    decorTemplate = bib::XMLEngine::load< map<int, DecorTemplate>>("DecorTemplates", "data/univ/sf.decortemplates");
     
     //initilise tile
     std::map<int,TileTemplate>::iterator it(tileTemplate->begin()), itEnd(tileTemplate->end());
+    std::map<int, DecorTemplate>::iterator it2(decorTemplate->begin()), it2End(decorTemplate->end());
     
     for(;it != itEnd; ++it)
       it->second.loadAfterXML(it->first);
+    for(; it2 != it2End; ++it2End)
+      it2->second.loadAfterXML(it2->first);
     
     
     //bib::XMLEngine::save<map <int, TileTemplate>>(*tileTemplate, "TileTemplates", "tamere.xml");
