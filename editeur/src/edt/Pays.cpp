@@ -1,5 +1,6 @@
 #include "edt/Pays.hpp"
 #include "edt/Region.hpp"
+#include "cce/Region.hpp"
 
 
 namespace edt {

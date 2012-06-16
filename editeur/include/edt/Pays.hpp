@@ -8,10 +8,16 @@
 
 using std::string;
 using std::list;
+namespace cce{
+  class Region; 
+  class PointSpawn;
+}
+
+using cce::Region;
+using cce::PointSpawn;
 
 namespace edt{
-class Region; 
-class PointSpawn; 
+ 
 class Pays : public cce::Pays
 {
 public : 
