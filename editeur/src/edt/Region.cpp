@@ -12,6 +12,10 @@ Region::Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemp
 	flag = _flag;
 }
 
+Region::~Region()
+{
+}
+
 void Region::setIncome(int incom){
 	income = incom;
 }
