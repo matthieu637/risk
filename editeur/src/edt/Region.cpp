@@ -2,7 +2,7 @@
 
 namespace edt{
   
-cce::Region::Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag){
+Region::Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag){
 
 	income = _income;
 	nom = _nom;
@@ -12,27 +12,27 @@ cce::Region::Region(int _income, string _nom, polygon_concept _zone, list<Upgrad
 	flag = _flag;
 }
 
-void cce::Region::setIncome(int incom){
+void Region::setIncome(int incom){
 	income = incom;
 }
 
-void cce::Region::setNom(string n){
+void Region::setNom(string n){
 	nom = n;
 }
 
-void cce::Region::setZone(polygon_concept zon){
+void Region::setZone(polygon_concept zon){
 	zone = zon;
 }
 
-void cce::Region::setUpgrades(list<UpgradeTemplate> upgr){
+void Region::setUpgrades(list<UpgradeTemplate> upgr){
 	upgrades = upgr;
 }
 
-void cce::Region::setTiles(list<Tile> t){
+void Region::setTiles(list<Tile> t){
 	tiles  = t;
 }
 
-void cce::Region::setFlag(Flag* f){
+void Region::setFlag(Flag* f){
 	flag = f;
 }
 }
