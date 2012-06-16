@@ -38,5 +38,4 @@
 	<Property Name="VerticalAlignment" Value="Centre" />
 	<LayoutImport Filename="Menu.Palettes.layout" />
     </Window>
-    </Window>
 </Window>
