@@ -36,23 +36,23 @@ int Repere::getIndice(int x, int y) const {
             if (y_rect < h_tile_demi - demi_h_sur_demi_l * x_rect)
                 //triangle haut gauche
                 if (indice >= largeur) //ne pas déborder du tableau
-                    {indice -= largeur + 1;LOG_DEBUG("hg");}
+                    indice -= largeur + 1;
         }
         else if (y_rect < demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
 		//triangle haut droite
 		if (indice >= largeur) //ne pas déborder du tableau
-		    {indice -= largeur;LOG_DEBUG("hd");}
+		    indice -= largeur;
     }
     else if (x_rect <= l_tile_demi) {
 	    if (y_rect - h_tile_demi > demi_h_sur_demi_l * x_rect)
 		//triangle bas gauche
 		if (indice <= nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
-		    {indice += largeur - 1;LOG_DEBUG("bg");}
+		    indice += largeur - 1;
 	  }
-	else if (y_rect > h_tile_demi - demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
+	else if (y_rect - h_tile_demi > h_tile_demi - demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
 		//triangle bas droite
 		if (indice < nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
-		    {indice += largeur;LOG_DEBUG("bd");}
+		    indice += largeur;
 
     return indice;
 }
