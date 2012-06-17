@@ -14,6 +14,7 @@ namespace edt {
 Controleur::Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui) : cce::Controleur(engine, gui)
 {
     this->m = m;
+    selection = false;
     tile = true;
 
     // Evenements Thor
@@ -49,7 +50,8 @@ Controleur::Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui) : cce::Cont
     system.connect("placer_objet", BIND(& Controleur::onPlaceObject));
     
     //Binding fonctions CEGUI
-    moduleGUI->ajouterHandler("quitter", BIND(& Controleur::onQuit ));
+    moduleGUI->ajouterHandler("quitter", BIND(& Controleur::onQuit));
+    moduleGUI->ajouterHandler("selection", BIND(& Controleur::onSelection));
 
     gui->init(moduleGUI);
 }
@@ -97,6 +99,8 @@ void Controleur::onResetZoom(thor::ActionContext<string> context)
 
 void Controleur::onPlaceObject(thor::ActionContext<string> context)
 {
+    if(selection)
+      return;
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     if(tile)
       m->placeTile(getX(mousePosition.x), getY(mousePosition.y));
@@ -125,6 +129,12 @@ bool Controleur::onQuit(const CEGUI::EventArgs& e)
     (void) e;
     engine->getFenetre()->close();
     return true;
+}
+
+void Controleur::onSelection(thor::ActionContext<string> context)
+{
+    (void) context;
+    selection = !selection;
 }
 
 }

@@ -24,7 +24,7 @@ Tile& Repere::getTile (const int x, const int y)
 
 std::pair <int, int> Repere::getCoordonnees(int indice)
 {
-    if(indice<0 || indice>nbTiles)
+    if(indice<0 || indice>=nbTiles)
       return pair <int, int> (-1, -1);
 
     int x_tile, y_tile, ligne;
@@ -68,6 +68,9 @@ int Repere::getIndice(int x, int y) const {
 		if (indice < nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
 		    indice += largeur;
 
+    if(indice >= nbTiles)
+      return -1;
+    
     return indice;
 }
 

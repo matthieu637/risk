@@ -16,12 +16,12 @@
 	  <Property Name="Text" Value="Décors" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Palettes/Personnages" >
-	  <Property Name="Text" Value="Personnages" />
+      <Window Type="TaharezLook/MenuItem" Name="Palettes/Regions" >
+	  <Property Name="Text" Value="Regions" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Palettes/Zones" >
-	  <Property Name="Text" Value="Zones" />
+      <Window Type="TaharezLook/MenuItem" Name="Palettes/Pays" >
+	  <Property Name="Text" Value="Pays" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
 </Window>

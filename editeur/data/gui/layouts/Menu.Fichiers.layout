@@ -18,11 +18,6 @@
 	  <Property Name="Tooltip" Value="Ouvre une carte dans un nouvel onglet" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Fichier/Fermer" >
-	  <Property Name="Text" Value="Fermer" />
-	  <Property Name="Tooltip" Value="Ferme la carte courante" />
-	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
-      </Window>
       <Window Type="TaharezLook/MenuItem" Name="Fichier/Enregistrer" >
 	  <Property Name="Text" Value="Enregistrer" />
 	  <Property Name="Tooltip" Value="Sauvegarde la carte" />
@@ -31,11 +26,6 @@
       <Window Type="TaharezLook/MenuItem" Name="Fichier/EnregistrerSous" >
 	  <Property Name="Text" Value="Enregistrer Sous" />
 	  <Property Name="Tooltip" Value="Définit un nouveau chemin d'enregistrement" />
-	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
-      </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Fichier/ExporterImage" >
-	  <Property Name="Text" Value="Exporter en image" />
-	  <Property Name="Tooltip" Value="Génère une image de la carte au format voulu" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Fichier/Quitter" >

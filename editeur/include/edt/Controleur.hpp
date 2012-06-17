@@ -38,7 +38,7 @@ public:
     void onZoom(thor::ActionContext<string> context);
     void onResetZoom(thor::ActionContext<string> context);
     void onPlaceObject(thor::ActionContext<string> context);
-    
+    void onSelection(thor::ActionContext<string> context);
     bool onQuit(const CEGUI::EventArgs& e);
     
     int getX(int mouseX);
@@ -46,7 +46,7 @@ public:
 
 private:
     int clickX, clickY;
-    bool moveCam, tile, decor;
+    bool moveCam, tile, decor, selection;
     GUI* gui;
     Modele* m;
 };

@@ -36,14 +36,6 @@
 	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
 	  </Window>
       </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Affichage/Personnage" >
-	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
-	  <Window Type="TaharezLook/Checkbox" Name="Affichage/Personnage/Check" >
-	    <Property Name="Text" Value="Personnage" />
-	    <Property Name="Tooltip" Value="Masque ou affiche les personnages" />
-	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
-	  </Window>
-      </Window>
       <Window Type="TaharezLook/MenuItem" Name="Affichage/Zone" >
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
 	  <Window Type="TaharezLook/Checkbox" Name="Affichage/Zone/Check" >
