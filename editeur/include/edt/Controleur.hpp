@@ -15,42 +15,39 @@ using std::string;
 ///
 
 namespace cce {
-class MoteurSFML;
-}
+    class MoteurSFML;
+} namespace edt {
 
-namespace edt {
+    class Modele;
+    class GUI;
 
-class Modele;
-class GUI;
+    class Controleur:public cce::Controleur {
 
-class Controleur : public cce::Controleur
-{
-
-public:
+      public:
 ///
 ///\brief Simple setter, engine et gui doivent être les mêmes que celui de la vue
 ///
-    Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui);
+	Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui);
 
-    void onStartCam(thor::ActionContext<string> context);
-    void onStopCam(thor::ActionContext<string> context);
-    void onMoveCamera(thor::ActionContext<string> context);
-    void onZoom(thor::ActionContext<string> context);
-    void onResetZoom(thor::ActionContext<string> context);
-    void onPlaceObject(thor::ActionContext<string> context);
-    bool onSelection(const CEGUI::EventArgs& e);
-    bool onQuit(const CEGUI::EventArgs& e);
-    
-    int getX(int mouseX);
-    int getY(int mouseY);
+	void onStartCam(thor::ActionContext < string > context);
+	void onStopCam(thor::ActionContext < string > context);
+	void onMoveCamera(thor::ActionContext < string > context);
+	void onZoom(thor::ActionContext < string > context);
+	void onResetZoom(thor::ActionContext < string > context);
+	void onPlaceObject(thor::ActionContext < string > context);
+	void onDeleteObject(thor::ActionContext < string > context);
+	bool onSelection(const CEGUI::EventArgs & e);
+	bool onQuit(const CEGUI::EventArgs & e);
 
-private:
-    int clickX, clickY;
-    bool moveCam, tile, decor, selection;
-    GUI* gui;
-    Modele* m;
-};
+	int getX(int mouseX);
+	int getY(int mouseY);
+
+      private:
+	int clickX, clickY;
+	bool moveCam, tile, decor, selection;
+	GUI *gui;
+	Modele *m;
+    };
 
 }
-
-#endif // CONTROLEUR_HPP
+#endif	// CONTROLEUR_HPP
