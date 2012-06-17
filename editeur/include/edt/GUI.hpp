@@ -8,7 +8,7 @@ class GUI : public cce::GUI
 {
 
 public:
-GUI();
+GUI(const string& conteneur_);
 virtual ~GUI();
 };
 

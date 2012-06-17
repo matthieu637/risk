@@ -2,19 +2,20 @@
 #include "edt/Modele.hpp"
 #include "edt/GUI.hpp"
 #include "cce/MoteurSFML.hpp"
+#include <cce/CppScriptModule.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Thor/Events/Action.hpp>
 #include <Thor/Events/EventSystem.hpp>
 
 using thor::Action;
 
-namespace edt{
-  
+namespace edt {
+
 Controleur::Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui) : cce::Controleur(engine, gui)
 {
     this->m = m;
     tile = true;
-  
+
     // Evenements Thor
     Action close(sf::Event::Closed);
     Action right_press(sf::Mouse::Right, Action::PressOnce);
@@ -29,7 +30,7 @@ Controleur::Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui) : cce::Cont
     Action rctrl_num0 = rctrl_press && num0_press;
     Action drag_right = mouse_move && right_hold;
     Action drag_left = mouse_move && left_hold;
-    
+
     // Map
     map["quit"] = close;
     map["zoom"] = molette;
@@ -40,12 +41,17 @@ Controleur::Controleur(cce::MoteurSFML* engine, Modele* m, GUI* gui) : cce::Cont
     map["placer_objet"] = drag_left || left_release;
 
     //Binding map-fonctions
-    system.connect("start_cam", std::bind(& Controleur::onStartCam, this, std::placeholders::_1));
-    system.connect("stop_cam", std::bind(& Controleur::onStopCam, this, std::placeholders::_1));
-    system.connect("move_camera", std::bind(& Controleur::onMoveCamera, this, std::placeholders::_1));
-    system.connect("zoom", std::bind(& Controleur::onZoom, this, std::placeholders::_1));
-    system.connect("reset_zoom", std::bind(& Controleur::onResetZoom, this, std::placeholders::_1));
-    system.connect("placer_objet", std::bind(& Controleur::onPlaceObject, this, std::placeholders::_1));
+    system.connect("start_cam", BIND(& Controleur::onStartCam));
+    system.connect("stop_cam", BIND(& Controleur::onStopCam));
+    system.connect("move_camera",BIND(& Controleur::onMoveCamera));
+    system.connect("zoom", BIND(& Controleur::onZoom));
+    system.connect("reset_zoom", BIND(& Controleur::onResetZoom));
+    system.connect("placer_objet", BIND(& Controleur::onPlaceObject));
+    
+    //Binding fonctions CEGUI
+    moduleGUI->ajouterHandler("quitter", BIND(& Controleur::onQuit ));
+
+    gui->init(moduleGUI);
 }
 
 void Controleur::onStartCam(thor::ActionContext<string> context)
@@ -68,7 +74,7 @@ void Controleur::onStopCam(thor::ActionContext<string> context)
 void Controleur::onMoveCamera(thor::ActionContext<string> context)
 {
     if(!moveCam) //bug si exécuté avant le rightPress
-      return;
+        return;
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = clickX - mousePosition.x;
     int dy = clickY - mousePosition.y;
@@ -100,6 +106,13 @@ void Controleur::onPlaceObject(thor::ActionContext<string> context)
       m->placeTile(x_absolu, y_absolu);
     else if(decor)
       m->placeDecor(x_absolu, y_absolu);
+}
+
+bool Controleur::onQuit(const CEGUI::EventArgs& e)
+{
+    (void) e;
+    engine->getFenetre()->close();
+    return true;
 }
 
 }

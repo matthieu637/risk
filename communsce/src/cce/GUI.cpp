@@ -1,4 +1,5 @@
 #include "cce/GUI.hpp"
+#include <cce/CppScriptModule.hpp>
 #include <bib/Logger.hpp>
 #include <CEGUI/RendererModules/OpenGL/CEGUIOpenGLRenderer.h>
 #include <CEGUI/CEGUIDefaultResourceProvider.h>
@@ -16,15 +17,13 @@
 #include <CEGUI/CEGUIEventArgs.h>
 #include <CEGUI/CEGUISubscriberSlot.h>
 
-
 namespace cce {
 
 using namespace cce;
 
-GUI::GUI()
+GUI::GUI(const string& conteneur_):conteneur(conteneur_)
 {
     initialiserCastEvent();
-    init();
 }
 
 void GUI::dessiner()
@@ -64,7 +63,7 @@ bool GUI::captureEvent(const sf::Event& Event)
 }
 
 
-void GUI::init() {
+void GUI::init(CEGUI::ScriptModule* module) {
     CEGUI::OpenGLRenderer& myRenderer = CEGUI::OpenGLRenderer::create();
     //CEGUI::OpenGLRenderer& myRenderer = CEGUI:: OpenGLRenderer:: bootstrapSystem ();
     cSys = &CEGUI::System::create( myRenderer );
@@ -72,6 +71,8 @@ void GUI::init() {
     initialiserRessources();
     chargerRessources();
 
+    //Events handler
+    cSys->setScriptingModule(module);
 
     cSys->setDefaultFont("DejaVuSans-10");
     // cSys->setDefaultMouseCursor( "Vanilla", "MouseArrow" );
@@ -79,13 +80,8 @@ void GUI::init() {
     //cSys->setDefaultTooltip( "Vanilla/Tooltip" );
     cSys->setDefaultTooltip( "TaharezLook/Tooltip" );
 
-
-    cSys->executeScriptFile("gui_editeur.lua","lua_scripts");
-
-    rootW = CEGUI::WindowManager::getSingleton().loadWindowLayout( "Editeur.layout" );
+    rootW = CEGUI::WindowManager::getSingleton().loadWindowLayout( conteneur );
     cSys->setGUISheet( rootW );
-
-    cSys->executeScriptFile("gui_init_editeur.lua","lua_scripts");
 }
 
 void GUI::initialiserRessources() {
@@ -106,7 +102,7 @@ void GUI::initialiserRessources() {
     CEGUI::Scheme::setDefaultResourceGroup("schemes");
     CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
     CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-    CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
+    //CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
 
     // setup default group for validation schemas
     CEGUI::XMLParser* parser = CEGUI::System::getSingleton().getXMLParser();
@@ -122,11 +118,6 @@ void GUI::chargerRessources() {
 
     CEGUI::ImagesetManager::getSingleton().create("Vanilla.imageset");
     CEGUI::SchemeManager::getSingleton().create( "VanillaSkin.scheme" );
-
-    //Lua scripts
-    //CEGUI::LuaScriptModule* lsm = &CEGUI::LuaScriptModule::create();
-    //cSys->setScriptingModule(lsm);
-    //tolua_LuaInterface_open(lsm->getLuaState());
 }
 
 CEGUI::Key::Scan GUI::toCEGUIKey(const sf::Keyboard::Key& Code) const
@@ -253,3 +244,4 @@ void GUI::initialiserCastEvent()
 }
 
 }
+

@@ -2,7 +2,7 @@
 
 namespace edt{
 
-GUI::GUI() : cce::GUI()
+GUI::GUI(const string& conteneur_) : cce::GUI(conteneur_)
 {
 
 }

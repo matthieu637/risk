@@ -2,6 +2,7 @@
 #define CONTROLEUREDITEUR_HPP
 #include <cce/Controleur.hpp>
 #include <string>
+#include <CEGUI/CEGUIEventArgs.h>
 #include <Thor/Events/ActionMap.hpp>
 #include <Thor/Events/EventSystem.hpp>
 
@@ -37,6 +38,8 @@ public:
     void onZoom(thor::ActionContext<string> context);
     void onResetZoom(thor::ActionContext<string> context);
     void onPlaceObject(thor::ActionContext<string> context);
+    
+    bool onQuit(const CEGUI::EventArgs& e);
 
 private:
     int clickX, clickY;

@@ -8,6 +8,8 @@
 #include <SFML/Graphics/Shape.hpp>
 #include "cce/Tile.hpp"
 
+using std::pair;
+
 
 using sf::RenderTarget;
 using boost::serialization::make_nvp;
@@ -38,6 +40,9 @@ public:
 ///
     Tile& getTile (const int x, const int y);
 
+
+    pair <int, int> getCoordonnees(int indice);
+
     int getLargeur() {
         return largeur;
     }
@@ -67,17 +72,13 @@ public:
         (void) ar;
         nbTiles = largeur * hauteur;
         nbTiles_sans_derniere_ligne = nbTiles - largeur;
-	largeur_pixels = largeur * l_tile;
-	hauteur_pixels = hauteur * h_tile;
-	largeur_double = largeur * 2;
+        largeur_pixels = largeur * l_tile;
+        hauteur_pixels = hauteur * h_tile;
+        largeur_double = largeur * 2;
 
         for(int i=0; i<nbTiles; i++) {
-            int y_tile, x_tile;
-            y_tile = i/largeur - 1;
-            y_tile *= h_tile_demi;
-            //x_tile decale pour une ligne sur 2
-            x_tile = l_tile * (i%largeur) + (y_tile%2) * l_tile_demi;
-            tiles[i].init(x_tile, y_tile);
+            pair <int, int> xy = getCoordonnees(i);
+            tiles[i].init(xy.first, xy.second);
         }
     }
 

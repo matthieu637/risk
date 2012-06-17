@@ -5,7 +5,6 @@
 #include <utility>
 
 using cce::Tile;
-using std::pair;
 
 namespace cce{
 class TileTemplate;
@@ -38,7 +37,6 @@ public:
 ///\brief Redimensionne le repere
 ///\param x,y : taille du repere en tiles
 ///
-    pair <int, int> getCoordonnees(int indice);
 
 ///
 ///\brief Redimensionne le repere
