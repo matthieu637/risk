@@ -22,6 +22,20 @@ Tile& Repere::getTile (const int x, const int y)
     return tiles[getIndice(x, y)];
 }
 
+pair <int, int> Repere::getCoordonnees(int indice)
+{
+    if(indice<0 || indice>nbTiles)
+      return pair <int, int> (-1, -1);
+
+    int x_tile, y_tile, ligne;
+    ligne = (indice/largeur);
+    y_tile = ligne * h_tile_demi;
+    //x_tile decale pour une ligne sur 2
+    x_tile = l_tile * (indice%largeur) + (ligne%2) * l_tile_demi;
+    
+    return pair <int, int>(x_tile, y_tile);
+}
+
 int Repere::getIndice(int x, int y) const {
     if (x<0 || y<0 || x>largeur_pixels || y>hauteur_pixels)
       return -1;
