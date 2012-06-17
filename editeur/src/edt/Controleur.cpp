@@ -131,10 +131,11 @@ bool Controleur::onQuit(const CEGUI::EventArgs& e)
     return true;
 }
 
-void Controleur::onSelection(thor::ActionContext<string> context)
+bool Controleur::onSelection(const CEGUI::EventArgs& e)
 {
-    (void) context;
+    (void) e;
     selection = !selection;
+    return true;
 }
 
 }
