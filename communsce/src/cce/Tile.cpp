@@ -17,7 +17,7 @@ namespace cce {
 	return tt;
     } void Tile::setTemplate(TileTemplate * _tt) {
 	tt = _tt;
-	setTexture(*(tt->getTexture()));
+	setTexture(*(tt->getTexture()), true);
     }
 
     void Tile::unsetTemplate() {
