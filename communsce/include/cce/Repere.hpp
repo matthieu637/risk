@@ -9,8 +9,6 @@
 #include "cce/Tile.hpp"
 
 using std::pair;
-
-
 using sf::RenderTarget;
 using boost::serialization::make_nvp;
 using std::vector;

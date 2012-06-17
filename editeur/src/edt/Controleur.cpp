@@ -98,14 +98,26 @@ void Controleur::onResetZoom(thor::ActionContext<string> context)
 void Controleur::onPlaceObject(thor::ActionContext<string> context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
-    int x_view = engine->getView()->getCenter().x - engine->getView()->getSize().x/2;
-    int y_view = engine->getView()->getCenter().y - engine->getView()->getSize().y/2;
-    int x_absolu = x_view + mousePosition.x;
-    int y_absolu = y_view + mousePosition.y;
     if(tile)
-      m->placeTile(x_absolu, y_absolu);
+      m->placeTile(getX(mousePosition.x), getY(mousePosition.y));
     else if(decor)
-      m->placeDecor(x_absolu, y_absolu);
+      m->placeDecor(getX(mousePosition.x), getY(mousePosition.y));
+}
+
+int Controleur::getX(int mouseX)
+{
+    int x_view = engine->getView()->getCenter().x - engine->getView()->getSize().x/2;
+    float coeff_x = engine->getView()->getSize().x / engine->getFenetre()->getSize().x;
+    int x_absolu = x_view + mouseX * coeff_x;
+    return x_absolu;
+}
+
+int Controleur::getY(int mouseY)
+{
+    int y_view = engine->getView()->getCenter().y - engine->getView()->getSize().y/2;
+    float coeff_y = engine->getView()->getSize().y / engine->getFenetre()->getSize().y;
+    int y_absolu = y_view + mouseY * coeff_y;
+    return y_absolu;
 }
 
 bool Controleur::onQuit(const CEGUI::EventArgs& e)

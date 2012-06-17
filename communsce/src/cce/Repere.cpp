@@ -22,7 +22,7 @@ Tile& Repere::getTile (const int x, const int y)
     return tiles[getIndice(x, y)];
 }
 
-pair <int, int> Repere::getCoordonnees(int indice)
+std::pair <int, int> Repere::getCoordonnees(int indice)
 {
     if(indice<0 || indice>nbTiles)
       return pair <int, int> (-1, -1);

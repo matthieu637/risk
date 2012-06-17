@@ -40,6 +40,9 @@ public:
     void onPlaceObject(thor::ActionContext<string> context);
     
     bool onQuit(const CEGUI::EventArgs& e);
+    
+    int getX(int mouseX);
+    int getY(int mouseY);
 
 private:
     int clickX, clickY;
