@@ -22,6 +22,7 @@
 	<Property Name="Text" Value="Sélection" />
 	<Property Name="Tooltip" Value="Active ou désactive le mode sélection" />
 	<Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	<Event Name="CheckStateChanged" Function="selection" />
       </Window>
     </Window>
 </Window>
