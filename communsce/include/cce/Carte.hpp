@@ -11,6 +11,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include "Repere.hpp"
+#include "CoucheDecor.hpp"
 
 using boost::serialization::make_nvp;
 
@@ -35,6 +36,7 @@ public:
     }
     
     Repere* getRepere(){return &repere;}
+    CoucheDecor* getCoucheDecor(){return &couche_decor;}
   
 protected:
 ///
@@ -44,6 +46,7 @@ protected:
     
 protected:
     Repere repere;
+    CoucheDecor couche_decor;
 };
 
 }

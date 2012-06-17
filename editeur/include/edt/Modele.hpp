@@ -55,6 +55,11 @@ public:
 ///
     void placeTile(int x, int y);
     
+///
+///\brief Placer le decor actuellement sélectionné aux coordonées x,y pixels
+///
+    void placeDecor(int x, int y);
+    
     void saveCarte(const std::string& chemin);
     
 private:
@@ -64,6 +69,7 @@ private:
     int cameraOrigineX, cameraOrigineY;
     float coeff_zoom;
     cce::TileTemplate* tt;
+    cce::DecorTemplate* dt;
 };
 
 }

@@ -40,7 +40,7 @@ public:
 
 private:
     int clickX, clickY;
-    bool moveCam, tile;
+    bool moveCam, tile, decor;
     GUI* gui;
     Modele* m;
 };

@@ -3,6 +3,7 @@
 
 #include <set>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Drawable.hpp>
 
 using sf::RenderTarget;
 
@@ -11,8 +12,8 @@ namespace cce
 
 class Decor;
 class DecorTemplate;
-  
-class CoucheDecor
+
+class CoucheDecor : public sf::Drawable
 {
 public:
 
@@ -47,6 +48,8 @@ public:
     ///\param Les coordonnees
     ///
     void removeDecor(int x, int y);
+    
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
     std::set<cce::Decor> *decors;

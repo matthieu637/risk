@@ -98,6 +98,8 @@ void Controleur::onPlaceObject(thor::ActionContext<string> context)
     int y_absolu = y_view + mousePosition.y;
     if(tile)
       m->placeTile(x_absolu, y_absolu);
+    else if(decor)
+      m->placeDecor(x_absolu, y_absolu);
 }
 
 }

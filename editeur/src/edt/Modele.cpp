@@ -87,6 +87,11 @@ void Modele::placeTile(int x, int y)
     getRepere()->setTile(tt, x, y);
 }
 
+void Modele::placeDecor(int x, int y)
+{
+    carte->getCoucheDecor()->addDecor(dt, x, y);
+}
+
 }
 
 

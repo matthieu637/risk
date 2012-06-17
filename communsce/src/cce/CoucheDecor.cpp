@@ -30,11 +30,11 @@ const Decor* CoucheDecor::getDecor(int x, int y)
 }
 
 
-void CoucheDecor::dessiner(RenderTarget& cible)
+void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
   std::set<Decor>::iterator it = decors->begin();
   for(; it != decors->end(); ++it)
-    cible.draw(*it);
+    target.draw(*it, states);
 }
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)

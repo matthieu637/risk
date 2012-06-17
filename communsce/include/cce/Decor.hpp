@@ -24,13 +24,16 @@ public:
 ///
     DecorTemplate* getTemplate() const;
     
-    void setTexture(const Texture& texture, bool resetRect = false);
-    
 ///
 ///\brief Comparaison pour la position dans l'arbre
-///\return True si ce decor vient avant d2
+///\return True si ce decor vient avant d
 ///
-    bool operator <(const Decor& d) const;
+    bool inferieurA(const Decor& d) const;
+    
+///
+///\brief Changer la texture de l'objet (ajuste yCompare pour la position dans l'arbre)
+///
+    void setTexture(Texture* texture);
 
 public:
     int yCompare;
@@ -38,6 +41,8 @@ public:
 private:
     DecorTemplate *dt;
 };
+    
+bool operator<(Decor const &d1, Decor const &d2);
 
 }
 #endif // DECOR_HPP

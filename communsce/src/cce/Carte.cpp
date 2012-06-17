@@ -10,6 +10,7 @@ Carte::Carte()
 void Carte::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(repere, states);
+    target.draw(couche_decor, states);
 }
 
 }

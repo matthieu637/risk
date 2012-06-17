@@ -1,13 +1,15 @@
 #include "cce/Decor.hpp"
 #include "cce/DecorTemplate.hpp"
 
+using namespace std;
+
 namespace cce{
 
 Decor::Decor(DecorTemplate *_dt, int x, int y) : Sprite()
 {
   dt = _dt;
   setPosition(x,y);
-  setTexture(*(dt->getTexture()));
+  setTexture(dt->getTexture());
 }
 
 Decor::~Decor()
@@ -17,22 +19,30 @@ Decor::~Decor()
 
 DecorTemplate* Decor::getTemplate() const
 {
-  return dt;
+    return dt;
 }
 
-void Decor::setTexture(const Texture& texture, bool resetRect)
+void Decor::setTexture(Texture* texture)
 {
-  Sprite::setTexture(texture, resetRect);
-  yCompare = getPosition().y * 2 + getGlobalBounds().height;
+    Sprite::setTexture(*texture, true);
+    yCompare = getPosition().y * 2 + getGlobalBounds().height;
 }
 
-bool operator <(Decor &d1, Decor &d2)
+bool Decor::inferieurA(const Decor &d) const
 {
-  bool meme_hauteur = d1.yCompare == d2.yCompare;
-  if(meme_hauteur)
-    return d1.getPosition().x < d2.getPosition().x;
+    bool meme_hauteur = yCompare == d.yCompare;
+    if(meme_hauteur)
+	return getPosition().x < d.getPosition().x;
+    else
+      return meme_hauteur;
+}
+
+bool operator<(Decor const &d1, Decor const &d2)
+{
+  if(d1.inferieurA(d2))
+    return true;
   else
-    return meme_hauteur;
+    return false;
 }
 
 }
