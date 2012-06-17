@@ -42,6 +42,6 @@
 	  <Property Name="Text" Value="Quitter" />
 	  <Property Name="Tooltip" Value="Fermer l'éditeur" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
-	  <Event Name="Clicked" Function="test" />
+	  <Event Name="Clicked" Function="quitter" />
       </Window>
 </Window>

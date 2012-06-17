@@ -1,6 +1,7 @@
 #include "cce/Controleur.hpp"
 #include "cce/MoteurSFML.hpp"
 #include <cce/GUI.hpp>
+#include <cce/CppScriptModule.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Thor/Events/Action.hpp>
 #include <Thor/Events/EventSystem.hpp>
@@ -14,6 +15,8 @@ Controleur::Controleur(MoteurSFML* engine, GUI* gui) : map(*(engine->getFenetre(
 {
     this->engine = engine;
     this->gui = gui;
+    
+    moduleGUI = new CppScriptModule;
 
     // Evenements Thor
     Action close(sf::Event::Closed);

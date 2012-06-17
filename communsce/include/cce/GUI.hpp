@@ -6,6 +6,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/Clock.hpp>
+#include <string>
 
 ///
 ///\file GUI.hpp
@@ -13,19 +14,22 @@
 ///\author matthieu
 ///
 
+using std::string;
+
 namespace cce {
 
 class GUI
 {
 
 public:
-    GUI();
+    GUI(const string& conteneur);
     void dessiner();
     bool captureEvent(const sf::Event& event);
     void tocHorloge();
+    void init(CEGUI::ScriptModule* module);
 
 private:
-    void init();
+    
     void initialiserCastEvent();
     void initialiserRessources();
     void chargerRessources();
@@ -42,6 +46,8 @@ private:
 
     ToucheCast keys;
     SourisCast mouses;
+    
+    string conteneur;
 };
 
 }

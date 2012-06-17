@@ -9,7 +9,7 @@ DaGame::DaGame()
 {
     cce::MoteurSFML* ms = new cce::MoteurSFML();
     //GUI (CEGUI) doit être créer après SFML
-    GUI* g = new GUI();
+    GUI* g = new GUI("Editeur.layout");
     
     modele = new Modele();
     vue = new Vue(ms, g);

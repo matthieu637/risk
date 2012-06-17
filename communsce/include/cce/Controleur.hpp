@@ -3,6 +3,11 @@
 #include <string.h>
 #include <Thor/Events/ActionMap.hpp>
 #include <Thor/Events/EventSystem.hpp>
+#include <functional>
+
+#define BIND(fonction) \
+  std::bind(fonction, this, std::placeholders::_1)
+	
 
 using std::string;
 
@@ -14,6 +19,7 @@ using std::string;
 
 namespace cce{
 
+class CppScriptModule;
 class MoteurSFML;
 class GUI;
   
@@ -36,6 +42,7 @@ public:
 protected:
     MoteurSFML* engine;
     GUI* gui;
+    CppScriptModule* moduleGUI;
     thor::ActionMap<std::string> map;
     thor::ActionMap<string>::CallbackSystem system;
 };
