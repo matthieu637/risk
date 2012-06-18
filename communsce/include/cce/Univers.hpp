@@ -33,6 +33,14 @@ public:
     UnitTemplate* getUnitTemplate(int id);
 
     UpgradeTemplate* getUpgradeTemplate(int id);
+    
+    map<int, TileTemplate>* getMapTile();
+    
+    const map<int, DecorTemplate>* getMapDecor();
+    
+    const map<int, UnitTemplate>* getMapUnit();
+    
+    const map<int, UpgradeTemplate>* getMapUpgrade();
 
 private:
     void chargerTileTemplates();

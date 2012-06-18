@@ -27,6 +27,7 @@ public:
     bool captureEvent(const sf::Event& event);
     void tocHorloge();
     void init(CEGUI::ScriptModule* module);
+    CEGUI::Window* getRootWindow() const;
 
 private:
     

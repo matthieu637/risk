@@ -36,6 +36,11 @@ void GUI::tocHorloge() {
     horloge.restart();
 }
 
+CEGUI::Window* GUI::getRootWindow() const
+{
+  return rootW;
+}
+
 bool GUI::captureEvent(const sf::Event& Event)
 {
     switch (Event.type)
