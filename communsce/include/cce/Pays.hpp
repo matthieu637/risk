@@ -51,10 +51,11 @@ virtual ~Pays();
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version)
     {
+	(void) version;
         ar & make_nvp("nom", nom); 
 	ar & make_nvp("income", income);
-	ar & make_nvp("pointspawn", ps);
-	ar & make_nvp("regions", regions);
+	ar & make_nvp("PointSpawn", ps);
+	ar & make_nvp("Regions", regions);
     }
     
 protected : 
