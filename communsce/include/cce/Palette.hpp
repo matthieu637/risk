@@ -2,7 +2,7 @@
 #define PALETTE_HPP
 #include <CEGUI/CEGUI.h>
 
-namespace edt{
+namespace cce{
   
 class GUI;
 

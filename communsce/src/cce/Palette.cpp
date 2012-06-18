@@ -1,11 +1,11 @@
-#include "edt/Palette.hpp"
-#include "edt/GUI.hpp"
+#include "cce/Palette.hpp"
+#include "cce/GUI.hpp"
 #include <CEGUI/CEGUIWindowManager.h>
 
 using CEGUI::WindowManager;
 using CEGUI::FrameWindow;
 
-namespace edt{
+namespace cce{
 
 Palette::Palette()
 {
@@ -16,7 +16,7 @@ Palette::~Palette()
     
 }
 
-void Palette::init(GUI const *gui)
+void Palette::init(const GUI  *gui)
 {
     fenetre = (FrameWindow*) WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", "Palette de Tiles");
     fenetre->setVisible(true);

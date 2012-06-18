@@ -15,7 +15,7 @@ PaletteTile::~PaletteTile()
 
 }
 
-void PaletteTile::init(GUI const *gui)
+void PaletteTile::init(const cce::GUI *gui)
 {
     Palette::init(gui);
     
