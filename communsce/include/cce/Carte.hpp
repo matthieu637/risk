@@ -9,14 +9,18 @@
 ///
 
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include "Repere.hpp"
 #include "CoucheDecor.hpp"
+#include <list>
+#include "Pays.hpp"
 
 using boost::serialization::make_nvp;
+using std::list;
 
 namespace cce {
-
+  
 class Carte : public sf::Drawable
 {
 
@@ -33,6 +37,8 @@ public:
     {
         (void) version;
         ar & make_nvp("Repere", repere);
+	ar & make_nvp("Pays", lp);
+	
     }
     
     Repere* getRepere(){return &repere;}
@@ -47,6 +53,7 @@ protected:
 protected:
     Repere repere;
     CoucheDecor couche_decor;
+    list<Pays> lp;
 };
 
 }

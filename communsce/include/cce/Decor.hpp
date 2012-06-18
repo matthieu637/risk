@@ -16,6 +16,7 @@ class Decor : public Sprite
 
 public:
     Decor(DecorTemplate *_dt, int x, int y);
+    Decor();
     virtual ~Decor();
     
 ///

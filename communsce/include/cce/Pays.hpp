@@ -5,13 +5,14 @@
 #include <list>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/list.hpp> 
+#include "Region.hpp"
+#include "cce/PointSpawn.hpp"
 
 using std::string;
 using std::list;
 using boost::serialization::make_nvp; 
 
 namespace cce{
-class Region; 
 class PointSpawn;
 class Pays
 {

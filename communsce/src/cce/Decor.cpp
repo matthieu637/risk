@@ -12,6 +12,10 @@ Decor::Decor(DecorTemplate *_dt, int x, int y) : Sprite()
   setTexture(dt->getTexture());
 }
 
+Decor::Decor()
+{
+}
+
 Decor::~Decor()
 {
     

@@ -7,14 +7,13 @@
 #include "cce/Tile.hpp"
 #include "cce/UpgradeTemplate.hpp"
 #include <boost/serialization/list.hpp> 
+#include "cce/Flag.hpp"
 
 using boost::polygon::polygon_concept;
 using std::string;
 using std::list;
 	
-namespace cce{
-
-class Flag;	
+namespace cce{	
 class Region
 {
 	
@@ -64,7 +63,7 @@ public:
         ar & make_nvp("nom", nom); 
 	ar & make_nvp("income", income);
 	ar & make_nvp("flag", flag);
-	ar & make_nvp("zone", zone);
+	//ar & make_nvp("zone", zone);
 	ar & make_nvp("upgrades", upgrades);
 	ar & make_nvp("tiles",tiles);
     }
