@@ -14,10 +14,12 @@
 #include "Repere.hpp"
 #include "CoucheDecor.hpp"
 #include <list>
+#include <string>
 #include "Pays.hpp"
 
 using boost::serialization::make_nvp;
 using std::list;
+using std::string;
 
 namespace cce {
   
@@ -35,14 +37,21 @@ public:
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version)
     {
-        (void) version;
-        ar & make_nvp("Repere", repere);
+	(void) version;
+	ar & make_nvp("Repere", repere);
 	ar & make_nvp("Pays", lp);
-	
     }
     
     Repere* getRepere(){return &repere;}
     CoucheDecor* getCoucheDecor(){return &couche_decor;}
+    list<Pays>* getListPays(){return &lp;}
+    list<Region> getListRegions();
+    
+///
+///\brief Ajouter une region a un pays par leurs noms.
+///
+    void addRegion(string nom_pays, string nom_region);
+   
   
 protected:
 ///

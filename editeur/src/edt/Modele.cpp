@@ -7,8 +7,10 @@
 #include "bib/XMLEngine.hpp"
 #include "cce/ImageManager.hpp"
 #include <list>
+#include <string>
 
 using std::list;
+using std::string;
 
 namespace edt {
 
@@ -16,12 +18,13 @@ namespace edt {
 	// carte = new Carte(50,50);
 	// bib::XMLEngine::save<Carte>(*carte, "Carte", "alpha.map");
 
-	carte =
-	    bib::XMLEngine::load < edt::Carte > ("Carte",
-						 "data/map/sf/alpha.map");
+	carte = bib::XMLEngine::load < edt::Carte > ("Carte", "data/map/sf/alpha.map");
 	coeff_zoom = 1;
 	tt = cce::Univers::getInstance()->getTileTemplate(100000000);
-    } Modele::~Modele() {
+	current_pays = "Mordor";
+    } 
+    
+    Modele::~Modele() {
 
     }
 
@@ -83,6 +86,22 @@ namespace edt {
 
     void Modele::deleteTile(int x, int y) {
 	getRepere()->unsetTile(x, y);
+    }
+    
+    void Modele::addRegion(string nom)
+    {
+// 	carte->addRegion(current_pays, nom);
+	
+	list<string> noms;
+	
+	list<cce::Region>::iterator ir =  carte->getListRegions().begin();
+	for (; ir != carte->getListRegions().end(); ir++)
+	    noms.push_back((*ir).getNom());
+	
+	list <cce::Vue*>::iterator it;
+	for (it = vues.begin(); it != vues.end(); it++)
+	    ((Vue*)(*it))->updateListRegions(noms);
+       
     }
 
 }

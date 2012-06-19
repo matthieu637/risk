@@ -63,6 +63,7 @@ public :
 ///
             void setFlag(Flag* f);
 	    
+	    
 };
 }
 #endif // REGION_HPP

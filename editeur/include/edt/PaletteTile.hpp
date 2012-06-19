@@ -11,7 +11,9 @@ class PaletteTile : public cce::Palette
 public:
 PaletteTile();
 virtual ~PaletteTile();
-void init(cce::GUI const *gui, const std::string& conteneur);
+
+void init(cce::GUI const *gui, const std::string& conteneur, string nom);
+
 };
 
 }

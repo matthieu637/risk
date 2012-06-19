@@ -16,9 +16,9 @@ PaletteTile::~PaletteTile()
 
 }
 
-void PaletteTile::init(const cce::GUI *gui, const std::string& conteneur)
+void PaletteTile::init(const cce::GUI *gui, const std::string& conteneur, string nom)
 {
-    Palette::init(gui, conteneur);
+    Palette::init(gui, conteneur, nom);
     
     map<int, cce::TileTemplate>::iterator it = cce::Univers::getInstance()->getMapTile()->begin();
     for (; it != cce::Univers::getInstance()->getMapTile()->end(); it++)
