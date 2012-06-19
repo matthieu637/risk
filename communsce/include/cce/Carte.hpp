@@ -45,7 +45,7 @@ public:
     Repere* getRepere(){return &repere;}
     CoucheDecor* getCoucheDecor(){return &couche_decor;}
     list<Pays>* getListPays(){return &lp;}
-    list<Region> getListRegions();
+    list<Region>* getListRegions() ;
     
 ///
 ///\brief Ajouter une region a un pays par leurs noms.
