@@ -16,7 +16,6 @@ namespace cce{
        bool isVisible();                      // return true if console is visible, false if is hidden
  
     private:
-       void CreateCEGUIWindow();                                  // The function which will load in the CEGUI Window and register event handlers
        void RegisterHandlers();                                   // Register our handler functions
        bool Handle_TextSubmitted(const CEGUI::EventArgs &e);      // Handle when we press Enter after typing
        bool Handle_SendButtonPressed(const CEGUI::EventArgs &e);  // Handle when we press the Send button         
@@ -25,9 +24,6 @@ namespace cce{
 		       CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); //   with a white color default
  
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the ConsoleRoot window.
-       CEGUI::String sNamePrefix;                                  // This will be the prefix name we give the layout
-       bool m_bConsole; 
-       CEGUI::Window *mWindow; // type a verifier
     
   };
 

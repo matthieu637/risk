@@ -3,6 +3,10 @@
 #include <cce/GUI.hpp>
 #include <CEGUI/CEGUIScriptModule.h>
 
+namespace cce{
+class Console;
+}
+
 namespace edt{
   
 class PaletteTile;
@@ -17,6 +21,7 @@ public:
 
 private:
     PaletteTile* palette_tile;
+    cce::Console* console;
 };
 
 }
