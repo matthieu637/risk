@@ -43,6 +43,10 @@ public:
     
     Repere* getRepere(){return &repere;}
     CoucheDecor* getCoucheDecor(){return &couche_decor;}
+    
+    list<Pays>* getListPays(){return &lp;}
+    list<Region> getListRegions();
+   
   
 protected:
 ///

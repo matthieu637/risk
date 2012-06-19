@@ -13,6 +13,7 @@ class Carte : public cce::Carte
 public:
     Carte(int x, int y);
     Carte();
+    
 };
 
 }

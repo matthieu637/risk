@@ -65,6 +65,8 @@ namespace edt {
 	void deleteTile(int x, int y);
 
 	void saveCarte(const std::string & chemin);
+	
+	void addRegion(string nom);
 
       private:
 	 Repere * getRepere();

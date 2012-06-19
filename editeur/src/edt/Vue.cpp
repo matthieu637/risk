@@ -13,4 +13,14 @@ Vue::~Vue()
 
 }
 
+GUI* Vue::getGUI()
+{
+  return (GUI*)gui;
+}
+
+void Vue::updateListRegions(string noms)
+{
+   getGUI()->updateListRegions(noms);
+}
+
 }

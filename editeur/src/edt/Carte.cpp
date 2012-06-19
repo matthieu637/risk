@@ -2,6 +2,7 @@
 #include "edt/Repere.hpp"
 #include "cce/Carte.hpp"
 
+
 using namespace edt;
 
 Carte::Carte(int x, int y)

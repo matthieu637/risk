@@ -3,6 +3,8 @@
 
 #include "edt/Palette.hpp"
 
+
+
 namespace edt{
 
 class PaletteTile : public Palette
@@ -11,7 +13,7 @@ class PaletteTile : public Palette
 public:
 PaletteTile();
 virtual ~PaletteTile();
-void init(GUI const *gui);
+void init(GUI const *gui, string nom);
 };
 
 }

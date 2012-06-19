@@ -63,10 +63,10 @@ public:
         (void)version;
         ar & make_nvp("nom", nom);
         ar & make_nvp("income", income);
-        //ar & make_nvp("Flag", flag);
+        ar & make_nvp("Flag", flag);
         //ar & make_nvp("zone", zone);
-        //ar & make_nvp("upgrades", upgrades);
-        //ar & make_nvp("Tiles",tiles);
+        ar & make_nvp("upgrades", upgrades);
+        ar & make_nvp("Tiles",tiles);
     }
 
 
