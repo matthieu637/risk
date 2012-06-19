@@ -48,7 +48,7 @@ namespace cce{
             // Lets add our new window to the Root GUI Window
             CEGUI::System::getSingleton().getGUISheet()->addChildWindow(m_ConsoleWindow);
             // Now register the handlers for the events (Clicking, typing, etc)
-          //  (this)->RegisterHandlers();
+           (this)->RegisterHandlers();
         }
         else
         {
@@ -65,7 +65,7 @@ namespace cce{
  
     // First lets register the Send button.  Our buttons name is "ConsoleRoot/SendButton", but don't forget we prepended a name to      
       // all the windows which were loaded.  So we need to take that into account here.
-    m_ConsoleWindow->getChild(sNamePrefix + "Console/SendButton")->subscribeEvent(
+    m_ConsoleWindow->getChild("Console/SendButton")->subscribeEvent(
                         CEGUI::PushButton::EventClicked,    // If we recall our button was of type CEGUI::PushButton in the .scheme
                                                             // and we want to acknowledge the EventClicked action.
                         CEGUI::Event::Subscriber(           // What function to call when this is clicked.  Remember, all functions 
@@ -76,7 +76,7 @@ namespace cce{
     // Now for the TextSubmitted, we will be registering the event on the edit box, which is where the users cursor will be when   
       //they press Enter.  I'm not going to break this down as much, because I believe that is very ugly to read, but was a good  
       //way of expressing it.  Here is the function call.
-    m_ConsoleWindow->getChild(sNamePrefix + "Console/EditBox")->subscribeEvent(CEGUI::Editbox::EventMouseClick,
+    m_ConsoleWindow->getChild("Console/EditBox")->subscribeEvent(CEGUI::Editbox::EventMouseClick,
                         CEGUI::Event::Subscriber(&Console::Handle_TextSubmitted,this));
   }
 
@@ -91,23 +91,23 @@ namespace cce{
     const CEGUI::WindowEventArgs* args = static_cast<const CEGUI::WindowEventArgs*>(&e);
  
     // Now we need to get the text that is in the edit box right now.
-    CEGUI::String Msg = mWindow->getChild(sNamePrefix + "Console/EditBox")->getText();
+    CEGUI::String Msg = mWindow->getChild("Console/EditBox")->getText();
  
     // Since we have that string, lets send it to the TextParser which will handle it from here
     (this)->ParseText(Msg);
  
     // Now that we've finished with the text, we need to ensure that we clear out the EditBox.  This is what we would expect
       // To happen after we press enter
-    m_ConsoleWindow->getChild(sNamePrefix + "Console/EditBox")->setText("");
+    m_ConsoleWindow->getChild("Console/EditBox")->setText("");
  
     return true;
   }  
   
   bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
   {
-    CEGUI::String Msg = mWindow->getChild(sNamePrefix + "Console/EditBox")->getText();
+    CEGUI::String Msg = mWindow->getChild("Console/EditBox")->getText();
     (this)->ParseText(Msg);
-    m_ConsoleWindow->getChild(sNamePrefix + "Console/EditBox")->setText("");
+    m_ConsoleWindow->getChild("Console/EditBox")->setText("");
  
     return true;
   }
