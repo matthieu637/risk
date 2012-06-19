@@ -5,13 +5,14 @@
 #include <CEGUI/CEGUIEventArgs.h>
 #include <CEGUI/CEGUIString.h>
 #include <CEGUI/CEGUIWindow.h>
+#include <string>
 
 namespace cce{
 
   class Console
   {
     public:
-       Console();                   // Constructor
+       Console(const std::string& conteneur);                   // Constructor
        void setVisible(bool visible);         // Hide or show the console
        bool isVisible();                      // return true if console is visible, false if is hidden
  

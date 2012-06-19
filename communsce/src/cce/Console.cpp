@@ -9,11 +9,12 @@
 #include <CEGUI/elements/CEGUIPushButton.h>
 #include <CEGUI/elements/CEGUIEditbox.h>
 #include <CEGUI/elements/CEGUIListboxTextItem.h>
+#include <string>
 #include "bib/Logger.hpp"
 
 namespace cce {
 
-Console::Console()
+Console::Console(const std::string& conteneur)
 {
     // Get a local pointer to the CEGUI Window Manager, Purely for convenience to reduce typing
     CEGUI::WindowManager *pWindowManager = CEGUI::WindowManager::getSingletonPtr();
@@ -24,7 +25,7 @@ Console::Console()
     if (m_ConsoleWindow)
     {
         // Lets add our new window to the Root GUI Window
-        CEGUI::System::getSingleton().getGUISheet()->addChildWindow(m_ConsoleWindow);
+        CEGUI::System::getSingleton().getGUISheet()->getChild(conteneur)->addChildWindow(m_ConsoleWindow);
         RegisterHandlers();
     }
     else

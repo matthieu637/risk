@@ -19,6 +19,6 @@ void GUI::init(CEGUI::ScriptModule* module)
 {
     cce::GUI::init(module);
     palette_tile = new PaletteTile();
-    palette_tile->init(this);
-    console = new cce::Console;
+    palette_tile->init(this, "Editeur/Pane");
+    console = new cce::Console("Editeur/Pane");
 }
