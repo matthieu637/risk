@@ -19,7 +19,8 @@ namespace cce{
     private:
        void RegisterHandlers();                                   // Register our handler functions
        bool Handle_TextSubmitted(const CEGUI::EventArgs &e);      // Handle when we press Enter after typing
-       bool Handle_SendButtonPressed(const CEGUI::EventArgs &e);  // Handle when we press the Send button         
+       bool Handle_SendButtonPressed(const CEGUI::EventArgs &e);  // Handle when we press the Send button    
+       bool Handle_SendButtonKeyPressed(const CEGUI::EventArgs &e);
        void ParseText(CEGUI::String inMsg);                       // Parse the text the user submitted.
        void OutputText(CEGUI::String inMsg,                       // Post the message to the ChatHistory listbox.
 		       CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); //   with a white color default
