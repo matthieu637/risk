@@ -35,6 +35,7 @@ void GUI::initScrollPane(const std::string& conteneur)
 {
     CEGUI::Scrollbar* sp = static_cast<CEGUI::Scrollbar*>(getRootWindow()->getChild("HSP"));
     //sp->set
+    //sp->set
     //sp->setContentPaneArea(CEGUI::Rect(0,0,1500,1500));
 }
 

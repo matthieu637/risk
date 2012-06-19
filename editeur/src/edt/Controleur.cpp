@@ -4,6 +4,7 @@
 #include "cce/MoteurSFML.hpp"
 #include <cce/CppScriptModule.hpp>
 #include <SFML/Window/Event.hpp>
+#include <CEGUI/elements/CEGUIScrollbar.h>
 #include <Thor/Events/Action.hpp>
 #include <Thor/Events/EventSystem.hpp>
 
@@ -154,9 +155,18 @@ void Controleur::onDeleteObject(thor::ActionContext < string > context) {
 }
 
 bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e){
+    const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
+    CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
+    
     sf::View* v = engine->getView();
     
-   // v->setCenter(v->getCenter().x, );
+    //v->setCenter(v->getCenter().x, sb->getScrollPosition()/100 * ());
+    
+    int cameraX = engine->getView()->getCenter().x;
+    int cameraY = engine->getView()->getCenter().y;
+    
+    m->moveView(10, 0, cameraX, cameraY);
+    LOG_DEBUG("ifi");
 }
 
 bool Controleur::onMainScrollHoriChange(const CEGUI::EventArgs & e){
