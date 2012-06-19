@@ -13,7 +13,7 @@ class Console;
 }
 
 namespace edt {
-
+class Modele;
 class PaletteTile;
 class PaletteRegions;
   
@@ -23,7 +23,7 @@ class GUI : public cce::GUI
 public:
     GUI(const string& conteneur_);
     virtual ~GUI();
-    void init(CEGUI::ScriptModule* module);
+    void init(const Modele* module);
     void updateListRegions(list<string> noms);
 
 private:
