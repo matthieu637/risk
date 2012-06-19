@@ -16,16 +16,16 @@ void Carte::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 
-list<Region> Carte::getListRegions()
+list<Region>* Carte::getListRegions() 
 {
     
     list<Pays>* lp = getListPays();
-    list<Region> lr;
+    list<Region> *lr= new list<Region>;
     list<Pays>::iterator it;
     list<Region>::iterator ir;
       for (it = lp->begin(); it != lp->end(); it++)
 	for(ir=(*it).getRegions().begin(); ir!=(*it).getRegions().end(); ir++)
-	  lr.push_back(*ir);
+	  lr->push_back(*ir);
   return lr;
 }
 

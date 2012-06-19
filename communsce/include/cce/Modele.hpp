@@ -36,6 +36,8 @@ public:
 ///
     void addVue(Vue* vue);
     
+    Carte* getCarte();
+    
 protected:
 ///
 ///\brief Méthode d'affichage SFML
