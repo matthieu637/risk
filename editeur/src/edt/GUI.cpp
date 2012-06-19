@@ -5,6 +5,9 @@
 #include "CEGUI/CEGUIScriptModule.h"
 #include "CEGUI/elements/CEGUIScrollbar.h"
 #include "cce/Console.hpp"
+#include "cce/Carte.hpp"
+#include "edt/Carte.hpp"
+#include "cce/Modele.hpp"
 
 using namespace edt;
 
@@ -18,7 +21,7 @@ GUI::~GUI()
 
 }
 
-void GUI::init(const Modele* modele)
+void GUI::init(Modele* modele)
 {
     std::string conteneur = "Editeur";
 
@@ -26,7 +29,10 @@ void GUI::init(const Modele* modele)
     palette_tile = new PaletteTile();
     palette_tile->init(this, conteneur, "Palette de tiles");
     palette_regions = new PaletteRegions();
-    palette_regions->init(this, conteneur, "Palette de regions");
+    
+    
+    edt::Carte* c=static_cast <edt::Carte*>(modele->getCarte());
+     palette_regions->init(this, conteneur, "Palette de regions", c);
     console = new cce::Console(conteneur);
 /*    initScrollPane(conteneur);*/
 }

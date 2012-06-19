@@ -12,6 +12,8 @@ namespace CEGUI{
   class Listbox;
 }
 namespace edt{
+
+class Carte;
   
 class GUI;
 
@@ -20,7 +22,7 @@ class PaletteRegions : public cce::Palette
 public :
   PaletteRegions();
   virtual ~PaletteRegions();
-  void init(GUI const *gui, const string& conteneur, string nom);
+  void init(GUI const *gui, const string& conteneur, string nom, Carte* c);
   void updateListRegions(list<string> noms);
 private :
   CEGUI::Listbox* lbox;

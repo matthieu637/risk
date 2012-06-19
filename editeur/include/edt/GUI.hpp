@@ -23,7 +23,7 @@ class GUI : public cce::GUI
 public:
     GUI(const string& conteneur_);
     virtual ~GUI();
-    void init(const Modele* module);
+    void init(Modele* module);
     void updateListRegions(list<string> noms);
 
 private:
