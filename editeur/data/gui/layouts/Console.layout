@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<GUILayout version="4" >
+    <Window Type="TaharezLook/FrameWindow" Name="Console" >
+        <Property Name="Area" Value="{{0,0},{0,0},{0,8},{0,3}}" />
+        <Property Name="Text" Value="Console" />
+        <Property Name="RollUpEnabled" Value="True" />
+        <Property Name="SizingEnabled" Value="True" />
+        <Property Name="DragMovingEnabled" Value="True" />
+        <AutoWindow NamePath="__auto_titlebar__" >
+            <Property Name="DraggingEnabled" Value="True" />
+        </AutoWindow>
+        <Window Type="TaharezLook/Listbox" Name="ChatBox" >
+            <Property Name="Area" Value="{{0,0},{0,0},{0,812},{0,160}}" />
+        </Window>
+        <Window Type="TaharezLook/Editbox" Name="EditBox" >
+            <Property Name="Area" Value="{{0,0},{0,166},{0,649},{0,197}}" />
+        </Window>
+        <Window Type="TaharezLook/Button" Name="SendButton" >
+            <Property Name="Area" Value="{{0,672},{0,164},{0,771},{0,196}}" />
+            <Property Name="Text" Value="Send" />
+        </Window>
+    </Window>
+</GUILayout>

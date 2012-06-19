@@ -1,6 +1,7 @@
 #include "edt/PaletteTile.hpp"
 #include "edt/GUI.hpp"
 #include "CEGUI/CEGUIScriptModule.h"
+#include "cce/Console.hpp"
 
 using namespace edt;
 
@@ -19,4 +20,5 @@ void GUI::init(CEGUI::ScriptModule* module)
     cce::GUI::init(module);
     palette_tile = new PaletteTile();
     palette_tile->init(this);
+    cce::Console c;
 }
