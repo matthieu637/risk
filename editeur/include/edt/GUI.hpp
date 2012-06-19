@@ -2,9 +2,11 @@
 #define GUIEDITEUR_HPP
 #include <cce/GUI.hpp>
 #include <CEGUI/CEGUIScriptModule.h>
-#include <string.h>
+#include <string>
+#include <list>
 
 using std::string;
+using std::list;
 
 namespace edt{
   
@@ -18,7 +20,7 @@ public:
     GUI(const string& conteneur_);
     virtual ~GUI();
     void init(CEGUI::ScriptModule* module);
-    void updateListRegions(string noms);
+    void updateListRegions(list<string> noms);
 
 private:
     PaletteTile* palette_tile;

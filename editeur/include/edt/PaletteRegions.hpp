@@ -2,9 +2,11 @@
 #define PALETTEREGIONS_HPP
 
 #include "edt/Palette.hpp"
-#include <string.h>
+#include <string>
+#include <list>
 
 using std::string;
+using std::list;
 
 namespace CEGUI{
   class Listbox;
@@ -17,7 +19,7 @@ public :
   PaletteRegions();
   virtual ~PaletteRegions();
   void init(GUI const *gui, string nom);
-  void updateListRegions(string noms);
+  void updateListRegions(list<string> noms);
 private :
   CEGUI::Listbox* lbox;
   

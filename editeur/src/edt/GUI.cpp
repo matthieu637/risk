@@ -24,7 +24,7 @@ void GUI::init(CEGUI::ScriptModule* module)
     palette_regions->init(this, "Palette de regions");
 }
 
-void GUI::updateListRegions(string noms)
+void GUI::updateListRegions(list<string> noms)
 {
   palette_regions->updateListRegions(noms);
 }

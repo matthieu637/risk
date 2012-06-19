@@ -10,6 +10,7 @@ using CEGUI::WindowManager;
 using CEGUI::Size;
 using CEGUI::Listbox;
 using CEGUI::ListboxTextItem;
+using CEGUI::UDim;
 
 namespace edt{
   PaletteRegions::PaletteRegions()
@@ -31,24 +32,22 @@ namespace edt{
     fenetre->addChildWindow(lbox);
     
      //Add the top 5 of the GPWiki forums:
-    lbox->addItem(new ListboxTextItem("Ryan"));
-    lbox->addItem(new ListboxTextItem("Ryan"));
-    lbox->addItem(new ListboxTextItem("Ryan"));
-    lbox->addItem(new ListboxTextItem("Machaira"));
-    lbox->addItem(new ListboxTextItem("Codehead"));
-    lbox->setHeight(CEGUI::UDim(1,100));
-    lbox->setWidth(CEGUI::UDim(1,100));
+    lbox->addItem(new ListboxTextItem("Barad-dur"));
+    lbox->addItem(new ListboxTextItem("Isengard"));
+    lbox->addItem(new ListboxTextItem("Edoras"));
+    lbox->addItem(new ListboxTextItem("Minas Tirith"));
+    lbox->addItem(new ListboxTextItem("Lothlorien"));
+    lbox->setWidth(UDim(1.0f,0));
+    lbox->setHeight(UDim(0.75f,0));
 
   }
   
-  void PaletteRegions::updateListRegions(string noms)
+  void PaletteRegions::updateListRegions(list<string> noms)
   {
-    lbox->resetList();
-    
-	list <Region>::iterator it;
-	lr.end();
-	for (it = lr.begin(); it != lr.end(); it++)
-	    lbox->addItem(new ListboxTextItem((*it).getNom()));
+      lbox->resetList();
+      list<string>::iterator it;
+      for (it = noms.begin(); it != noms.end(); it++)
+	  lbox->addItem(new ListboxTextItem(*it));
   }
   
   

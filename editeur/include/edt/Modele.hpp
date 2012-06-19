@@ -13,6 +13,8 @@
 #include <cce/Modele.hpp>
 #include <string>
 
+using std::string;
+
 namespace edt {
 
     class Vue;
@@ -64,8 +66,12 @@ namespace edt {
 ///
 	void deleteTile(int x, int y);
 
-	void saveCarte(const std::string & chemin);
-	
+	void saveCarte(const string & chemin);
+
+///
+///\brief Ajoute une region au pays actuellement sélectionné
+///\param nom: nom de la region
+///
 	void addRegion(string nom);
 
       private:
@@ -74,8 +80,9 @@ namespace edt {
       private:
 	int cameraOrigineX, cameraOrigineY;
 	float coeff_zoom;
-	 cce::TileTemplate * tt;
-	 cce::DecorTemplate * dt;
+	string current_pays;
+	cce::TileTemplate * tt;
+	cce::DecorTemplate * dt;
     };
 
 }

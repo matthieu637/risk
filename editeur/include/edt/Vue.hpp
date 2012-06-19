@@ -8,9 +8,11 @@
 ///
 
 #include <cce/Vue.hpp>
-#include <string.h>
+#include <string>
+#include <list>
 
 using std::string;
+using std::list;
 
 namespace cce {
   class MoteurSFML;
@@ -28,7 +30,7 @@ class Vue : public cce::Vue
 public:
     Vue(cce::MoteurSFML* engine, GUI* gui);
     ~Vue();
-    void updateListRegions(string noms);
+    void updateListRegions(list<string> noms);
     
     GUI* getGUI();
     

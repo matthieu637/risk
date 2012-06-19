@@ -18,7 +18,7 @@ GUI* Vue::getGUI()
   return (GUI*)gui;
 }
 
-void Vue::updateListRegions(string noms)
+void Vue::updateListRegions(list<string> noms)
 {
    getGUI()->updateListRegions(noms);
 }
