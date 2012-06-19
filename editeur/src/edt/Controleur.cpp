@@ -58,7 +58,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m,
     moduleGUI->ajouterHandler("gui_viewscroll_change_vertical",  BIND(&Controleur::onMainScrollVertChange));
     moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal",  BIND(&Controleur::onMainScrollHoriChange));
 
-    gui->init(moduleGUI);
+    gui->setScriptModule(moduleGUI);
 }
 void Controleur::onStartCam(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition =

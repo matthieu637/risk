@@ -17,7 +17,7 @@
 using std::string;
 
 namespace cce {
-
+class Modele;
 class GUI
 {
 
@@ -26,7 +26,8 @@ public:
     void dessiner();
     bool captureEvent(const sf::Event& event);
     void tocHorloge();
-    void init(CEGUI::ScriptModule* module);
+    void setScriptModule(CEGUI::ScriptModule* module);
+    void init(const Modele* modele);
     CEGUI::Window* getRootWindow() const;
 
 private:
@@ -49,6 +50,7 @@ private:
     SourisCast mouses;
     
     string conteneur;
+    CEGUI::ScriptModule* scm;
 };
 
 }

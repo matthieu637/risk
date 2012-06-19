@@ -1,5 +1,6 @@
 #include "cce/GUI.hpp"
 #include <cce/CppScriptModule.hpp>
+#include <cce/Modele.hpp>
 #include <bib/Logger.hpp>
 #include <CEGUI/RendererModules/OpenGL/CEGUIOpenGLRenderer.h>
 #include <CEGUI/CEGUIDefaultResourceProvider.h>
@@ -68,7 +69,11 @@ bool GUI::captureEvent(const sf::Event& Event)
 }
 
 
-void GUI::init(CEGUI::ScriptModule* module) {
+void GUI::setScriptModule(CEGUI::ScriptModule* module) {
+    scm=module;
+}
+void GUI::init(const Modele* modele)
+{
     CEGUI::OpenGLRenderer& myRenderer = CEGUI::OpenGLRenderer::create();
     //CEGUI::OpenGLRenderer& myRenderer = CEGUI:: OpenGLRenderer:: bootstrapSystem ();
     cSys = &CEGUI::System::create( myRenderer );
@@ -77,7 +82,7 @@ void GUI::init(CEGUI::ScriptModule* module) {
     chargerRessources();
 
     //Events handler
-    cSys->setScriptingModule(module);
+    cSys->setScriptingModule(scm);
 
     cSys->setDefaultFont("DejaVuSans-10");
     // cSys->setDefaultMouseCursor( "Vanilla", "MouseArrow" );

@@ -1,8 +1,6 @@
 #ifndef DAGAME_HPP
 #define DAGAME_HPP
-#include "edt/Modele.hpp"
-#include "edt/Vue.hpp"
-#include "edt/Controleur.hpp"
+
 
 ///
 ///\file DaGame.hpp
@@ -11,7 +9,9 @@
 ///
 
 namespace edt{
-
+class Modele;
+class Vue;
+class Controleur;
 class DaGame
 {
 
