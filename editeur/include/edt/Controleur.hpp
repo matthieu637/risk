@@ -38,6 +38,8 @@ namespace cce {
 	void onDeleteObject(thor::ActionContext < string > context);
 	bool onSelection(const CEGUI::EventArgs & e);
 	bool onQuit(const CEGUI::EventArgs & e);
+	bool onMainScrollVertChange(const CEGUI::EventArgs & e);
+	bool onMainScrollHoriChange(const CEGUI::EventArgs & e);
 
 	int getX(int mouseX);
 	int getY(int mouseY);

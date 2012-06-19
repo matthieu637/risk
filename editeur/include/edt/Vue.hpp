@@ -24,6 +24,7 @@ class Vue : public cce::Vue
 public:
     Vue(cce::MoteurSFML* engine, GUI* gui);
     ~Vue();
+    void updateCameraPosition(int x, int y);
     
 private:
 };

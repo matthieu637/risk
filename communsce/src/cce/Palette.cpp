@@ -21,7 +21,8 @@ void Palette::init(const GUI  *gui, const string& conteneur)
     fenetre = (FrameWindow*) WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", "Palette de Tiles");
     fenetre->setVisible(true);
     
-    gui->getRootWindow()->getChild(conteneur)->addChildWindow(fenetre);
+    //gui->getRootWindow()->getChild(conteneur)->addChildWindow(fenetre);
+    gui->getRootWindow()->addChildWindow(fenetre);
 }
 
 }

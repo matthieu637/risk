@@ -26,7 +26,7 @@ public:
 ///
 ///\brief Repositionne la cam selon le modele
 ///
-    void updateCameraPosition(int x, int y);
+    virtual void updateCameraPosition(int x, int y);
 ///
 ///\brief Zoom par un facteur
 ///
