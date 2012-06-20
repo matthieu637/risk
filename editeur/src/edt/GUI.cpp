@@ -37,16 +37,12 @@ void GUI::init(Modele* modele)
 /*    initScrollPane(conteneur);*/
 }
 
-<<<<<<< HEAD
-void GUI::initScrollPane(const std::string& conteneur, Modele* modele)
-=======
 
 cce::Console *GUI::getConsole(){
   return console;
 }
 
-void GUI::initScrollPane(const std::string& conteneur)
->>>>>>> 6cc713b1462c32bc4dd2b5702ed6369974e8dfca
+void GUI::initScrollPane(const std::string& conteneur, Modele* modele)
 {
   (void) modele;
   (void) conteneur;

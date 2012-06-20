@@ -34,6 +34,7 @@ namespace cce{
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the Console window.
       int index;// index pour pouvoir recuperer l'historique du chat
       std::map<CEGUI::String, EventConsole*> mapCommandes;
+
       
   };
 

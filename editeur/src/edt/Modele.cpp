@@ -92,9 +92,8 @@ void Modele::addRegion(string nom)
 {
     (void) nom;
 // 	carte->addRegion(current_pays, nom);
-<<<<<<< HEAD
     //FIXME pointeurs getListRegions
-    list<string> noms;
+    /*list<string> noms;
 
     list<cce::Region>::iterator ir =  carte->getListRegions()->begin();
     for (; ir != carte->getListRegions()->end(); ir++)
@@ -103,6 +102,7 @@ void Modele::addRegion(string nom)
     list <cce::Vue*>::iterator it;
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->updateListRegions(noms);
+    */
 
 }
 
@@ -125,20 +125,3 @@ void Modele::moveScrollHori(float pos, float size)
 }
 
 }
-=======
-	//FIXME pointeurs getListRegions
-	/*list<string> noms;
-	
-	list<cce::Region>::iterator ir =  carte->getListRegions()->begin();
-	for (; ir != carte->getListRegions()->end(); ir++)
-	    noms.push_back((*ir).getNom());
-	
-	list <cce::Vue*>::iterator it;
-	for (it = vues.begin(); it != vues.end(); it++)
-	    ((Vue*)(*it))->updateListRegions(noms);
-	*/
-       
-    }
-
-}
->>>>>>> 6cc713b1462c32bc4dd2b5702ed6369974e8dfca
