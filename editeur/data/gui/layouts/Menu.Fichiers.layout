@@ -17,11 +17,13 @@
 	  <Property Name="Text" Value="Ouvrir" />
 	  <Property Name="Tooltip" Value="Ouvre une carte dans un nouvel onglet" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="ouvrir" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Fichier/Enregistrer" >
 	  <Property Name="Text" Value="Enregistrer" />
 	  <Property Name="Tooltip" Value="Sauvegarde la carte" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="enregistrer" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Fichier/EnregistrerSous" >
 	  <Property Name="Text" Value="Enregistrer Sous" />

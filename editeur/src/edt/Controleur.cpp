@@ -3,9 +3,11 @@
 #include "edt/GUI.hpp"
 #include "cce/MoteurSFML.hpp"
 #include <cce/CppScriptModule.hpp>
+#include <cce/Console.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Thor/Events/Action.hpp>
 #include <Thor/Events/EventSystem.hpp>
+#include "bib/Logger.hpp"
 
 using thor::Action;
 
@@ -57,7 +59,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m,
                               BIND(&Controleur::onSelection));
     moduleGUI->ajouterHandler("gui_viewscroll_change_vertical",  BIND(&Controleur::onMainScrollVertChange));
     moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal",  BIND(&Controleur::onMainScrollHoriChange));
-
+    moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
+    moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
+    
     gui->setScriptModule(moduleGUI);
 }
 void Controleur::onStartCam(thor::ActionContext < string > context) {
@@ -134,6 +138,18 @@ int Controleur::getY(int mouseY) {
 bool Controleur::onQuit(const CEGUI::EventArgs & e) {
     (void) e;
     engine->getFenetre()->close();
+    return true;
+}
+
+bool Controleur::onSave(const CEGUI::EventArgs & e) {
+    (void) e;
+    gui->getConsole()->afficherCommande("/save ");
+    return true;
+}
+
+bool Controleur::onOpen(const CEGUI::EventArgs & e) {
+    (void) e;
+    gui->getConsole()->afficherCommande("/open ");
     return true;
 }
 

@@ -32,9 +32,14 @@ void GUI::init(Modele* modele)
     
     
     edt::Carte* c=static_cast <edt::Carte*>(modele->getCarte());
-     palette_regions->init(this, conteneur, "Palette de regions", c);
+    palette_regions->init(this, conteneur, "Palette de regions", c);
     console = new cce::Console(conteneur);
 /*    initScrollPane(conteneur);*/
+}
+
+
+cce::Console *GUI::getConsole(){
+  return console;
 }
 
 void GUI::initScrollPane(const std::string& conteneur)
