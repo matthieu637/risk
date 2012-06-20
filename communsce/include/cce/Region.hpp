@@ -28,12 +28,6 @@ public:
     int getIncome();
 
 ///
-///\brief nom de la region
-///\return Retourne le nom de la region
-///
-    string getNom();
-
-///
 ///\brief zone de la region
 ///\return Retourne la zone de la region
 ///
@@ -61,22 +55,20 @@ public:
     void serialize(Archive& ar, const unsigned int version)
     {
         (void)version;
-        ar & make_nvp("nom", nom);
         ar & make_nvp("income", income);
         ar & make_nvp("Flag", flag);
         //ar & make_nvp("zone", zone);
-        ar & make_nvp("upgrades", upgrades);
+        ar & make_nvp("Upgrades", upgrades);
         ar & make_nvp("Tiles",tiles);
     }
 
 
 protected:
     int income;
-    string nom;
     polygon_concept zone;
     list<UpgradeTemplate> upgrades;
     list<Tile> tiles;
-    Flag* flag;
+    Flag flag;
 };
 }
 #endif

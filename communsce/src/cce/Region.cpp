@@ -4,6 +4,7 @@ namespace cce{
 
 Region::Region(){
 } 
+
 Region::~Region()
 {
 }
@@ -12,9 +13,6 @@ int Region::getIncome(){
 	return income;
 }
 
-string Region::getNom(){
-	return nom;
-}
 
 
 polygon_concept Region::getZone(){
@@ -32,7 +30,7 @@ list<Tile> Region::getTiles(){
 
 
 Flag* Region::getFlag(){
-	return flag;
+	return &flag;
 }
 
 }

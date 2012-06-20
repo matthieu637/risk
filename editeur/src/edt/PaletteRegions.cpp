@@ -33,12 +33,12 @@ void PaletteRegions::init(GUI const *gui, const string& conteneur, string nom, C
     fenetre->addChildWindow(lbox);
      lbox->setWidth(UDim(1.0f,0));
       lbox->setHeight(UDim(0.75f,0));
-    list<cce::Region>* lr= c->getListRegions();
+    map<string, cce::Region>* lr= c->getAllRegions();
     
-    list<cce::Region>::iterator it;
+    map<string, cce::Region>::iterator it;
     for(it = lr->begin(); it != lr->end(); it++)
     {
-      lbox->addItem(new ListboxTextItem(it->getNom()));
+      lbox->addItem(new ListboxTextItem(it->first));
      
     }
 }
