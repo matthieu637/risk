@@ -35,11 +35,7 @@ virtual ~Pays();
 ///
             void setNom(string n);
 	    
-///
-///\brief ajoute une région à la liste des régions
-///\param r : regions a associer
-///
-            void addRegion(const Region& r);  
+
 	    
 ///
 ///\brief definit le point de spawn du pays

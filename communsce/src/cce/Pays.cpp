@@ -22,12 +22,21 @@ string Pays::getNom(){
 	return nom;
 }
 
-list<Region> Pays::getRegions(){
-	return regions;
+map<string,Region>* Pays::getRegions(){
+	return &regions;
+}
+
+Region Pays::getRegion(string nom)
+{
+  return regions[nom];
 }
 
 PointSpawn* Pays::getPointSpawn(){
-	return ps;
+	return &ps;
+}
+
+void Pays::addRegion(const string& name, const Region& r){
+	regions[name] = r;
 }
 
 }
