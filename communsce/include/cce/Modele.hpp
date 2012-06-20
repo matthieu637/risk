@@ -36,6 +36,11 @@ public:
 ///
     void addVue(Vue* vue);
     
+ ///
+///\brief ouvre une carte
+///
+    string openCarte(const std::string & chemin);
+
     Carte* getCarte();
     
 protected:

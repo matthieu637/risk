@@ -15,7 +15,6 @@
 #include "cce/Controleur.hpp" //BIND
 
 
-
 namespace cce {
 
 Console::Console(const std::string& conteneur)
@@ -38,9 +37,8 @@ Console::Console(const std::string& conteneur)
     {
         CEGUI::Logger::getSingleton().logEvent("Error: Unable to load the ConsoleWindow from Console.layout");
     }
-    
-    
-    //mapCommandes["help"] = BIND(&Console::onHelp);
+        
+    mapCommandes["help"] = BIND(&Console::onHelp);
     
 }
 
@@ -129,33 +127,15 @@ void Console::ParseText(CEGUI::String inMsg)
             {
                 command[i] = tolower(command[i]);
             }
-
-            if (command == "say")
-            {
-                std::string outString = "You:" + inString; // Append our 'name' to the message we'll display in the list
-                // mConsole->OutputText(outString);
-            }
-            else if (command == "quit")
-            {
-                // do a /quit
-            }
-            else if (command == "help")
-            {
-               
-            }
-            else if(command == "save"){
-	      
-	      
-	    }
-	    else if(command == "open"){
-	      
-	      
-	    }
-            else
-            {
-                std::string outString = "<" + inString + "> is an invalid command.";
-                (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f)); // With red ANGRY colors!
-            }
+	    
+	    std::map <std::string, std::function<string(const string&)> >::iterator it;
+	    for(it = mapCommandes.begin(); it != mapCommandes.end(); it++)
+	    {
+		if(it->first == command){
+		  string rep =   it->second(commandArgs);
+		  (this)->OutputText(rep);
+		}
+	     }
         } 
         else
         {
@@ -165,9 +145,10 @@ void Console::ParseText(CEGUI::String inMsg)
 }
 
  
-void Console::onHelp(const string& s){
+string Console::onHelp(const string& s){
    std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
-   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
+  (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
+  return outString;
 }
 
 

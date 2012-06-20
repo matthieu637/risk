@@ -19,6 +19,7 @@ Modele::Modele():cce::Modele() {
     // bib::XMLEngine::save<Carte>(*carte, "Carte", "alpha.map");
 
     carte = bib::XMLEngine::load < edt::Carte > ("Carte", "data/map/sf/alpha.map");
+   // carte = new Carte; FIXME
     coeff_zoom = 1;
     tt = cce::Univers::getInstance()->getTileTemplate(100000000);
     current_pays = "Mordor";
@@ -36,8 +37,9 @@ Repere *Modele::getRepere() {
     return (Repere *) carte->getRepere();
 }
 
-void Modele::saveCarte(const std::string & chemin) {
-    (void) chemin;
+string Modele::saveCarte(const std::string & chemin) {
+    bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
+    return "La carte "+chemin+" a bien ete sauvegardee";  
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY) {

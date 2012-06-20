@@ -4,7 +4,7 @@
 #include <edt/Modele.hpp>
 #include "CEGUI/CEGUIScriptModule.h"
 #include "CEGUI/elements/CEGUIScrollbar.h"
-#include "cce/Console.hpp"
+#include "edt/Console.hpp"
 #include "cce/Carte.hpp"
 #include "edt/Carte.hpp"
 #include "cce/Modele.hpp"
@@ -33,7 +33,8 @@ void GUI::init(Modele* modele)
     
     edt::Carte* c=static_cast <edt::Carte*>(modele->getCarte());
     palette_regions->init(this, conteneur, "Palette de regions", c);
-    console = new cce::Console(conteneur);
+    console = new edt::Console(conteneur,modele);
+    
 /*    initScrollPane(conteneur);*/
 }
 

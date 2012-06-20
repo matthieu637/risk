@@ -1,14 +1,15 @@
-#ifndef CONSOLE_HPP
-#define CONSOLE_HPP
+#ifndef CCE_CONSOLE_HPP
+#define CCE_CONSOLE_HPP
 
 #include <CEGUI/CEGUIcolour.h>
 #include <CEGUI/CEGUIEventArgs.h>
 #include <CEGUI/CEGUIString.h>
 #include <CEGUI/CEGUIWindow.h>
 #include <string>
+#include <functional>
 #include <map>
 using std::string;
-//using std::map;
+
 
 namespace cce{
 
@@ -29,14 +30,15 @@ namespace cce{
        void ParseText(CEGUI::String inMsg);                       
        void OutputText(CEGUI::String inMsg,                       
 		       CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); 
-       void onHelp(const string& s);
+       string onHelp(const string& s);
  
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the Console window.
       int index;// index pour pouvoir recuperer l'historique du chat
-      std::map<CEGUI::String, EventConsole*> mapCommandes;
-
+   
+  protected:
+    std::map <std::string, std::function<string(const string&)> > mapCommandes; 
       
   };
 
 }
-#endif // CONSOLE_HPP
+#endif // CCE_CCONSOLE_HPP

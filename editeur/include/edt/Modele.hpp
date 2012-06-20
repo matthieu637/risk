@@ -65,8 +65,11 @@ namespace edt {
 ///\brief Supprimer le tile aux coordonées x,y pixels
 ///
 	void deleteTile(int x, int y);
-
-	void saveCarte(const string & chemin);
+	
+///
+///\brief sauvegarde une carte 
+///
+	string saveCarte(const string & chemin);
 
 ///
 ///\brief Ajoute une region au pays actuellement sélectionné
