@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout >
-    <Window Type="TaharezLook/FrameWindow" Name="Console" >
+    <Window Type="TaharezLook/Tree" Name="Console" >
         <Property Name="Text" Value="Console" />
         <Property Name="Alpha" Value="0.75" />
         <Property Name="TitlebarFont" Value="DejaVuSans-10" />

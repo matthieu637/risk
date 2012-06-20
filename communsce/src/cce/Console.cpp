@@ -49,34 +49,33 @@ void Console::RegisterHandlers()
      m_ConsoleWindow->getChild("Console/EditBox")->subscribeEvent(
 	CEGUI::PushButton::EventKeyDown,
         CEGUI::Event::Subscriber(    
-            &Console::Handle_SendButtonKeyPressed,  
+            &Console::Handle_ButtonKeyPressed,  
             this));          
-     
-     m_ConsoleWindow->getChild("Console/EditBox")->subscribeEvent(
-	CEGUI::PushButton::EventKeyDown,
-        CEGUI::Event::Subscriber(    
-            &Console::Handle_EscapeButtonKeyPressedToQuit,  
-            this));                           
 }
 
-bool Console::Handle_EscapeButtonKeyPressedToQuit(const CEGUI::EventArgs &e)
+
+bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
 {
   const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
 
-   if ((CEGUI::Key::Escape == keyEvent.scancode)){
+   if ((CEGUI::Key::ArrowUp == keyEvent.scancode)){  
+      CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
+      if(index == -1 || index == 0){
+	index = (int)outputWindow->getItemCount()-1;
+      }else{
+	index--;
+      }     
+      m_ConsoleWindow->getChild("Console/EditBox")->setText( outputWindow->getListboxItemFromIndex(index)->getText());
+      CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
+      editWindow->setCaratIndex(editWindow->getMaxTextLength());
+      return true;
+      
+   }else if ((CEGUI::Key::Escape == keyEvent.scancode)){
       setVisible(false);
       return true;
-   }
-   return false;
-}
-
-
-bool Console::Handle_SendButtonKeyPressed(const CEGUI::EventArgs &e)
-{
-  const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
-
-   if ((CEGUI::Key::Return == keyEvent.scancode)){
-    
+      
+   }else if ((CEGUI::Key::Return == keyEvent.scancode)){
+    index = -1;
     CEGUI::String Msg = m_ConsoleWindow->getChild("Console/EditBox")->getText();
     (this)->ParseText(Msg);
     m_ConsoleWindow->getChild("Console/EditBox")->setText("");
@@ -88,6 +87,7 @@ bool Console::Handle_SendButtonKeyPressed(const CEGUI::EventArgs &e)
 bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
 {
     (void) e;
+    index = -1;
     CEGUI::String Msg = m_ConsoleWindow->getChild("Console/EditBox")->getText();
     (this)->ParseText(Msg);
     m_ConsoleWindow->getChild("Console/EditBox")->setText("");
