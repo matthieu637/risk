@@ -47,9 +47,7 @@ void Console::RegisterHandlers()
     
      m_ConsoleWindow->getChild("Console/EditBox")->subscribeEvent(
 	CEGUI::PushButton::EventKeyDown,
-        CEGUI::Event::Subscriber(    
-            &Console::Handle_SendButtonKeyPressed,  
-            this));                            
+        CEGUI::Event::Subscriber(&Console::Handle_SendButtonKeyPressed, this));                        
 
 }
 
