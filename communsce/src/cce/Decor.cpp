@@ -1,5 +1,6 @@
 #include "cce/Decor.hpp"
 #include "cce/DecorTemplate.hpp"
+#include "bib/Logger.hpp"
 
 using namespace std;
 
@@ -34,11 +35,11 @@ void Decor::setTexture(Texture* texture)
 
 bool Decor::inferieurA(const Decor &d) const
 {
-    bool meme_hauteur = yCompare == d.yCompare;
-    if(meme_hauteur)
-	return getPosition().x < d.getPosition().x;
+    bool y_inf = yCompare < d.yCompare;
+    if(y_inf)
+	return true;
     else
-      return meme_hauteur;
+      return getPosition().x < d.getPosition().x;
 }
 
 bool operator<(Decor const &d1, Decor const &d2)

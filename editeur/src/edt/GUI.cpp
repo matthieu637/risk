@@ -1,13 +1,14 @@
 #include "edt/GUI.hpp"
 #include "edt/PaletteTile.hpp"
+#include "edt/PaletteDecor.hpp"
 #include "edt/PaletteRegions.hpp"
-#include <edt/Modele.hpp>
-#include "CEGUI/CEGUIScriptModule.h"
-#include "CEGUI/elements/CEGUIScrollbar.h"
 #include "cce/Console.hpp"
 #include "cce/Carte.hpp"
 #include "edt/Carte.hpp"
 #include "cce/Modele.hpp"
+#include "edt/Modele.hpp"
+#include "CEGUI/CEGUIScriptModule.h"
+#include "CEGUI/elements/CEGUIScrollbar.h"
 
 using namespace edt;
 
@@ -27,12 +28,13 @@ void GUI::init(Modele* modele)
 
     cce::GUI::init(modele);
     palette_tile = new PaletteTile();
-    palette_tile->init(this, conteneur, "Palette de tiles");
-    palette_regions = new PaletteRegions();
-    
+    palette_tile->init(this, conteneur, "PaletteFrames/Tiles", (edt::Modele*)modele);
+    palette_decor = new PaletteDecor();
+    palette_decor->init(this, conteneur, "PaletteFrames/Decors", (edt::Modele*)modele);
     
     edt::Carte* c=static_cast <edt::Carte*>(modele->getCarte());
-    palette_regions->init(this, conteneur, "Palette de regions", c);
+    palette_regions = new PaletteRegions();
+    palette_regions->init(this, conteneur, "PaletteFrames/Regions", c);
     console = new cce::Console(conteneur);
 /*    initScrollPane(conteneur);*/
 }

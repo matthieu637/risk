@@ -36,7 +36,7 @@ public:
     
     map<int, TileTemplate>* getMapTile();
     
-    const map<int, DecorTemplate>* getMapDecor();
+    map<int, DecorTemplate>* getMapDecor();
     
     const map<int, UnitTemplate>* getMapUnit();
     

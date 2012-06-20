@@ -15,6 +15,7 @@ class Console;
 namespace edt {
 class Modele;
 class PaletteTile;
+class PaletteDecor;
 class PaletteRegions;
   
 class GUI : public cce::GUI
@@ -32,6 +33,7 @@ private:
 
 private:
     PaletteTile* palette_tile;
+    PaletteDecor* palette_decor;
     PaletteRegions* palette_regions;
     cce::Console* console;
 };

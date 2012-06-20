@@ -6,6 +6,7 @@
 #include <cce/Console.hpp>
 #include <SFML/Window/Event.hpp>
 #include <CEGUI/elements/CEGUIScrollbar.h>
+#include <CEGUI/elements/CEGUIFrameWindow.h>
 #include <Thor/Events/Action.hpp>
 #include <Thor/Events/EventSystem.hpp>
 #include "bib/Logger.hpp"
@@ -14,11 +15,9 @@ using thor::Action;
 
 namespace edt {
 
-Controleur::Controleur(cce::MoteurSFML * engine, Modele * m,
-                       GUI * gui):cce::Controleur(engine, gui) {
+Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Controleur(engine, gui) {
     this->m = m;
     selection = false;
-    tile = true;
 
     // Evenements Thor
     Action close(sf::Event::Closed);
@@ -56,18 +55,17 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m,
 
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
-    moduleGUI->ajouterHandler("selection",
-                              BIND(&Controleur::onSelection));
+    moduleGUI->ajouterHandler("selection", BIND(&Controleur::onSelection));
     moduleGUI->ajouterHandler("gui_viewscroll_change_vertical",  BIND(&Controleur::onMainScrollVertChange));
     moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal",  BIND(&Controleur::onMainScrollHoriChange));
     moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
+    moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
     
     gui->setScriptModule(moduleGUI);
 }
 void Controleur::onStartCam(thor::ActionContext < string > context) {
-    sf::Vector2i mousePosition =
-        sf::Mouse::getPosition(*context.window);
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     clickX = mousePosition.x;
     clickY = mousePosition.y;
     int cameraX = engine->getView()->getCenter().x;
@@ -84,8 +82,7 @@ void Controleur::onStopCam(thor::ActionContext < string > context) {
 void Controleur::onMoveCamera(thor::ActionContext < string > context) {
     if (!moveCam)		//bug si exécuté avant le rightPress
         return;
-    sf::Vector2i mousePosition =
-        sf::Mouse::getPosition(*context.window);
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = clickX - mousePosition.x;
     int dy = clickY - mousePosition.y;
     int cameraX = engine->getView()->getCenter().x;
@@ -106,34 +103,41 @@ void Controleur::onResetZoom(thor::ActionContext < string > context) {
 void Controleur::onPlaceObject(thor::ActionContext < string > context) {
     if (selection)
         return;
-    sf::Vector2i mousePosition =
-        sf::Mouse::getPosition(*context.window);
-    if (tile)
-        m->placeTile(getX(mousePosition.x), getY(mousePosition.y));
-    else if (decor)
-        m->placeDecor(getX(mousePosition.x), getY(mousePosition.y));
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    m->placeObject(getX(mousePosition.x), getY(mousePosition.y));
+}
+
+void Controleur::onDeleteObject(thor::ActionContext < string > context) {
+    if (!selection)
+        return;
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    m->deleteObject(getX(mousePosition.x), getY(mousePosition.y));
 }
 
 int Controleur::getX(int mouseX) {
-    int x_view =
-        engine->getView()->getCenter().x -
-        engine->getView()->getSize().x / 2;
-    float coeff_x =
-        engine->getView()->getSize().x /
-        engine->getFenetre()->getSize().x;
+    int x_view = engine->getView()->getCenter().x - engine->getView()->getSize().x / 2;
+    float coeff_x = engine->getView()->getSize().x / engine->getFenetre()->getSize().x;
     int x_absolu = x_view + mouseX * coeff_x;
     return x_absolu;
 }
 
 int Controleur::getY(int mouseY) {
-    int y_view =
-        engine->getView()->getCenter().y -
-        engine->getView()->getSize().y / 2;
-    float coeff_y =
-        engine->getView()->getSize().y /
-        engine->getFenetre()->getSize().y;
+    int y_view = engine->getView()->getCenter().y - engine->getView()->getSize().y / 2;
+    float coeff_y = engine->getView()->getSize().y / engine->getFenetre()->getSize().y;
     int y_absolu = y_view + mouseY * coeff_y;
     return y_absolu;
+}
+
+bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
+{
+    const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
+    CEGUI::FrameWindow* fw = static_cast<CEGUI::FrameWindow*>(wea.window);
+    const string nom = fw->getName().c_str();
+    if(nom == "Palettes/Terrains")
+      m->selectPalette(tiles);
+    else if(nom == "Palettes/Decors")
+      m->selectPalette(decors);
+    return true;
 }
 
 bool Controleur::onQuit(const CEGUI::EventArgs & e) {
@@ -158,16 +162,6 @@ bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;
     return true;
-}
-
-void Controleur::onDeleteObject(thor::ActionContext < string > context) {
-    if (!selection)
-        return;
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
-    if (tile)
-        m->deleteTile(getX(mousePosition.x), getY(mousePosition.y));
-    //else if (decor)
-    //    m->deleteDecor(getX(mousePosition.x), getY(mousePosition.y));
 }
 
 bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e){

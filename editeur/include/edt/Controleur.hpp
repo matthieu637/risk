@@ -42,13 +42,14 @@ namespace cce {
 	bool onOpen(const CEGUI::EventArgs & e);
 	bool onMainScrollVertChange(const CEGUI::EventArgs & e);
 	bool onMainScrollHoriChange(const CEGUI::EventArgs & e);
+	bool onChoixPalette(const CEGUI::EventArgs & e);
 
 	int getX(int mouseX);
 	int getY(int mouseY);
 
       private:
 	int clickX, clickY;
-	bool moveCam, tile, decor, selection;
+	bool moveCam, selection;
 	GUI *gui;
 	Modele *m;
     };
