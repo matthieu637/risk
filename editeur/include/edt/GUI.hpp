@@ -25,7 +25,8 @@ public:
     virtual ~GUI();
     void init(Modele* module);
     void updateListRegions(list<string> noms);
-
+    cce::Console *getConsole();
+    
 private:
     void initScrollPane(const string& conteneur, Modele* modele);
 

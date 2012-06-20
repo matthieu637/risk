@@ -55,6 +55,15 @@ void Console::RegisterHandlers()
 }
 
 
+void Console::afficherCommande(const string& s){
+  
+  CEGUI::Window *w =  CEGUI::System::getSingleton().getGUISheet()->getChild("Console");
+  w->getChild("Console/EditBox")->setText(s);;
+  
+  CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(w->getChild("Console/EditBox"));
+  editWindow->setCaratIndex(editWindow->getMaxTextLength());
+}
+
 bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
 {
   const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
@@ -65,8 +74,10 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
 	index = (int)outputWindow->getItemCount()-1;
       }else{
 	index--;
-      }     
+      }
+      //recuperation du texte
       m_ConsoleWindow->getChild("Console/EditBox")->setText( outputWindow->getListboxItemFromIndex(index)->getText());
+      //placement correct du curseur
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
       return true;
@@ -98,7 +109,7 @@ bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
 
 void Console::ParseText(CEGUI::String inMsg)
 {
-
+  
     std::string inString = inMsg.c_str();
 
     if (inString.length() >= 1) 
@@ -128,6 +139,14 @@ void Console::ParseText(CEGUI::String inMsg)
                 std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
                 (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
             }
+            else if(command == "save"){
+	      
+	      
+	    }
+	    else if(command == "open"){
+	      
+	      
+	    }
             else
             {
                 std::string outString = "<" + inString + "> is an invalid command.";

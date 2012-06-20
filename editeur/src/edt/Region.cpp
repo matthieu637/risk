@@ -2,14 +2,13 @@
 
 namespace edt{
   
-Region::Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag){
+Region::Region(int _income, polygon_concept _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag){
 
 	income = _income;
-	nom = _nom;
 	zone = _zone;	
 	upgrades = _upgrades;
 	tiles = _tiles;
-	flag = _flag;
+	flag = *_flag;
 }
 
 Region::~Region()
@@ -18,10 +17,6 @@ Region::~Region()
 
 void Region::setIncome(int incom){
 	income = incom;
-}
-
-void Region::setNom(string n){
-	nom = n;
 }
 
 void Region::setZone(polygon_concept zon){
@@ -37,7 +32,7 @@ void Region::setTiles(const Tile& t){
 }
 
 void Region::setFlag(Flag* f){
-	flag = f;
+	flag = *f;
 }
 }
 

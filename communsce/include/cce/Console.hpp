@@ -6,6 +6,9 @@
 #include <CEGUI/CEGUIString.h>
 #include <CEGUI/CEGUIWindow.h>
 #include <string>
+#include <map>
+using std::string;
+using std::map;
 
 namespace cce{
 
@@ -15,7 +18,8 @@ namespace cce{
        Console(const std::string& conteneur);                   // Constructor
        void setVisible(bool visible);         // Hide or show the console
        bool isVisible();                      // return true if console is visible, false if is hidden
- 
+       void afficherCommande(const string& s);
+       
     private:
        void RegisterHandlers();                                   // Register our handler functions
        bool Handle_TextSubmitted(const CEGUI::EventArgs &e);      // Handle when we press Enter after typing
@@ -27,6 +31,8 @@ namespace cce{
  
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the ConsoleRoot window.
       int index;
+      map mapCommandes;
+      
   };
 
 }
