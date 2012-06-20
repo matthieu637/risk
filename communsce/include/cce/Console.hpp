@@ -31,7 +31,7 @@ namespace cce{
  
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the ConsoleRoot window.
       int index;
-      map mapCommandes;
+      //map mapCommandes;
       
   };
 
