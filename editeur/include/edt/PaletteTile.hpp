@@ -2,6 +2,7 @@
 #define PALETTETILE_HPP
 
 #include "cce/Palette.hpp"
+#include "Modele.hpp"
 
 namespace edt{
 

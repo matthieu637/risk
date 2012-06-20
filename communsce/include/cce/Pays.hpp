@@ -4,7 +4,7 @@
 #include <string>
 #include <list>
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp> 
+#include <boost/serialization/map.hpp> 
 #include "Region.hpp"
 #include "cce/PointSpawn.hpp"
 
@@ -37,15 +37,25 @@ virtual ~Pays();
 ///\brief regions du pays
 ///\return Retourne les regions du pays
 ///
-            list<Region> getRegions();
+            map<string,Region>* getRegions();
 	    
-
+///\brief obtenir une région
+///\return Retourne une région associée à l'argument 
+///
+            Region getRegion(string nom);
+	    
 ///	    
 ///
 ///\brief point de spawn du pays
 ///\return Retourne le point de spawn du pays
 ///
             PointSpawn* getPointSpawn();
+	    
+///
+///\brief ajoute une région à la liste des régions
+///\param r : regions a associer
+///
+            void addRegion(const string& name, const Region& r);  
 	    
 
     template<class Archive>
@@ -61,8 +71,8 @@ virtual ~Pays();
 protected : 
 	    int income;
 	    string nom;
-	    list<Region> regions;
-	    PointSpawn* ps;	  
+	    map<string,Region> regions;
+	    PointSpawn ps;	  
 
 };
 }

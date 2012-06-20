@@ -9,7 +9,7 @@
 ///
 
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
+#include <boost/serialization/map.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include "Repere.hpp"
 #include "CoucheDecor.hpp"
@@ -39,18 +39,18 @@ public:
     {
 	(void) version;
 	ar & make_nvp("Repere", repere);
-	ar & make_nvp("Pays", lp);
+	ar & make_nvp("Pays", mp);
     }
     
     Repere* getRepere(){return &repere;}
     CoucheDecor* getCoucheDecor(){return &couche_decor;}
-    list<Pays>* getListPays(){return &lp;}
-    list<Region> getListRegions();
+    //list<Pays>* getListPays(){return &mp;}
+    map<string, Region>* getAllRegions() ;
     
 ///
 ///\brief Ajouter une region a un pays par leurs noms.
 ///
-    void addRegion(string nom_pays, string nom_region);
+    void addRegion(const string& nom_pays, const string& nom_region, const Region& r);
    
   
 protected:
@@ -62,7 +62,7 @@ protected:
 protected:
     Repere repere;
     CoucheDecor couche_decor;
-    list<Pays> lp;
+    map<string,Pays> mp;
 };
 
 }

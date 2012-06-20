@@ -91,16 +91,17 @@ namespace edt {
     void Modele::addRegion(string nom)
     {
 // 	carte->addRegion(current_pays, nom);
+	//FIXME pointeurs getListRegions
+	/*list<string> noms;
 	
-	list<string> noms;
-	
-	list<cce::Region>::iterator ir =  carte->getListRegions().begin();
-	for (; ir != carte->getListRegions().end(); ir++)
+	list<cce::Region>::iterator ir =  carte->getListRegions()->begin();
+	for (; ir != carte->getListRegions()->end(); ir++)
 	    noms.push_back((*ir).getNom());
 	
 	list <cce::Vue*>::iterator it;
 	for (it = vues.begin(); it != vues.end(); it++)
 	    ((Vue*)(*it))->updateListRegions(noms);
+	*/
        
     }
 

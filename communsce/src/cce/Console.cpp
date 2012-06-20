@@ -10,6 +10,7 @@
 #include <CEGUI/elements/CEGUIEditbox.h>
 #include <CEGUI/elements/CEGUIListboxTextItem.h>
 #include <string>
+#include <CEGUI/elements/CEGUIScrollbar.h>
 #include "bib/Logger.hpp"
 
 
@@ -47,32 +48,37 @@ void Console::RegisterHandlers()
     
      m_ConsoleWindow->getChild("Console/EditBox")->subscribeEvent(
 	CEGUI::PushButton::EventKeyDown,
-        CEGUI::Event::Subscriber(&Console::Handle_SendButtonKeyPressed, this));                        
-
+        CEGUI::Event::Subscriber(    
+            &Console::Handle_ButtonKeyPressed,  
+            this));          
 }
 
 
-bool Console::Handle_TextSubmitted(const CEGUI::EventArgs &e)
-{
-    const CEGUI::WindowEventArgs* args = static_cast<const CEGUI::WindowEventArgs*>(&e);
-    CEGUI::String Msg = m_ConsoleWindow->getChild("Console/EditBox")->getText();
-    (this)->ParseText(Msg);
-
-    m_ConsoleWindow->getChild("Console/EditBox")->setText("");
-
-    return true;
-}
-
-bool Console::Handle_SendButtonKeyPressed(const CEGUI::EventArgs &e)
+bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
 {
   const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
 
-   if ((CEGUI::Key::Return == keyEvent.scancode)){
-    
+   if ((CEGUI::Key::ArrowUp == keyEvent.scancode)){  
+      CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
+      if(index == -1 || index == 0){
+	index = (int)outputWindow->getItemCount()-1;
+      }else{
+	index--;
+      }     
+      m_ConsoleWindow->getChild("Console/EditBox")->setText( outputWindow->getListboxItemFromIndex(index)->getText());
+      CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
+      editWindow->setCaratIndex(editWindow->getMaxTextLength());
+      return true;
+      
+   }else if ((CEGUI::Key::Escape == keyEvent.scancode)){
+      setVisible(false);
+      return true;
+      
+   }else if ((CEGUI::Key::Return == keyEvent.scancode)){
+    index = -1;
     CEGUI::String Msg = m_ConsoleWindow->getChild("Console/EditBox")->getText();
     (this)->ParseText(Msg);
     m_ConsoleWindow->getChild("Console/EditBox")->setText("");
-
     return true;
    }
    return false;
@@ -81,6 +87,7 @@ bool Console::Handle_SendButtonKeyPressed(const CEGUI::EventArgs &e)
 bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
 {
     (void) e;
+    index = -1;
     CEGUI::String Msg = m_ConsoleWindow->getChild("Console/EditBox")->getText();
     (this)->ParseText(Msg);
     m_ConsoleWindow->getChild("Console/EditBox")->setText("");
@@ -91,23 +98,20 @@ bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
 void Console::ParseText(CEGUI::String inMsg)
 {
 
-    // I personally like working with std::string. So i'm going to convert it here.
     std::string inString = inMsg.c_str();
 
-    if (inString.length() >= 1) // Be sure we got a string longer than 0
+    if (inString.length() >= 1) 
     {
         if (inString.at(0) == '/') // Check if the first letter is a 'command'
         {
             std::string::size_type commandEnd = inString.find(" ", 1);
             std::string command = inString.substr(1, commandEnd - 1);
             std::string commandArgs = inString.substr(commandEnd + 1, inString.length() - (commandEnd + 1));
-            //convert command to lower case
+            
             for(std::string::size_type i=0; i < command.length(); i++)
             {
                 command[i] = tolower(command[i]);
             }
-
-            // Begin processing
 
             if (command == "say")
             {
@@ -120,14 +124,15 @@ void Console::ParseText(CEGUI::String inMsg)
             }
             else if (command == "help")
             {
-                // do a /help
+                std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
+                (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
             }
             else
             {
                 std::string outString = "<" + inString + "> is an invalid command.";
                 (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f)); // With red ANGRY colors!
             }
-        } // End if /
+        } 
         else
         {
             (this)->OutputText(inString); // no commands, just output what they wrote
@@ -144,9 +149,11 @@ void Console::OutputText(CEGUI::String message, CEGUI::colour colour)
     //CEGUI::FormattedListboxTextItem *newItem=0; // This will hold the actual text and will be the listbox segment / item
     CEGUI::ListboxTextItem *newItem=0;
     newItem = new CEGUI::ListboxTextItem(message,CEGUI::HTF_WORDWRAP_LEFT_ALIGNED); // Instance the Item with Left
-    //   wordwrapped alignment
+    //   wordwrapped alignmentoutputWindow->getVertScrollbar()->
     newItem->setTextColours(colour); // Set the text color
     outputWindow->addItem(newItem); // Add the new ListBoxTextItem to the ListBox
+    
+    outputWindow->getVertScrollbar()->setScrollPosition((int)outputWindow->getVertScrollbar()->getDocumentSize());
 }
 
 void Console::setVisible(bool visible)

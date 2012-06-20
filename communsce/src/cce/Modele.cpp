@@ -35,4 +35,9 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(*carte,states);
 }
 
+Carte* Modele::getCarte() 
+{
+  return carte;
+}
+
 }

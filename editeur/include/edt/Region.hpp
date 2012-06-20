@@ -24,7 +24,7 @@ namespace edt{
 class Region : public cce::Region
 {
 public :
-   Region(int _income, string _nom, polygon_concept _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag);
+   Region(int _income, polygon_concept _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag);
     virtual ~Region();
   
 ///
@@ -32,12 +32,6 @@ public :
 ///\param incom : income à associer
 ///
 	    void setIncome(int incom);
-	    
-///
-///\brief Definit le nom de la region
-///\param n : nom à associer
-///
-            void setNom(string n);
 	    
 ///
 ///\brief Definit la zone d'une region
