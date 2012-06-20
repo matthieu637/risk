@@ -22,12 +22,13 @@ Palette::~Palette()
 
 void Palette::init(GUI const *gui, const string& conteneur, string nom)
 {
+  
     fenetre = (FrameWindow*) WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", nom);
     fenetre->setSize(UVector2(UDim(0.0f,200), UDim(0.0f,600)));
     fenetre->setVisible(true);
     
     //gui->getRootWindow()->getChild(conteneur)->addChildWindow(fenetre);
-
+    (void) conteneur;
     gui->getRootWindow()->addChildWindow(fenetre);
 }
 

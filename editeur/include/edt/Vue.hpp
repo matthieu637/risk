@@ -35,6 +35,10 @@ public:
 
     void updateListRegions(list<string> noms);
     
+    void updateScrollVert(float newpos);
+    
+    void updateScrollHori(float newpos);
+    
     GUI* getGUI();
 
     

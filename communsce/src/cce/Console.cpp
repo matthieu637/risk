@@ -29,6 +29,7 @@ Console::Console(const std::string& conteneur)
     {
         // Lets add our new window to the Root GUI Window
         //CEGUI::System::getSingleton().getGUISheet()->getChild(conteneur)->addChildWindow(m_ConsoleWindow);
+        (void) conteneur;
 	CEGUI::System::getSingleton().getGUISheet()->addChildWindow(m_ConsoleWindow);
         RegisterHandlers();
     }

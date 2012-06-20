@@ -74,6 +74,8 @@ void GUI::setScriptModule(CEGUI::ScriptModule* module) {
 }
 void GUI::init(const Modele* modele)
 {
+    (void) modele;
+  
     CEGUI::OpenGLRenderer& myRenderer = CEGUI::OpenGLRenderer::create();
     //CEGUI::OpenGLRenderer& myRenderer = CEGUI:: OpenGLRenderer:: bootstrapSystem ();
     cSys = &CEGUI::System::create( myRenderer );

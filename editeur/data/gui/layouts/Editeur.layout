@@ -11,6 +11,7 @@
             <Property Name="DocumentSize" Value="1" />
             <Property Name="ScrollPosition" Value="0" />
             <Property Name="UnifiedAreaRect" Value="{{1,-13},{0.03,0},{1,0},{1,0}}" />
+	    <Event Name="ScrollPosChanged" Function="gui_viewscroll_change_vertical" />
         </Window>
         <Window Type="TaharezLook/HorizontalScrollbar" Name="Editeur/HSB" >
             <Property Name="PageSize" Value="0" />
@@ -19,6 +20,7 @@
             <Property Name="DocumentSize" Value="1" />
             <Property Name="ScrollPosition" Value="0" />
             <Property Name="UnifiedAreaRect" Value="{{0,0},{0.985,0},{1,-10},{1,0}}" />
+            <Event Name="ScrollPosChanged" Function="gui_viewscroll_change_horizontal" />
         </Window>
     </Window>
 </GUILayout>

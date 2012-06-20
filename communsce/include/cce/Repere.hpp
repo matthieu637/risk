@@ -100,6 +100,8 @@ protected:
     int hauteur_pixels;
     int nbTiles;
     int nbTiles_sans_derniere_ligne;
+
+public:
     static constexpr int h_tile = 88;
     static constexpr int l_tile = 158;
     static constexpr int h_tile_demi = 44;

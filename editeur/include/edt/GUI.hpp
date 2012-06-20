@@ -27,7 +27,7 @@ public:
     void updateListRegions(list<string> noms);
 
 private:
-    void initScrollPane(const string& conteneur);
+    void initScrollPane(const string& conteneur, Modele* modele);
 
 private:
     PaletteTile* palette_tile;

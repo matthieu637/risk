@@ -160,17 +160,18 @@ bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e){
     
     sf::View* v = engine->getView();
     
-    //v->setCenter(v->getCenter().x, sb->getScrollPosition()/100 * ());
-    
-    int cameraX = engine->getView()->getCenter().x;
-    int cameraY = engine->getView()->getCenter().y;
-    
-    m->moveView(10, 0, cameraX, cameraY);
-    LOG_DEBUG("ifi");
+    m->moveScrollVert(sb->getScrollPosition(), v->getSize().y);
+    return true;
 }
 
 bool Controleur::onMainScrollHoriChange(const CEGUI::EventArgs & e){
-
+    const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
+    CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
+    
+    sf::View* v = engine->getView();
+    
+    m->moveScrollHori(sb->getScrollPosition(), v->getSize().x);
+    return true;
 }
 
 

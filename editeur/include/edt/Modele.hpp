@@ -73,6 +73,9 @@ namespace edt {
 ///\param nom: nom de la region
 ///
 	void addRegion(string nom);
+	
+	void moveScrollVert(float pos, float size);
+	void moveScrollHori(float pos, float size);
 
       private:
 	 Repere * getRepere();

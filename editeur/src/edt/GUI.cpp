@@ -37,11 +37,17 @@ void GUI::init(Modele* modele)
 /*    initScrollPane(conteneur);*/
 }
 
-void GUI::initScrollPane(const std::string& conteneur)
+void GUI::initScrollPane(const std::string& conteneur, Modele* modele)
 {
-    CEGUI::Scrollbar* sp = static_cast<CEGUI::Scrollbar*>(getRootWindow()->getChild("HSP"));
+  (void) modele;
+  (void) conteneur;
+    //CEGUI::Scrollbar* sp = static_cast<CEGUI::Scrollbar*>(getRootWindow()->getChild("HSP"));
     //sp->set
     //sp->set
+    
+    //sp->setPageSize(1000);
+    //sp->setDocumentSize(10000);
+    //sp
     //sp->setContentPaneArea(CEGUI::Rect(0,0,1500,1500));
 }
 
