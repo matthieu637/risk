@@ -12,6 +12,7 @@
 #include <string>
 #include <CEGUI/elements/CEGUIScrollbar.h>
 #include "bib/Logger.hpp"
+#include "cce/Controleur.hpp" //BIND
 
 
 
@@ -37,6 +38,10 @@ Console::Console(const std::string& conteneur)
     {
         CEGUI::Logger::getSingleton().logEvent("Error: Unable to load the ConsoleWindow from Console.layout");
     }
+    
+    
+    //mapCommandes["help"] = BIND(&Console::onHelp);
+    
 }
 
 void Console::RegisterHandlers()
@@ -136,8 +141,7 @@ void Console::ParseText(CEGUI::String inMsg)
             }
             else if (command == "help")
             {
-                std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
-                (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
+               
             }
             else if(command == "save"){
 	      
@@ -159,6 +163,13 @@ void Console::ParseText(CEGUI::String inMsg)
         }
     }
 }
+
+ 
+void Console::onHelp(const string& s){
+   std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
+   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
+}
+
 
 void Console::OutputText(CEGUI::String message, CEGUI::colour colour)
 {
