@@ -37,6 +37,12 @@ public:
 ///
     bool bloquant();
     
+///
+///\brief path du fichier image associé
+///\return path de l'image sous forme de string
+///
+    string getPath(){return path;}
+    
     friend class ::boost::serialization::access;
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {

@@ -2,18 +2,18 @@
 #define CCE_REGION_HPP
 
 #include <string>
-#include <boost/polygon/polygon.hpp>
 #include <list>
 #include "cce/Tile.hpp"
 #include "cce/UpgradeTemplate.hpp"
 #include <boost/serialization/list.hpp>
 #include "cce/Flag.hpp"
+#include "cce/Polygon.hpp"
 
-using boost::polygon::polygon_concept;
 using std::string;
 using std::list;
 
 namespace cce {
+  
 class Region
 {
 
@@ -31,7 +31,7 @@ public:
 ///\brief zone de la region
 ///\return Retourne la zone de la region
 ///
-    polygon_concept getZone();
+    Polygon getZone();
 
 ///
 ///\brief upgrades de la region
@@ -65,7 +65,7 @@ public:
 
 protected:
     int income;
-    polygon_concept zone;
+    Polygon zone;
     list<UpgradeTemplate> upgrades;
     list<Tile> tiles;
     Flag flag;

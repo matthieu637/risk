@@ -1,6 +1,6 @@
-#include "edt/PaletteTile.hpp"
+#include "edt/PaletteDecor.hpp"
 #include "cce/Univers.hpp"
-#include "cce/TileTemplate.hpp"
+#include "cce/DecorTemplate.hpp"
 #include "edt/Modele.hpp"
 #include <CEGUI/CEGUIImageset.h>
 #include <CEGUI/CEGUIEvent.h>
@@ -18,17 +18,17 @@ using namespace CEGUI;
 
 namespace edt{
 
-PaletteTile::PaletteTile() : Palette()
+PaletteDecor::PaletteDecor()
 {
 
 }
 
-PaletteTile::~PaletteTile()
+PaletteDecor::~PaletteDecor()
 {
 
 }
 
-void PaletteTile::init(const cce::GUI *gui, const string& conteneur, string nom, Modele* _m)
+void PaletteDecor::init(const cce::GUI *gui, const string& conteneur, string nom, Modele* _m)
 {
     Palette::init(gui, conteneur, nom);
     
@@ -38,10 +38,10 @@ void PaletteTile::init(const cce::GUI *gui, const string& conteneur, string nom,
     ostringstream oss;
     PushButton *tileButton = NULL;
     int i=0, j=0;
-    map<int, cce::TileTemplate>::iterator it = cce::Univers::getInstance()->getMapTile()->begin();
+    map<int, cce::DecorTemplate>::iterator it = cce::Univers::getInstance()->getMapDecor()->begin();
     string prop;
     
-    for (; it != cce::Univers::getInstance()->getMapTile()->end(); it++){
+    for (; it != cce::Univers::getInstance()->getMapDecor()->end(); it++){
 	prop = "set:" + (*it).second.getPath() + " image:full_image";
 	ImagesetManager::getSingleton().createFromImageFile((*it).second.getPath(), "../../texture/" + (*it).second.getPath());
 	oss.str("");
@@ -53,7 +53,7 @@ void PaletteTile::init(const cce::GUI *gui, const string& conteneur, string nom,
 	tileButton->setProperty("HoverImage", prop);
 	tileButton->setProperty("PushedImage", prop);
 	tileButton->setProperty("DisabledImage", prop);
-	tileButton->subscribeEvent(PushButton::EventClicked, Event::Subscriber(&PaletteTile::setTile,this));
+	tileButton->subscribeEvent(PushButton::EventClicked, Event::Subscriber(&PaletteDecor::setDecor,this));
 	fenetre->addChildWindow(tileButton);
 	if(i == 2){
 	  j++;
@@ -64,12 +64,12 @@ void PaletteTile::init(const cce::GUI *gui, const string& conteneur, string nom,
     }
 }
 
-bool PaletteTile::setTile(const EventArgs &e)
+bool PaletteDecor::setDecor(const EventArgs &e)
 {
     const WindowEventArgs& wea = static_cast<const WindowEventArgs&>(e);
     PushButton* pb = static_cast<PushButton*>(wea.window);
     const char* nom = pb->getName().c_str();
-    m->setTileTemplate(atoi(nom));
+    m->setDecorTemplate(atoi(nom));
     return true;
 }
 

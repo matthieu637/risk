@@ -13,9 +13,7 @@ int Region::getIncome(){
 	return income;
 }
 
-
-
-polygon_concept Region::getZone(){
+Polygon Region::getZone(){
 	return zone;
 }
 
@@ -26,8 +24,6 @@ list<UpgradeTemplate> Region::getUpgrades(){
 list<Tile> Region::getTiles(){
 	return tiles;
 }
-
-
 
 Flag* Region::getFlag(){
 	return &flag;

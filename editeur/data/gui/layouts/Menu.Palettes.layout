@@ -11,17 +11,21 @@
       <Window Type="TaharezLook/MenuItem" Name="Palettes/Terrains" >
 	  <Property Name="Text" Value="Terrains" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="choix_palette" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Palettes/Decors" >
 	  <Property Name="Text" Value="Décors" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="choix_palette" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Palettes/Regions" >
 	  <Property Name="Text" Value="Regions" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="choix_palette" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Palettes/Pays" >
 	  <Property Name="Text" Value="Pays" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="choix_palette" />
       </Window>
 </Window>

@@ -8,6 +8,7 @@
 #include "cce/ImageManager.hpp"
 #include <list>
 #include <string>
+#include <CEGUI/CEGUI.h>
 
 using std::list;
 using std::string;
@@ -22,7 +23,10 @@ Modele::Modele():cce::Modele() {
    // carte = new Carte; FIXME
     coeff_zoom = 1;
     tt = cce::Univers::getInstance()->getTileTemplate(100000000);
+    dt = cce::Univers::getInstance()->getDecorTemplate(200000000);
     current_pays = "Mordor";
+    tile = true;
+    decor = false;
 }
 
 Modele::~Modele() {
@@ -58,7 +62,6 @@ void Modele::moveView(int dx, int dy, int cameraX, int cameraY) {
     if ((y < 0 && cameraY < 0) || (y > y_max && cameraY > y_max))
         y = cameraY;
 
-    list < cce::Vue * >::iterator it;
     vues.end();
     for (it = vues.begin(); it != vues.end(); it++)
         (*it)->updateCameraPosition(x, y);
@@ -66,28 +69,57 @@ void Modele::moveView(int dx, int dy, int cameraX, int cameraY) {
 
 void Modele::zoom(int ticks) {
     coeff_zoom *= 1 - ticks * 0.05;
-    list < cce::Vue * >::iterator it;
     for (it = vues.begin(); it != vues.end(); it++)
         (*it)->updateCameraZoom(1 - ticks * 0.05);
 }
 
 void Modele::resetZoom() {
     coeff_zoom = 1;
-    list < cce::Vue * >::iterator it;
     for (it = vues.begin(); it != vues.end(); it++)
         (*it)->resetCameraZoom();
 }
 
-void Modele::placeTile(int x, int y) {
-    getRepere()->setTile(tt, x, y);
+void Modele::setTileTemplate(int id)
+{
+    tt = cce::Univers::getInstance()->getTileTemplate(id);
 }
 
-void Modele::placeDecor(int x, int y) {
+void Modele::setDecorTemplate(int id)
+{
+    dt = cce::Univers::getInstance()->getDecorTemplate(id);
+}
+
+void Modele::placeObject(int x, int y) {
+  if(tile)
+    getRepere()->setTile(tt, x, y);
+  else if(decor)
     carte->getCoucheDecor()->addDecor(dt, x, y);
 }
 
-void Modele::deleteTile(int x, int y) {
+void Modele::deleteObject(int x, int y) {
+  if(tile)
     getRepere()->unsetTile(x, y);
+  else if(decor)
+    carte->getCoucheDecor()->removeDecor(x, y);
+}
+
+void Modele::selectPalette(palette_type p)
+{
+    ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(false);
+    ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(false);
+    tile = false;
+    decor = false;
+    switch(p)
+    {
+	case tiles:
+	  ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(true);
+	  tile = true;
+	  break;
+	case decors:
+	  ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(true);
+	  decor = true;
+	  break;
+    }
 }
 
 void Modele::addRegion(string nom)
@@ -112,7 +144,6 @@ void Modele::moveScrollVert(float pos, float size)
 {
     float npos = pos/100 * (carte->getRepere()->getHauteur() - size/cce::Repere::h_tile) + size/2;
 
-    list <cce::Vue*>::iterator it;
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->updateScrollVert(npos);
 }
@@ -121,7 +152,6 @@ void Modele::moveScrollHori(float pos, float size)
 {
     float npos = pos/100 * (carte->getRepere()->getLargeur() - size/cce::Repere::l_tile) + size /2;
 
-    list <cce::Vue*>::iterator it;
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->updateScrollHori(npos);
 }

@@ -1,5 +1,6 @@
 #include "cce/CoucheDecor.hpp"
 #include "cce/Decor.hpp"
+#include "cce/DecorTemplate.hpp"
 
 namespace cce{
 

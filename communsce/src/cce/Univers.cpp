@@ -93,7 +93,7 @@ UpgradeTemplate* Univers::getUpgradeTemplate(int id)
 
 map<int, TileTemplate>* Univers::getMapTile(){return tileTemplate;}
 
-const map<int, DecorTemplate>* Univers::getMapDecor(){return decorTemplate;}
+map<int, DecorTemplate>* Univers::getMapDecor(){return decorTemplate;}
 
 const map<int, UnitTemplate>* Univers::getMapUnit(){return unitTemplate;}
 

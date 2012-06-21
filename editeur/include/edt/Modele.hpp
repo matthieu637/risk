@@ -17,53 +17,65 @@ using std::string;
 
 namespace edt {
 
-    class Vue;
-    class Repere;
+enum palette_type
+{
+    tiles, decors, regions, pays
+};
 
-    class Modele:public cce::Modele {
+class Vue;
+class Repere;
 
-      public:
-	Modele();
-	~Modele();
+class Modele:public cce::Modele {
+
+public:
+    Modele();
+    ~Modele();
 
 ///
 ///\brief Calculs à effectuer par le modèle à chaque pas de boucle
 ///
-	void update();
+    void update();
 
 ///
 ///\brief Changer les coordonées par (dx,dy) de la caméra selon sa largeur et sa hauteur.
 ///
-	void moveView(int dx, int dy, int cameraX, int cameraY);
+    void moveView(int dx, int dy, int cameraX, int cameraY);
 
 ///
 ///\brief stocker le point d'origine de la caméra avant de commencer le déplacement par drag
 ///
-	void setCamOrigine(int cameraX, int cameraY);
+    void setCamOrigine(int cameraX, int cameraY);
 
 ///
 ///\brief Ajuster le zoom en fonction du nombre de ticks scrollé et du champ couvert par la caméra.
 ///
-	void zoom(int ticks);
+    void zoom(int ticks);
 
 ///
 ///\brief Remettre le zoom à 0
 ///
-	void resetZoom();
+    void resetZoom();
+///
+///\brief Placer l'objet actuellement sélectionné aux coordonées x,y pixels
+///
+    void placeObject(int x, int y);
 
 ///
-///\brief Placer la tile actuellement sélectionné aux coordonées x,y pixels
+///\brief Supprimer l'objet aux coordonées x,y pixels
 ///
-	void placeTile(int x, int y);
+    void deleteObject(int x, int y);
 
 ///
-///\brief Placer le decor actuellement sélectionné aux coordonées x,y pixels
+///\brief Changer le tileTemplate à placer par son id
 ///
-	void placeDecor(int x, int y);
+    void setTileTemplate(int id);
 
 ///
-///\brief Supprimer le tile aux coordonées x,y pixels
+///\brief Changer le decorTemplate à placer par son id
 ///
+    void setDecorTemplate(int id);
+
+
 	void deleteTile(int x, int y);
 	
 ///
@@ -72,24 +84,33 @@ namespace edt {
 	string saveCarte(const string & chemin);
 
 ///
+///\brief Choisir la palette
+///
+
+    void selectPalette(palette_type p);
+
+
+///
 ///\brief Ajoute une region au pays actuellement sélectionné
 ///\param nom: nom de la region
 ///
-	void addRegion(string nom);
-	
-	void moveScrollVert(float pos, float size);
-	void moveScrollHori(float pos, float size);
+    void addRegion(string nom);
+    
+    void moveScrollVert(float pos, float size);
+    void moveScrollHori(float pos, float size);
 
-      private:
-	 Repere * getRepere();
+  private:
+      Repere * getRepere();
 
-      private:
-	int cameraOrigineX, cameraOrigineY;
-	float coeff_zoom;
-	string current_pays;
-	cce::TileTemplate * tt;
-	cce::DecorTemplate * dt;
-    };
+  private:
+    int cameraOrigineX, cameraOrigineY;
+    float coeff_zoom;
+    bool tile, decor;
+    string current_pays;
+    cce::TileTemplate * tt;
+    cce::DecorTemplate * dt;
+    list < cce::Vue * >::iterator it;
+};
 
 }
 #endif	// MODELEEDITEUR_HPP
