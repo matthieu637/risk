@@ -27,6 +27,7 @@ Modele::Modele():cce::Modele() {
     current_pays = "Mordor";
     tile = true;
     decor = false;
+    current_map = "";
 }
 
 Modele::~Modele() {
@@ -41,9 +42,29 @@ Repere *Modele::getRepere() {
     return (Repere *) carte->getRepere();
 }
 
+//herite de edt::openCarte
+string Modele::openCarte(const std::string & chemin) {
+    current_map = chemin;
+    return cce::Modele::openCarte(chemin);
+}
+
+string Modele::getCurrentMap(){
+  return current_map;
+}
 string Modele::saveCarte(const std::string & chemin) {
+    current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
     return "La carte "+chemin+" a bien ete sauvegardee";  
+}
+
+
+string Modele::saveCarte() {
+  if(current_map != ""){
+    bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
+    return "La carte "+current_map+" a bien ete sauvegardee"; 
+  }else{
+    return "Veuillez saisir un nom de carte";
+  }
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY) {

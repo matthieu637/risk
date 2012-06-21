@@ -82,7 +82,9 @@ public:
 ///\brief sauvegarde une carte 
 ///
 	string saveCarte(const string & chemin);
-
+	string saveCarte();
+	string openCarte(const std::string & chemin);
+	string getCurrentMap();
 ///
 ///\brief Choisir la palette
 ///
@@ -110,6 +112,8 @@ public:
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
     list < cce::Vue * >::iterator it;
+    string current_map;
+    
 };
 
 }

@@ -39,8 +39,8 @@ public:
  ///
 ///\brief ouvre une carte
 ///
-    string openCarte(const std::string & chemin);
-
+    virtual string openCarte(const std::string & chemin);
+    
     Carte* getCarte();
     
 protected:
@@ -52,6 +52,7 @@ protected:
 protected:
     Carte* carte;
     std::list<Vue*> vues;
+    
 };
 
 }
