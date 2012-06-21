@@ -58,6 +58,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("selection", BIND(&Controleur::onSelection));
     moduleGUI->ajouterHandler("gui_viewscroll_change_vertical",  BIND(&Controleur::onMainScrollVertChange));
     moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal",  BIND(&Controleur::onMainScrollHoriChange));
+    moduleGUI->ajouterHandler("enregistrerSous", BIND(&Controleur::onSaveAs));
     moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
@@ -147,6 +148,12 @@ bool Controleur::onQuit(const CEGUI::EventArgs & e) {
 }
 
 bool Controleur::onSave(const CEGUI::EventArgs & e) {
+    (void) e;
+    gui->getConsole()->afficherCommande("/save "+m->getCurrentMap());
+    return true;
+}
+
+bool Controleur::onSaveAs(const CEGUI::EventArgs & e) {
     (void) e;
     gui->getConsole()->afficherCommande("/save ");
     return true;

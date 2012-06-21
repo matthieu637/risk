@@ -133,6 +133,7 @@ void Console::ParseText(CEGUI::String inMsg)
 	    {
 		if(it->first == command){
 		  string rep =   it->second(commandArgs);
+		  (this)->OutputText(inString);
 		  (this)->OutputText(rep);
 		}
 	     }

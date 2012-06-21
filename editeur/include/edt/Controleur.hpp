@@ -39,6 +39,7 @@ namespace cce {
 	bool onSelection(const CEGUI::EventArgs & e);
 	bool onQuit(const CEGUI::EventArgs & e);
 	bool onSave(const CEGUI::EventArgs & e);
+	bool onSaveAs(const CEGUI::EventArgs & e);
 	bool onOpen(const CEGUI::EventArgs & e);
 	bool onMainScrollVertChange(const CEGUI::EventArgs & e);
 	bool onMainScrollHoriChange(const CEGUI::EventArgs & e);
