@@ -8,6 +8,9 @@
 #include <string>
 #include <functional>
 #include <map>
+#include <list>
+#include <deque>
+
 using std::string;
 
 
@@ -37,6 +40,7 @@ namespace cce{
    
   protected:
     std::map <std::string, std::function<string(const string&)> > mapCommandes; 
+    std::deque <std::string> commandeHistorique;
       
   };
 
