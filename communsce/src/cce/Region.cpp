@@ -1,4 +1,6 @@
 #include "cce/Region.hpp"
+#include "cce/Polygon.hpp"
+#include "cce/Flag.hpp"
 
 namespace cce{
 
@@ -13,7 +15,7 @@ int Region::getIncome(){
 	return income;
 }
 
-Polygon Region::getZone(){
+Polygon* Region::getZone(){
 	return zone;
 }
 
@@ -26,7 +28,7 @@ list<Tile> Region::getTiles(){
 }
 
 Flag* Region::getFlag(){
-	return &flag;
+	return flag;
 }
 
 }

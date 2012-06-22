@@ -73,18 +73,37 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
 
    if ((CEGUI::Key::ArrowUp == keyEvent.scancode)){  
       CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
+      if(commandeHistorique.size() == 0)
+	return true;
+      
       if(index == -1 || index == 0){
-	index = (int)outputWindow->getItemCount()-1;
+	index = commandeHistorique.size()-1;
       }else{
 	index--;
       }
       //recuperation du texte
-      m_ConsoleWindow->getChild("Console/EditBox")->setText( outputWindow->getListboxItemFromIndex(index)->getText());
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
       //placement correct du curseur
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
       return true;
       
+   }else if ((CEGUI::Key::ArrowDown == keyEvent.scancode)){  
+      CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
+       if(commandeHistorique.size() == 0)
+	return true;
+       
+      if(index == commandeHistorique.size()-1){
+	index = 0;
+      }else{
+	index++;
+      }
+      //recuperation du texte
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
+      //placement correct du curseur
+      CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
+      editWindow->setCaratIndex(editWindow->getMaxTextLength());
+      return true;
    }else if ((CEGUI::Key::Escape == keyEvent.scancode)){
       setVisible(false);
       return true;
@@ -133,12 +152,16 @@ void Console::ParseText(CEGUI::String inMsg)
 	    {
 		if(it->first == command){
 		  string rep =   it->second(commandArgs);
+		  (this)->OutputText(inString);
 		  (this)->OutputText(rep);
+		 commandeHistorique.push_back(inString);
+		  //commandeHistorique.insert(inString);
+		  break;
 		}
 	     }
         } 
         else
-        {
+        {   commandeHistorique.push_back(inString);
             (this)->OutputText(inString); // no commands, just output what they wrote
         }
     }

@@ -36,9 +36,13 @@ namespace cce {
 	void onResetZoom(thor::ActionContext < string > context);
 	void onPlaceObject(thor::ActionContext < string > context);
 	void onDeleteObject(thor::ActionContext < string > context);
+	void onStartMoveDecor(thor::ActionContext < string > context);
+	void onStopMoveDecor(thor::ActionContext < string > context);
+	void onMoveDecor(thor::ActionContext < string > context);
 	bool onSelection(const CEGUI::EventArgs & e);
 	bool onQuit(const CEGUI::EventArgs & e);
 	bool onSave(const CEGUI::EventArgs & e);
+	bool onSaveAs(const CEGUI::EventArgs & e);
 	bool onOpen(const CEGUI::EventArgs & e);
 	bool onMainScrollVertChange(const CEGUI::EventArgs & e);
 	bool onMainScrollHoriChange(const CEGUI::EventArgs & e);
@@ -49,7 +53,7 @@ namespace cce {
 
       private:
 	int clickX, clickY;
-	bool moveCam, selection;
+	bool moveCam, moveDecor, selection;
 	GUI *gui;
 	Modele *m;
     };
