@@ -110,6 +110,14 @@ void Modele::setDecorTemplate(int id)
     dt = cce::Univers::getInstance()->getDecorTemplate(id);
 }
 
+void Modele::setDecorMove(int x, int y) {
+    carte->getCoucheDecor()->setDecorMove(x, y);
+}
+
+void Modele::moveDecor(int x, int y, int dx, int dy) {
+    carte->getCoucheDecor()->moveDecor(x, y, dx, dy);
+}
+
 void Modele::placeObject(int x, int y) {
   if(tile)
     getRepere()->setTile(tt, x, y);

@@ -18,12 +18,14 @@ namespace edt {
 Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Controleur(engine, gui) {
     this->m = m;
     selection = false;
+    moveDecor = false;
 
     // Evenements Thor
     Action close(sf::Event::Closed);
     Action right_press(sf::Mouse::Right, Action::PressOnce);
     Action right_release(sf::Mouse::Right, Action::ReleaseOnce);
     Action right_hold(sf::Mouse::Right, Action::Hold);
+    Action left_press(sf::Mouse::Left, Action::PressOnce);
     Action left_release(sf::Mouse::Left, Action::ReleaseOnce);
     Action left_hold(sf::Mouse::Left, Action::Hold);
     Action mouse_move(sf::Event::MouseMoved);
@@ -41,6 +43,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["start_cam"] = right_press;
     map["stop_cam"] = right_release;
     map["move_camera"] = drag_right;
+    map["start_move_decor"] = left_press;
+    map["stop_move_decor"] = left_release;
+    map["move_decor"] = drag_left;
     map["placer_objet"] = drag_left || left_release;
     map["supprimer_objet"] = right_release;
 
@@ -48,6 +53,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("start_cam", BIND(&Controleur::onStartCam));
     system.connect("stop_cam", BIND(&Controleur::onStopCam));
     system.connect("move_camera", BIND(&Controleur::onMoveCamera));
+    system.connect("start_move_decor", BIND(&Controleur::onStartMoveDecor));
+    system.connect("stop_move_decor", BIND(&Controleur::onStopMoveDecor));
+    system.connect("move_decor", BIND(&Controleur::onMoveDecor));
     system.connect("zoom", BIND(&Controleur::onZoom));
     system.connect("reset_zoom", BIND(&Controleur::onResetZoom));
     system.connect("placer_objet", BIND(&Controleur::onPlaceObject));
@@ -81,7 +89,7 @@ void Controleur::onStopCam(thor::ActionContext < string > context) {
 }
 
 void Controleur::onMoveCamera(thor::ActionContext < string > context) {
-    if (!moveCam)		//bug si exécuté avant le rightPress
+    if (!moveCam) //bug si exécuté avant le rightPress
         return;
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = clickX - mousePosition.x;
@@ -89,6 +97,35 @@ void Controleur::onMoveCamera(thor::ActionContext < string > context) {
     int cameraX = engine->getView()->getCenter().x;
     int cameraY = engine->getView()->getCenter().y;
     m->moveView(dx, dy, cameraX, cameraY);
+}
+
+void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    
+    if(!selection)
+      return;
+    
+    clickX = mousePosition.x;
+    clickY = mousePosition.y;
+    m->setDecorMove(clickX, clickY);
+    moveDecor = true;
+}
+
+void Controleur::onStopMoveDecor(thor::ActionContext < string > context) {
+    (void) context;
+    moveDecor = false;
+}
+
+void Controleur::onMoveDecor(thor::ActionContext < string > context) {
+    if (!moveDecor) //bug si exécuté avant le leftPress
+        return;
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    int dx = mousePosition.x - clickX;
+    int dy = mousePosition.y - clickY;
+    m->moveDecor(getX(clickX), getY(clickY), dx, dy);
+    
+    clickX = mousePosition.x;
+    clickY = mousePosition.y;
 }
 
 void Controleur::onZoom(thor::ActionContext < string > context) {

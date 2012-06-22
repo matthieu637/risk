@@ -35,11 +35,12 @@ void Decor::setTexture(Texture* texture)
 
 bool Decor::inferieurA(const Decor &d) const
 {
-    bool y_inf = yCompare < d.yCompare;
-    if(y_inf)
+    if(yCompare < d.yCompare)
 	return true;
-    else
+    else if(yCompare == d.yCompare)
       return getPosition().x < d.getPosition().x;
+    else
+      return false;
 }
 
 bool operator<(Decor const &d1, Decor const &d2)

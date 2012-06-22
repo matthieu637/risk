@@ -24,7 +24,7 @@ void Pays::setNom(string n){
 }
 
 void Pays::setPointSpawn(PointSpawn* p){
-    ps = *p;
+    ps = p;
 }
   
 } 

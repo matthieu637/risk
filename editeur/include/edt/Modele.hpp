@@ -55,6 +55,18 @@ public:
 ///\brief Remettre le zoom à 0
 ///
     void resetZoom();
+
+///
+///\brief Initialise le decor à déplacer
+///\param x, y: coordonnees du decor à déplacer
+///
+    void setDecorMove(int x, int y);
+    
+///
+///\brief Deplacer l'objet en x,y vers les coordonées x1,y1
+///
+    void moveDecor(int x, int y, int x1, int y1);
+    
 ///
 ///\brief Placer l'objet actuellement sélectionné aux coordonées x,y pixels
 ///
@@ -76,21 +88,20 @@ public:
     void setDecorTemplate(int id);
 
 
-	void deleteTile(int x, int y);
-	
+    void deleteTile(int x, int y);
+
 ///
 ///\brief sauvegarde une carte 
 ///
-	string saveCarte(const string & chemin);
-	string saveCarte();
-	string openCarte(const std::string & chemin);
-	string getCurrentMap();
+    string saveCarte(const string & chemin);
+    string saveCarte();
+    string openCarte(const std::string & chemin);
+    string getCurrentMap();
+    
 ///
 ///\brief Choisir la palette
 ///
-
     void selectPalette(palette_type p);
-
 
 ///
 ///\brief Ajoute une region au pays actuellement sélectionné
