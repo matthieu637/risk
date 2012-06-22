@@ -43,7 +43,7 @@ Repere *Modele::getRepere() {
 }
 
 //herite de edt::openCarte
-string Modele::openCarte(const std::string & chemin) {
+string Modele::openCarte(const string &chemin) {
     current_map = chemin;
     return cce::Modele::openCarte(chemin);
 }
@@ -51,7 +51,7 @@ string Modele::openCarte(const std::string & chemin) {
 string Modele::getCurrentMap(){
   return current_map;
 }
-string Modele::saveCarte(const std::string & chemin) {
+string Modele::saveCarte(const string &chemin) {
     current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
     return "La carte "+chemin+" a bien ete sauvegardee";  
@@ -114,8 +114,8 @@ void Modele::setDecorMove(int x, int y) {
     carte->getCoucheDecor()->setDecorMove(x, y);
 }
 
-void Modele::moveDecor(int x, int y, int dx, int dy) {
-    carte->getCoucheDecor()->moveDecor(x, y, dx, dy);
+void Modele::moveDecor(int dx, int dy) {
+    carte->getCoucheDecor()->moveDecor(dx, dy);
 }
 
 void Modele::placeObject(int x, int y) {

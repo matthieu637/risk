@@ -122,7 +122,7 @@ void Controleur::onMoveDecor(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = mousePosition.x - clickX;
     int dy = mousePosition.y - clickY;
-    m->moveDecor(getX(clickX), getY(clickY), dx, dy);
+    m->moveDecor(dx, dy);
     
     clickX = mousePosition.x;
     clickY = mousePosition.y;

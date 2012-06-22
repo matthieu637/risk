@@ -35,7 +35,7 @@ void CoucheDecor::setDecorMove(int x, int y){
     d_move = getDecor(x, y);
 }
 
-void CoucheDecor::moveDecor(int x, int y, int dx, int dy)
+void CoucheDecor::moveDecor(int dx, int dy)
 {
     if(d_move == nullptr)
       return;
@@ -61,7 +61,7 @@ void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)
 {
-    decors->insert(Decor(dt, x, y));
+    decors->insert(Decor(dt, x - dt->getTexture()->getSize().x/2, y - dt->getTexture()->getSize().y * 3/4));
 }
 
 

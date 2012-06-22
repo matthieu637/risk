@@ -65,7 +65,7 @@ public:
 ///
 ///\brief Deplacer l'objet en x,y vers les coordonées x1,y1
 ///
-    void moveDecor(int x, int y, int x1, int y1);
+    void moveDecor(int x1, int y1);
     
 ///
 ///\brief Placer l'objet actuellement sélectionné aux coordonées x,y pixels
