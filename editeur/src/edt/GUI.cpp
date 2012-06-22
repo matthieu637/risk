@@ -42,7 +42,7 @@ void GUI::init(Modele* modele)
     
     palette_regions = new PaletteRegions();
     palette_regions->init(this, conteneur, "PaletteFrames/Regions", c);
-/*    initScrollPane(conteneur);*/
+    initScrollPane(conteneur, modele);
 }
 
 
@@ -54,8 +54,11 @@ void GUI::initScrollPane(const std::string& conteneur, Modele* modele)
 {
   (void) modele;
   (void) conteneur;
-    //CEGUI::Scrollbar* sp = static_cast<CEGUI::Scrollbar*>(getRootWindow()->getChild("HSP"));
-    //sp->set
+    CEGUI::Scrollbar* sp = static_cast<CEGUI::Scrollbar*>(getRootWindow()->getChild("Editeur/VSB"));
+    sp->setDocumentSize(1000);
+    sp->setPageSize(20);
+    //sp.set
+    //sp->setStepSize(0.5);
     //sp->set
     
     //sp->setPageSize(1000);

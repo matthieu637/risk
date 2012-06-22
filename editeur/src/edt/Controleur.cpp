@@ -169,7 +169,7 @@ bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e){
     CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
     
     sf::View* v = engine->getView();
-    
+    LOG_DEBUG(sb->getScrollPosition());
     m->moveScrollVert(sb->getScrollPosition(), v->getSize().y);
     return true;
 }

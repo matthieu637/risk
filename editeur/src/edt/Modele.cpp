@@ -140,9 +140,10 @@ void Modele::addRegion(string nom)
 
 }
 
-void Modele::moveScrollVert(float pos, float size)
+void Modele::moveScrollVert(float pos, float size_)
 {
-    float npos = pos/100 * (carte->getRepere()->getHauteur() - size/cce::Repere::h_tile) + size/2;
+    LOG_DEBUG(carte->getRepere()->getHauteur());
+    float npos = pos * ((carte->getRepere()->getHauteur()*cce::Repere::h_tile)/2 - size_/cce::Repere::h_tile/coeff_zoom) ;
 
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->updateScrollVert(npos);
@@ -150,7 +151,7 @@ void Modele::moveScrollVert(float pos, float size)
 
 void Modele::moveScrollHori(float pos, float size)
 {
-    float npos = pos/100 * (carte->getRepere()->getLargeur() - size/cce::Repere::l_tile) + size /2;
+    float npos = pos * (carte->getRepere()->getLargeur()*cce::Repere::l_tile - size/cce::Repere::l_tile/coeff_zoom);
 
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->updateScrollHori(npos);
