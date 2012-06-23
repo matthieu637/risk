@@ -20,6 +20,7 @@ DaGame::DaGame()
     g->init(modele);
     
     modele->addVue(vue);
+    modele->resetZoom();
 }
 
 void DaGame::gameloop()

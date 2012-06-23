@@ -212,9 +212,7 @@ bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e){
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
     
-    sf::View* v = engine->getView();
-    LOG_DEBUG(sb->getScrollPosition());
-    m->moveScrollVert(sb->getScrollPosition(), v->getSize().y);
+    m->moveScrollVert(sb->getScrollPosition());
     return true;
 }
 
@@ -222,9 +220,7 @@ bool Controleur::onMainScrollHoriChange(const CEGUI::EventArgs & e){
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
     
-    sf::View* v = engine->getView();
-    
-    m->moveScrollHori(sb->getScrollPosition(), v->getSize().x);
+    m->moveScrollHori(sb->getScrollPosition());
     return true;
 }
 

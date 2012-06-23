@@ -30,7 +30,7 @@ public:
 ///
 ///\brief Zoom par un facteur
 ///
-    void updateCameraZoom(float factor);
+    virtual void updateCameraZoom(float factor);
 ///
 ///\brief Remet le zoom à 0
 ///

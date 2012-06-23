@@ -32,12 +32,18 @@ public:
     ~Vue();
 
     void updateCameraPosition(int x, int y);
+    
+    void updateCameraZoom(float factor);
+    
+    void updateScrollsThumb(float coef, int largeur, int hauteur);
 
     void updateListRegions(list<string> noms);
     
-    void updateScrollVert(float newpos);
+    void updateYCamera(int y);
     
-    void updateScrollHori(float newpos);
+    void updateXCamera(int x);
+    
+    void updateScrolls();
     
     GUI* getGUI();
 
@@ -47,3 +53,4 @@ private:
 
 }
 #endif // VUE_HPP
+
