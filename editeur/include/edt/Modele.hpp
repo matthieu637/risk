@@ -109,8 +109,8 @@ public:
 ///
     void addRegion(string nom);
     
-    void moveScrollVert(float pos, float size);
-    void moveScrollHori(float pos, float size);
+    void moveScrollVert(float pos);
+    void moveScrollHori(float pos);
 
   private:
       Repere * getRepere();

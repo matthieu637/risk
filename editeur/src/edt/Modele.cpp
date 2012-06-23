@@ -51,6 +51,7 @@ string Modele::openCarte(const string &chemin) {
 string Modele::getCurrentMap(){
   return current_map;
 }
+
 string Modele::saveCarte(const string &chemin) {
     current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
@@ -83,21 +84,27 @@ void Modele::moveView(int dx, int dy, int cameraX, int cameraY) {
     if ((y < 0 && cameraY < 0) || (y > y_max && cameraY > y_max))
         y = cameraY;
 
-    vues.end();
-    for (it = vues.begin(); it != vues.end(); it++)
+    for (it = vues.begin(); it != vues.end(); it++){
         (*it)->updateCameraPosition(x, y);
+	((Vue*)*it)->updateScrolls();
+    }
+    
 }
 
 void Modele::zoom(int ticks) {
     coeff_zoom *= 1 - ticks * 0.05;
-    for (it = vues.begin(); it != vues.end(); it++)
-        (*it)->updateCameraZoom(1 - ticks * 0.05);
+    for (it = vues.begin(); it != vues.end(); it++){
+        ((Vue*)*it)->updateCameraZoom(1 - ticks * 0.05);
+	((Vue*)*it)->updateScrollsThumb(coeff_zoom, carte->getRepere()->getLargeur(), carte->getRepere()->getHauteur());
+    }
 }
 
 void Modele::resetZoom() {
     coeff_zoom = 1;
-    for (it = vues.begin(); it != vues.end(); it++)
+    for (it = vues.begin(); it != vues.end(); it++){
         (*it)->resetCameraZoom();
+	((Vue*)*it)->updateScrollsThumb(coeff_zoom, carte->getRepere()->getLargeur(), carte->getRepere()->getHauteur());
+    }
 }
 
 void Modele::setTileTemplate(int id)
@@ -169,20 +176,16 @@ void Modele::addRegion(string nom)
 
 }
 
-void Modele::moveScrollVert(float pos, float size)
+void Modele::moveScrollVert(float pos)
 {
-    float npos = pos/100 * (carte->getRepere()->getHauteur() - size/cce::Repere::h_tile) + size/2;
-
     for (it = vues.begin(); it != vues.end(); it++)
-        ((Vue*)(*it))->updateScrollVert(npos);
+        ((Vue*)(*it))->updateYCamera(pos);
 }
 
-void Modele::moveScrollHori(float pos, float size)
+void Modele::moveScrollHori(float pos)
 {
-    float npos = pos/100 * (carte->getRepere()->getLargeur() - size/cce::Repere::l_tile) + size /2;
-
     for (it = vues.begin(); it != vues.end(); it++)
-        ((Vue*)(*it))->updateScrollHori(npos);
+        ((Vue*)(*it))->updateXCamera(pos);
 }
 
 }

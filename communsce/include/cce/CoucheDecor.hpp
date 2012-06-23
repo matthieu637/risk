@@ -38,6 +38,7 @@ public:
     ///
     void moveDecor(int dx, int dy);
 
+
     ///
     ///\brief Initialise le decor à déplacer
     ///\param x, y: coordonnees du decor à déplacer

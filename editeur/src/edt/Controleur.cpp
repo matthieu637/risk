@@ -74,8 +74,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
     moduleGUI->ajouterHandler("selection", BIND(&Controleur::onSelection));
-    moduleGUI->ajouterHandler("gui_viewscroll_change_vertical", BIND(&Controleur::onMainScrollVertChange));
-    moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal", BIND(&Controleur::onMainScrollHoriChange));
+    moduleGUI->ajouterHandler("gui_viewscroll_change_vertical",  BIND(&Controleur::onMainScrollVertChange));
+    moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal",  BIND(&Controleur::onMainScrollHoriChange));
     moduleGUI->ajouterHandler("enregistrerSous", BIND(&Controleur::onSaveAs));
     moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
@@ -132,6 +132,7 @@ void Controleur::onMoveDecor(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = mousePosition.x - clickX;
     int dy = mousePosition.y - clickY;
+
     m->moveDecor(dx, dy);
     
     clickX = mousePosition.x;
@@ -233,9 +234,7 @@ bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e){
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
     
-    sf::View* v = engine->getView();
-    
-    m->moveScrollVert(sb->getScrollPosition(), v->getSize().y);
+    m->moveScrollVert(sb->getScrollPosition());
     return true;
 }
 
@@ -243,9 +242,7 @@ bool Controleur::onMainScrollHoriChange(const CEGUI::EventArgs & e){
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
     
-    sf::View* v = engine->getView();
-    
-    m->moveScrollHori(sb->getScrollPosition(), v->getSize().x);
+    m->moveScrollHori(sb->getScrollPosition());
     return true;
 }
 
