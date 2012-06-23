@@ -7,6 +7,10 @@
 #include <SFML/Window/Event.hpp>
 #include <CEGUI/elements/CEGUIScrollbar.h>
 #include <CEGUI/elements/CEGUIFrameWindow.h>
+#include <CEGUI/elements/CEGUICheckbox.h>
+#include <CEGUI/elements/CEGUIMenuItem.h>
+#include <CEGUI/elements/CEGUIPopupMenu.h>
+#include <CEGUI/CEGUIWindowManager.h>
 #include <Thor/Events/Action.hpp>
 #include <Thor/Events/EventSystem.hpp>
 #include "bib/Logger.hpp"
@@ -24,30 +28,35 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action close(sf::Event::Closed);
     Action right_press(sf::Mouse::Right, Action::PressOnce);
     Action right_release(sf::Mouse::Right, Action::ReleaseOnce);
-    Action right_hold(sf::Mouse::Right, Action::Hold);
     Action left_press(sf::Mouse::Left, Action::PressOnce);
     Action left_release(sf::Mouse::Left, Action::ReleaseOnce);
     Action left_hold(sf::Mouse::Left, Action::Hold);
-    Action mouse_move(sf::Event::MouseMoved);
+    Action wheel_hold(sf::Mouse::Middle, Action::Hold);
+    Action wheel_press(sf::Mouse::Middle, Action::PressOnce);
+    Action wheel_release(sf::Mouse::Middle, Action::ReleaseOnce);
     Action molette(sf::Event::MouseWheelMoved);
+    Action mouse_move(sf::Event::MouseMoved);
+    Action drag_wheel = mouse_move && wheel_hold;
+    Action drag_left = mouse_move && left_hold;
+    
+    Action space_press(sf::Keyboard::Space, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
-    Action drag_right = mouse_move && right_hold;
-    Action drag_left = mouse_move && left_hold;
 
     // Map
     map["quit"] = close;
     map["zoom"] = molette;
     map["reset_zoom"] = rctrl_num0;
-    map["start_cam"] = right_press;
-    map["stop_cam"] = right_release;
-    map["move_camera"] = drag_right;
+    map["start_cam"] = wheel_press;
+    map["stop_cam"] = wheel_release;
+    map["move_camera"] = drag_wheel;
     map["start_move_decor"] = left_press;
     map["stop_move_decor"] = left_release;
     map["move_decor"] = drag_left;
     map["placer_objet"] = drag_left || left_release;
     map["supprimer_objet"] = right_release;
+    map["selection"] = space_press;
 
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -60,12 +69,13 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("reset_zoom", BIND(&Controleur::onResetZoom));
     system.connect("placer_objet", BIND(&Controleur::onPlaceObject));
     system.connect("supprimer_objet", BIND(&Controleur::onDeleteObject));
+    system.connect("selection", BIND(&Controleur::onSelectionThor));
 
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
     moduleGUI->ajouterHandler("selection", BIND(&Controleur::onSelection));
-    moduleGUI->ajouterHandler("gui_viewscroll_change_vertical",  BIND(&Controleur::onMainScrollVertChange));
-    moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal",  BIND(&Controleur::onMainScrollHoriChange));
+    moduleGUI->ajouterHandler("gui_viewscroll_change_vertical", BIND(&Controleur::onMainScrollVertChange));
+    moduleGUI->ajouterHandler("gui_viewscroll_change_horizontal", BIND(&Controleur::onMainScrollHoriChange));
     moduleGUI->ajouterHandler("enregistrerSous", BIND(&Controleur::onSaveAs));
     moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
@@ -107,7 +117,7 @@ void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
     
     clickX = mousePosition.x;
     clickY = mousePosition.y;
-    m->setDecorMove(clickX, clickY);
+    m->setDecorMove(getX(clickX), getY(clickY));
     moveDecor = true;
 }
 
@@ -150,6 +160,17 @@ void Controleur::onDeleteObject(thor::ActionContext < string > context) {
         return;
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     m->deleteObject(getX(mousePosition.x), getY(mousePosition.y));
+}
+
+void Controleur::onSelectionThor(thor::ActionContext < string > context) {
+    (void) context;
+    CEGUI::Checkbox *cb = ((CEGUI::Checkbox*)CEGUI::WindowManager::getSingleton().getWindow("Edition/Selection/Check"));
+    cb->setSelected(!cb->isSelected());
+}
+
+void Controleur::onChoixPaletteThor(thor::ActionContext < string > context) {
+    (void) context;
+    //((CEGUI::MenuItem*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Tiles"))->closePopupMenu();
 }
 
 int Controleur::getX(int mouseX) {

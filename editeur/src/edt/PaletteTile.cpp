@@ -31,8 +31,7 @@ PaletteTile::~PaletteTile()
 void PaletteTile::init(const cce::GUI *gui, const string& conteneur, string nom, Modele* _m)
 {
     Palette::init(gui, conteneur, nom);
-    
-    fenetre->setSize(UVector2(UDim(0.0f,333), UDim(0.0f,600)));
+    fenetre->setText("Palette de Tiles");
     m = _m;
     
     ostringstream oss;

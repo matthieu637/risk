@@ -22,14 +22,23 @@ Palette::~Palette()
 
 void Palette::init(GUI const *gui, const string& conteneur, string nom)
 {
-  
+    int width = 333;
     fenetre = (FrameWindow*) WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", nom);
-    fenetre->setSize(UVector2(UDim(0.0f,200), UDim(0.0f,600)));
+    fenetre->setSize(UVector2(UDim(0.0f, width), UDim(0.75f,0)));
+    fenetre->setPosition(UVector2(UDim(0.76f, 0), UDim(0,26)));
+    fenetre->setCloseButtonEnabled(true);
+    fenetre->subscribeEvent(FrameWindow::EventCloseClicked,CEGUI::Event::Subscriber(&Palette::onClose, this));
     fenetre->setVisible(false);
     
     //gui->getRootWindow()->getChild(conteneur)->addChildWindow(fenetre);
     (void) conteneur;
     gui->getRootWindow()->addChildWindow(fenetre);
+}
+
+bool Palette::onClose(const CEGUI::EventArgs&)
+{
+    fenetre->setVisible(false);
+    return true;
 }
 
 }

@@ -39,6 +39,8 @@ namespace cce {
 	void onStartMoveDecor(thor::ActionContext < string > context);
 	void onStopMoveDecor(thor::ActionContext < string > context);
 	void onMoveDecor(thor::ActionContext < string > context);
+	void onSelectionThor(thor::ActionContext < string > context);
+	void onChoixPaletteThor(thor::ActionContext < string > context);
 	bool onSelection(const CEGUI::EventArgs & e);
 	bool onQuit(const CEGUI::EventArgs & e);
 	bool onSave(const CEGUI::EventArgs & e);
