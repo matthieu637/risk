@@ -122,7 +122,7 @@ void Modele::setDecorMove(int x, int y) {
 }
 
 void Modele::moveDecor(int dx, int dy) {
-    carte->getCoucheDecor()->moveDecor(dx, dy);
+    carte->getCoucheDecor()->moveDecor(dx*coeff_zoom, dy*coeff_zoom);
 }
 
 void Modele::placeObject(int x, int y) {
