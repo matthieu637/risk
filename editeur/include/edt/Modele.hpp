@@ -89,6 +89,8 @@ public:
 
 
     void deleteTile(int x, int y);
+    
+    void windowResized(int width, int height);
 
 ///
 ///\brief sauvegarde une carte 

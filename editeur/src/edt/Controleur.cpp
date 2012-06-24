@@ -26,6 +26,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
 
     // Evenements Thor
     Action close(sf::Event::Closed);
+    Action resize(sf::Event::Resized);
     Action right_press(sf::Mouse::Right, Action::PressOnce);
     Action right_release(sf::Mouse::Right, Action::ReleaseOnce);
     Action left_press(sf::Mouse::Left, Action::PressOnce);
@@ -38,7 +39,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action mouse_move(sf::Event::MouseMoved);
     Action drag_wheel = mouse_move && wheel_hold;
     Action drag_left = mouse_move && left_hold;
-    
+
     Action space_press(sf::Keyboard::Space, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
@@ -47,6 +48,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     // Map
     map["quit"] = close;
     map["zoom"] = molette;
+    map["resize"] = resize;
     map["reset_zoom"] = rctrl_num0;
     map["start_cam"] = wheel_press;
     map["stop_cam"] = wheel_release;
@@ -70,6 +72,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("placer_objet", BIND(&Controleur::onPlaceObject));
     system.connect("supprimer_objet", BIND(&Controleur::onDeleteObject));
     system.connect("selection", BIND(&Controleur::onSelectionThor));
+    system.connect("resize", BIND(&Controleur::onWindowResized));
 
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
@@ -80,7 +83,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
-    
+
     gui->setScriptModule(moduleGUI);
 }
 void Controleur::onStartCam(thor::ActionContext < string > context) {
@@ -111,10 +114,10 @@ void Controleur::onMoveCamera(thor::ActionContext < string > context) {
 
 void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
-    
+
     if(!selection)
-      return;
-    
+        return;
+
     clickX = mousePosition.x;
     clickY = mousePosition.y;
     m->setDecorMove(getX(clickX), getY(clickY));
@@ -134,7 +137,7 @@ void Controleur::onMoveDecor(thor::ActionContext < string > context) {
     int dy = mousePosition.y - clickY;
 
     m->moveDecor(dx, dy);
-    
+
     clickX = mousePosition.x;
     clickY = mousePosition.y;
 }
@@ -142,6 +145,10 @@ void Controleur::onMoveDecor(thor::ActionContext < string > context) {
 void Controleur::onZoom(thor::ActionContext < string > context) {
     int ticks = context.event->mouseWheel.delta;
     m->zoom(ticks);
+}
+
+bool Controleur::onWindowResized(thor::ActionContext<string> context) {
+    m->windowResized(context.event->size.width, context.event->size.height);
 }
 
 void Controleur::onResetZoom(thor::ActionContext < string > context) {
@@ -194,9 +201,9 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
     CEGUI::FrameWindow* fw = static_cast<CEGUI::FrameWindow*>(wea.window);
     const string nom = fw->getName().c_str();
     if(nom == "Palettes/Terrains")
-      m->selectPalette(tiles);
+        m->selectPalette(tiles);
     else if(nom == "Palettes/Decors")
-      m->selectPalette(decors);
+        m->selectPalette(decors);
     return true;
 }
 
@@ -230,21 +237,22 @@ bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     return true;
 }
 
-bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e){
+bool Controleur::onMainScrollVertChange(const CEGUI::EventArgs & e) {
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
-    
+
     m->moveScrollVert(sb->getScrollPosition());
     return true;
 }
 
-bool Controleur::onMainScrollHoriChange(const CEGUI::EventArgs & e){
+bool Controleur::onMainScrollHoriChange(const CEGUI::EventArgs & e) {
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     CEGUI::Scrollbar* sb = static_cast<CEGUI::Scrollbar*>(wea.window);
-    
+
     m->moveScrollHori(sb->getScrollPosition());
     return true;
 }
+
 
 
 }

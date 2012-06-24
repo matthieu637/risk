@@ -99,4 +99,9 @@ void Vue::updateCameraZoom(float factor)
     cce::Vue::updateCameraZoom(factor);
 }
 
+void Vue::updateSize(int width, int height)
+{
+    CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Size(width, height));
+}
+
 }
