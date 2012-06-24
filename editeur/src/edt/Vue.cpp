@@ -61,9 +61,9 @@ void Vue::updateScrollsThumb(float coef, int largeur, int hauteur)
     float max_thumb = 0.95;
 
     float hmin_zoom = 0.1*hauteur;
-    float hmax_zoom = 30*hauteur;
+    float hmax_zoom = 5*hauteur;
     float vmin_zoom = 0.1*largeur;
-    float vmax_zoom = 30*largeur;
+    float vmax_zoom = 5*largeur;
 
     float hcoef = coef*hauteur;
     float vcoef = coef*largeur;
