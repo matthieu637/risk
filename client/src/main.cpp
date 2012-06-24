@@ -1,9 +1,9 @@
 #include <iostream>
-#include "edt/DaGame.hpp"
+#include "cli/DaGame.hpp"
 
 int main()
 {
-    edt::DaGame game;
+    cli::DaGame game;
     game.gameloop();
 
     return EXIT_SUCCESS;

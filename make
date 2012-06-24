@@ -23,6 +23,10 @@ if [ ! -e editeur/build ]; then
 	mkdir editeur/build
 fi
 
+if [ ! -e client/build ]; then
+	mkdir client/build
+fi
+
 cd biblio/build
 cmake $debug ..
 if [ $? -ne 0 ]; then exit 1 ; fi 
@@ -41,4 +45,9 @@ if [ $? -ne 0 ]; then exit 1 ; fi
 make -j$jobs
 if [ $? -ne 0 ]; then exit 1 ; fi 
 
+cd ../../client/build
+cmake $debug ..
+if [ $? -ne 0 ]; then exit 1 ; fi
+make -j$jobs
+if [ $? -ne 0 ]; then exit 1 ; fi
 
