@@ -59,7 +59,7 @@ void Console::RegisterHandlers()
 
 
 void Console::afficherCommande(const string& s){
-  
+  setVisible(true);
   CEGUI::Window *w =  CEGUI::System::getSingleton().getGUISheet()->getChild("Console");
   w->getChild("Console/EditBox")->setText(s);;
   
