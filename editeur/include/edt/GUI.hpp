@@ -17,6 +17,7 @@ class Modele;
 class PaletteTile;
 class PaletteDecor;
 class PaletteRegions;
+class PalettePays;
   
 class GUI : public cce::GUI
 {
@@ -35,6 +36,7 @@ private:
     PaletteTile* palette_tile;
     PaletteDecor* palette_decor;
     PaletteRegions* palette_regions;
+    PalettePays* palette_pays;
     cce::Console* console;
 };
 

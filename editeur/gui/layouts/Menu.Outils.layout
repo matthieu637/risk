@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window Type="TaharezLook/PopupMenu" Name="Outils/AutoPopup" >
+      <Property Name="Visible" Value="False" />
+      <Property Name="FadeInTime" Value="0" />
+      <Property Name="FadeOutTime" Value="0" />
+      <Property Name="ItemSpacing" Value="2" />
+      <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      <Property Name="ClippedByParent" Value="False" />
+      <Property Name="AutoResizeEnabled" Value="True" />
+      <Window Type="TaharezLook/MenuItem" Name="Outils/Transitions" >
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Window Type="TaharezLook/Checkbox" Name="Outils/Transitions/Check" >
+	    <Property Name="Text" Value="Transitions" />
+	    <Property Name="Tooltip" Value="Active / Désactive les transitions entre les tiles" />
+	    <Property Name="UnifiedAreaRect" Value="{{0,0},{0,0},{1,0},{1,0}}" />
+	  </Window>
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Outils/Redimensionner" >
+	  <Property Name="Text" Value="Redimensionner" />
+	  <Property Name="Tooltip" Value="Redéfinir la dimension en tiles de la carte" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Outils/Remplir" >
+	  <Property Name="Text" Value="Remplir le fond" />
+	  <Property Name="Tooltip" Value="Remplace les tiles vides par celle sélectionnée" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Outils/Definir" >
+	  <Property Name="Text" Value="Définir comme fond" />
+	  <Property Name="Tooltip" Value="Remplace toutes les tiles par celle sélectionnée" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+</Window>

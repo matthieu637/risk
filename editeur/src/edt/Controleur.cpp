@@ -41,8 +41,10 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action drag_left = mouse_move && left_hold;
 
     Action space_press(sf::Keyboard::Space, Action::ReleaseOnce);
-    Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
     Action d_press(sf::Keyboard::D, Action::ReleaseOnce);
+    Action p_press(sf::Keyboard::P, Action::ReleaseOnce);
+    Action r_press(sf::Keyboard::R, Action::ReleaseOnce);
+    Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
@@ -61,7 +63,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["placer_objet"] = drag_left || left_release;
     map["supprimer_objet"] = right_release;
     map["selection"] = space_press;
-    map["choix_palette"] = t_press || d_press;
+    map["choix_palette"] = t_press || d_press || p_press || r_press;
 
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -188,10 +190,11 @@ void Controleur::onChoixPaletteThor(thor::ActionContext < string > context) {
 	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Terrains");
     else if(key.code == sf::Keyboard::D)
 	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Decors");
+    else if(key.code == sf::Keyboard::P)
+	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Pays");
     
-    CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);	//dafuq
-    CEGUI::WindowEventArgs &weaa = wea;			//is
-    onChoixPalette(weaa);					//this shit?
+    CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
+    onChoixPalette(wea);
 }
 
 int Controleur::getX(int mouseX) {
@@ -217,6 +220,8 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
         m->selectPalette(tiles);
     else if(nom == "Palettes/Decors")
         m->selectPalette(decors);
+    else if(nom == "Palettes/Pays")
+        m->selectPalette(pays);
     return true;
 }
 

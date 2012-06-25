@@ -120,7 +120,7 @@ public:
   private:
     int cameraOrigineX, cameraOrigineY;
     float coeff_zoom;
-    bool tile, decor;
+    palette_type palette;
     string current_pays;
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
