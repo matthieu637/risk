@@ -91,6 +91,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
     moduleGUI->ajouterHandler("console", BIND(&Controleur::onOpenConsoleClick));
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
+    moduleGUI->ajouterHandler("redimensionner", BIND(&Controleur::onRedimensionner));
 
     gui->setScriptModule(moduleGUI);
 }
@@ -269,8 +270,16 @@ bool Controleur::onOpenConsole(thor::ActionContext < string > context){
 
 bool Controleur::onOpenConsoleClick(const CEGUI::EventArgs& e){
     (void) e;
-    gui->getConsole()->setVisible(true);;
+    gui->getConsole()->setVisible(true);
+    return true;
 }
+
+bool Controleur::onRedimensionner(const CEGUI::EventArgs& e){
+    (void) e;
+    gui->getConsole()->afficherCommande("/redimensionner");
+    return true;  
+}
+
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;

@@ -62,7 +62,7 @@ void Console::afficherCommande(const string& s){
   setVisible(true);
   CEGUI::Window *w =  CEGUI::System::getSingleton().getGUISheet()->getChild("Console");
   w->getChild("Console/EditBox")->setText(s);;
-  
+  //w->
   CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(w->getChild("Console/EditBox"));
   editWindow->setCaratIndex(editWindow->getMaxTextLength());
 }
