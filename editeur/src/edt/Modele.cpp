@@ -9,6 +9,7 @@
 #include <list>
 #include <string>
 #include <CEGUI/CEGUI.h>
+#include <bib/StringUtils.hpp>
 
 using std::list;
 using std::string;
@@ -50,6 +51,11 @@ string Modele::getCurrentMap() {
     return current_map;
 }
 
+void Modele::nouvelleCarte()
+{
+    carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
+}
+
 string Modele::saveCarte(const string &chemin) {
     current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
@@ -58,7 +64,8 @@ string Modele::saveCarte(const string &chemin) {
 
 
 string Modele::saveCarte() {
-    if(current_map != "") {
+    if(current_map != "" && !bib::onlySpaceCharacter(current_map)) {
+        LOG_DEBUG(" saveCarte de merde");
         bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
         return "La carte "+current_map+" a bien ete sauvegardee";
     } else {

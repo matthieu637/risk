@@ -2,6 +2,7 @@
 #include "bib/Logger.hpp"
 #include "cce/Controleur.hpp" //BIND
 #include <cce/Modele.hpp>
+#include <bib/StringUtils.hpp>
 
 
 namespace edt {
@@ -17,7 +18,7 @@ namespace edt {
 
 
 string Console::onSave(const string& s){
-  if (s == ""){
+  if (s == "" || bib::onlySpaceCharacter(s)){
    return m->saveCarte();  
   }else{
     return m->saveCarte(s);

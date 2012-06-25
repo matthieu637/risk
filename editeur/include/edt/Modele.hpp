@@ -90,6 +90,8 @@ public:
 
     void deleteTile(int x, int y);
     
+    void nouvelleCarte();
+    
     void windowResized(int width, int height);
 
 ///

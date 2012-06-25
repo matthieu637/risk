@@ -18,6 +18,7 @@ DaGame::DaGame()
     vue = new Vue(ms, g);
     control = new Controleur(ms, modele, g);
     g->init(modele);
+    control->setGUI(g);
     
     modele->addVue(vue);
     modele->resetZoom();

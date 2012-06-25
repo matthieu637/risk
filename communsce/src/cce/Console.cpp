@@ -140,18 +140,28 @@ void Console::ParseText(CEGUI::String inMsg)
         {
             std::string::size_type commandEnd = inString.find(" ", 1);
             std::string command = inString.substr(1, commandEnd - 1);
-            std::string commandArgs = inString.substr(commandEnd + 1, inString.length() - (commandEnd + 1));
+            //std::string commandArgs = inString.substr(commandEnd + 1, inString.length() - (commandEnd + 1));
+	    std::string commandArgs; 
+	    
+	    if(inString.find(' ') == inString.npos)
+	      commandArgs = "";
+	    else
+	      commandArgs = inString.substr(commandEnd + 1);
             
             for(std::string::size_type i=0; i < command.length(); i++)
             {
                 command[i] = tolower(command[i]);
             }
-	    
+	    string rep;
 	    std::map <std::string, std::function<string(const string&)> >::iterator it;
 	    for(it = mapCommandes.begin(); it != mapCommandes.end(); it++)
 	    {
 		if(it->first == command){
-		  string rep =   it->second(commandArgs);
+		  if(commandArgs == command){
+		      rep = it->second("");
+		  }else{
+		      rep =   it->second(commandArgs);
+		  }
 		  (this)->OutputText(inString);
 		  (this)->OutputText(rep);
 		 commandeHistorique.push_back(inString);
