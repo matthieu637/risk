@@ -90,6 +90,11 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
 
     gui->setScriptModule(moduleGUI);
 }
+
+void Controleur::setGUI(GUI* g) {
+    this->gui = g;
+}
+
 void Controleur::onStartCam(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     clickX = mousePosition.x;
@@ -183,12 +188,12 @@ void Controleur::onSelectionThor(thor::ActionContext < string > context) {
 void Controleur::onChoixPaletteThor(thor::ActionContext < string > context) {
     sf::Event::KeyEvent key = context.event->key;
     CEGUI::FrameWindow* mi;
-    
+
     if(key.code == sf::Keyboard::T)
-	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Terrains");
+        mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Terrains");
     else if(key.code == sf::Keyboard::D)
-	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Decors");
-    
+        mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Decors");
+
     CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);	//dafuq
     CEGUI::WindowEventArgs &weaa = wea;			//is
     onChoixPalette(weaa);					//this shit?
