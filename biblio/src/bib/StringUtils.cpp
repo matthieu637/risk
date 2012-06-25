@@ -25,14 +25,13 @@ string rmFirstNumber(const string& s) {
     return result;
 }
 
-bool onlySpaceCharacter(const string& s){
+bool onlySpaceCharacter(const string& s) {
 
-    for(unsigned int i=0; i < s.length() ; i++){
-	if(s.at(i) != ' '){
-	  return false;
-	}else{
-	    return true;
-	}
+    for(unsigned int i=0; i < s.length() ; i++) {
+        if(s.at(i) != ' ') {
+            return false;
+        }
     }
+    return true;
 }
 }

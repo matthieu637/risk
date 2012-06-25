@@ -22,7 +22,6 @@ Palette::~Palette()
 
 void Palette::init(GUI const *gui, const string& conteneur, string nom)
 {
-    int width = 333;
     fenetre = (FrameWindow*) WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", nom);
     fenetre->setSize(UVector2(UDim(0.21f, 0), UDim(0.75f,0)));
     fenetre->setPosition(UVector2(UDim(0.782f, 0), UDim(0.03f,0)));

@@ -72,7 +72,6 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
   const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
 
    if ((CEGUI::Key::ArrowUp == keyEvent.scancode)){  
-      CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
       if(commandeHistorique.size() == 0)
 	return true;
       
@@ -89,11 +88,10 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
       return true;
       
    }else if ((CEGUI::Key::ArrowDown == keyEvent.scancode)){  
-      CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
        if(commandeHistorique.size() == 0)
 	return true;
        
-      if(index == commandeHistorique.size()-1){
+      if(index == (int)commandeHistorique.size() - 1){
 	index = 0;
       }else{
 	index++;
@@ -179,6 +177,7 @@ void Console::ParseText(CEGUI::String inMsg)
 
  
 string Console::onHelp(const string& s){
+   (void) s;
    std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
   return outString;

@@ -158,6 +158,7 @@ void Controleur::onZoom(thor::ActionContext < string > context) {
 
 bool Controleur::onWindowResized(thor::ActionContext<string> context) {
     m->windowResized(context.event->size.width, context.event->size.height);
+    return true;
 }
 
 void Controleur::onResetZoom(thor::ActionContext < string > context) {
