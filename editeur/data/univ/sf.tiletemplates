@@ -2,138 +2,222 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
 <TileTemplates class_id="0" tracking_level="0" version="0">
-	<count>19</count>
+	<count>31</count>
 	<item_version>0</item_version>
 	<item class_id="1" tracking_level="0" version="0">
 		<first>100000000</first>
 		<second class_id="2" tracking_level="0" version="0">
-			<path>texture1.png</path>
+			<path>tile1.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000001</first>
 		<second>
-			<path>texture2.png</path>
+			<path>tile2.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000002</first>
 		<second>
-			<path>texture3.png</path>
+			<path>tile3.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000003</first>
 		<second>
-			<path>texture4.png</path>
+			<path>tile4.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000004</first>
 		<second>
-			<path>texture5.png</path>
+			<path>tile5.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000005</first>
 		<second>
-			<path>texture6.png</path>
+			<path>tile6.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000006</first>
 		<second>
-			<path>texture7.png</path>
+			<path>tile7.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000007</first>
 		<second>
-			<path>texture8.png</path>
+			<path>tile8.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000008</first>
 		<second>
-			<path>texture9.png</path>
+			<path>tile9.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000009</first>
 		<second>
-			<path>texture10.png</path>
+			<path>tile10.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000010</first>
 		<second>
-			<path>texture11.png</path>
+			<path>tile11.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000011</first>
 		<second>
-			<path>texture12.png</path>
+			<path>tile12.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000012</first>
 		<second>
-			<path>texture13.png</path>
+			<path>tile13.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000013</first>
 		<second>
-			<path>texture14.png</path>
+			<path>tile14.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000014</first>
 		<second>
-			<path>texture15.png</path>
+			<path>tile15.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000015</first>
 		<second>
-			<path>texture16.png</path>
+			<path>tile16.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000016</first>
 		<second>
-			<path>texture17.png</path>
+			<path>tile17.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000017</first>
 		<second>
-			<path>texture18.png</path>
+			<path>tile18.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>
 	<item>
 		<first>100000018</first>
 		<second>
-			<path>texture19.png</path>
+			<path>tile19.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000019</first>
+		<second>
+			<path>tile20.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000020</first>
+		<second>
+			<path>tile21.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000021</first>
+		<second>
+			<path>tile22.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000022</first>
+		<second>
+			<path>tile23.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000023</first>
+		<second>
+			<path>tile24.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000024</first>
+		<second>
+			<path>tile25.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000025</first>
+		<second>
+			<path>tile26.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000026</first>
+		<second>
+			<path>tile27.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000027</first>
+		<second>
+			<path>tile28.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000028</first>
+		<second>
+			<path>tile29.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000029</first>
+		<second>
+			<path>tile30.png</path>
+			<bloquante>0</bloquante>
+		</second>
+	</item>
+	<item>
+		<first>100000030</first>
+		<second>
+			<path>tile31.png</path>
 			<bloquante>0</bloquante>
 		</second>
 	</item>

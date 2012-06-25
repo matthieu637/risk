@@ -66,7 +66,7 @@ private:
     Texture *texture;
     
 public:
-    static const int hauteurTile = 88;
+    static const int hauteurTile = 86;
 };
 
 }
