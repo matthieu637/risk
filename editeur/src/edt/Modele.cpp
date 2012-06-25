@@ -9,6 +9,7 @@
 #include <list>
 #include <string>
 #include <CEGUI/CEGUI.h>
+#include <bib/StringUtils.hpp>
 
 using std::list;
 using std::string;
@@ -44,8 +45,8 @@ Repere *Modele::getRepere() {
 
 //herite de edt::openCarte
 string Modele::openCarte(const string &chemin) {
-    current_map = chemin;
-    return cce::Modele::openCarte(chemin);
+      current_map = chemin;  
+      return cce::Modele::openCarte(chemin);
 }
 
 string Modele::getCurrentMap() {
@@ -60,8 +61,9 @@ string Modele::saveCarte(const string &chemin) {
 
 
 string Modele::saveCarte() {
-    if(current_map != "") {
-        bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
+    if(current_map != "" && !bib::onlySpaceCharacter(current_map)) {
+      LOG_DEBUG(" saveCarte de merde");
+      bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
         return "La carte "+current_map+" a bien ete sauvegardee";
     } else {
         return "Veuillez saisir un nom de carte";
