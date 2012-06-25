@@ -42,6 +42,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
 
     Action space_press(sf::Keyboard::Space, Action::ReleaseOnce);
     Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
+    Action c_press(sf::Keyboard::C, Action::ReleaseOnce);
     Action d_press(sf::Keyboard::D, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
@@ -62,6 +63,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["supprimer_objet"] = right_release;
     map["selection"] = space_press;
     map["choix_palette"] = t_press || d_press;
+    map["console"] = c_press;
 
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -77,6 +79,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("selection", BIND(&Controleur::onSelectionThor));
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("choix_palette", BIND(&Controleur::onChoixPaletteThor));
+    system.connect("console", BIND(&Controleur::onOpenConsole));
 
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
@@ -86,6 +89,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("enregistrerSous", BIND(&Controleur::onSaveAs));
     moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
+    moduleGUI->ajouterHandler("console", BIND(&Controleur::onOpenConsoleClick));
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
 
     gui->setScriptModule(moduleGUI);
@@ -249,6 +253,24 @@ bool Controleur::onOpen(const CEGUI::EventArgs & e) {
     return true;
 }
 
+bool Controleur::onOpenConsole(thor::ActionContext < string > context){
+ 
+      sf::Event::KeyEvent key = context.event->key;
+      CEGUI::FrameWindow* mi;
+
+      if(key.code == sf::Keyboard::C){
+	  mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Outils/Console");
+
+          CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
+	  onOpenConsoleClick(wea);
+      }
+      return true;
+}
+
+bool Controleur::onOpenConsoleClick(const CEGUI::EventArgs& e){
+    (void) e;
+    gui->getConsole()->setVisible(true);;
+}
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;
