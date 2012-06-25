@@ -26,8 +26,6 @@ Modele::Modele():cce::Modele() {
     tt = cce::Univers::getInstance()->getTileTemplate(100000000);
     dt = cce::Univers::getInstance()->getDecorTemplate(200000000);
     current_pays = "Mordor";
-    tile = true;
-    decor = false;
     current_map = "";
 }
 
@@ -133,16 +131,16 @@ void Modele::moveDecor(int dx, int dy) {
 }
 
 void Modele::placeObject(int x, int y) {
-    if(tile)
+    if(palette == tiles)
         getRepere()->setTile(tt, x, y);
-    else if(decor)
+    else if(palette == decors)
         carte->getCoucheDecor()->addDecor(dt, x, y);
 }
 
 void Modele::deleteObject(int x, int y) {
-    if(tile)
+    if(palette == tiles)
         getRepere()->unsetTile(x, y);
-    else if(decor)
+    else if(palette == decors)
         carte->getCoucheDecor()->removeDecor(x, y);
 }
 
@@ -150,17 +148,18 @@ void Modele::selectPalette(palette_type p)
 {
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(false);
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(false);
-    tile = false;
-    decor = false;
+    ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Pays"))->setVisible(false);
+    palette = p;
     switch(p)
     {
     case tiles:
         ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(true);
-        tile = true;
         break;
     case decors:
         ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(true);
-        decor = true;
+        break;
+    case pays:
+        ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Pays"))->setVisible(true);
         break;
     }
 }

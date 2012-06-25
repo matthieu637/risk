@@ -2,6 +2,7 @@
 #include "edt/PaletteTile.hpp"
 #include "edt/PaletteDecor.hpp"
 #include "edt/PaletteRegions.hpp"
+#include "edt/PalettePays.hpp"
 
 #include <edt/Modele.hpp>
 #include "CEGUI/CEGUIScriptModule.h"
@@ -32,16 +33,19 @@ void GUI::init(Modele* modele)
     std::string conteneur = "Editeur";
 
     cce::GUI::init(modele);
+    
+    edt::Carte* c=static_cast <edt::Carte*>(modele->getCarte());
+    
     palette_tile = new PaletteTile();
     palette_tile->init(this, conteneur, "PaletteFrames/Tiles", (edt::Modele*)modele);
     palette_decor = new PaletteDecor();
     palette_decor->init(this, conteneur, "PaletteFrames/Decors", (edt::Modele*)modele);
-    
-    edt::Carte* c=static_cast <edt::Carte*>(modele->getCarte());
-    console = new edt::Console(conteneur,modele);
-    
+    palette_pays = new PalettePays();
+    palette_pays->init(this, conteneur, "PaletteFrames/Pays", c);
     palette_regions = new PaletteRegions();
     palette_regions->init(this, conteneur, "PaletteFrames/Regions", c);
+    
+    console = new edt::Console(conteneur,modele);
     initScrollPane(conteneur, modele);
 }
 
