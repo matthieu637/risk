@@ -41,8 +41,11 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action drag_left = mouse_move && left_hold;
 
     Action space_press(sf::Keyboard::Space, Action::ReleaseOnce);
-    Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
+    Action c_press(sf::Keyboard::C, Action::ReleaseOnce);
     Action d_press(sf::Keyboard::D, Action::ReleaseOnce);
+    Action p_press(sf::Keyboard::P, Action::ReleaseOnce);
+    Action r_press(sf::Keyboard::R, Action::ReleaseOnce);
+    Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
@@ -61,7 +64,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["placer_objet"] = drag_left || left_release;
     map["supprimer_objet"] = right_release;
     map["selection"] = space_press;
-    map["choix_palette"] = t_press || d_press;
+    map["choix_palette"] = t_press || d_press || p_press || r_press;
+    map["console"] = c_press;
 
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -77,6 +81,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("selection", BIND(&Controleur::onSelectionThor));
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("choix_palette", BIND(&Controleur::onChoixPaletteThor));
+    system.connect("console", BIND(&Controleur::onOpenConsole));
 
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
@@ -86,6 +91,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("enregistrerSous", BIND(&Controleur::onSaveAs));
     moduleGUI->ajouterHandler("enregistrer", BIND(&Controleur::onSave));
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
+    moduleGUI->ajouterHandler("console", BIND(&Controleur::onOpenConsoleClick));
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
 
     gui->setScriptModule(moduleGUI);
@@ -193,11 +199,12 @@ void Controleur::onChoixPaletteThor(thor::ActionContext < string > context) {
     if(key.code == sf::Keyboard::T)
         mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Terrains");
     else if(key.code == sf::Keyboard::D)
-        mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Decors");
-
-    CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);	//dafuq
-    CEGUI::WindowEventArgs &weaa = wea;			//is
-    onChoixPalette(weaa);					//this shit?
+	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Decors");
+    else if(key.code == sf::Keyboard::P)
+	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Pays");
+    
+    CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
+    onChoixPalette(wea);
 }
 
 int Controleur::getX(int mouseX) {
@@ -223,6 +230,8 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
         m->selectPalette(tiles);
     else if(nom == "Palettes/Decors")
         m->selectPalette(decors);
+    else if(nom == "Palettes/Pays")
+        m->selectPalette(pays);
     return true;
 }
 
@@ -250,6 +259,24 @@ bool Controleur::onOpen(const CEGUI::EventArgs & e) {
     return true;
 }
 
+bool Controleur::onOpenConsole(thor::ActionContext < string > context){
+ 
+      sf::Event::KeyEvent key = context.event->key;
+      CEGUI::FrameWindow* mi;
+
+      if(key.code == sf::Keyboard::C){
+	  mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Outils/Console");
+
+          CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
+	  onOpenConsoleClick(wea);
+      }
+      return true;
+}
+
+bool Controleur::onOpenConsoleClick(const CEGUI::EventArgs& e){
+    (void) e;
+    gui->getConsole()->setVisible(true);;
+}
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;

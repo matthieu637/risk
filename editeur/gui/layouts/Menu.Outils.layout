@@ -31,10 +31,4 @@
 	  <Property Name="Tooltip" Value="Remplace toutes les tiles par celle sélectionnée" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
       </Window>
-      <Window Type="TaharezLook/MenuItem" Name="Outils/Console" >
-	  <Property Name="Text" Value="Ouvrir la console" />
-	  <Property Name="Tooltip" Value="fait apparaître la console" />
-	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
-	  <Event Name="Clicked" Function="console" />
-      </Window>
 </Window>

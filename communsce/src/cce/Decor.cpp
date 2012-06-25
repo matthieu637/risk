@@ -30,7 +30,7 @@ DecorTemplate* Decor::getTemplate() const
 void Decor::setTexture(Texture* texture)
 {
     Sprite::setTexture(*texture, true);
-    yCompare = getPosition().y * 2 + getGlobalBounds().height;
+    yCompare = getPosition().y * 1.5 + getGlobalBounds().height;
 }
 
 bool Decor::inferieurA(const Decor &d) const
