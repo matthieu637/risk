@@ -52,7 +52,8 @@ string Modele::getCurrentMap() {
 }
 
 void Modele::nouvelleCarte()
-{
+{   
+    current_map = "data/map/empty.map";
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
 }
 

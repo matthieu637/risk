@@ -94,6 +94,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("console", BIND(&Controleur::onOpenConsoleClick));
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
     moduleGUI->ajouterHandler("redimensionner", BIND(&Controleur::onRedimensionner));
+    moduleGUI->ajouterHandler("new_map", BIND(&Controleur::onNewMap));
 
     gui->setScriptModule(moduleGUI);
 }
@@ -286,6 +287,11 @@ bool Controleur::onRedimensionner(const CEGUI::EventArgs& e){
     return true;  
 }
 
+bool Controleur::onNewMap(const CEGUI::EventArgs & e) {
+    (void) e;
+    gui->getConsole()->afficherCommande("/new_map");
+    return true;
+}
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;

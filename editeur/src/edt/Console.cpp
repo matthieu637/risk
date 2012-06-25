@@ -13,6 +13,7 @@ namespace edt {
   mapCommandes["open"] = BIND(&Console::onOpen);
   mapCommandes["quit"] = BIND(&Console::onQuit);
   mapCommandes["redimensionner"] = BIND(&Console::onRedimensionner);
+  mapCommandes["new_map"] = BIND(&Console::onNewMap);
   m = modele;
   // mapCommandes["say"] = BIND(&Console::onSay); 
 }
@@ -29,6 +30,12 @@ string Console::onSave(const string& s){
 string Console::onOpen(const string& s){
    LOG_DEBUG("onOpen");
   return m->openCarte(s);
+}
+
+string Console::onNewMap(const string& s){
+ (void) s;
+  m->nouvelleCarte();
+  return "Nouvelle carte affichée";
 }
 
 string Console::onRedimensionner(const string& s){

@@ -16,6 +16,7 @@ namespace edt{
     string onOpen(const string& s);
     string onQuit(const string& s);
     string onRedimensionner(const string& s);
+    string onNewMap(const string& s);
     
     Modele* m;
   };
