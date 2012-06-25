@@ -2,6 +2,7 @@
 #include "cce/Decor.hpp"
 #include "cce/DecorTemplate.hpp"
 #include "bib/Logger.hpp"
+#include <cmath>
 
 namespace cce{
 
@@ -22,11 +23,9 @@ const Decor* CoucheDecor::getDecor(int x, int y)
     for(rit = decors->rbegin(); rit != decors->rend(); rit++){
 	if(rit->getGlobalBounds().contains(x, y)){
 	    a = rit->getTexture()->copyToImage().getPixel(x - rit->getPosition().x, y - rit->getPosition().y).a;
-	    if(a != 0) //pixel transparent? Permet de détecter véritablement le decor cliqué lorsqu'ils sont superposés
+	    if(a == 255) //pixel transparent? Permet de détecter véritablement le decor cliqué lorsqu'ils sont superposés
 		return &(*rit);
 	}
-	else if(y > rit->getPosition().y + rit->getGlobalBounds().top)
-	    return nullptr;
     }
     return nullptr;
 }

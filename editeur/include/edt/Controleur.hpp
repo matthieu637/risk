@@ -29,6 +29,7 @@ namespace cce {
 ///
 	Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui);
 
+	void setGUI(GUI* g);
 	void onStartCam(thor::ActionContext < string > context);
 	void onStopCam(thor::ActionContext < string > context);
 	void onMoveCamera(thor::ActionContext < string > context);
