@@ -40,7 +40,7 @@ public:
  ///
 ///\brief ouvre une carte
 ///
-    virtual CEGUI::String openCarte(CEGUI::String chemin);
+    virtual string openCarte(const string& chemin);
     
     Carte* getCarte();
     

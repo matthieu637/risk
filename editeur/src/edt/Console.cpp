@@ -19,7 +19,7 @@ Console::Console(Modele *modele) : cce::Console()
 }
 
 
-CEGUI::String Console::onSave(CEGUI::String s) {
+string Console::onSave(const string& s) {
     if (s == "" || bib::onlySpaceCharacter(s.c_str())) {
         return m->saveCarte();
     } else {
@@ -27,22 +27,22 @@ CEGUI::String Console::onSave(CEGUI::String s) {
     }
 }
 
-CEGUI::String Console::onOpen(CEGUI::String s) {
+string Console::onOpen(const string& s) {
     LOG_DEBUG("onOpen "+s);
     return m->openCarte(s);
 }
 
-CEGUI::String Console::onNewMap(CEGUI::String s) {
+string Console::onNewMap(const string& s) {
     (void) s;
     m->nouvelleCarte();
     return "Nouvelle carte affichée";
 }
 
-CEGUI::String Console::onRedimensionner(CEGUI::String s) {
+string Console::onRedimensionner(const string& s) {
 
-    CEGUI::String::size_type argEnd = s.find(" ", 1);
-    CEGUI::String x = s.substr(0, argEnd);
-    CEGUI::String y = s.substr(argEnd + 1);
+    string::size_type argEnd = s.find(" ", 1);
+    string x = s.substr(0, argEnd);
+    string y = s.substr(argEnd + 1);
 
     if(s.find(' ') == s.npos)
         return "vous devez utiliser la commande : /redimensionner x y";
@@ -52,7 +52,7 @@ CEGUI::String Console::onRedimensionner(CEGUI::String s) {
     }
 }
 
-CEGUI::String Console::onQuit(CEGUI::String s) {
+string Console::onQuit(const string& s) {
     (void)s;
     LOG_DEBUG("onQuit");
     return "";

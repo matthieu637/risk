@@ -22,7 +22,7 @@ namespace cce{
        Console();                  
        void setVisible(bool visible);         
        bool isVisible();                     
-       void afficherCommande(CEGUI::String s);
+       void afficherCommande(const string& s);
        typedef void (EventConsole)(const string&);
        
     private:
@@ -31,15 +31,15 @@ namespace cce{
        bool Handle_SendButtonPressed(const CEGUI::EventArgs &e);     
        bool Handle_ButtonKeyPressed(const CEGUI::EventArgs &e);
        void ParseText(CEGUI::String inMsg);                       
-       void OutputText(CEGUI::String inMsg,                       
+       void OutputText(const string&  inMsg,                       
 		       CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); 
-       CEGUI::String onHelp(CEGUI::String s);
+       string onHelp(const string& s);
  
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the Console window.
       int index;// index pour pouvoir recuperer l'historique du chat
    
   protected:
-    std::map <std::string, std::function<CEGUI::String(CEGUI::String)> > mapCommandes; 
+    std::map <std::string, std::function<string(const string &)> > mapCommandes; 
     std::deque <std::string> commandeHistorique;
       
   };
