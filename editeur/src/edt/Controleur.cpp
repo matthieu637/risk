@@ -137,6 +137,8 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
       m->selectPalette(tiles);
     else if(nom == "Palettes/Decors")
       m->selectPalette(decors);
+    else if(nom == "Palettes/Regions")
+      m->selectPalette(regions);
     return true;
 }
 

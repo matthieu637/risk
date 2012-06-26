@@ -27,6 +27,7 @@ Modele::Modele():cce::Modele() {
     current_pays = "Mordor";
     tile = true;
     decor = false;
+    region = false;
 }
 
 Modele::~Modele() {
@@ -107,8 +108,10 @@ void Modele::selectPalette(palette_type p)
 {
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(false);
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(false);
+    ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Regions"))->setVisible(false);
     tile = false;
     decor = false;
+    region = false;
     switch(p)
     {
 	case tiles:
@@ -117,6 +120,10 @@ void Modele::selectPalette(palette_type p)
 	  break;
 	case decors:
 	  ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(true);
+	  decor = true;
+	  break;
+	case regions:
+	  ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Regions"))->setVisible(true);
 	  decor = true;
 	  break;
     }

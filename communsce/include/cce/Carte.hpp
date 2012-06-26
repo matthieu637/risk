@@ -51,6 +51,10 @@ public:
 ///\brief Ajouter une region a un pays par leurs noms.
 ///
     void addRegion(const string& nom_pays, const string& nom_region, const Region& r);
+    
+    map<string,Pays> getAllPays();
+    
+    Region getRegion(const string& nom_region);
    
   
 protected:
@@ -63,6 +67,7 @@ protected:
     Repere repere;
     CoucheDecor couche_decor;
     map<string,Pays> mp;
+    map<string, Region> mr;
 };
 
 }
