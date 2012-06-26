@@ -24,14 +24,15 @@ class GUI : public cce::GUI
 {
 
 public:
-    GUI(const string& conteneur_);
+    GUI(const string& conteneur);
     virtual ~GUI();
     void init(Modele* module, Controleur* controleur);
+    void initScrollPane(int largeur, int hauteur);
     void updateListRegions(list<string> noms);
     cce::Console *getConsole();
     
 private:
-    void initScrollPane(const string& conteneur, Modele* modele);
+    
 
 private:
     PaletteTile* palette_tile;

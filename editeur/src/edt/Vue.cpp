@@ -54,9 +54,14 @@ void Vue::updateScrolls()
     hori->setScrollPosition(camera->getCenter().x);
 }
 
+void Vue::initScrolls(int largeur, int hauteur)
+{
+    getGUI()->initScrollPane(largeur, hauteur);
+}
+
 void Vue::updateScrollsThumb(float coef, int largeur, int hauteur)
 {
-  
+
     float min_thumb = 0.03;
     float max_thumb = 0.95;
 

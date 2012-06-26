@@ -53,22 +53,23 @@ CEGUI::String Modele::getCurrentMap() {
 }
 
 void Modele::nouvelleCarte()
-{   
-    current_map = "data/map/empty.map";
+{
+    current_map = "";
+    delete carte;
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
 }
 
 CEGUI::String Modele::saveCarte(CEGUI::String chemin) {
     current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
-    return "La carte "+chemin+" a bien été sauvegardée";
+    return "La carte "+chemin+" a bien Ã©tÃ© sauvegardÃ©e";
 }
 
 
 CEGUI::String Modele::saveCarte() {
     if(current_map != "" && !bib::onlySpaceCharacter(current_map.c_str())) {
         bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
-        return "La carte "+current_map+" a bien été sauvegardée";
+        return "La carte "+current_map+" a bien Ã©tÃ© sauvegardÃ©e";
     } else {
         return "Veuillez saisir un nom de carte";
     }
@@ -149,7 +150,7 @@ void Modele::setSpawn(int x, int y)
 {
     const cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
     if(d != nullptr)
-      ;
+        ;
     //carte->getPays(current_pays)->setSpawn();
 }
 
@@ -215,5 +216,14 @@ void Modele::moveScrollHori(float pos)
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->updateXCamera(pos);
 }
+
+void Modele::redimensionner(int x, int y) {
+    edt::Repere* r = static_cast<edt::Repere*> (getCarte()->getRepere());
+    r->redimensionner(x, y);
+    
+    for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)(*it))->initScrolls(x, y);
+}
+
 
 }

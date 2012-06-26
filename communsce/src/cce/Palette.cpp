@@ -20,7 +20,7 @@ Palette::~Palette()
     
 }
 
-void Palette::init(GUI const *gui, const string& conteneur, string nom)
+void Palette::init(GUI const *gui, string nom)
 {
     fenetre = (FrameWindow*) WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", nom);
     fenetre->setSize(UVector2(UDim(0.21f, 0), UDim(0.75f,0)));
@@ -31,7 +31,6 @@ void Palette::init(GUI const *gui, const string& conteneur, string nom)
     fenetre->setSizingEnabled(false);
     
     //gui->getRootWindow()->getChild(conteneur)->addChildWindow(fenetre);
-    (void) conteneur;
     gui->getRootWindow()->addChildWindow(fenetre);
 }
 

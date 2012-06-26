@@ -22,7 +22,7 @@ class PalettePays : public cce::Palette
 public :
   PalettePays();
   virtual ~PalettePays();
-  void init(GUI const *gui, const string& conteneur, string nom, Controleur* c);
+  void init(GUI const *gui, string nom, Controleur* c);
   bool setSpawn(const CEGUI::EventArgs &e);
 private :
   Controleur* control;

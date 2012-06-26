@@ -45,6 +45,8 @@ public:
     
     void updateScrolls();
     
+    void initScrolls(int largeur, int hauteur);
+    
     void updateSize(int width, int height);
     
     GUI* getGUI();

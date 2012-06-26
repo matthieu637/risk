@@ -10,7 +10,7 @@ namespace edt{
   class Console : public cce::Console
   {
     public:
-       Console(const std::string& conteneur,Modele *modele);
+       Console(Modele *modele);
        
   private:
     CEGUI::String onSave(CEGUI::String s);

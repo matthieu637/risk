@@ -17,7 +17,7 @@
 
 namespace cce {
 
-Console::Console(const std::string& conteneur)
+Console::Console()
 {
     // Get a local pointer to the CEGUI Window Manager, Purely for convenience to reduce typing
     CEGUI::WindowManager *pWindowManager = CEGUI::WindowManager::getSingletonPtr();
@@ -29,7 +29,6 @@ Console::Console(const std::string& conteneur)
     {
         // Lets add our new window to the Root GUI Window
         //CEGUI::System::getSingleton().getGUISheet()->getChild(conteneur)->addChildWindow(m_ConsoleWindow);
-        (void) conteneur;
 	CEGUI::System::getSingleton().getGUISheet()->addChildWindow(m_ConsoleWindow);
         RegisterHandlers();
     }

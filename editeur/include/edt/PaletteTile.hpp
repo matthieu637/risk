@@ -14,7 +14,7 @@ public:
     PaletteTile();
     virtual ~PaletteTile();
 
-    void init(cce::GUI const *gui, const std::string& conteneur, string nom, Modele* _m);
+    void init(cce::GUI const *gui, string nom, Modele* _m);
     bool setTile(const CEGUI::EventArgs &e);
 
 private:
