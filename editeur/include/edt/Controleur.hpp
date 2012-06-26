@@ -45,6 +45,7 @@ namespace cce {
 	void onChooseSpawn(thor::ActionContext < string > context);
 	bool onWindowResized(thor::ActionContext<string> context);
 	bool onOpenConsole(thor::ActionContext < string > context);
+	bool onCloseConsole(thor::ActionContext < string > context);
 	bool onSelection(const CEGUI::EventArgs & e);
 	bool onQuit(const CEGUI::EventArgs & e);
 	bool onSave(const CEGUI::EventArgs & e);

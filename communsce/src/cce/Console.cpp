@@ -54,6 +54,13 @@ void Console::RegisterHandlers()
         CEGUI::Event::Subscriber(    
             &Console::Handle_ButtonKeyPressed,  
             this));          
+
+        m_ConsoleWindow->getChild("Console/EditBox")->subscribeEvent(
+	CEGUI::PushButton::EventKeyUp,
+        CEGUI::Event::Subscriber(    
+            &Console::ignore,  
+            this));  
+  
 }
 
 
@@ -64,6 +71,11 @@ void Console::afficherCommande(const string& s){
   w->getChild("Console/EditBox")->activate();
   CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(w->getChild("Console/EditBox"));
   editWindow->setCaratIndex(editWindow->getMaxTextLength());
+}
+
+bool Console::ignore(const CEGUI::EventArgs& e)
+{
+  return true;
 }
 
 bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
@@ -80,7 +92,7 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
 	index--;
       }
       //recuperation du texte
-      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
       //placement correct du curseur
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
@@ -95,16 +107,12 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
       }else{
 	index++;
       }
-      //recuperation du texte
-      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
+      //recuperation du texte 
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
       //placement correct du curseur
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
       return true;
-   }else if ((CEGUI::Key::Escape == keyEvent.scancode)){
-      setVisible(false);
-      return true;
-      
    }else if ((CEGUI::Key::Return == keyEvent.scancode)){
     index = -1;
     CEGUI::String Msg = m_ConsoleWindow->getChild("Console/EditBox")->getText();

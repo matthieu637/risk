@@ -30,6 +30,7 @@ namespace cce{
        bool Handle_TextSubmitted(const CEGUI::EventArgs &e);      
        bool Handle_SendButtonPressed(const CEGUI::EventArgs &e);     
        bool Handle_ButtonKeyPressed(const CEGUI::EventArgs &e);
+       bool ignore(const CEGUI::EventArgs& e);
        void ParseText(CEGUI::String inMsg);                       
        void OutputText(const string&  inMsg,                       
 		       CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); 

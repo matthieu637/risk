@@ -128,6 +128,7 @@ public:
     
     void moveScrollVert(float pos);
     void moveScrollHori(float pos);
+    void quit();
 
   private:
       Repere * getRepere();

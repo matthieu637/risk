@@ -46,6 +46,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action d_press(sf::Keyboard::D, Action::ReleaseOnce);
     Action p_press(sf::Keyboard::P, Action::ReleaseOnce);
     Action r_press(sf::Keyboard::R, Action::ReleaseOnce);
+    Action escape_press(sf::Keyboard::Escape, Action::ReleaseOnce);
     Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
@@ -68,6 +69,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["selection"] = space_press;
     map["choix_palette"] = t_press || d_press || p_press || r_press;
     map["console"] = c_press;
+    map["close_console"] = escape_press;
 
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -84,6 +86,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("choix_palette", BIND(&Controleur::onChoixPaletteThor));
     system.connect("console", BIND(&Controleur::onOpenConsole));
+    system.connect("close_console", BIND(&Controleur::onCloseConsole));
     system.connect("set_spawn", BIND(&Controleur::onChooseSpawn));
 
     //Binding fonctions CEGUI
@@ -261,7 +264,9 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
 
 bool Controleur::onQuit(const CEGUI::EventArgs & e) {
     (void) e;
-    engine->getFenetre()->close();
+    //
+    m->quit();
+    
     return true;
 }
 
@@ -296,6 +301,15 @@ bool Controleur::onOpenConsole(thor::ActionContext < string > context){
       }
       return true;
 }
+
+bool Controleur::onCloseConsole(thor::ActionContext < string > context){
+      (void)context;
+      gui->getConsole()->setVisible(false);
+      
+      return true;
+}
+
+
 
 bool Controleur::onOpenConsoleClick(const CEGUI::EventArgs& e){
     (void) e;
