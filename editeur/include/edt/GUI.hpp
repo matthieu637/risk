@@ -27,11 +27,12 @@ public:
     GUI(const string& conteneur_);
     virtual ~GUI();
     void init(Modele* module, Controleur* controleur);
+    void initScrollPane(const string& conteneur, int largeur, int hauteur);
     void updateListRegions(list<string> noms);
     cce::Console *getConsole();
     
 private:
-    void initScrollPane(const string& conteneur, Modele* modele);
+    
 
 private:
     PaletteTile* palette_tile;

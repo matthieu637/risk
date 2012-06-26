@@ -104,6 +104,8 @@ public:
     void nouvelleCarte();
     
     void windowResized(int width, int height);
+    
+    void redimensionner(int x, int y);
 
 ///
 ///\brief sauvegarde une carte 

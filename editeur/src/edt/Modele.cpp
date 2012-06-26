@@ -53,7 +53,7 @@ CEGUI::String Modele::getCurrentMap() {
 }
 
 void Modele::nouvelleCarte()
-{   
+{
     current_map = "";
     delete carte;
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
@@ -150,7 +150,7 @@ void Modele::setSpawn(int x, int y)
 {
     const cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
     if(d != nullptr)
-      ;
+        ;
     //carte->getPays(current_pays)->setSpawn();
 }
 
@@ -216,5 +216,14 @@ void Modele::moveScrollHori(float pos)
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->updateXCamera(pos);
 }
+
+void Modele::redimensionner(int x, int y) {
+    edt::Repere* r = static_cast<edt::Repere*> (getCarte()->getRepere());
+    r->redimensionner(x, y);
+    
+    for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)(*it))->initScrolls(x, y);
+}
+
 
 }
