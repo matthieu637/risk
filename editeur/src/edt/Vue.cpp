@@ -56,7 +56,7 @@ void Vue::updateScrolls()
 
 void Vue::initScrolls(int largeur, int hauteur)
 {
-    getGUI()->initScrollPane("", largeur, hauteur);
+    getGUI()->initScrollPane(largeur, hauteur);
 }
 
 void Vue::updateScrollsThumb(float coef, int largeur, int hauteur)

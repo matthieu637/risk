@@ -28,9 +28,9 @@ PaletteTile::~PaletteTile()
 
 }
 
-void PaletteTile::init(const cce::GUI *gui, const string& conteneur, string nom, Modele* _m)
+void PaletteTile::init(const cce::GUI *gui, string nom, Modele* _m)
 {
-    Palette::init(gui, conteneur, nom);
+    Palette::init(gui, nom);
     fenetre->setText("Palette de Tiles");
     m = _m;
     

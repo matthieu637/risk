@@ -14,7 +14,7 @@ public:
     PaletteDecor();
     virtual ~PaletteDecor();
 
-    void init(cce::GUI const *gui, const std::string& conteneur, string nom, Modele* _m);
+    void init(cce::GUI const *gui, string nom, Modele* _m);
     bool setDecor(const CEGUI::EventArgs &e);
 
 private:

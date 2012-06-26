@@ -19,7 +19,7 @@ namespace cce{
   class Console
   {
     public:
-       Console(const std::string& conteneur);                  
+       Console();                  
        void setVisible(bool visible);         
        bool isVisible();                     
        void afficherCommande(CEGUI::String s);

@@ -6,7 +6,7 @@
 #include <edt/Repere.hpp>
 
 namespace edt {
-Console::Console(const std::string& conteneur,Modele *modele) : cce::Console(conteneur)
+Console::Console(Modele *modele) : cce::Console()
 {
 
     mapCommandes["save"] = BIND(&Console::onSave);

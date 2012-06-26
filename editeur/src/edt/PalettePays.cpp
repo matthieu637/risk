@@ -25,9 +25,9 @@ PalettePays::~PalettePays()
 
 }
 
-void PalettePays::init(GUI const *gui, const string& conteneur, string nom, Controleur* c)
+void PalettePays::init(GUI const *gui, string nom, Controleur* c)
 {
-    Palette::init(gui, conteneur, nom);
+    Palette::init(gui, nom);
     control = c;
     fenetre->setText("Palette de Pays");
     
