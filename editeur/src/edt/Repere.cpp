@@ -62,8 +62,11 @@ void Repere::redimensionner(const int x, const int y)
     
     largeur = x;
     hauteur = y;
-    nbTiles = x * y;
+    nbTiles = largeur * hauteur;
     nbTiles_sans_derniere_ligne = nbTiles - largeur;
+    largeur_pixels = largeur * l_tile;
+    hauteur_pixels = hauteur * h_tile;
+    largeur_double = largeur * 2;
     tiles = tiles_new;
 }
 
