@@ -80,7 +80,7 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
 	index--;
       }
       //recuperation du texte
-      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
       //placement correct du curseur
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
@@ -95,8 +95,8 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
       }else{
 	index++;
       }
-      //recuperation du texte
-      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
+      //recuperation du texte 
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
       //placement correct du curseur
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
