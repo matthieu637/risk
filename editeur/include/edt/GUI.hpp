@@ -8,10 +8,6 @@
 using std::string;
 using std::list;
 
-namespace cce {
-class Console;
-}
-
 namespace edt {
 class Controleur;
 class Modele;
@@ -19,6 +15,7 @@ class PaletteTile;
 class PaletteDecor;
 class PaletteRegions;
 class PalettePays;
+class Console;
   
 class GUI : public cce::GUI
 {
@@ -29,7 +26,7 @@ public:
     void init(Modele* module, Controleur* controleur);
     void initScrollPane(int largeur, int hauteur);
     void updateListRegions(list<string> noms);
-    cce::Console *getConsole();
+    edt::Console* getConsole(){return (edt::Console*) console; } 
     
 private:
     
@@ -39,7 +36,6 @@ private:
     PaletteDecor* palette_decor;
     PaletteRegions* palette_regions;
     PalettePays* palette_pays;
-    cce::Console* console;
 };
 
 }

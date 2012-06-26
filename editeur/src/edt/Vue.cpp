@@ -3,7 +3,7 @@
 
 #include "bib/Logger.hpp"
 #include <cce/MoteurSFML.hpp>
-#include <cce/Console.hpp>
+#include "edt/Console.hpp"
 #include <CEGUI/elements/CEGUIScrollbar.h>
 #include <CEGUI/elements/CEGUIThumb.h>
 
@@ -57,7 +57,6 @@ void Vue::updateScrolls()
 
 void Vue::quit()
 {
-   getGUI()->getConsole()->OutputText("Voulez vous vraiment quitter?\n y  n");
    if(getGUI()->getConsole()->getConfirmQuit()){
 	engine->getFenetre()->close();
    }

@@ -3,7 +3,7 @@
 #include "edt/GUI.hpp"
 #include "cce/MoteurSFML.hpp"
 #include <cce/CppScriptModule.hpp>
-#include <cce/Console.hpp>
+#include "edt/Console.hpp"
 #include <SFML/Window/Event.hpp>
 #include <CEGUI/elements/CEGUIScrollbar.h>
 #include <CEGUI/elements/CEGUIFrameWindow.h>
