@@ -6,6 +6,7 @@
 #include "edt/Vue.hpp"
 #include "bib/XMLEngine.hpp"
 #include "cce/ImageManager.hpp"
+#include "cce/Decor.hpp"
 #include <list>
 #include <string>
 #include <CEGUI/CEGUI.h>
@@ -25,8 +26,8 @@ Modele::Modele():cce::Modele() {
     coeff_zoom = 1;
     tt = cce::Univers::getInstance()->getTileTemplate(100000000);
     dt = cce::Univers::getInstance()->getDecorTemplate(200000000);
-    current_pays = "Mordor";
     current_map = "";
+    current_pays = "";
 }
 
 Modele::~Modele() {
@@ -142,6 +143,19 @@ void Modele::deleteObject(int x, int y) {
         getRepere()->unsetTile(x, y);
     else if(palette == decors)
         carte->getCoucheDecor()->removeDecor(x, y);
+}
+
+void Modele::setSpawn(int x, int y)
+{
+    const cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
+    if(d != nullptr)
+      ;
+    //carte->getPays(current_pays)->setSpawn();
+}
+
+void Modele::setCurrentPays(string nom)
+{
+    current_pays = nom;
 }
 
 void Modele::selectPalette(palette_type p)

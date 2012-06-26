@@ -37,4 +37,9 @@ void Pays::addRegion(const string& name, const Region& r){
     regions[name] = r;
 }
 
+void Pays::setSpawn(PointSpawn* d)
+{
+    ps = d;
+}
+
 }

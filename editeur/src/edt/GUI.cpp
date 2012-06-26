@@ -13,6 +13,7 @@
 #include "edt/Carte.hpp"
 #include "cce/Modele.hpp"
 #include "edt/Modele.hpp"
+#include "edt/Controleur.hpp"
 #include "CEGUI/CEGUIScriptModule.h"
 #include "CEGUI/elements/CEGUIScrollbar.h"
 
@@ -28,7 +29,7 @@ GUI::~GUI()
 
 }
 
-void GUI::init(Modele* modele)
+void GUI::init(Modele* modele, Controleur* controleur)
 {
     std::string conteneur = "Editeur";
 
@@ -41,7 +42,7 @@ void GUI::init(Modele* modele)
     palette_decor = new PaletteDecor();
     palette_decor->init(this, conteneur, "PaletteFrames/Decors", (edt::Modele*)modele);
     palette_pays = new PalettePays();
-    palette_pays->init(this, conteneur, "PaletteFrames/Pays", c);
+    palette_pays->init(this, conteneur, "PaletteFrames/Pays", (edt::Controleur*)controleur);
     palette_regions = new PaletteRegions();
     palette_regions->init(this, conteneur, "PaletteFrames/Regions", c);
     

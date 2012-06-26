@@ -23,6 +23,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     this->m = m;
     selection = false;
     moveDecor = false;
+    setSpawn = false;
 
     // Evenements Thor
     Action close(sf::Event::Closed);
@@ -60,6 +61,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["move_camera"] = drag_wheel;
     map["start_move_decor"] = left_press;
     map["stop_move_decor"] = left_release;
+    map["set_spawn"] = left_release;
     map["move_decor"] = drag_left;
     map["placer_objet"] = drag_left || left_release;
     map["supprimer_objet"] = right_release;
@@ -82,6 +84,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("choix_palette", BIND(&Controleur::onChoixPaletteThor));
     system.connect("console", BIND(&Controleur::onOpenConsole));
+    system.connect("set_spawn", BIND(&Controleur::onChooseSpawn));
 
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
@@ -162,7 +165,7 @@ void Controleur::onZoom(thor::ActionContext < string > context) {
     m->zoom(ticks);
 }
 
-bool Controleur::onWindowResized(thor::ActionContext<string> context) {
+void Controleur::onWindowResized(thor::ActionContext<string> context) {
     m->windowResized(context.event->size.width, context.event->size.height);
 }
 
@@ -206,6 +209,14 @@ void Controleur::onChoixPaletteThor(thor::ActionContext < string > context) {
     onChoixPalette(wea);
 }
 
+void Controleur::onChooseSpawn(thor::ActionContext < string > context) {
+    if(!setSpawn)
+      return;
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    m->setSpawn(getX(mousePosition.x), getY(mousePosition.y));
+    setSpawn = false;
+}
+
 int Controleur::getX(int mouseX) {
     int x_view = engine->getView()->getCenter().x - engine->getView()->getSize().x / 2;
     float coeff_x = engine->getView()->getSize().x / engine->getFenetre()->getSize().x;
@@ -218,6 +229,12 @@ int Controleur::getY(int mouseY) {
     float coeff_y = engine->getView()->getSize().y / engine->getFenetre()->getSize().y;
     int y_absolu = y_view + mouseY * coeff_y;
     return y_absolu;
+}
+
+bool Controleur::onSetSpawn(const CEGUI::EventArgs &e)
+{
+    setSpawn = true;
+    return true;
 }
 
 bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)

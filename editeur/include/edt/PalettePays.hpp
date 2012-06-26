@@ -12,7 +12,8 @@ class PushButton;
 
 namespace edt{
 
-class Carte;
+class Controleur;
+class Modele;
 class GUI;
 
 class PalettePays : public cce::Palette
@@ -21,10 +22,10 @@ class PalettePays : public cce::Palette
 public :
   PalettePays();
   virtual ~PalettePays();
-  void init(GUI const *gui, const string& conteneur, string nom, Carte* c);
+  void init(GUI const *gui, const string& conteneur, string nom, Controleur* c);
   bool setSpawn(const CEGUI::EventArgs &e);
 private :
-  Carte* carte;
+  Controleur* control;
 };
 
 }

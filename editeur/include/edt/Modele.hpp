@@ -87,6 +87,16 @@ public:
 ///
     void setDecorTemplate(int id);
 
+///
+///\brief Changer le pays sur lequel on opère
+///
+    void setCurrentPays(string nom);
+
+///
+///\brief Changer le decorTemplate à placer par son id
+///
+    void setSpawn(int x, int y);
+
 
     void deleteTile(int x, int y);
     

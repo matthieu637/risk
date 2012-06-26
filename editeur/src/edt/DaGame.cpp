@@ -17,7 +17,7 @@ DaGame::DaGame()
     modele = new Modele();
     vue = new Vue(ms, g);
     control = new Controleur(ms, modele, g);
-    g->init(modele);
+    g->init(modele, control);
     control->setGUI(g);
     
     modele->addVue(vue);

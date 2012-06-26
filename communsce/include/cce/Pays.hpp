@@ -13,6 +13,8 @@ using std::list;
 using boost::serialization::make_nvp; 
 
 namespace cce{
+
+
 class Pays
 {
 
@@ -49,6 +51,12 @@ virtual ~Pays();
 ///\return Retourne le point de spawn du pays
 ///
     PointSpawn* getPointSpawn();
+    
+///
+///\brief point de spawn du pays
+///\return Retourne le point de spawn du pays
+///
+    void setSpawn(PointSpawn* d);
     
 ///
 ///\brief ajoute une région à la liste des régions

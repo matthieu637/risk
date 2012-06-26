@@ -7,7 +7,7 @@
 	<item class_id="1" tracking_level="0" version="0">
 		<first>200000000</first>
 		<second class_id="2" tracking_level="0" version="0">
-			<path>buisson1.png</path>
+			<path>spawn.png</path>
 			<bloquant>0</bloquant>
 		</second>
 	</item>
@@ -57,6 +57,13 @@
 		<first>200000007</first>
 		<second>
 			<path>rocher3.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000008</first>
+		<second>
+			<path>buisson1.png</path>
 			<bloquant>0</bloquant>
 		</second>
 	</item>
