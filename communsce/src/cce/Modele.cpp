@@ -29,13 +29,14 @@ void Modele::update()
   
 }
 
-string Modele::openCarte(const std::string & chemin) {
-    ifstream fichier(chemin, std::ios::in);
-    if(fichier){  
-	  carte =  bib::XMLEngine::load<cce::Carte>("CARTE",chemin);
-	  return "La carte "+chemin+" a bien ete chargée";
+CEGUI::String Modele::openCarte(CEGUI::String chemin) {
+    LOG_DEBUG("modele->openCarte->chemin "+chemin);
+    ifstream fichier(chemin.c_str(), std::ios::in);
+    if(fichier){
+	  carte =  bib::XMLEngine::load<cce::Carte>("CARTE",chemin.c_str());
+	  return "La carte "+chemin+" a bien été chargée";
     }else{
-	  return "La carte "+chemin+" n existe pas";
+	  return "La carte "+chemin+" n'existe pas";
     }
     fichier.close();
 }

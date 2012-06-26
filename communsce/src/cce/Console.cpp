@@ -58,11 +58,11 @@ void Console::RegisterHandlers()
 }
 
 
-void Console::afficherCommande(const string& s){
+void Console::afficherCommande(CEGUI::String s){
   setVisible(true);
   CEGUI::Window *w =  CEGUI::System::getSingleton().getGUISheet()->getChild("Console");
   w->getChild("Console/EditBox")->setText(s);;
-  //w->
+  w->getChild("Console/EditBox")->activate();
   CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(w->getChild("Console/EditBox"));
   editWindow->setCaratIndex(editWindow->getMaxTextLength());
 }
@@ -150,17 +150,18 @@ void Console::ParseText(CEGUI::String inMsg)
             {
                 command[i] = tolower(command[i]);
             }
-	    string rep;
-	    std::map <std::string, std::function<string(const string&)> >::iterator it;
+	    CEGUI::String rep;
+	    std::map <std::string, std::function<CEGUI::String(CEGUI::String)> >::iterator it;
 	    for(it = mapCommandes.begin(); it != mapCommandes.end(); it++)
 	    {
 		if(it->first == command){
 		  if(commandArgs == command){
 		      rep = it->second("");
 		  }else{
-		      rep =   it->second(commandArgs);
+		      rep = it->second(commandArgs);
 		  }
-		  (this)->OutputText(inString);
+		  (this)->OutputText(inMsg);
+		  LOG_DEBUG(rep);
 		  (this)->OutputText(rep);
 		 commandeHistorique.push_back(inString);
 		  //commandeHistorique.insert(inString);
@@ -170,19 +171,19 @@ void Console::ParseText(CEGUI::String inMsg)
         } 
         else
         {   commandeHistorique.push_back(inString);
-            (this)->OutputText(inString); // no commands, just output what they wrote
+            (this)->OutputText(inMsg); // no commands, just output what they wrote
         }
     }
 }
 
  
-string Console::onHelp(const string& s){
+CEGUI::String Console::onHelp(CEGUI::String s){
    (void) s;
-   string outString = "commande /help : affiche les commandes disponibles\n";
+   CEGUI::String outString = "commande /help : affiche les commandes disponibles\n";
    outString += "commande /save : enregistre la carte courante\n";
-   outString += "commande /save chemin : enregistre la carte sous le nom du chemin donnÃ©\n";
-   outString += "commande /open chemin : charge la carte ayant pour nom le chemin donnÃ©\n";
-   outString += "commande /quit : quitte l'Ã©diteur\n";
+   outString += "commande /save chemin : enregistre la carte sous le nom du chemin donné\n";
+   outString += "commande /open chemin : charge la carte ayant pour nom le chemin donné\n";
+   outString += "commande /quit : quitte l'éditeur\n";
    outString += "commande /redimensionner x y : redimensionne la carte aux dimensions x et y\n";
    outString += "commande /new_map : charge une carte vide";
     
@@ -191,9 +192,9 @@ string Console::onHelp(const string& s){
    outString += "touche c : ouvre une console\n";
    outString += "touche t : affiche la palette des tiles\n";
    outString += "touche d : affiche la palette des dÃ©cors\n";
-   outString += "touche r : affiche la palette des rÃ©gions\n";
+   outString += "touche r : affiche la palette des régions\n";
    outString += "touche p : affiche la palette des pays\n";
-   outString += "touche space : pour se mettre en mode sÃ©lection\n";
+   outString += "touche space : pour se mettre en mode sélection\n";
    
   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
   return outString;
@@ -211,7 +212,7 @@ void Console::OutputText(CEGUI::String message, CEGUI::colour colour)
     //   wordwrapped alignmentoutputWindow->getVertScrollbar()->
     newItem->setTextColours(colour); // Set the text color
     outputWindow->addItem(newItem); // Add the new ListBoxTextItem to the ListBox
-    
+
     outputWindow->getVertScrollbar()->setScrollPosition((int)outputWindow->getVertScrollbar()->getDocumentSize());
 }
 

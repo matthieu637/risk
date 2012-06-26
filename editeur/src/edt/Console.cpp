@@ -19,41 +19,41 @@ namespace edt {
 }
 
 
-string Console::onSave(const string& s){
-  if (s == "" || bib::onlySpaceCharacter(s)){
+CEGUI::String Console::onSave(CEGUI::String s){
+  if (s == "" || bib::onlySpaceCharacter(s.c_str())){
    return m->saveCarte();  
   }else{
     return m->saveCarte(s);
   }
 }
 
-string Console::onOpen(const string& s){
-   LOG_DEBUG("onOpen");
+CEGUI::String Console::onOpen(CEGUI::String s){
+   LOG_DEBUG("onOpen "+s);
   return m->openCarte(s);
 }
 
-string Console::onNewMap(const string& s){
+CEGUI::String Console::onNewMap(CEGUI::String s){
  (void) s;
   m->nouvelleCarte();
-  return "Nouvelle carte affichÃ©e";
+  return "Nouvelle carte affichée";
 }
 
-string Console::onRedimensionner(const string& s){
+CEGUI::String Console::onRedimensionner(CEGUI::String s){
   
-   std::string::size_type argEnd = s.find(" ", 1);
-   std::string x = s.substr(0, argEnd);
-   std::string y = s.substr(argEnd + 1); 
+   CEGUI::String::size_type argEnd = s.find(" ", 1);
+   CEGUI::String x = s.substr(0, argEnd);
+   CEGUI::String y = s.substr(argEnd + 1); 
 
   if(s.find(' ') == s.npos)
     return "vous devez utiliser la commande : /redimensionner x y";
   else{
     edt::Repere* r = static_cast<edt::Repere*> (m->getCarte()->getRepere());
     r->redimensionner(atoi(x.c_str()), atoi(y.c_str()));
-    return "Carte redimensionnÃ©e aux dimensions " + x+ "x" + y;
-}
+    return "Carte redimensionnée aux dimensions ";
+ }
 }
 
-string Console::onQuit(const string& s){
+CEGUI::String Console::onQuit(CEGUI::String s){
   (void)s;
   LOG_DEBUG("onQuit");
   return "";

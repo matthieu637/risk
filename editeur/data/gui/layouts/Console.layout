@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 
 <GUILayout >
     <Window Type="TaharezLook/Tree" Name="Console" >
@@ -6,7 +6,8 @@
         <Property Name="Text" Value="Console" />
         <Property Name="Alpha" Value="0.75" />
         <Property Name="UnifiedAreaRect" Value="{{0,0},{1,-250},{0.5,0},{1,-13}}" />
-        <Window Type="TaharezLook/Listbox" Name="Console/ChatBox" >
+       
+	<Window Type="TaharezLook/Listbox" Name="Console/ChatBox" >
             <Property Name="Alpha" Value="0.75" />
 	    <Property Name="MousePassThroughEnabled" Value="True" />
 

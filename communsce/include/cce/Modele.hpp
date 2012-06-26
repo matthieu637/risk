@@ -13,6 +13,7 @@
 #include <string>
 #include <list>
 #include "cce/Carte.hpp"
+#include <CEGUI/CEGUIString.h>
 
 namespace cce {
   
@@ -39,7 +40,7 @@ public:
  ///
 ///\brief ouvre une carte
 ///
-    virtual string openCarte(const std::string & chemin);
+    virtual CEGUI::String openCarte(CEGUI::String chemin);
     
     Carte* getCarte();
     
