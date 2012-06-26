@@ -54,6 +54,13 @@ void Console::RegisterHandlers()
         CEGUI::Event::Subscriber(    
             &Console::Handle_ButtonKeyPressed,  
             this));          
+
+        m_ConsoleWindow->getChild("Console/EditBox")->subscribeEvent(
+	CEGUI::PushButton::EventKeyUp,
+        CEGUI::Event::Subscriber(    
+            &Console::ignore,  
+            this));  
+  
 }
 
 
@@ -64,6 +71,11 @@ void Console::afficherCommande(const string& s){
   w->getChild("Console/EditBox")->activate();
   CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(w->getChild("Console/EditBox"));
   editWindow->setCaratIndex(editWindow->getMaxTextLength());
+}
+
+bool Console::ignore(const CEGUI::EventArgs& e)
+{
+  return true;
 }
 
 bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
