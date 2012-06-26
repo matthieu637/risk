@@ -6,10 +6,10 @@ project(CommunsCE CXX)
 #Localisation des Modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-#Détection de l'OS
+#DÃ©tection de l'OS
 include(${CMAKE_SOURCE_DIR}/cmake/OS.cmake)
 
-#Définition des variables globales
+#DÃ©finition des variables globales
 include(${CMAKE_SOURCE_DIR}/cmake/Variables.cmake)
 
 #Trouver Biblio
@@ -34,7 +34,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include ${SFML_INCLUDE_DIRS} ${BIBLIO_IN
 #Source & headers
 file ( GLOB_RECURSE sources src/*.cpp include/*.hpp)
 
-#### Création de la librarie ####
+#### CrÃ©ation de la librarie ####
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/lib")
 
