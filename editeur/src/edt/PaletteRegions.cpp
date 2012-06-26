@@ -53,7 +53,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     ebox->setHeight(UDim(0.0f,25));
     ebox->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,0)));
     
-    ebox->subscribeEvent(CEGUI::Editbox::EventKeyDown, CEGUI::Event::Subscriber(&PaletteRegions::onNameChange, this));
+    ebox->subscribeEvent(CEGUI::Editbox::EventKeyUp, CEGUI::Event::Subscriber(&PaletteRegions::onNameChange, this));
     
     eboxinc = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Editbox", "PaletteFrames/Regions/EditboxIncomeRegions"));
     fenetre->addChildWindow(eboxinc);
@@ -87,12 +87,10 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
 bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
 {
     const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
-    if (!(CEGUI::Key::Backspace == keyEvent.scancode)){
+    
     lbti->setText(ebox->getText());
     lbox->handleUpdatedItemData();
-    return true;
-    }
-    return false;	
+    return true;	
 }
 
 
