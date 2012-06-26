@@ -22,7 +22,7 @@ namespace cce{
        Console(const std::string& conteneur);                  
        void setVisible(bool visible);         
        bool isVisible();                     
-       void afficherCommande(const string& s);
+       void afficherCommande(CEGUI::String s);
        typedef void (EventConsole)(const string&);
        
     private:
@@ -33,13 +33,13 @@ namespace cce{
        void ParseText(CEGUI::String inMsg);                       
        void OutputText(CEGUI::String inMsg,                       
 		       CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); 
-       string onHelp(const string& s);
+       CEGUI::String onHelp(CEGUI::String s);
  
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the Console window.
       int index;// index pour pouvoir recuperer l'historique du chat
    
   protected:
-    std::map <std::string, std::function<string(const string&)> > mapCommandes; 
+    std::map <std::string, std::function<CEGUI::String(CEGUI::String)> > mapCommandes; 
     std::deque <std::string> commandeHistorique;
       
   };

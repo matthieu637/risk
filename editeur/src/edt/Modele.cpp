@@ -43,12 +43,12 @@ Repere *Modele::getRepere() {
 }
 
 //herite de edt::openCarte
-string Modele::openCarte(const string &chemin) {
+CEGUI::String Modele::openCarte(CEGUI::String chemin) {
     current_map = chemin;
     return cce::Modele::openCarte(chemin);
 }
 
-string Modele::getCurrentMap() {
+CEGUI::String Modele::getCurrentMap() {
     return current_map;
 }
 
@@ -58,18 +58,17 @@ void Modele::nouvelleCarte()
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
 }
 
-string Modele::saveCarte(const string &chemin) {
+CEGUI::String Modele::saveCarte(CEGUI::String chemin) {
     current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
-    return "La carte "+chemin+" a bien ete sauvegardee";
+    return "La carte "+chemin+" a bien été sauvegardée";
 }
 
 
-string Modele::saveCarte() {
-    if(current_map != "" && !bib::onlySpaceCharacter(current_map)) {
-        LOG_DEBUG(" saveCarte de merde");
+CEGUI::String Modele::saveCarte() {
+    if(current_map != "" && !bib::onlySpaceCharacter(current_map.c_str())) {
         bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
-        return "La carte "+current_map+" a bien ete sauvegardee";
+        return "La carte "+current_map+" a bien été sauvegardée";
     } else {
         return "Veuillez saisir un nom de carte";
     }
