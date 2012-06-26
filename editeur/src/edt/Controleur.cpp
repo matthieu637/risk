@@ -167,7 +167,7 @@ void Controleur::onZoom(thor::ActionContext < string > context) {
     m->zoom(ticks);
 }
 
-void Controleur::onWindowResized(thor::ActionContext<string> context) {
+bool Controleur::onWindowResized(thor::ActionContext<string> context) {
     m->windowResized(context.event->size.width, context.event->size.height);
     return true;
 }
@@ -236,6 +236,7 @@ int Controleur::getY(int mouseY) {
 
 bool Controleur::onSetSpawn(const CEGUI::EventArgs &e)
 {
+    (void)e;
     setSpawn = true;
     return true;
 }
