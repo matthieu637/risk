@@ -264,9 +264,7 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
 
 bool Controleur::onQuit(const CEGUI::EventArgs & e) {
     (void) e;
-    //
-    m->quit();
-    
+    gui->getConsole()->afficherCommande("/quit");   
     return true;
 }
 
