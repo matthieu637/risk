@@ -7,10 +7,10 @@ project(Client CXX)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 
-#Détection de l'OS
+#DÃ©tection de l'OS
 include(${CMAKE_SOURCE_DIR}/cmake/OS.cmake)
 
-#Définition des variables globales
+#DÃ©finition des variables globales
 include(${CMAKE_SOURCE_DIR}/cmake/Variables.cmake)
 
 #Trouve Boost
@@ -22,7 +22,7 @@ find_package(Thor REQUIRED)
 #Source & headers
 file ( GLOB_RECURSE sources src/*.cpp include/*.hpp)
 
-#### Création de l'exécutable ####
+#### CrÃ©ation de l'exÃ©cutable ####
 if(WINDOWS AND LINK-MAIN)
 	add_executable (client WIN32 ${sources} )
 else()
