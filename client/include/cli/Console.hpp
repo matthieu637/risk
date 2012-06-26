@@ -10,8 +10,8 @@ class Console : public cce::Console
 {
 public:
     Console(Modele *modele);
-    CEGUI::String onOpen(const CEGUI::String& s);
-    CEGUI::String onQuit(const CEGUI::String& s);
+    string onOpen(const std::string& s);
+    string onQuit(const std::string& s);
 private:
 
     Modele* m;
