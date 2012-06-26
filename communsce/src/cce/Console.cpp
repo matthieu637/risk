@@ -178,7 +178,23 @@ void Console::ParseText(CEGUI::String inMsg)
  
 string Console::onHelp(const string& s){
    (void) s;
-   std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
+   string outString = "commande /help : affiche les commandes disponibles\n";
+   outString += "commande /save : enregistre la carte courante\n";
+   outString += "commande /save chemin : enregistre la carte sous le nom du chemin donné\n";
+   outString += "commande /open chemin : charge la carte ayant pour nom le chemin donné\n";
+   outString += "commande /quit : quitte l'éditeur\n";
+   outString += "commande /redimensionner x y : redimensionne la carte aux dimensions x et y\n";
+   outString += "commande /new_map : charge une carte vide";
+    
+   outString += "touche escape : ferme la console\n"; //le curseur doit être dans la console
+   outString += "touche enter :  affiche le message sur la console\n";//le curseur doit être dans la console
+   outString += "touche c : ouvre une console\n";
+   outString += "touche t : affiche la palette des tiles\n";
+   outString += "touche d : affiche la palette des décors\n";
+   outString += "touche r : affiche la palette des régions\n";
+   outString += "touche p : affiche la palette des pays\n";
+   outString += "touche espace : pour se mettre en mode sélection\n";
+   
   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
   return outString;
 }
@@ -186,7 +202,6 @@ string Console::onHelp(const string& s){
 
 void Console::OutputText(CEGUI::String message, CEGUI::colour colour)
 {
-
     // Get a pointer to the ChatBox so we don't have to use this ugly getChild function everytime.
     CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
 
