@@ -38,6 +38,7 @@ Console::Console()
     }
         
     mapCommandes["help"] = BIND(&Console::onHelp);
+    confirmQuit = false;
     
 }
 
@@ -76,6 +77,10 @@ void Console::afficherCommande(const string& s){
 bool Console::ignore(const CEGUI::EventArgs& e)
 {
   return true;
+}
+
+bool Console::getConfirmQuit(){
+    return confirmQuit;
 }
 
 bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
@@ -119,6 +124,12 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
     (this)->ParseText(Msg);
     m_ConsoleWindow->getChild("Console/EditBox")->setText("");
     return true;
+   }else if ((CEGUI::Key::Y == keyEvent.scancode)){
+      confirmQuit = true;
+      return true;
+   }else if ((CEGUI::Key::N == keyEvent.scancode)){
+      confirmQuit = false;
+      return true;
    }
    return false;
 }

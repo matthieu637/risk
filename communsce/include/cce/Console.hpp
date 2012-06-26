@@ -23,6 +23,8 @@ namespace cce{
        void setVisible(bool visible);         
        bool isVisible();                     
        void afficherCommande(const string& s);
+       bool getConfirmQuit();
+       void OutputText(const string&  inMsg,CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); 
        typedef void (EventConsole)(const string&);
        
     private:
@@ -32,8 +34,7 @@ namespace cce{
        bool Handle_ButtonKeyPressed(const CEGUI::EventArgs &e);
        bool ignore(const CEGUI::EventArgs& e);
        void ParseText(CEGUI::String inMsg);                       
-       void OutputText(const string&  inMsg,                       
-		       CEGUI::colour colour = CEGUI::colour( 0xFFFFFFFF)); 
+       
        string onHelp(const string& s);
  
        CEGUI::Window *m_ConsoleWindow;                            // This will be a pointer to the Console window.
@@ -42,6 +43,8 @@ namespace cce{
   protected:
     std::map <std::string, std::function<string(const string &)> > mapCommandes; 
     std::deque <std::string> commandeHistorique;
+    bool confirmQuit;
+   
       
   };
 
