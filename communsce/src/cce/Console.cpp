@@ -193,7 +193,7 @@ string Console::onHelp(const string& s){
    outString += "touche d : affiche la palette des décors\n";
    outString += "touche r : affiche la palette des régions\n";
    outString += "touche p : affiche la palette des pays\n";
-   outString += "touche espace : pour se mettre en mode sélection\n";
+   outString += "touche space : pour se mettre en mode sélection\n";
    
   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
   return outString;
