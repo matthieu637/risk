@@ -43,7 +43,7 @@ virtual ~Pays();
 ///\brief obtenir une région
 ///\return Retourne une région associée à l'argument 
 ///
-    Region getRegion(string nom);
+    Region* getRegion(const string& nom);
     
 ///	    
 ///

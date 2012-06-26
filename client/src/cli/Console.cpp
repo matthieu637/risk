@@ -12,12 +12,12 @@ Console::Console(Modele *modele) : cce::Console()
     m = modele;
 }
 
-CEGUI::String Console::onOpen(const CEGUI::String& s) {
+string Console::onOpen(const std::string& s) {
     LOG_DEBUG("onOpen");
     return m->openCarte(s);
 }
 
-CEGUI::String Console::onQuit(const CEGUI::String& s) {
+string Console::onQuit(const std::string& s) {
     (void)s;
     LOG_DEBUG("onQuit");
     return "";

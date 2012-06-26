@@ -24,9 +24,9 @@ map<string,Region>* Pays::getRegions(){
     return &regions;
 }
 
-Region Pays::getRegion(string nom)
+Region* Pays::getRegion(const string& nom)
 {
-    return regions[nom];
+    return &regions[nom];
 }
 
 PointSpawn* Pays::getPointSpawn(){

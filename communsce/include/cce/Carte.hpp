@@ -54,7 +54,7 @@ public:
     
     map<string,Pays> getAllPays();
     
-    Region getRegion(const string& nom_region);
+    Region* getRegion(const string& nom_region);
    
   
 protected:
@@ -67,7 +67,6 @@ protected:
     Repere repere;
     CoucheDecor couche_decor;
     map<string,Pays> mp;
-    map<string, Region> mr;
 };
 
 }
