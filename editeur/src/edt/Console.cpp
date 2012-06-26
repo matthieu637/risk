@@ -3,7 +3,7 @@
 #include "cce/Controleur.hpp" //BIND
 #include <cce/Modele.hpp>
 #include <bib/StringUtils.hpp>
-
+#include <edt/Repere.hpp>
 
 namespace edt {
   Console::Console(const std::string& conteneur,Modele *modele) : cce::Console(conteneur)
@@ -12,6 +12,8 @@ namespace edt {
   mapCommandes["save"] = BIND(&Console::onSave);
   mapCommandes["open"] = BIND(&Console::onOpen);
   mapCommandes["quit"] = BIND(&Console::onQuit);
+  mapCommandes["redimensionner"] = BIND(&Console::onRedimensionner);
+  mapCommandes["new_map"] = BIND(&Console::onNewMap);
   m = modele;
   // mapCommandes["say"] = BIND(&Console::onSay); 
 }
@@ -28,7 +30,27 @@ string Console::onSave(const string& s){
 string Console::onOpen(const string& s){
    LOG_DEBUG("onOpen");
   return m->openCarte(s);
-   
+}
+
+string Console::onNewMap(const string& s){
+ (void) s;
+  m->nouvelleCarte();
+  return "Nouvelle carte affichée";
+}
+
+string Console::onRedimensionner(const string& s){
+  
+   std::string::size_type argEnd = s.find(" ", 1);
+   std::string x = s.substr(0, argEnd);
+   std::string y = s.substr(argEnd + 1); 
+
+  if(s.find(' ') == s.npos)
+    return "vous devez utiliser la commande : /redimensionner x y";
+  else{
+    edt::Repere* r = static_cast<edt::Repere*> (m->getCarte()->getRepere());
+    r->redimensionner(atoi(x.c_str()), atoi(y.c_str()));
+    return "Carte redimensionnée aux dimensions " + x+ "x" + y;
+}
 }
 
 string Console::onQuit(const string& s){

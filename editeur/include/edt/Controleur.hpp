@@ -51,6 +51,8 @@ namespace cce {
 	bool onSaveAs(const CEGUI::EventArgs & e);
 	bool onOpen(const CEGUI::EventArgs & e);
 	bool onOpenConsoleClick(const CEGUI::EventArgs & e);
+	bool onRedimensionner(const CEGUI::EventArgs & e);
+	bool onNewMap(const CEGUI::EventArgs & e);
 	bool onMainScrollVertChange(const CEGUI::EventArgs & e);
 	bool onMainScrollHoriChange(const CEGUI::EventArgs & e);
 	bool onChoixPalette(const CEGUI::EventArgs & e);

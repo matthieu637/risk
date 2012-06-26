@@ -96,6 +96,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("ouvrir", BIND(&Controleur::onOpen));
     moduleGUI->ajouterHandler("console", BIND(&Controleur::onOpenConsoleClick));
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
+    moduleGUI->ajouterHandler("redimensionner", BIND(&Controleur::onRedimensionner));
+    moduleGUI->ajouterHandler("new_map", BIND(&Controleur::onNewMap));
 
     gui->setScriptModule(moduleGUI);
 }
@@ -167,6 +169,7 @@ void Controleur::onZoom(thor::ActionContext < string > context) {
 
 void Controleur::onWindowResized(thor::ActionContext<string> context) {
     m->windowResized(context.event->size.width, context.event->size.height);
+    return true;
 }
 
 void Controleur::onResetZoom(thor::ActionContext < string > context) {
@@ -291,7 +294,20 @@ bool Controleur::onOpenConsole(thor::ActionContext < string > context){
 
 bool Controleur::onOpenConsoleClick(const CEGUI::EventArgs& e){
     (void) e;
-    gui->getConsole()->setVisible(true);;
+    gui->getConsole()->setVisible(true);
+    return true;
+}
+
+bool Controleur::onRedimensionner(const CEGUI::EventArgs& e){
+    (void) e;
+    gui->getConsole()->afficherCommande("/redimensionner");
+    return true;  
+}
+
+bool Controleur::onNewMap(const CEGUI::EventArgs & e) {
+    (void) e;
+    gui->getConsole()->afficherCommande("/new_map");
+    return true;
 }
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
