@@ -28,7 +28,6 @@ string Console::onSave(const string& s) {
 }
 
 string Console::onOpen(const string& s) {
-    LOG_DEBUG("onOpen "+s);
     return m->openCarte(s);
 }
 
@@ -54,7 +53,7 @@ string Console::onRedimensionner(const string& s) {
 
 string Console::onQuit(const string& s) {
     (void)s;
-    LOG_DEBUG("onQuit");
+    m->quit();
     return "";
 }
 

@@ -264,7 +264,9 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
 
 bool Controleur::onQuit(const CEGUI::EventArgs & e) {
     (void) e;
-    engine->getFenetre()->close();
+    //
+    m->quit();
+    
     return true;
 }
 

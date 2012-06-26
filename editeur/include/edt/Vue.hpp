@@ -44,6 +44,8 @@ public:
     void updateXCamera(int x);
     
     void updateScrolls();
+   
+    void quit();
     
     void initScrolls(int largeur, int hauteur);
     

@@ -11,6 +11,7 @@
 #include <string>
 #include <CEGUI/CEGUI.h>
 #include <bib/StringUtils.hpp>
+#include "cce/MoteurSFML.hpp"
 
 using std::list;
 using std::string;
@@ -73,6 +74,13 @@ string Modele::saveCarte() {
         return "La carte "+current_map+" a bien été sauvegardée";
     } else {
         return "Veuillez saisir un nom de carte";
+    }
+}
+
+
+void Modele::quit(){
+     for (it = vues.begin(); it != vues.end(); it++) {
+        ((Vue*)*it)->quit();
     }
 }
 

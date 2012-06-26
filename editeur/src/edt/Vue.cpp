@@ -54,6 +54,12 @@ void Vue::updateScrolls()
     hori->setScrollPosition(camera->getCenter().x);
 }
 
+void Vue::quit()
+{
+   engine->getFenetre()->close();
+}
+
+
 void Vue::initScrolls(int largeur, int hauteur)
 {
     getGUI()->initScrollPane(largeur, hauteur);
