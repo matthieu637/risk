@@ -40,9 +40,12 @@ map<string, Region>* Carte::getAllRegions()
       return mp;
     }
     
-    Region Carte::getRegion(const string& nom_region)
+    Region* Carte::getRegion(const string& nom_region)
     {
-      return mr[nom_region];
+       map <string,Pays>::iterator it;
+       for (it = mp.begin(); it != mp.end(); it++)
+	 if(it->second.getRegion(nom_region) != nullptr)
+	  return it->second.getRegion(nom_region);
     }
     
 

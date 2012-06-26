@@ -60,7 +60,6 @@ void PaletteRegions::init(GUI const *gui, string nom, Carte* c)
     eboxinc->setHeight(UDim(0.0f,25));
     eboxinc->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,28)));
     
-    eboxinc->subscribeEvent(CEGUI::Editbox::EventKeyDown, CEGUI::Event::Subscriber(&PaletteRegions::onIncomeChange, this));
 }
 
 void PaletteRegions::updateListRegions(list<string> noms)
@@ -78,7 +77,8 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     lbti=lbox->getFirstSelectedItem();
     ebox->setText(lbti->getText());
-    oss << carte->getRegion(lbti->getText().c_str()).getIncome();
+    oss << carte->getRegion(lbti->getText().c_str())->getIncome();
+    LOG_DEBUG(carte->getRegion(lbti->getText().c_str())->getIncome());
     eboxinc->setText(oss.str());
     return true;
 }
@@ -86,10 +86,6 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
 bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
 {
     const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
-    /*if(carte->getAllPays()==lbti->getText())
-    {
-      mettre à jour le nom de la région dans la map de la classe Pays
-    }*/
     if (!(CEGUI::Key::Backspace == keyEvent.scancode)){
     lbti->setText(ebox->getText());
     lbox->handleUpdatedItemData();
@@ -98,11 +94,5 @@ bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
     return false;	
 }
 
-bool PaletteRegions::onIncomeChange(const CEGUI::EventArgs &e)
-{
-   //const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
-   
-   
-}
 
 }
