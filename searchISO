@@ -1,0 +1,31 @@
+#!/bin/bash
+
+tmp=`mktemp`
+
+find . | grep -v .git | while read file
+do
+	file -i $file | grep -v utf-8 | grep -v us-ascii | grep -v binary
+	if [ $? -eq 0 ]; then
+		echo $file >> $tmp
+	fi
+done
+
+echo "convert to UTF-8 y/n?"
+read n
+
+if [ "$n" == "y" ]; then
+
+cat $tmp | while read file
+do
+	tmp2=`mktemp`
+	cp $file $tmp2
+	iconv -f iso-8859-1 -t utf-8 < $tmp2   > $file
+	rm $tmp2
+done
+
+fi
+
+rm $tmp
+
+
+
