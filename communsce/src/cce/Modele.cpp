@@ -33,6 +33,7 @@ CEGUI::String Modele::openCarte(CEGUI::String chemin) {
     LOG_DEBUG("modele->openCarte->chemin "+chemin);
     ifstream fichier(chemin.c_str(), std::ios::in);
     if(fichier){
+	  delete carte;
 	  carte =  bib::XMLEngine::load<cce::Carte>("CARTE",chemin.c_str());
 	  return "La carte "+chemin+" a bien été chargée";
     }else{
