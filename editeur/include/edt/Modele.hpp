@@ -12,7 +12,7 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <cce/Modele.hpp>
 #include <string>
-#include <CEGUI/CEGUIString.h>
+
 
 using std::string;
 
@@ -110,10 +110,10 @@ public:
 ///
 ///\brief sauvegarde une carte 
 ///
-    CEGUI::String saveCarte(CEGUI::String chemin);
-    CEGUI::String saveCarte();
-    CEGUI::String openCarte(CEGUI::String chemin);
-    CEGUI::String getCurrentMap();
+    string saveCarte(const string&  chemin);
+    string saveCarte();
+    string openCarte(const string& chemin);
+    string getCurrentMap();
     
 ///
 ///\brief Choisir la palette
@@ -140,7 +140,7 @@ public:
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
     list < cce::Vue * >::iterator it;
-    CEGUI::String current_map;
+    string current_map;
     
 };
 

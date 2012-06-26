@@ -3,7 +3,7 @@
 
 #include "cce/Console.hpp"
 #include "edt/Modele.hpp"
-#include <CEGUI/CEGUIString.h>
+
 
 namespace edt{
 
@@ -13,11 +13,11 @@ namespace edt{
        Console(Modele *modele);
        
   private:
-    CEGUI::String onSave(CEGUI::String s);
-    CEGUI::String onOpen(CEGUI::String s);
-    CEGUI::String onQuit(CEGUI::String s);
-    CEGUI::String onRedimensionner(CEGUI::String s);
-    CEGUI::String onNewMap(CEGUI::String s);
+    string onSave(const string& s);
+    string onOpen(const string& s);
+    string onQuit(const string& s);
+    string onRedimensionner(const string& s);
+    string onNewMap(const string& s);
     
     Modele* m;
   };

@@ -57,7 +57,7 @@ void Console::RegisterHandlers()
 }
 
 
-void Console::afficherCommande(CEGUI::String s){
+void Console::afficherCommande(const string& s){
   setVisible(true);
   CEGUI::Window *w =  CEGUI::System::getSingleton().getGUISheet()->getChild("Console");
   w->getChild("Console/EditBox")->setText(s);;
@@ -128,27 +128,27 @@ bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
 
 void Console::ParseText(CEGUI::String inMsg)
 {
-  
-    if (inMsg.length() >= 1) 
+    string inString = inMsg.c_str();
+    if (inString.length() >= 1) 
     {
-        if (inMsg.at(0) == '/') // Check if the first letter is a 'command'
+        if (inString.at(0) == '/') // Check if the first letter is a 'command'
         {
-            CEGUI::String::size_type commandEnd = inMsg.find(" ", 1);
-            CEGUI::String command = inMsg.substr(1, commandEnd - 1);
+            string::size_type commandEnd = inString.find(" ", 1);
+            string command = inString.substr(1, commandEnd - 1);
             //std::string commandArgs = inString.substr(commandEnd + 1, inString.length() - (commandEnd + 1));
-	    CEGUI::String commandArgs; 
+	    string commandArgs; 
 	    
-	    if(inMsg.find(' ') == inMsg.npos)
+	    if(inString.find(' ') == inString.npos)
 	      commandArgs = "";
 	    else
-	      commandArgs = inMsg.substr(commandEnd + 1);
+	      commandArgs = inString.substr(commandEnd + 1);
             
-            for(CEGUI::String::size_type i=0; i < command.length(); i++)
+            for(string::size_type i=0; i < command.length(); i++)
             {
                 command[i] = tolower(command[i]);
             }
-	    CEGUI::String rep;
-	    std::map <std::string, std::function<CEGUI::String(CEGUI::String)> >::iterator it;
+	    string rep;
+	    std::map <std::string, std::function<string(const string&)> >::iterator it;
 	    for(it = mapCommandes.begin(); it != mapCommandes.end(); it++)
 	    {
 		if(it->first == command){
@@ -157,25 +157,25 @@ void Console::ParseText(CEGUI::String inMsg)
 		  }else{
 		      rep = it->second(commandArgs);
 		  }
-		  (this)->OutputText(inMsg);
+		  (this)->OutputText(inString);
 		  LOG_DEBUG(rep);
 		  (this)->OutputText(rep);
-		 commandeHistorique.push_back(inMsg.c_str());
+		 commandeHistorique.push_back(inString);
 		  break;
 		}
 	     }
         } 
         else
-        {   commandeHistorique.push_back(inMsg.c_str());
-            (this)->OutputText(inMsg); // no commands, just output what they wrote
+        {   commandeHistorique.push_back(inString);
+            (this)->OutputText(inString); // no commands, just output what they wrote
         }
     }
 }
 
  
-CEGUI::String Console::onHelp(CEGUI::String s){
+string Console::onHelp(const string&  s){
    (void) s;
-   CEGUI::String outString = "commande /help : affiche les commandes disponibles\n";
+   string outString = "commande /help : affiche les commandes disponibles\n";
    outString += "commande /save : enregistre la carte courante\n";
    outString += "commande /save chemin : enregistre la carte sous le nom du chemin donné\n";
    outString += "commande /open chemin : charge la carte ayant pour nom le chemin donné\n";
@@ -197,14 +197,14 @@ CEGUI::String Console::onHelp(CEGUI::String s){
 }
 
 
-void Console::OutputText(CEGUI::String message, CEGUI::colour colour)
+void Console::OutputText(const string& message, CEGUI::colour colour)
 {
     // Get a pointer to the ChatBox so we don't have to use this ugly getChild function everytime.
     CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
 
     //CEGUI::FormattedListboxTextItem *newItem=0; // This will hold the actual text and will be the listbox segment / item
     CEGUI::ListboxTextItem *newItem=0;
-    newItem = new CEGUI::ListboxTextItem(message,CEGUI::HTF_WORDWRAP_LEFT_ALIGNED); // Instance the Item with Left
+    newItem = new CEGUI::ListboxTextItem(CEGUI::String((const CEGUI::utf8*) message.c_str()),CEGUI::HTF_WORDWRAP_LEFT_ALIGNED); // Instance the Item with Left
     //   wordwrapped alignmentoutputWindow->getVertScrollbar()->
     newItem->setTextColours(colour); // Set the text color
     outputWindow->addItem(newItem); // Add the new ListBoxTextItem to the ListBox
