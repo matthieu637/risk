@@ -15,7 +15,7 @@ namespace CEGUI{
 }
 namespace edt{
 
-class Carte;
+class Modele;
   
 class GUI;
 
@@ -24,7 +24,7 @@ class PaletteRegions : public cce::Palette
 public :
   PaletteRegions();
   virtual ~PaletteRegions();
-  void init(GUI const *gui, string nom, Carte* c);
+  void init(GUI const *gui, string nom, Modele* m);
   void updateListRegions(list<string> noms);
   bool onNameChange(const CEGUI::EventArgs &e);
   bool onChangeSelection(const CEGUI::EventArgs &e);
@@ -35,7 +35,7 @@ private :
   CEGUI::Editbox* ebox;
   CEGUI::Editbox* eboxinc;
   CEGUI::ListboxItem* lbti;
-  Carte* carte;
+  Modele* modele;
 };
 }
 

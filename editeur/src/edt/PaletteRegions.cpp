@@ -8,6 +8,7 @@
 #include "edt/Region.hpp"
 #include "edt/GUI.hpp"
 #include <edt/Carte.hpp>
+#include <edt/Modele.hpp>
 #include "cce/Carte.hpp"
 
 using CEGUI::WindowManager;
@@ -28,16 +29,16 @@ PaletteRegions::~PaletteRegions()
   
 }
 
-void PaletteRegions::init(GUI const *gui, string nom, Carte* c)
+void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
 {
     Palette::init(gui, nom);
     
-    carte=c;
+    modele=m;
     lbox = static_cast<Listbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Listbox", "PaletteFrames/Regions/ListboxRegions"));
     fenetre->addChildWindow(lbox);
     lbox->setWidth(UDim(1.0f,0));
     lbox->setHeight(UDim(0.75f,0));
-    map<string, cce::Region>* lr= c->getAllRegions();
+    map<string, cce::Region>* lr= m->getCarte()->getAllRegions();
     
     map<string, cce::Region>::iterator it;
     for(it = lr->begin(); it != lr->end(); it++)
@@ -77,8 +78,8 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     lbti=lbox->getFirstSelectedItem();
     ebox->setText(lbti->getText());
-    oss << carte->getRegion(lbti->getText().c_str())->getIncome();
-    LOG_DEBUG(carte->getRegion(lbti->getText().c_str())->getIncome());
+    oss << modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome();
+    LOG_DEBUG(modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome());
     eboxinc->setText(oss.str());
     return true;
 }

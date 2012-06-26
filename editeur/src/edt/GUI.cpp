@@ -42,7 +42,7 @@ void GUI::init(Modele* modele, Controleur* controleur)
     palette_pays = new PalettePays();
     palette_pays->init(this, "PaletteFrames/Pays", (edt::Controleur*)controleur);
     palette_regions = new PaletteRegions();
-    palette_regions->init(this, "PaletteFrames/Regions", c);
+    palette_regions->init(this, "PaletteFrames/Regions", modele);
     
     console = new edt::Console(modele);
     
