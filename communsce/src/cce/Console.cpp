@@ -130,23 +130,21 @@ bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
 void Console::ParseText(CEGUI::String inMsg)
 {
   
-    std::string inString = inMsg.c_str();
-
-    if (inString.length() >= 1) 
+    if (inMsg.length() >= 1) 
     {
-        if (inString.at(0) == '/') // Check if the first letter is a 'command'
+        if (inMsg.at(0) == '/') // Check if the first letter is a 'command'
         {
-            std::string::size_type commandEnd = inString.find(" ", 1);
-            std::string command = inString.substr(1, commandEnd - 1);
+            CEGUI::String::size_type commandEnd = inMsg.find(" ", 1);
+            CEGUI::String command = inMsg.substr(1, commandEnd - 1);
             //std::string commandArgs = inString.substr(commandEnd + 1, inString.length() - (commandEnd + 1));
-	    std::string commandArgs; 
+	    CEGUI::String commandArgs; 
 	    
-	    if(inString.find(' ') == inString.npos)
+	    if(inMsg.find(' ') == inMsg.npos)
 	      commandArgs = "";
 	    else
-	      commandArgs = inString.substr(commandEnd + 1);
+	      commandArgs = inMsg.substr(commandEnd + 1);
             
-            for(std::string::size_type i=0; i < command.length(); i++)
+            for(CEGUI::String::size_type i=0; i < command.length(); i++)
             {
                 command[i] = tolower(command[i]);
             }
@@ -163,14 +161,13 @@ void Console::ParseText(CEGUI::String inMsg)
 		  (this)->OutputText(inMsg);
 		  LOG_DEBUG(rep);
 		  (this)->OutputText(rep);
-		 commandeHistorique.push_back(inString);
-		  //commandeHistorique.insert(inString);
+		 commandeHistorique.push_back(inMsg.c_str());
 		  break;
 		}
 	     }
         } 
         else
-        {   commandeHistorique.push_back(inString);
+        {   commandeHistorique.push_back(inMsg.c_str());
             (this)->OutputText(inMsg); // no commands, just output what they wrote
         }
     }
@@ -181,20 +178,20 @@ CEGUI::String Console::onHelp(CEGUI::String s){
    (void) s;
    CEGUI::String outString = "commande /help : affiche les commandes disponibles\n";
    outString += "commande /save : enregistre la carte courante\n";
-   outString += "commande /save chemin : enregistre la carte sous le nom du chemin donné\n";
-   outString += "commande /open chemin : charge la carte ayant pour nom le chemin donné\n";
-   outString += "commande /quit : quitte l'éditeur\n";
+   outString += "commande /save chemin : enregistre la carte sous le nom du chemin donnÃ©\n";
+   outString += "commande /open chemin : charge la carte ayant pour nom le chemin donnÃ©\n";
+   outString += "commande /quit : quitte l'Ã©diteur\n";
    outString += "commande /redimensionner x y : redimensionne la carte aux dimensions x et y\n";
-   outString += "commande /new_map : charge une carte vide";
+   outString += "commande /new_map : charge une carte vide\n\n";
     
    outString += "touche escape : ferme la console\n"; //le curseur doit Ãªtre dans la console
    outString += "touche enter :  affiche le message sur la console\n";//le curseur doit Ãªtre dans la console
    outString += "touche c : ouvre une console\n";
    outString += "touche t : affiche la palette des tiles\n";
    outString += "touche d : affiche la palette des dÃ©cors\n";
-   outString += "touche r : affiche la palette des régions\n";
+   outString += "touche r : affiche la palette des rÃ©gions\n";
    outString += "touche p : affiche la palette des pays\n";
-   outString += "touche space : pour se mettre en mode sélection\n";
+   outString += "touche space : pour se mettre en mode sÃ©lection\n";
    
   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
   return outString;

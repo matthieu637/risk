@@ -30,13 +30,13 @@ void Modele::update()
 }
 
 CEGUI::String Modele::openCarte(CEGUI::String chemin) {
-    LOG_DEBUG("modele->openCarte->chemin "+chemin);
+    LOG_DEBUG(chemin);
     ifstream fichier(chemin.c_str(), std::ios::in);
     if(fichier){
 	  carte =  bib::XMLEngine::load<cce::Carte>("CARTE",chemin.c_str());
-	  return "La carte "+chemin+" a bien été chargée";
+	  return "La carte "+chemin+" a bien Ã©tÃ© chargÃ©e";
     }else{
-	  return "La carte "+chemin+" n'existe pas";
+      return "La carte "+chemin+" n'existe pas";
     }
     fichier.close();
 }
