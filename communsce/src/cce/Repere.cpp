@@ -49,23 +49,23 @@ int Repere::getIndice(int x, int y) const {
         if (x_rect <= l_tile_demi) {
             if (y_rect < h_tile_demi - demi_h_sur_demi_l * x_rect)
                 //triangle haut gauche
-                if (indice >= largeur) //ne pas déborder du tableau
+                if (indice >= largeur && indice%largeur != 0) //ne pas déborder du tableau ni à gauche
                     indice -= largeur + 1;
         }
         else if (y_rect < demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
 		//triangle haut droite
-		if (indice >= largeur) //ne pas déborder du tableau
+		if (indice >= largeur && indice%largeur != largeur - 1) //ne pas déborder du tableau ni à droite
 		    indice -= largeur;
     }
     else if (x_rect <= l_tile_demi) {
 	    if (y_rect - h_tile_demi > demi_h_sur_demi_l * x_rect)
 		//triangle bas gauche
-		if (indice <= nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
+		if (indice <= nbTiles_sans_derniere_ligne && indice%largeur != 0) //ne pas déborder du tableau ni à gauche
 		    indice += largeur - 1;
 	  }
 	else if (y_rect - h_tile_demi > h_tile_demi - demi_h_sur_demi_l * (x_rect - (float)l_tile_demi))
 		//triangle bas droite
-		if (indice < nbTiles_sans_derniere_ligne) //ne pas déborder du tableau
+		if (indice < nbTiles_sans_derniere_ligne && indice%largeur != largeur - 1) //ne pas déborder du tableau ni à droite
 		    indice += largeur;
 
     if(indice >= nbTiles)
@@ -82,34 +82,34 @@ void Repere::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
     //cherche le point en haut à gauche de l'écran
     int gauche = centre.x - taille.x/2;
-    int haut = centre.y - taille.y /2;
+    int haut = centre.y - taille.y/2;
+    if(gauche < 0)
+      gauche = 0;
+    if(haut < 0)
+      haut = 0;
 
     //trouve sa tile
     int indice_debut = getIndice(gauche, haut);
-    if (indice_debut - largeur >=0 ) //dessine 1 tile plus haut si possible
-        indice_debut -= largeur;
-    if (indice_debut % largeur > 0 ) //dessine 1 tile plus à gauche si possible
-        indice_debut--;
+    
+    //decalage d'une tile vers la gauche si possible
+    if(indice_debut % largeur != 0)
+      indice_debut--;
+    if(indice_debut / largeur > 0)
+      indice_debut -= largeur;
 
     //trouve le nombre de tile en largeur et en hauteur à afficher
-    int nbTileLargeur = (taille.x / l_tile) + 3;
-    int nbTileHauteur = (taille.y / h_tile) + 3;
-
+    int nbTileLargeur = (taille.x / l_tile) + 4;
+    int nbTileHauteur = (taille.y / h_tile) * 2 + 4;
 
     //si la zone de vue est plus grande que la carte
-    if ( indice_debut%largeur + nbTileLargeur >= largeur ) //reduit la largeur
+    if (indice_debut%largeur + nbTileLargeur >= largeur) //reduit la largeur
         nbTileLargeur = largeur - indice_debut%largeur;
-    if ( indice_debut/largeur + nbTileHauteur*2 >= hauteur) { //réduit la hauteur
-        nbTileHauteur = (hauteur - (indice_debut/largeur))/2;
-    }
-/*
-    for(int indice_ligne= indice_debut ; indice_ligne < nbTileHauteur*2 ; indice_ligne++)
-        for(int indice_colonne= indice_debut; indice_colonne < indice_debut + nbTileLargeur ; indice_colonne++)
-            target.draw(tiles[indice_ligne*largeur + indice_colonne], states);
-    */
-    for(int i=0;i<nbTiles;i++)
-       target.draw(tiles[i], states);
+    if (indice_debut/largeur + nbTileHauteur >= hauteur) //reduit la hauteur
+        nbTileHauteur = hauteur - (indice_debut/largeur);
 
+    for(int i = 0; i < nbTileHauteur; i++)
+        for(int j = 0; j < nbTileLargeur; j++)
+            target.draw(tiles[indice_debut + i*largeur + j], states);
 }
 
 

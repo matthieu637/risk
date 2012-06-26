@@ -33,7 +33,7 @@ string Modele::openCarte(const std::string & chemin) {
     ifstream fichier(chemin, std::ios::in);
     if(fichier){  
 	  carte =  bib::XMLEngine::load<cce::Carte>("CARTE",chemin);
-	  return "La carte "+chemin+" a bien ete chargee";
+	  return "La carte "+chemin+" a bien ete chargée";
     }else{
 	  return "La carte "+chemin+" n existe pas";
     }
