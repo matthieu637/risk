@@ -7,13 +7,12 @@
 #include "cce/UpgradeTemplate.hpp"
 #include <boost/serialization/list.hpp>
 #include "cce/Flag.hpp"
+#include "cce/Polygon.hpp"
 
 using std::string;
 using std::list;
 
 namespace cce {
-  
-class Polygon;
   
 class Region
 {
@@ -58,7 +57,7 @@ public:
         (void)version;
         ar & make_nvp("income", income);
         ar & make_nvp("Flag", flag);
-        //ar & make_nvp("zone", zone);
+        ar & make_nvp("Polygon", zone);
         ar & make_nvp("Upgrades", upgrades);
         ar & make_nvp("Tiles",tiles);
     }
@@ -66,7 +65,7 @@ public:
 
 protected:
     int income;
-    Polygon* zone;
+    Polygon zone;
     list<UpgradeTemplate> upgrades;
     list<Tile> tiles;
     Flag* flag;

@@ -2,9 +2,11 @@
 #define POLYGON_HPP
 
 #include "cce/Point.hpp"
-#include <vector>
+#include <deque>
+#include <boost/serialization/deque.hpp>
 
-using std::vector;
+using std::deque;
+using boost::serialization::make_nvp;
 
 namespace cce{
 
@@ -19,8 +21,15 @@ public:
 
   bool contient(Point p);
   
+      template<class Archive>
+    void serialize(Archive& ar, const unsigned int version)
+    {
+        (void)version;
+        ar & make_nvp("Points", points);    
+    }
+  
 private:
-  vector<Point> points;
+  deque<Point> points;
 };
 
 }

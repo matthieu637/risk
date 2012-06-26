@@ -7535,11 +7535,17 @@
 								<y>10</y>
 								<id>200000000</id>
 							</Flag>
-							<Upgrades class_id="12" tracking_level="0" version="0">
+							<Polygon class_id="12" tracking_level="0" version="0">
+								<Points class_id="13" tracking_level="0" version="0" >
+									<count>0</count>
+									<item_version>0</item_version>
+								</Points>
+							</Polygon>
+							<Upgrades class_id="14" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</Upgrades>
-							<Tiles class_id="13" tracking_level="0" version="0">
+							<Tiles class_id="15" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</Tiles>

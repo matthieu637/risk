@@ -16,7 +16,7 @@ int Region::getIncome(){
 }
 
 Polygon* Region::getZone(){
-	return zone;
+	return &zone;
 }
 
 list<UpgradeTemplate> Region::getUpgrades(){
