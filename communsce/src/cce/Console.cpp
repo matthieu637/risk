@@ -101,10 +101,6 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
       return true;
-   }else if ((CEGUI::Key::Escape == keyEvent.scancode)){
-      setVisible(false);
-      return true;
-      
    }else if ((CEGUI::Key::Return == keyEvent.scancode)){
     index = -1;
     CEGUI::String Msg = m_ConsoleWindow->getChild("Console/EditBox")->getText();
