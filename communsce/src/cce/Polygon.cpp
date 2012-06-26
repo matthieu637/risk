@@ -24,7 +24,7 @@ void Polygon::addPoint(Point p)
 bool Polygon::contient(Point p)
 {
   int counter = 0;
-  int i;
+  unsigned int i;
   double xinters;
   Point p1,p2;
 

@@ -16,7 +16,9 @@ public:
   Palette();
   virtual ~Palette();
 
-  void init(const GUI* gui, const string& conteneur, string nom);
+  void init(const GUI* gui, string nom);
+  
+  bool onClose(const CEGUI::EventArgs&);
 
 protected:
   CEGUI::FrameWindow* fenetre;

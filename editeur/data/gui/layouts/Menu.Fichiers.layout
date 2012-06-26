@@ -12,6 +12,7 @@
 	  <Property Name="Text" Value="Nouveau" />
 	  <Property Name="Tooltip" Value="Crée une nouvelle carte dans un nouvel onglet" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="new_map" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Fichier/Ouvrir" >
 	  <Property Name="Text" Value="Ouvrir" />
@@ -29,6 +30,7 @@
 	  <Property Name="Text" Value="Enregistrer Sous" />
 	  <Property Name="Tooltip" Value="Définit un nouveau chemin d'enregistrement" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="enregistrerSous" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Fichier/Quitter" >
 	  <Property Name="Text" Value="Quitter" />

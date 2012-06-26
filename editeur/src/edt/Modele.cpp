@@ -6,9 +6,11 @@
 #include "edt/Vue.hpp"
 #include "bib/XMLEngine.hpp"
 #include "cce/ImageManager.hpp"
+#include "cce/Decor.hpp"
 #include <list>
 #include <string>
 #include <CEGUI/CEGUI.h>
+#include <bib/StringUtils.hpp>
 
 using std::list;
 using std::string;
@@ -20,14 +22,13 @@ Modele::Modele():cce::Modele() {
     // bib::XMLEngine::save<Carte>(*carte, "Carte", "alpha.map");
 
     carte = bib::XMLEngine::load < edt::Carte > ("Carte", "data/map/sf/alpha.map");
-   // carte = new Carte; FIXME
+    // carte = new Carte; FIXME
     coeff_zoom = 1;
     tt = cce::Univers::getInstance()->getTileTemplate(100000000);
     dt = cce::Univers::getInstance()->getDecorTemplate(200000000);
-    current_pays = "Mordor";
-    tile = true;
-    decor = false;
-    region = false;
+   
+    current_map = "";
+    current_pays = "";
 }
 
 Modele::~Modele() {
@@ -42,9 +43,37 @@ Repere *Modele::getRepere() {
     return (Repere *) carte->getRepere();
 }
 
-string Modele::saveCarte(const std::string & chemin) {
+//herite de edt::openCarte
+CEGUI::String Modele::openCarte(CEGUI::String chemin) {
+    current_map = chemin;
+    return cce::Modele::openCarte(chemin);
+}
+
+CEGUI::String Modele::getCurrentMap() {
+    return current_map;
+}
+
+void Modele::nouvelleCarte()
+{
+    current_map = "";
+    delete carte;
+    carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
+}
+
+CEGUI::String Modele::saveCarte(CEGUI::String chemin) {
+    current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
-    return "La carte "+chemin+" a bien ete sauvegardee";  
+    return "La carte "+chemin+" a bien été sauvegardée";
+}
+
+
+CEGUI::String Modele::saveCarte() {
+    if(current_map != "" && !bib::onlySpaceCharacter(current_map.c_str())) {
+        bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
+        return "La carte "+current_map+" a bien été sauvegardée";
+    } else {
+        return "Veuillez saisir un nom de carte";
+    }
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY) {
@@ -63,21 +92,27 @@ void Modele::moveView(int dx, int dy, int cameraX, int cameraY) {
     if ((y < 0 && cameraY < 0) || (y > y_max && cameraY > y_max))
         y = cameraY;
 
-    vues.end();
-    for (it = vues.begin(); it != vues.end(); it++)
+    for (it = vues.begin(); it != vues.end(); it++) {
         (*it)->updateCameraPosition(x, y);
+        ((Vue*)*it)->updateScrolls();
+    }
+
 }
 
 void Modele::zoom(int ticks) {
     coeff_zoom *= 1 - ticks * 0.05;
-    for (it = vues.begin(); it != vues.end(); it++)
-        (*it)->updateCameraZoom(1 - ticks * 0.05);
+    for (it = vues.begin(); it != vues.end(); it++) {
+        ((Vue*)*it)->updateCameraZoom(1 - ticks * 0.05);
+        ((Vue*)*it)->updateScrollsThumb(coeff_zoom, carte->getRepere()->getLargeur(), carte->getRepere()->getHauteur());
+    }
 }
 
 void Modele::resetZoom() {
     coeff_zoom = 1;
-    for (it = vues.begin(); it != vues.end(); it++)
+    for (it = vues.begin(); it != vues.end(); it++) {
         (*it)->resetCameraZoom();
+        ((Vue*)*it)->updateScrollsThumb(coeff_zoom, carte->getRepere()->getLargeur(), carte->getRepere()->getHauteur());
+    }
 }
 
 void Modele::setTileTemplate(int id)
@@ -90,18 +125,39 @@ void Modele::setDecorTemplate(int id)
     dt = cce::Univers::getInstance()->getDecorTemplate(id);
 }
 
+void Modele::setDecorMove(int x, int y) {
+    carte->getCoucheDecor()->setDecorMove(x, y);
+}
+
+void Modele::moveDecor(int dx, int dy) {
+    carte->getCoucheDecor()->moveDecor(dx*coeff_zoom, dy*coeff_zoom);
+}
+
 void Modele::placeObject(int x, int y) {
-  if(tile)
-    getRepere()->setTile(tt, x, y);
-  else if(decor)
-    carte->getCoucheDecor()->addDecor(dt, x, y);
+    if(palette == tiles)
+        getRepere()->setTile(tt, x, y);
+    else if(palette == decors)
+        carte->getCoucheDecor()->addDecor(dt, x, y);
 }
 
 void Modele::deleteObject(int x, int y) {
-  if(tile)
-    getRepere()->unsetTile(x, y);
-  else if(decor)
-    carte->getCoucheDecor()->removeDecor(x, y);
+    if(palette == tiles)
+        getRepere()->unsetTile(x, y);
+    else if(palette == decors)
+        carte->getCoucheDecor()->removeDecor(x, y);
+}
+
+void Modele::setSpawn(int x, int y)
+{
+    const cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
+    if(d != nullptr)
+        ;
+    //carte->getPays(current_pays)->setSpawn();
+}
+
+void Modele::setCurrentPays(string nom)
+{
+    current_pays = nom;
 }
 
 void Modele::selectPalette(palette_type p)
@@ -109,23 +165,22 @@ void Modele::selectPalette(palette_type p)
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(false);
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(false);
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Regions"))->setVisible(false);
-    tile = false;
-    decor = false;
-    region = false;
+    ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Pays"))->setVisible(false);
+    palette = p;
     switch(p)
     {
-	case tiles:
-	  ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(true);
-	  tile = true;
-	  break;
-	case decors:
-	  ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(true);
-	  decor = true;
-	  break;
-	case regions:
-	  ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Regions"))->setVisible(true);
-	  decor = true;
-	  break;
+    case tiles:
+        ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(true);
+        break;
+    case decors:
+        ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(true);
+        break;
+    case pays:
+        ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Pays"))->setVisible(true);
+        break;
+    case regions:
+        ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Regions"))->setVisible(true);
+        break;
     }
 }
 
@@ -147,20 +202,33 @@ void Modele::addRegion(string nom)
 
 }
 
-void Modele::moveScrollVert(float pos, float size)
+void Modele::windowResized(int width, int height)
 {
-    float npos = pos/100 * (carte->getRepere()->getHauteur() - size/cce::Repere::h_tile) + size/2;
-
-    for (it = vues.begin(); it != vues.end(); it++)
-        ((Vue*)(*it))->updateScrollVert(npos);
+    for (it = vues.begin(); it != vues.end(); it++) {
+        ((Vue*)(*it))->updateSize(width, height);
+    }
+    resetZoom();
 }
 
-void Modele::moveScrollHori(float pos, float size)
+void Modele::moveScrollVert(float pos)
 {
-    float npos = pos/100 * (carte->getRepere()->getLargeur() - size/cce::Repere::l_tile) + size /2;
-
     for (it = vues.begin(); it != vues.end(); it++)
-        ((Vue*)(*it))->updateScrollHori(npos);
+        ((Vue*)(*it))->updateYCamera(pos);
 }
+
+void Modele::moveScrollHori(float pos)
+{
+    for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)(*it))->updateXCamera(pos);
+}
+
+void Modele::redimensionner(int x, int y) {
+    edt::Repere* r = static_cast<edt::Repere*> (getCarte()->getRepere());
+    r->redimensionner(x, y);
+    
+    for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)(*it))->initScrolls(x, y);
+}
+
 
 }

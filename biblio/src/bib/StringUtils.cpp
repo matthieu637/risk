@@ -2,7 +2,7 @@
 
 namespace bib {
 
-string rmNumber(const string s) {
+string rmNumber(const string& s) {
     string result;
     for(unsigned int i=0; i < s.length() ; i++)
         if(s.at(i) < 48 || s.at(i) > 57)
@@ -10,7 +10,7 @@ string rmNumber(const string s) {
     return result;
 }
 
-string rmFirstNumber(const string s) {
+string rmFirstNumber(const string& s) {
     string result;
     bool begin = true;
 
@@ -23,5 +23,15 @@ string rmFirstNumber(const string s) {
             result += s.at(i);
 
     return result;
+}
+
+bool onlySpaceCharacter(const string& s) {
+
+    for(unsigned int i=0; i < s.length() ; i++) {
+        if(s.at(i) != ' ') {
+            return false;
+        }
+    }
+    return true;
 }
 }

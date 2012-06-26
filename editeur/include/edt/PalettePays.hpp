@@ -1,12 +1,33 @@
 #ifndef PALETTEPAYS_HPP
 #define PALETTEPAYS_HPP
 
-class PalettePays
-{
+#include "cce/Palette.hpp"
+#include <string>
 
-public:
-PalettePays();
-virtual ~PalettePays();
+using std::string;
+
+namespace CEGUI{
+class PushButton;
+}
+
+namespace edt{
+
+class Controleur;
+class Modele;
+class GUI;
+
+class PalettePays : public cce::Palette
+{
+  
+public :
+  PalettePays();
+  virtual ~PalettePays();
+  void init(GUI const *gui, string nom, Controleur* c);
+  bool setSpawn(const CEGUI::EventArgs &e);
+private :
+  Controleur* control;
 };
+
+}
 
 #endif // PALETTEPAYS_HPP

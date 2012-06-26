@@ -20,7 +20,7 @@ namespace bib {
 ///\return la chaîne sans chiffre
 ///
   
-string rmNumber(const string s);
+string rmNumber(const string& s);
 
 ///
 ///\brief Supprime tous les premiers chiffres d'une chaîne de caractères
@@ -28,8 +28,14 @@ string rmNumber(const string s);
 ///\return la chaîne sans ses premiers chiffre
 ///
 
-string rmFirstNumber(const string s);
+string rmFirstNumber(const string& s);
 
+///
+///\brief regarde si la chaine de caractères ne contient que des espaces
+///\param s : chaîne de départ
+///\return true ou false
+///
+bool onlySpaceCharacter(const string& s);
 }
 
 

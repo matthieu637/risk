@@ -2,11 +2,67 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="9">
 <DecorTemplates class_id="0" tracking_level="0" version="0">
-	<count>1</count>
+	<count>9</count>
 	<item_version>0</item_version>
 	<item class_id="1" tracking_level="0" version="0">
 		<first>200000000</first>
 		<second class_id="2" tracking_level="0" version="0">
+			<path>spawn.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000001</first>
+		<second>
+			<path>caisse1_petit.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000002</first>
+		<second>
+			<path>arbre.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000003</first>
+		<second>
+			<path>arbre.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000004</first>
+		<second>
+			<path>maison1.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000005</first>
+		<second>
+			<path>rocher1.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000006</first>
+		<second>
+			<path>rocher2.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000007</first>
+		<second>
+			<path>rocher3.png</path>
+			<bloquant>0</bloquant>
+		</second>
+	</item>
+	<item>
+		<first>200000008</first>
+		<second>
 			<path>buisson1.png</path>
 			<bloquant>0</bloquant>
 		</second>

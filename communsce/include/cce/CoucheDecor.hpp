@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 
 using sf::RenderTarget;
+using std::set;
 
 namespace cce
 {
@@ -32,6 +33,19 @@ public:
     const Decor* getDecor(int x, int y);
 
     ///
+    ///\brief Deplace un decor.
+    ///\param dx, dy: deplacemement du décor
+    ///
+    void moveDecor(int dx, int dy);
+
+
+    ///
+    ///\brief Initialise le decor à déplacer
+    ///\param x, y: coordonnees du decor à déplacer
+    ///
+    void setDecorMove(int x, int y);
+
+    ///
     ///\brief Dessine les decors
     ///\param
     ///
@@ -40,6 +54,7 @@ public:
     ///
     ///\brief Ajouter un decor aux coordonnees (x,y)
     ///\param le Decor, les coordonnees
+    ///\return le decor créé
     ///
     void addDecor(DecorTemplate *d, int x, int y);
 
@@ -52,7 +67,8 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    std::set<cce::Decor> *decors;
+    set<Decor> *decors;
+    const Decor *d_move;
 };
 
 } /* End of namespace cce */

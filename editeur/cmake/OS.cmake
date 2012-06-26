@@ -1,5 +1,5 @@
 
-# Détection de l'OS
+# DÃ©tection de l'OS
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     set(WINDOWS 1)
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")

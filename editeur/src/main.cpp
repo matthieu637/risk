@@ -1,6 +1,5 @@
 #include <iostream>
 #include "edt/DaGame.hpp"
-#include "edt/Region.hpp"
 
 int main()
 {

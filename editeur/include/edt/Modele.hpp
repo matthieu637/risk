@@ -12,6 +12,7 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <cce/Modele.hpp>
 #include <string>
+#include <CEGUI/CEGUIString.h>
 
 using std::string;
 
@@ -55,6 +56,18 @@ public:
 ///\brief Remettre le zoom à 0
 ///
     void resetZoom();
+
+///
+///\brief Initialise le decor à déplacer
+///\param x, y: coordonnees du decor à déplacer
+///
+    void setDecorMove(int x, int y);
+    
+///
+///\brief Deplacer l'objet en x,y vers les coordonées x1,y1
+///
+    void moveDecor(int x1, int y1);
+    
 ///
 ///\brief Placer l'objet actuellement sélectionné aux coordonées x,y pixels
 ///
@@ -75,20 +88,37 @@ public:
 ///
     void setDecorTemplate(int id);
 
+///
+///\brief Changer le pays sur lequel on opère
+///
+    void setCurrentPays(string nom);
 
-	void deleteTile(int x, int y);
-	
+///
+///\brief Changer le decorTemplate à placer par son id
+///
+    void setSpawn(int x, int y);
+
+
+    void deleteTile(int x, int y);
+    
+    void nouvelleCarte();
+    
+    void windowResized(int width, int height);
+    
+    void redimensionner(int x, int y);
+
 ///
 ///\brief sauvegarde une carte 
 ///
-	string saveCarte(const string & chemin);
-
+    CEGUI::String saveCarte(CEGUI::String chemin);
+    CEGUI::String saveCarte();
+    CEGUI::String openCarte(CEGUI::String chemin);
+    CEGUI::String getCurrentMap();
+    
 ///
 ///\brief Choisir la palette
 ///
-
     void selectPalette(palette_type p);
-
 
 ///
 ///\brief Ajoute une region au pays actuellement sélectionné
@@ -96,8 +126,8 @@ public:
 ///
     void addRegion(string nom);
     
-    void moveScrollVert(float pos, float size);
-    void moveScrollHori(float pos, float size);
+    void moveScrollVert(float pos);
+    void moveScrollHori(float pos);
 
   private:
       Repere * getRepere();
@@ -105,11 +135,13 @@ public:
   private:
     int cameraOrigineX, cameraOrigineY;
     float coeff_zoom;
-    bool tile, decor, region;
+    palette_type palette;
     string current_pays;
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
     list < cce::Vue * >::iterator it;
+    CEGUI::String current_map;
+    
 };
 
 }

@@ -33,10 +33,9 @@ void Controleur::appliquer_events()
     map.clearEvents();
 
     while(engine->getFenetre()->pollEvent(e)) {
-        gui->captureEvent(e);
         // décommenter pour ignorer les events utilisé par CEGUI
-        // if(gui->captureEvent(e))
-        //    continue;
+         if(gui->captureEvent(e))
+            continue;
 
         map.pushEvent(e);
     }

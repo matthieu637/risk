@@ -28,11 +28,10 @@ PaletteDecor::~PaletteDecor()
 
 }
 
-void PaletteDecor::init(const cce::GUI *gui, const string& conteneur, string nom, Modele* _m)
+void PaletteDecor::init(const cce::GUI *gui, string nom, Modele* _m)
 {
-    Palette::init(gui, conteneur, nom);
-    
-    fenetre->setSize(UVector2(UDim(0.0f,333), UDim(0.0f,600)));
+    Palette::init(gui, nom);
+    fenetre->setText("Palette de Decors");
     m = _m;
     
     ostringstream oss;
@@ -47,8 +46,8 @@ void PaletteDecor::init(const cce::GUI *gui, const string& conteneur, string nom
 	oss.str("");
 	oss << (*it).second.getID();
 	tileButton = static_cast<PushButton*>(WindowManager::getSingleton().createWindow("TaharezLook/Button",oss.str()));  // Create Window
-	tileButton->setPosition(UVector2(UDim(0,i*105),UDim(0,j*59)));
-	tileButton->setSize(UVector2(UDim(0,105),UDim(0,59)));
+	tileButton->setPosition(UVector2(UDim(0.33f*i,0),UDim(0.10f*j,0)));
+	tileButton->setSize(UVector2(UDim(0.33f,0),UDim(0.10f,0)));
 	tileButton->setProperty("NormalImage", prop);
 	tileButton->setProperty("HoverImage", prop);
 	tileButton->setProperty("PushedImage", prop);

@@ -102,11 +102,11 @@ protected:
     int nbTiles_sans_derniere_ligne;
 
 public:
-    static constexpr int h_tile = 88;
-    static constexpr int l_tile = 158;
-    static constexpr int h_tile_demi = 44;
-    static constexpr int l_tile_demi = 79;
-    static constexpr float h_sur_l = 88/158;
+    static constexpr int h_tile = 86;
+    static constexpr int l_tile = 156;
+    static constexpr int h_tile_demi = h_tile/2;
+    static constexpr int l_tile_demi = l_tile/2;
+    static constexpr float h_sur_l = h_tile/l_tile;
 };
 
 }

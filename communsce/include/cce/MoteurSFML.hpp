@@ -22,9 +22,9 @@ class MoteurSFML
 {
 
 public:
-    MoteurSFML(): fenetre(sf::VideoMode(1440,900), "*** Editeur Risk ***"),camera(sf::FloatRect(0,0,1440,900))
+    MoteurSFML(): fenetre(sf::VideoMode::getDesktopMode(), "*** Editeur Risk ***"),camera(sf::FloatRect())
     {
-	LOG_INFO("Chargement d'une fenetre " << 1440 << "x" << 900);
+	LOG_INFO("Chargement d'une fenetre " << fenetre.getSize().x << "x" << fenetre.getSize().y);
         fenetre.setFramerateLimit(60);
 	fenetre.setMouseCursorVisible(false);
     }

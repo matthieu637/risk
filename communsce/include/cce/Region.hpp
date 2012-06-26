@@ -7,12 +7,13 @@
 #include "cce/UpgradeTemplate.hpp"
 #include <boost/serialization/list.hpp>
 #include "cce/Flag.hpp"
-#include "cce/Polygon.hpp"
 
 using std::string;
 using std::list;
 
 namespace cce {
+  
+class Polygon;
   
 class Region
 {
@@ -31,7 +32,7 @@ public:
 ///\brief zone de la region
 ///\return Retourne la zone de la region
 ///
-    Polygon getZone();
+    Polygon* getZone();
 
 ///
 ///\brief upgrades de la region
@@ -65,10 +66,10 @@ public:
 
 protected:
     int income;
-    Polygon zone;
+    Polygon* zone;
     list<UpgradeTemplate> upgrades;
     list<Tile> tiles;
-    Flag flag;
+    Flag* flag;
 };
 }
 #endif

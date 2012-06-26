@@ -17,7 +17,7 @@
 
 namespace cce {
 
-Console::Console(const std::string& conteneur)
+Console::Console()
 {
     // Get a local pointer to the CEGUI Window Manager, Purely for convenience to reduce typing
     CEGUI::WindowManager *pWindowManager = CEGUI::WindowManager::getSingletonPtr();
@@ -29,7 +29,6 @@ Console::Console(const std::string& conteneur)
     {
         // Lets add our new window to the Root GUI Window
         //CEGUI::System::getSingleton().getGUISheet()->getChild(conteneur)->addChildWindow(m_ConsoleWindow);
-        (void) conteneur;
 	CEGUI::System::getSingleton().getGUISheet()->addChildWindow(m_ConsoleWindow);
         RegisterHandlers();
     }
@@ -58,11 +57,11 @@ void Console::RegisterHandlers()
 }
 
 
-void Console::afficherCommande(const string& s){
-  
+void Console::afficherCommande(CEGUI::String s){
+  setVisible(true);
   CEGUI::Window *w =  CEGUI::System::getSingleton().getGUISheet()->getChild("Console");
   w->getChild("Console/EditBox")->setText(s);;
-  
+  w->getChild("Console/EditBox")->activate();
   CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(w->getChild("Console/EditBox"));
   editWindow->setCaratIndex(editWindow->getMaxTextLength());
 }
@@ -72,19 +71,36 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
   const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
 
    if ((CEGUI::Key::ArrowUp == keyEvent.scancode)){  
-      CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
+      if(commandeHistorique.size() == 0)
+	return true;
+      
       if(index == -1 || index == 0){
-	index = (int)outputWindow->getItemCount()-1;
+	index = commandeHistorique.size()-1;
       }else{
 	index--;
       }
       //recuperation du texte
-      m_ConsoleWindow->getChild("Console/EditBox")->setText( outputWindow->getListboxItemFromIndex(index)->getText());
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
       //placement correct du curseur
       CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
       editWindow->setCaratIndex(editWindow->getMaxTextLength());
       return true;
       
+   }else if ((CEGUI::Key::ArrowDown == keyEvent.scancode)){  
+       if(commandeHistorique.size() == 0)
+	return true;
+       
+      if(index == (int)commandeHistorique.size() - 1){
+	index = 0;
+      }else{
+	index++;
+      }
+      //recuperation du texte
+      m_ConsoleWindow->getChild("Console/EditBox")->setText(commandeHistorique.at(index));
+      //placement correct du curseur
+      CEGUI::Editbox *editWindow = static_cast<CEGUI::Editbox*>(m_ConsoleWindow->getChild("Console/EditBox"));
+      editWindow->setCaratIndex(editWindow->getMaxTextLength());
+      return true;
    }else if ((CEGUI::Key::Escape == keyEvent.scancode)){
       setVisible(false);
       return true;
@@ -113,40 +129,69 @@ bool Console::Handle_SendButtonPressed(const CEGUI::EventArgs &e)
 void Console::ParseText(CEGUI::String inMsg)
 {
   
-    std::string inString = inMsg.c_str();
-
-    if (inString.length() >= 1) 
+    if (inMsg.length() >= 1) 
     {
-        if (inString.at(0) == '/') // Check if the first letter is a 'command'
+        if (inMsg.at(0) == '/') // Check if the first letter is a 'command'
         {
-            std::string::size_type commandEnd = inString.find(" ", 1);
-            std::string command = inString.substr(1, commandEnd - 1);
-            std::string commandArgs = inString.substr(commandEnd + 1, inString.length() - (commandEnd + 1));
+            CEGUI::String::size_type commandEnd = inMsg.find(" ", 1);
+            CEGUI::String command = inMsg.substr(1, commandEnd - 1);
+            //std::string commandArgs = inString.substr(commandEnd + 1, inString.length() - (commandEnd + 1));
+	    CEGUI::String commandArgs; 
+	    
+	    if(inMsg.find(' ') == inMsg.npos)
+	      commandArgs = "";
+	    else
+	      commandArgs = inMsg.substr(commandEnd + 1);
             
-            for(std::string::size_type i=0; i < command.length(); i++)
+            for(CEGUI::String::size_type i=0; i < command.length(); i++)
             {
                 command[i] = tolower(command[i]);
             }
-	    
-	    std::map <std::string, std::function<string(const string&)> >::iterator it;
+	    CEGUI::String rep;
+	    std::map <std::string, std::function<CEGUI::String(CEGUI::String)> >::iterator it;
 	    for(it = mapCommandes.begin(); it != mapCommandes.end(); it++)
 	    {
 		if(it->first == command){
-		  string rep =   it->second(commandArgs);
+		  if(commandArgs == command){
+		      rep = it->second("");
+		  }else{
+		      rep = it->second(commandArgs);
+		  }
+		  (this)->OutputText(inMsg);
+		  LOG_DEBUG(rep);
 		  (this)->OutputText(rep);
+		 commandeHistorique.push_back(inMsg.c_str());
+		  break;
 		}
 	     }
         } 
         else
-        {
-            (this)->OutputText(inString); // no commands, just output what they wrote
+        {   commandeHistorique.push_back(inMsg.c_str());
+            (this)->OutputText(inMsg); // no commands, just output what they wrote
         }
     }
 }
 
  
-string Console::onHelp(const string& s){
-   std::string outString = "commande /help pour connaitre les commandes disponibles\n commande /say pour ecrire un message sur la console\n bouton escape pour fermer la console\n bouton enter pour afficher le message sur la console";
+CEGUI::String Console::onHelp(CEGUI::String s){
+   (void) s;
+   CEGUI::String outString = "commande /help : affiche les commandes disponibles\n";
+   outString += "commande /save : enregistre la carte courante\n";
+   outString += "commande /save chemin : enregistre la carte sous le nom du chemin donné\n";
+   outString += "commande /open chemin : charge la carte ayant pour nom le chemin donné\n";
+   outString += "commande /quit : quitte l'éditeur\n";
+   outString += "commande /redimensionner x y : redimensionne la carte aux dimensions x et y\n";
+   outString += "commande /new_map : charge une carte vide\n\n";
+    
+   outString += "touche escape : ferme la console\n"; //le curseur doit être dans la console
+   outString += "touche enter :  affiche le message sur la console\n";//le curseur doit être dans la console
+   outString += "touche c : ouvre une console\n";
+   outString += "touche t : affiche la palette des tiles\n";
+   outString += "touche d : affiche la palette des décors\n";
+   outString += "touche r : affiche la palette des régions\n";
+   outString += "touche p : affiche la palette des pays\n";
+   outString += "touche space : pour se mettre en mode sélection\n";
+   
   (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
   return outString;
 }
@@ -154,7 +199,6 @@ string Console::onHelp(const string& s){
 
 void Console::OutputText(CEGUI::String message, CEGUI::colour colour)
 {
-
     // Get a pointer to the ChatBox so we don't have to use this ugly getChild function everytime.
     CEGUI::Listbox *outputWindow = static_cast<CEGUI::Listbox*>(m_ConsoleWindow->getChild("Console/ChatBox"));
 
@@ -164,7 +208,7 @@ void Console::OutputText(CEGUI::String message, CEGUI::colour colour)
     //   wordwrapped alignmentoutputWindow->getVertScrollbar()->
     newItem->setTextColours(colour); // Set the text color
     outputWindow->addItem(newItem); // Add the new ListBoxTextItem to the ListBox
-    
+
     outputWindow->getVertScrollbar()->setScrollPosition((int)outputWindow->getVertScrollbar()->getDocumentSize());
 }
 

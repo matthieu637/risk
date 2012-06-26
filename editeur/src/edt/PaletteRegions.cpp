@@ -28,9 +28,9 @@ PaletteRegions::~PaletteRegions()
   
 }
 
-void PaletteRegions::init(GUI const *gui, const string& conteneur, string nom, Carte* c)
+void PaletteRegions::init(GUI const *gui, string nom, Carte* c)
 {
-    Palette::init(gui, conteneur, nom);
+    Palette::init(gui, nom);
     
     carte=c;
     lbox = static_cast<Listbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Listbox", "PaletteFrames/Regions/ListboxRegions"));

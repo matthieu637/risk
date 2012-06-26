@@ -20,6 +20,7 @@
 	  <Property Name="Text" Value="Redimensionner" />
 	  <Property Name="Tooltip" Value="Redéfinir la dimension en tiles de la carte" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="redimensionner" />
       </Window>
       <Window Type="TaharezLook/MenuItem" Name="Outils/Remplir" >
 	  <Property Name="Text" Value="Remplir le fond" />
@@ -30,5 +31,11 @@
 	  <Property Name="Text" Value="Définir comme fond" />
 	  <Property Name="Tooltip" Value="Remplace toutes les tiles par celle sélectionnée" />
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+      </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Outils/Console" >
+	  <Property Name="Text" Value="Ouvrir la console" />
+	  <Property Name="Tooltip" Value="fait apparaître la console" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="console" />
       </Window>
 </Window>

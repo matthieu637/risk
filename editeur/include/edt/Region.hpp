@@ -25,10 +25,15 @@ namespace edt{
 class Region : public cce::Region
 {
 public :
-    Region(int _income, Polygon _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag);
+    Region(int _income, Polygon* _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag);
     Region();
     virtual ~Region();
-  
+    
+///
+///\brief Reset le polygone (efface tous les points)
+///\param x, y : les coordonnées
+///
+    void resetPolygon();
 ///
 ///\brief Ajoute un point de coordonnées x,y à la region
 ///\param x, y : les coordonnées

@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 2.8)
 #Nom du projet
 project(Biblio CXX)
 
-#Détection de l'OS
+#DÃ©tection de l'OS
 include(${CMAKE_SOURCE_DIR}/cmake/OS.cmake)
 
-#Définition des variables globales
+#DÃ©finition des variables globales
 include(${CMAKE_SOURCE_DIR}/cmake/Variables.cmake)
 
 #Trouve Boost
@@ -19,7 +19,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS} )
 file ( GLOB_RECURSE sources_lib src/bib/*.cpp include/bib/*.hpp)
 file ( GLOB_RECURSE sources_tests src/*.cpp include/*.hpp)
 
-#### Création de la librarie ####
+#### CrÃ©ation de la librarie ####
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_SOURCE_DIR}/lib")
 
