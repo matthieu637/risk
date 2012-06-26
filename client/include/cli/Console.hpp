@@ -9,9 +9,9 @@ namespace cli {
 class Console : public cce::Console
 {
 public:
-    Console(const std::string& conteneur,Modele *modele);
-    string onOpen(const string& s);
-    string onQuit(const string& s);
+    Console(Modele *modele);
+    CEGUI::String onOpen(const CEGUI::String& s);
+    CEGUI::String onQuit(const CEGUI::String& s);
 private:
 
     Modele* m;

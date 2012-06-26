@@ -34,5 +34,16 @@ map<string, Region>* Carte::getAllRegions()
     {
       mp[nom_pays].addRegion(nom_region, r);
     }
+    
+   map<string, Pays> Carte::getAllPays()
+    {
+      return mp;
+    }
+    
+    Region Carte::getRegion(const string& nom_region)
+    {
+      return mr[nom_region];
+    }
+    
 
 }

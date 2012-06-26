@@ -10,6 +10,8 @@ using std::list;
 
 namespace CEGUI{
   class Listbox;
+  class Editbox;
+  class ListboxItem;
 }
 namespace edt{
 
@@ -24,9 +26,16 @@ public :
   virtual ~PaletteRegions();
   void init(GUI const *gui, string nom, Carte* c);
   void updateListRegions(list<string> noms);
+  bool onNameChange(const CEGUI::EventArgs &e);
+  bool onChangeSelection(const CEGUI::EventArgs &e);
+  bool onIncomeChange(const CEGUI::EventArgs &e);
+  
 private :
   CEGUI::Listbox* lbox;
-  
+  CEGUI::Editbox* ebox;
+  CEGUI::Editbox* eboxinc;
+  CEGUI::ListboxItem* lbti;
+  Carte* carte;
 };
 }
 

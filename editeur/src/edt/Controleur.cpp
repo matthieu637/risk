@@ -207,6 +207,8 @@ void Controleur::onChoixPaletteThor(thor::ActionContext < string > context) {
 	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Decors");
     else if(key.code == sf::Keyboard::P)
 	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Pays");
+    else if(key.code == sf::Keyboard::R)
+	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Regions");
     
     CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
     onChoixPalette(wea);
@@ -249,7 +251,9 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
     if(nom == "Palettes/Terrains")
         m->selectPalette(tiles);
     else if(nom == "Palettes/Decors")
-        m->selectPalette(decors);
+	m->selectPalette(decors);
+    else if(nom == "Palettes/Regions")
+	m->selectPalette(regions);
     else if(nom == "Palettes/Pays")
         m->selectPalette(pays);
     return true;

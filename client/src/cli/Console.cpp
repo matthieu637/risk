@@ -5,19 +5,19 @@
 
 
 namespace cli {
-Console::Console(const std::string& conteneur,Modele *modele) : cce::Console(conteneur)
+Console::Console(Modele *modele) : cce::Console()
 {
     mapCommandes["open"] = BIND(&Console::onOpen);
     mapCommandes["quit"] = BIND(&Console::onQuit);
     m = modele;
 }
 
-string Console::onOpen(const string& s) {
+CEGUI::String Console::onOpen(const CEGUI::String& s) {
     LOG_DEBUG("onOpen");
     return m->openCarte(s);
 }
 
-string Console::onQuit(const string& s) {
+CEGUI::String Console::onQuit(const CEGUI::String& s) {
     (void)s;
     LOG_DEBUG("onQuit");
     return "";

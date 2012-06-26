@@ -25,11 +25,9 @@ GUI::~GUI()
 
 void GUI::init(Modele* modele)
 {
-    std::string conteneur = "Editeur";
-
     cce::GUI::init(modele);
     
-    console = new cli::Console(conteneur,modele);
+    console = new cli::Console(modele);
 }
 
 
