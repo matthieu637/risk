@@ -54,21 +54,22 @@ CEGUI::String Modele::getCurrentMap() {
 
 void Modele::nouvelleCarte()
 {   
-    current_map = "data/map/empty.map";
+    current_map = "";
+    delete carte;
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
 }
 
 CEGUI::String Modele::saveCarte(CEGUI::String chemin) {
     current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin.c_str());
-    return "La carte "+chemin+" a bien été sauvegardée";
+    return "La carte "+chemin+" a bien Ã©tÃ© sauvegardÃ©e";
 }
 
 
 CEGUI::String Modele::saveCarte() {
     if(current_map != "" && !bib::onlySpaceCharacter(current_map.c_str())) {
         bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map.c_str());
-        return "La carte "+current_map+" a bien été sauvegardée";
+        return "La carte "+current_map+" a bien Ã©tÃ© sauvegardÃ©e";
     } else {
         return "Veuillez saisir un nom de carte";
     }
