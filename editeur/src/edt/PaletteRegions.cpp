@@ -150,13 +150,15 @@ bool PaletteRegions::onDefinirPoly(const CEGUI::EventArgs &e)
         lbti=lbox->getFirstSelectedItem();
         cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
 	
-	if(modele->getPoly() == nullptr)
+	if(modele->getPoly() == nullptr){
 	  modele->setPoly(new Polygon);
-	else {
+	  addPoint->setText("Finish");
+	}else {
 	    Polygon* p = modele->getPoly();
 	    modele->unsetPoly();
 	    p->setPointCount(p->getPointCount() - 1);
 	    ((edt::Region*)r)->setZone(p);
+	    addPoint->setText("Set Poly");
 	}
     }
     return true;
