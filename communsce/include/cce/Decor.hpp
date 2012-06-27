@@ -39,6 +39,8 @@ public:
 ///\brief Changer la texture de l'objet (ajuste yCompare pour la position dans l'arbre)
 ///
     void setTexture(Texture* texture);
+    
+    void move(float offsetX, float offsetY);
 
 
     template<class Archive>

@@ -33,6 +33,12 @@ void Decor::setTexture(Texture* texture)
     yCompare = getPosition().y * 1.5 + getGlobalBounds().height;
 }
 
+void Decor::move(float offsetX, float offsetY)
+{
+    Sprite::move(offsetX, offsetY);
+    yCompare = getPosition().y * 1.5 + getGlobalBounds().height;
+}
+
 bool Decor::inferieurA(const Decor &d) const
 {
     if(yCompare < d.yCompare)

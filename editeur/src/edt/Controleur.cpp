@@ -301,27 +301,22 @@ bool Controleur::onOpen(const CEGUI::EventArgs & e) {
 }
 
 bool Controleur::onOpenConsole(thor::ActionContext < string > context){
- 
-      sf::Event::KeyEvent key = context.event->key;
-      CEGUI::FrameWindow* mi;
+    sf::Event::KeyEvent key = context.event->key;
+    CEGUI::FrameWindow* mi;
 
-      if(key.code == sf::Keyboard::C){
-	  mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Outils/Console");
-
-          CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
-	  onOpenConsoleClick(wea);
-      }
-      return true;
+    if(key.code == sf::Keyboard::C){
+	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Outils/Console");
+	CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
+	onOpenConsoleClick(wea);
+    }
+    return true;
 }
 
 bool Controleur::onCloseConsole(thor::ActionContext < string > context){
-      (void)context;
-      gui->getConsole()->setVisible(false);
-      
-      return true;
+    (void)context;
+    gui->getConsole()->setVisible(false);
+    return true;
 }
-
-
 
 bool Controleur::onOpenConsoleClick(const CEGUI::EventArgs& e){
     (void) e;

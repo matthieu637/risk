@@ -1,5 +1,4 @@
 #include "cce/Pays.hpp"
-#include "cce/Region.hpp"
 
 namespace cce{
 
@@ -29,17 +28,17 @@ Region* Pays::getRegion(const string& nom)
     return &regions[nom];
 }
 
-const PointSpawn* Pays::getPointSpawn(){
-    return ps;
+Decor* Pays::getPointSpawn(){
+    return spawn;
 }
 
 void Pays::addRegion(const string& name, const Region& r){
     regions[name] = r;
 }
 
-void Pays::setSpawn(const PointSpawn* d)
+void Pays::setSpawn(Decor* d)
 {
-    ps = d;
+    spawn = d;
 }
 
 }

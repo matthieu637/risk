@@ -14,6 +14,7 @@ using boost::serialization::make_nvp;
 
 namespace cce{
 
+class Decor;
 
 class Pays
 {
@@ -46,13 +47,13 @@ virtual ~Pays();
 ///\brief point de spawn du pays
 ///\return Retourne le point de spawn du pays
 ///
-    const PointSpawn* getPointSpawn();
+    Decor* getPointSpawn();
     
 ///
 ///\brief point de spawn du pays
 ///\return Retourne le point de spawn du pays
 ///
-    void setSpawn(const PointSpawn* d);
+    void setSpawn(Decor* d);
     
 ///
 ///\brief ajoute une région à la liste des régions
@@ -72,7 +73,8 @@ virtual ~Pays();
 protected : 
     int income;
     map<string,Region> regions;
-    const PointSpawn* ps;
+    PointSpawn* ps;
+    Decor* spawn;
 };
 }
 #endif // PAYS_HPP

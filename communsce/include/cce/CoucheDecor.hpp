@@ -33,7 +33,7 @@ public:
     ///       y: ordonnee
     ///\return le Decor aux coordonnees (x,y)
     ///
-    const Decor* getDecor(int x, int y);
+    Decor* getDecor(int x, int y);
 
     ///
     ///\brief Deplace un decor.
@@ -76,8 +76,8 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    set<Decor> decors;
-    const Decor *d_move;
+    set<Decor*> decors;
+    Decor *d_move;
 };
 
 } /* End of namespace cce */

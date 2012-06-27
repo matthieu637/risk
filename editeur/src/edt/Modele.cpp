@@ -67,7 +67,6 @@ string Modele::saveCarte(const string& chemin) {
     return "La carte "+chemin+" a bien été sauvegardée";
 }
 
-
 string Modele::saveCarte() {
     if(current_map != "" && !bib::onlySpaceCharacter(current_map)) {
         bib::XMLEngine::save<cce::Carte>(*carte,"Carte",current_map);
@@ -76,7 +75,6 @@ string Modele::saveCarte() {
         return "Veuillez saisir un nom de carte";
     }
 }
-
 
 void Modele::setPoly(cce::Polygon* poly) {
     poly->setOutlineColor(sf::Color::Red);
@@ -141,7 +139,6 @@ void Modele::moveView(int dx, int dy, int cameraX, int cameraY) {
         (*it)->updateCameraPosition(x, y);
         ((Vue*)*it)->updateScrolls();
     }
-
 }
 
 void Modele::zoom(int ticks) {
@@ -194,9 +191,9 @@ void Modele::deleteObject(int x, int y) {
 
 void Modele::setSpawn(int x, int y)
 {
-    const cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
-    if(d != nullptr);
-        //carte->getPays(current_pays)->setSpawn(d);
+    cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
+    if(d != nullptr)
+        carte->getPays(current_pays)->setSpawn(d);
 }
 
 void Modele::setCurrentPays(string nom)

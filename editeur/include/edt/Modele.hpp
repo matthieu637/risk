@@ -98,7 +98,6 @@ public:
 ///
     void setSpawn(int x, int y);
 
-
     void deleteTile(int x, int y);
     
     void nouvelleCarte();
@@ -124,7 +123,6 @@ public:
 ///\brief Choisir la palette
 ///
     void selectPalette(palette_type p);
-    
     
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

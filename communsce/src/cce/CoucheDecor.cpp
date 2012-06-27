@@ -15,15 +15,15 @@ CoucheDecor::~CoucheDecor()
 
 }
 
-const Decor* CoucheDecor::getDecor(int x, int y)
+Decor* CoucheDecor::getDecor(int x, int y)
 {
     int a;
-    set<Decor>::reverse_iterator rit;
+    set<Decor*>::reverse_iterator rit;
     for(rit = decors.rbegin(); rit != decors.rend(); rit++){
-	if(rit->getGlobalBounds().contains(x, y)){
-	    a = rit->getTexture()->copyToImage().getPixel(x - rit->getPosition().x, y - rit->getPosition().y).a;
-	    if(a == 255) //pixel transparent? Permet de détecter véritablement le decor cliqué lorsqu'ils sont superposés
-		return &(*rit);
+	if((*rit)->getGlobalBounds().contains(x, y)){
+	    a = (*rit)->getTexture()->copyToImage().getPixel(x - (*rit)->getPosition().x, y - (*rit)->getPosition().y).a;
+	    if(a > 122) //pixel transparent? Permet de détecter véritablement le decor cliqué lorsqu'ils sont superposés
+		return *rit;
 	}
     }
     return nullptr;
@@ -36,38 +36,32 @@ void CoucheDecor::setDecorMove(int x, int y){
 void CoucheDecor::moveDecor(int dx, int dy)
 {
     if(d_move == nullptr)
-      return;
-    int ancien_x = d_move->getPosition().x;
-    int ancien_y = d_move->getPosition().y;
-    int nouveau_x = ancien_x + dx;
-    int nouveau_y = ancien_y + dy;
-    DecorTemplate *dt = d_move->getTemplate();
-    Decor* d_new = new Decor(dt, nouveau_x, nouveau_y);
-    if((&(*(decors.find(*d_new))))->getPosition() != d_new->getPosition()){
-      decors.erase(*d_move);
-      decors.insert(*d_new);
-      d_move = d_new;
-    }
+	return;
+    decors.erase(d_move);
+    d_move->move(dx, dy);
+    if(decors.count(d_move) > 0)
+	d_move->move(-dx, -dy);
+    decors.insert(d_move);
 }
 
 void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    set<Decor>::iterator it = decors.begin();
+    set<Decor*>::iterator it = decors.begin();
     for(; it != decors.end(); ++it)
-      target.draw(*it, states);
+      target.draw(**it, states);
 }
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)
 {
-    decors.insert(Decor(dt, x - dt->getTexture()->getSize().x/2, y - dt->getTexture()->getSize().y * 3/4));
+    decors.insert(new Decor(dt, x - dt->getTexture()->getSize().x/2, y - dt->getTexture()->getSize().y * 3/4));
 }
 
 
 void CoucheDecor::removeDecor(int x, int y)
 {
-    const Decor *d = getDecor(x,y);
+    Decor *d = getDecor(x,y);
     if(d != nullptr)
-      decors.erase(*d);
+      decors.erase(d);
 }
 
 }
