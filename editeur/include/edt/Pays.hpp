@@ -20,7 +20,7 @@ class Region;
 class Pays : public cce::Pays
 {
 public : 
-Pays(int _income, string _nom, PointSpawn* _ps);
+Pays(int _income, PointSpawn* _ps);
 virtual ~Pays();
 
 ///

@@ -53,8 +53,20 @@ string Console::onRedimensionner(const string& s) {
 
 string Console::onQuit(const string& s) {
     (void)s;
+    wantQuit = true;
     m->quit();
-    return "";
+    return "Voulez vous vraiment quitter? y/n";
+}
+
+void Console::ParseText(const CEGUI::String& inMsg)
+{
+    cce::Console::ParseText(inMsg);
+
+    if(inMsg == "y" && wantQuit) {
+        confirmQuit=true;
+        m->quit();
+    }else if(inMsg != "/quit")
+      wantQuit = false;
 }
 
 }

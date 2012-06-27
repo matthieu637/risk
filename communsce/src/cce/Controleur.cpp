@@ -2,6 +2,7 @@
 #include "cce/MoteurSFML.hpp"
 #include <cce/GUI.hpp>
 #include <cce/CppScriptModule.hpp>
+#include <cce/Console.hpp>
 #include <SFML/Window/Event.hpp>
 #include <Thor/Events/Action.hpp>
 #include <Thor/Events/EventSystem.hpp>
@@ -15,7 +16,7 @@ Controleur::Controleur(MoteurSFML* engine, GUI* gui) : map(*(engine->getFenetre(
 {
     this->engine = engine;
     this->gui = gui;
-    
+
     moduleGUI = new CppScriptModule;
 
     // Evenements Thor
@@ -34,7 +35,7 @@ void Controleur::appliquer_events()
 
     while(engine->getFenetre()->pollEvent(e)) {
         // décommenter pour ignorer les events utilisé par CEGUI
-         if(gui->captureEvent(e))
+        if(gui->captureEvent(e))
             continue;
 
         map.pushEvent(e);
@@ -43,7 +44,7 @@ void Controleur::appliquer_events()
     map.invokeCallbacks(system);
 
     if (map.isActive("quit"))
-        engine->getFenetre()->close();
+        gui->getConsole()->afficherCommande("/quit");
 }
 
 bool Controleur::isRunning()

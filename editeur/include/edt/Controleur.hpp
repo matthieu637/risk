@@ -65,7 +65,6 @@ namespace cce {
       private:
 	int clickX, clickY;
 	bool moveCam, moveDecor, selection, setSpawn;
-	GUI *gui;
 	Modele *m;
     };
 

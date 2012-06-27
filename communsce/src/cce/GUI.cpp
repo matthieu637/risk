@@ -148,6 +148,10 @@ CEGUI::MouseButton GUI::toCEGUIMouseButton(const sf::Mouse::Button& Button) cons
     return mouses.at(Button);
 }
 
+cce::Console *GUI::getConsole(){
+  return console;
+}
+
 void GUI::initialiserCastEvent()
 {
 
