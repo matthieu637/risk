@@ -9,6 +9,11 @@ Pays::Pays(int _income, PointSpawn* _ps)
     ps = _ps;
 }
 
+Pays::Pays()
+{
+
+}
+
 Pays::~Pays()
 {
 

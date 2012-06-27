@@ -23,6 +23,8 @@ public :
   bool onSelectionChange(const CEGUI::EventArgs &e);
   bool onNameChange(const CEGUI::EventArgs &e);
   bool onIncomeChange(const CEGUI::EventArgs &e);
+  bool onNewPays(const CEGUI::EventArgs &e);
+  bool onDeletePays(const CEGUI::EventArgs &e);
 private :
   Controleur* control;
   Modele* modele;

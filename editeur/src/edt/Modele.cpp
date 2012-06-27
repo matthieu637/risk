@@ -158,9 +158,8 @@ void Modele::deleteObject(int x, int y) {
 void Modele::setSpawn(int x, int y)
 {
     const cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
-    if(d != nullptr)
-        ;
-    //carte->getPays(current_pays)->setSpawn();
+    if(d != nullptr);
+        //carte->getPays(current_pays)->setSpawn(d);
 }
 
 void Modele::setCurrentPays(string nom)

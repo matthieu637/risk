@@ -46,13 +46,13 @@ virtual ~Pays();
 ///\brief point de spawn du pays
 ///\return Retourne le point de spawn du pays
 ///
-    PointSpawn* getPointSpawn();
+    const PointSpawn* getPointSpawn();
     
 ///
 ///\brief point de spawn du pays
 ///\return Retourne le point de spawn du pays
 ///
-    void setSpawn(PointSpawn* d);
+    void setSpawn(const PointSpawn* d);
     
 ///
 ///\brief ajoute une région à la liste des régions
@@ -72,7 +72,7 @@ virtual ~Pays();
 protected : 
     int income;
     map<string,Region> regions;
-    PointSpawn* ps;
+    const PointSpawn* ps;
 };
 }
 #endif // PAYS_HPP

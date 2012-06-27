@@ -51,6 +51,11 @@ public:
 ///
     void addRegion(const string& nom_pays, const string& nom_region, const Region& r);
     
+///
+///\brief Ajouter un pays
+///
+    void addPays(const string& nom_pays, const Pays& p);
+    
     map<string,Pays>* getAllPays();
     
     Region* getRegion(const string& nom_region);

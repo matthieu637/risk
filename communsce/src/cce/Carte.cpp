@@ -38,6 +38,11 @@ void Carte::addRegion(const string& nom_pays, const string& nom_region, const Re
     mp[nom_pays].addRegion(nom_region, r);
 }
 
+void Carte::addPays(const string& nom_pays, const Pays& p)
+{
+    mp[nom_pays] = p;
+}
+
 map<string, Pays>* Carte::getAllPays()
 {
     return &mp;
