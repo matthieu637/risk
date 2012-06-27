@@ -3,7 +3,6 @@
 
 #include "cce/Palette.hpp"
 #include <string>
-#include <CEGUI/elements/CEGUIPushButton.h>
 
 using std::string;
 
@@ -21,12 +20,14 @@ public :
   virtual ~PalettePays();
   void init(GUI const *gui, string nom, Controleur* c, Modele* m);
   bool setSpawn(const CEGUI::EventArgs &e);
-  bool onChangeSelection(const CEGUI::EventArgs &e);
+  bool onSelectionChange(const CEGUI::EventArgs &e);
+  bool onNameChange(const CEGUI::EventArgs &e);
+  bool onIncomeChange(const CEGUI::EventArgs &e);
 private :
   Controleur* control;
   Modele* modele;
-  CEGUI::Listbox* liste_pays;
-  CEGUI::Editbox* box_nom;
+  CEGUI::Listbox *liste_pays;
+  CEGUI::Editbox *box_nom, *box_income;
 };
 
 }

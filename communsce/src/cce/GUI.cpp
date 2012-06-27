@@ -164,7 +164,7 @@ void GUI::initialiserCastEvent()
     keys[sf::Keyboard::Num0] = CEGUI::Key::Zero ;
     keys[sf::Keyboard::Dash] = CEGUI::Key::Minus ;
     keys[sf::Keyboard::Equal] = CEGUI::Key::Equals ;
-    keys[sf::Keyboard::Back] = CEGUI::Key::Backspace ;
+    keys[sf::Keyboard::BackSpace] = CEGUI::Key::Backspace ;
     keys[sf::Keyboard::Tab] = CEGUI::Key::Tab ;
     keys[sf::Keyboard::Q] = CEGUI::Key::Q ;
     keys[sf::Keyboard::W] = CEGUI::Key::W ;

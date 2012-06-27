@@ -52,7 +52,7 @@ public:
 ///
     void addRegion(const string& nom_pays, const string& nom_region, const Region& r);
     
-    map<string,Pays> getAllPays();
+    map<string,Pays>* getAllPays();
     
     Region* getRegion(const string& nom_region);
    
