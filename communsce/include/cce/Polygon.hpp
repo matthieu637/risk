@@ -24,6 +24,10 @@ public:
 
   bool contient(Point p);
   
+  void removeLastPoint();
+  
+  virtual void setPoint(unsigned int index, const sf::Vector2f& point);
+  
       template<class Archive>
     void serialize(Archive& ar, const unsigned int version)
     {

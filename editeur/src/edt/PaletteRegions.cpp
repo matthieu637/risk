@@ -156,7 +156,7 @@ bool PaletteRegions::onDefinirPoly(const CEGUI::EventArgs &e)
 	}else {
 	    Polygon* p = modele->getPoly();
 	    modele->unsetPoly();
-	    p->setPointCount(p->getPointCount() - 1);
+	    p->removeLastPoint();
 	    ((edt::Region*)r)->setZone(p);
 	    addPoint->setText("Set Poly");
 	}

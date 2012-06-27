@@ -95,8 +95,7 @@ bool Modele::movePoly(int x_, int y_)
     if(poly != nullptr) {
         int index = poly->getPointCount();
         if(index != 0) {
-            LOG_DEBUG("immm settt " << x_ << " " << y_ << " " << index);
-            poly->setPointCount(index);
+            //poly->setPointCount(index);
             poly->setPoint(index-1, sf::Vector2f(x_, y_));
         }
         return true;
@@ -106,10 +105,11 @@ bool Modele::movePoly(int x_, int y_)
 
 bool Modele::addPoint(int x, int y)
 {
+    LOG_DEBUG(carte->getRegion("IsengardU")->getZone()->contient(cce::Point(x, y)));
     if(poly != nullptr) {
-        LOG_DEBUG("ADDDDDDDDDDD ");
         poly->addPoint(cce::Point(x, y));
-        poly->addPoint(cce::Point(x+1, y+1));
+        if(poly->getPointCount() == 1)
+            poly->addPoint(cce::Point(x+1, y+1));
         return true;
     }
     return false;
