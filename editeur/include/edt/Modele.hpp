@@ -107,9 +107,9 @@ public:
     
     void redimensionner(int x, int y);
     
-    void movePoly(int x, int y);
+    bool movePoly(int x, int y);
     
-    void addPoint(int x, int y);
+    bool addPoint(int x, int y);
 
 ///
 ///\brief sauvegarde une carte 
@@ -137,6 +137,9 @@ public:
     void moveScrollVert(float pos);
     void moveScrollHori(float pos);
     void quit();
+    
+    cce::Polygon* getPoly(){return poly;}
+    void unsetPoly();
 
   private:
       Repere * getRepere();

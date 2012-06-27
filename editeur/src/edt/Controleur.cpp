@@ -231,12 +231,12 @@ void Controleur::onChooseSpawn(thor::ActionContext < string > context) {
 
 bool Controleur::onMovePoly(thor::ActionContext < string > context)
 {
-    m->movePoly(getX(context.event->mouseMove.x), getY(context.event->mouseMove.y));
+    return m->movePoly(getX(context.event->mouseMove.x), getY(context.event->mouseMove.y));
 }
 
 bool Controleur::onAddPoint(thor::ActionContext < string > context)
 {
-    m->addPoint(getX(context.event->mouseButton.x), getY(context.event->mouseButton.y));
+    return m->addPoint(getX(context.event->mouseButton.x), getY(context.event->mouseButton.y));
 }
 
 int Controleur::getX(int mouseX) {

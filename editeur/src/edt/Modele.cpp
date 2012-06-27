@@ -54,12 +54,6 @@ string Modele::getCurrentMap() {
     return current_map;
 }
 
-void Modele::setPoly(cce::Polygon* poly){
-  poly->setOutlineColor(sf::Color::Red);
-  poly->setOutlineThickness(3.);
-  this->poly = poly;
-}
-
 void Modele::nouvelleCarte()
 {
     current_map = "";
@@ -84,23 +78,41 @@ string Modele::saveCarte() {
 }
 
 
-void Modele::movePoly(int x_, int y_)
+void Modele::setPoly(cce::Polygon* poly) {
+    poly->setOutlineColor(sf::Color::Red);
+    poly->setOutlineThickness(3.);
+    poly->setFillColor(sf::Color(100,100,100,100));
+    this->poly = poly;
+}
+
+void Modele::unsetPoly()
+{
+    poly = nullptr;
+}
+
+bool Modele::movePoly(int x_, int y_)
 {
     if(poly != nullptr) {
         int index = poly->getPointCount();
-	if(index != 0){
-	  LOG_DEBUG("immm settt" << x_ << " " << y_);
-	  poly->setPoint(index-1, sf::Vector2f(x_, y_));
-	}
+        if(index != 0) {
+            LOG_DEBUG("immm settt " << x_ << " " << y_ << " " << index);
+            poly->setPointCount(index);
+            poly->setPoint(index-1, sf::Vector2f(x_, y_));
+        }
+        return true;
     }
+    return false;
 }
 
-void Modele::addPoint(int x, int y)
+bool Modele::addPoint(int x, int y)
 {
-    if(poly != nullptr){
-	poly->addPoint(cce::Point(x, y));
-	poly->addPoint(cce::Point(x+1, y+1));
+    if(poly != nullptr) {
+        LOG_DEBUG("ADDDDDDDDDDD ");
+        poly->addPoint(cce::Point(x, y));
+        poly->addPoint(cce::Point(x+1, y+1));
+        return true;
     }
+    return false;
 }
 
 void Modele::quit() {
@@ -184,7 +196,7 @@ void Modele::setSpawn(int x, int y)
 {
     const cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
     if(d != nullptr)
-        ;
+        return;
     //carte->getPays(current_pays)->setSpawn();
 }
 

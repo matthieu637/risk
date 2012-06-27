@@ -133,22 +133,33 @@ bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
 
 bool PaletteRegions::onResetPoly(const CEGUI::EventArgs &e)
 {
+    (void) e;
     if(lbox->getFirstSelectedItem() != nullptr) {
         lbti=lbox->getFirstSelectedItem();
         cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
 
         r->resetPoly();
     }
+    return true;
 }
 
 bool PaletteRegions::onDefinirPoly(const CEGUI::EventArgs &e)
 {
+    (void) e;
     if(lbox->getFirstSelectedItem() != nullptr) {
         lbti=lbox->getFirstSelectedItem();
         cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
 	
-	modele->setPoly(new Polygon);
+	if(modele->getPoly() == nullptr)
+	  modele->setPoly(new Polygon);
+	else {
+	    Polygon* p = modele->getPoly();
+	    modele->unsetPoly();
+	    p->setPointCount(p->getPointCount() - 1);
+	    ((edt::Region*)r)->setZone(p);
+	}
     }
+    return true;
 }
 
 

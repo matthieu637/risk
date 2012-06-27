@@ -51,6 +51,7 @@ Region* Carte::getRegion(const string& nom_region)
     for (it = mp.begin(); it != mp.end(); it++)
         if(it->second.getRegion(nom_region) != nullptr)
             return it->second.getRegion(nom_region);
+    return nullptr;
 }
 
 
