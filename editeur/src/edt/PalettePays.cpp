@@ -73,31 +73,32 @@ void PalettePays::init(GUI const *gui, string nom, Controleur* c, Modele* m)
 
 bool PalettePays::onSelectionChange(const EventArgs &e)
 {
-    /*std::ostringstream oss;
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
-    ListboxTextItem pays = liste_pays->getFirstSelectedItem();
-    box_nom->setText(pays->getText());
-    oss << modele->getCarte()->get(pays->getText().c_str())->getIncome();
-    LOG_DEBUG(modele->getCarte()->getRegion(pays->getText().c_str())->getIncome());
-    box_income->setText(oss.str());*/
+    current_pays_item = (ListboxTextItem*) liste_pays->getFirstSelectedItem();
+    //box nom
+    box_nom->setText(current_pays_item->getText());
+    //box income
+    std::ostringstream oss;
+    oss << modele->getCarte()->getPays(current_pays_item->getText().c_str())->getIncome();
+    box_income->setText(oss.str());
+    
     return true;
 }
 
 bool PalettePays::onNameChange(const EventArgs &e)
 {
-    /*const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
-    
-    lbti->setText(ebox->getText());
-    lbox->handleUpdatedItemData();*/
+    (void) e;
+    if(current_pays_item != nullptr) {
+        current_pays_item->setText(box_nom->getText());
+        liste_pays->handleUpdatedItemData();
+    }
     return true;	
 }
 
 bool PalettePays::onIncomeChange(const EventArgs &e)
 {
-    /*const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
+    const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
     
-    lbti->setText(ebox->getText());
-    lbox->handleUpdatedItemData();*/
     return true;
 }
 

@@ -28,6 +28,7 @@ private :
   Modele* modele;
   CEGUI::Listbox *liste_pays;
   CEGUI::Editbox *box_nom, *box_income;
+  CEGUI::ListboxTextItem* current_pays_item;
 };
 
 }

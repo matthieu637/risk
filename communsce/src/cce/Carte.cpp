@@ -51,5 +51,10 @@ Region* Carte::getRegion(const string& nom_region)
             return it->second.getRegion(nom_region);
 }
 
+Pays* Carte::getPays(const string& nom_pays)
+{
+    return &mp[nom_pays];
+}
+
 
 }
