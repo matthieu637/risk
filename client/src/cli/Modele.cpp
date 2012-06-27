@@ -30,6 +30,10 @@ void Modele::update() {
     cce::Modele::update();
 }
 
+void Modele::spawnUnit(int id, int x, int y) {
+   
+}
+
 void Modele::setCamOrigine(int cameraX, int cameraY) {
     cameraOrigineX = cameraX;
     cameraOrigineY = cameraY;

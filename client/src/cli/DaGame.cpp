@@ -10,7 +10,7 @@ namespace cli {
 
 DaGame::DaGame()
 {
-    cce::MoteurSFML* ms = new cce::MoteurSFML();
+    cce::MoteurSFML* ms = new cce::MoteurSFML("**Client Risk**");
     //GUI (CEGUI) doit être créer après SFML
     GUI* g = new GUI("Client.layout");
     

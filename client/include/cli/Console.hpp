@@ -12,6 +12,7 @@ public:
     Console(Modele *modele);
     string onOpen(const std::string& s);
     string onQuit(const std::string& s);
+    string onSpawn(const std::string& s);
 private:
 
     Modele* m;

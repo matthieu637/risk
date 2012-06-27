@@ -22,7 +22,7 @@ class MoteurSFML
 {
 
 public:
-    MoteurSFML(): fenetre(sf::VideoMode::getDesktopMode(), "*** Editeur Risk ***"),camera(sf::FloatRect())
+    MoteurSFML(const string &nomFenetre): fenetre(sf::VideoMode::getDesktopMode(), nomFenetre),camera(sf::FloatRect())
     {
 	LOG_INFO("Chargement d'une fenetre " << fenetre.getSize().x << "x" << fenetre.getSize().y);
         fenetre.setFramerateLimit(60);

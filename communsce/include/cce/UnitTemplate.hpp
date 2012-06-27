@@ -44,6 +44,7 @@ public:
 	ar & make_nvp("collision", collision_);
 	ar & make_nvp("dmg_type", dmg_type);
 	ar & make_nvp("def_type", def_type);
+	ar & make_nvp("path", path);
     }
     
 
@@ -109,7 +110,7 @@ public:
 
 private:
     int id, dmg_min, dmg_max, defence, move_speed, attack_speed;
-    string nom, description;
+    string nom, description, path;
     bool collision_;
     damage_type dmg_type;
     defence_type def_type;

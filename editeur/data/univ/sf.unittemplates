@@ -17,6 +17,7 @@
 			<collision>1</collision>
 			<dmg_type>1</dmg_type>
 			<def_type>0</def_type>
+			<path>unit1.png</path>
 		</second>
 	</item>
 </UnitTemplates>

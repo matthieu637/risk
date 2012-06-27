@@ -10,7 +10,7 @@ namespace edt {
 
 DaGame::DaGame()
 {
-    cce::MoteurSFML* ms = new cce::MoteurSFML();
+    cce::MoteurSFML* ms = new cce::MoteurSFML("**Editeur Risk**");
     //GUI (CEGUI) doit être créer après SFML
     GUI* g = new GUI("Editeur.layout");
     

@@ -57,6 +57,8 @@ public:
     void resetZoom();
     
     void windowResized(int width, int height);
+    
+    void spawnUnit(int id, int x, int y);
 
   private:
     int cameraOrigineX, cameraOrigineY;
