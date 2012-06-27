@@ -40,7 +40,7 @@ void GUI::init(Modele* modele, Controleur* controleur)
     palette_decor = new PaletteDecor();
     palette_decor->init(this, "PaletteFrames/Decors", (edt::Modele*)modele);
     palette_pays = new PalettePays();
-    palette_pays->init(this, "PaletteFrames/Pays", (edt::Controleur*)controleur);
+    palette_pays->init(this, "PaletteFrames/Pays", (edt::Controleur*)controleur, (edt::Modele*)modele);
     palette_regions = new PaletteRegions();
     palette_regions->init(this, "PaletteFrames/Regions", modele);
     

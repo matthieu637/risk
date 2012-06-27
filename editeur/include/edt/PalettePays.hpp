@@ -3,12 +3,9 @@
 
 #include "cce/Palette.hpp"
 #include <string>
+#include <CEGUI/elements/CEGUIPushButton.h>
 
 using std::string;
-
-namespace CEGUI{
-class PushButton;
-}
 
 namespace edt{
 
@@ -22,10 +19,14 @@ class PalettePays : public cce::Palette
 public :
   PalettePays();
   virtual ~PalettePays();
-  void init(GUI const *gui, string nom, Controleur* c);
+  void init(GUI const *gui, string nom, Controleur* c, Modele* m);
   bool setSpawn(const CEGUI::EventArgs &e);
+  bool onChangeSelection(const CEGUI::EventArgs &e);
 private :
   Controleur* control;
+  Modele* modele;
+  CEGUI::Listbox* liste_pays;
+  CEGUI::Editbox* box_nom;
 };
 
 }
