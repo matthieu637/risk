@@ -4,6 +4,7 @@
 #include <string>
 #include <list>
 #include "cce/Tile.hpp"
+#include <SFML/Graphics/Drawable.hpp>
 #include "cce/UpgradeTemplate.hpp"
 #include <boost/serialization/list.hpp>
 #include "cce/Flag.hpp"
@@ -14,7 +15,7 @@ using std::list;
 
 namespace cce {
   
-class Region
+class Region : public sf::Drawable
 {
 
 public:
@@ -50,10 +51,13 @@ public:
 ///\return Retourne le flag de la region
 ///
     Flag* getFlag();
+    
+    void setDraw(bool drawme);
 
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version)
     {
+      	
         (void)version;
         ar & make_nvp("income", income);
         ar & make_nvp("Flag", flag);
@@ -62,13 +66,15 @@ public:
         ar & make_nvp("Tiles",tiles);
     }
 
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 protected:
     int income;
     Polygon zone;
+    bool drawme;
     list<UpgradeTemplate> upgrades;
     list<Tile> tiles;
-    Flag* flag;
+    Flag flag;
 };
 }
 #endif

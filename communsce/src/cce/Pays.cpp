@@ -16,11 +16,11 @@ int Pays::getIncome(){
     return income;
 }
 
-string Pays::getNom(){
-    return nom;
+map<string,Region>* Pays::getRegions() {
+    return &regions;
 }
 
-map<string,Region>* Pays::getRegions(){
+const map<string,Region>* Pays::getConstRegions() const{
     return &regions;
 }
 

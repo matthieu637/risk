@@ -44,8 +44,7 @@ public:
     
     Repere* getRepere(){return &repere;}
     CoucheDecor* getCoucheDecor(){return &couche_decor;}
-    //list<Pays>* getListPays(){return &mp;}
-    map<string, Region>* getAllRegions() ;
+    map<string, Region* >* getAllRegions() ;
     
 ///
 ///\brief Ajouter une region a un pays par leurs noms.
@@ -55,8 +54,7 @@ public:
     map<string,Pays> getAllPays();
     
     Region* getRegion(const string& nom_region);
-   
-  
+
 protected:
 ///
 ///\brief Méthode d'affichage SFML
@@ -66,7 +64,7 @@ protected:
 protected:
     Repere repere;
     CoucheDecor couche_decor;
-    map<string,Pays> mp;
+    map<string, Pays> mp;
 };
 
 }

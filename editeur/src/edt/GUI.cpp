@@ -30,8 +30,6 @@ void GUI::init(Modele* modele, Controleur* controleur)
 {
     cce::GUI::init(modele);
 
-    edt::Carte* c=static_cast <edt::Carte*>(modele->getCarte());
-
     palette_tile = new PaletteTile();
     palette_tile->init(this, "PaletteFrames/Tiles", (edt::Modele*)modele);
     palette_decor = new PaletteDecor();

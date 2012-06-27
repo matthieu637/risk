@@ -22,7 +22,7 @@ namespace edt {
 
 PaletteRegions::PaletteRegions()
 {
-  lbti=nullptr;
+    lbti=nullptr;
 }
 
 PaletteRegions::~PaletteRegions()
@@ -39,9 +39,9 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     fenetre->addChildWindow(lbox);
     lbox->setWidth(UDim(1.0f,0));
     lbox->setHeight(UDim(0.75f,0));
-    map<string, cce::Region>* lr= m->getCarte()->getAllRegions();
+    map<string, cce::Region* >* lr= m->getCarte()->getAllRegions();
 
-    map<string, cce::Region>::iterator it;
+    map<string, cce::Region* >::iterator it;
     for(it = lr->begin(); it != lr->end(); it++)
         lbox->addItem(new ListboxTextItem(it->first));
 
@@ -74,20 +74,32 @@ void PaletteRegions::updateListRegions(list<string> noms)
 
 
 bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
-{
-    std::ostringstream oss;
-    const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
-    lbti=lbox->getFirstSelectedItem();
-    ebox->setText(lbti->getText());
-    oss << modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome();
-    LOG_DEBUG(modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome());
-    eboxinc->setText(oss.str());
+{	
+    (void)e;
+  
+    //on efface tous les polygones
+    map<string, cce::Region*> * allr = modele->getCarte()->getAllRegions();
+    map<string, cce::Region* >::iterator it;
+    for(it = allr->begin(); it != allr->end();  it++)
+      it->second->setDraw(false);
+    delete allr;
+    
+    if(lbox->getFirstSelectedItem() != nullptr) {
+        std::ostringstream oss;
+        lbti=lbox->getFirstSelectedItem();
+        cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
+
+        r->setDraw(true);
+        ebox->setText(lbti->getText());
+        oss << modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome();
+        eboxinc->setText(oss.str());
+    }
     return true;
 }
 
 bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
 {
-    const CEGUI::KeyEventArgs& keyEvent = static_cast<const CEGUI::KeyEventArgs&>(e);
+    (void) e;
     if(lbti != nullptr) {
         lbti->setText(ebox->getText());
         lbox->handleUpdatedItemData();

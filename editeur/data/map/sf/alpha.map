@@ -7516,7 +7516,6 @@
 		<item class_id="5" tracking_level="0" version="0">
 			<first>Noobsland</first>
 			<second class_id="6" tracking_level="0" version="0">
-				<nom></nom>
 				<income>100</income>
 				<PointSpawn class_id="7" tracking_level="0" version="0">
 					<x>100</x>
@@ -7524,7 +7523,7 @@
 					<id>200000000</id>
 				</PointSpawn>
 				<Regions class_id="8" tracking_level="0" version="0">
-					<count>1</count>
+					<count>2</count>
 					<item_version>0</item_version>
 					<item class_id="9" tracking_level="0" version="0">
 						<first>IsengardU</first>
@@ -7537,15 +7536,60 @@
 							</Flag>
 							<Polygon class_id="12" tracking_level="0" version="0">
 								<Points class_id="13" tracking_level="0" version="0" >
-									<count>0</count>
+									<count>2</count>
 									<item_version>0</item_version>
+									<item class_id="14" tracking_level="0" version="0">
+										<x>10</x>
+										<y>25</y>
+									</item>
+									<item>
+										<x>20</x>
+										<y>40</y>
+									</item>
 								</Points>
 							</Polygon>
-							<Upgrades class_id="14" tracking_level="0" version="0">
+							<Upgrades class_id="15" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</Upgrades>
-							<Tiles class_id="15" tracking_level="0" version="0">
+							<Tiles class_id="16" tracking_level="0" version="0">
+								<count>0</count>
+								<item_version>0</item_version>
+							</Tiles>
+						</second>
+					</item>
+					<item>
+						<first>Srly?</first>
+						<second>
+							<income>666</income>
+							<Flag>
+								<x>300</x>
+								<y>300</y>
+								<id>200000001</id>
+							</Flag>
+							<Polygon>
+								<Points>
+									<count>3</count>
+									<item_version>0</item_version>
+									<item>
+										<x>10</x>
+										<y>25</y>
+									</item>
+									<item>
+										<x>20</x>
+										<y>40</y>
+									</item>
+									<item>
+										<x>300</x>
+										<y>400</y>
+									</item>
+								</Points>
+							</Polygon>
+							<Upgrades>
+								<count>0</count>
+								<item_version>0</item_version>
+							</Upgrades>
+							<Tiles>
 								<count>0</count>
 								<item_version>0</item_version>
 							</Tiles>

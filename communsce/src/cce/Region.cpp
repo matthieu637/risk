@@ -1,14 +1,27 @@
 #include "cce/Region.hpp"
 #include "cce/Polygon.hpp"
 #include "cce/Flag.hpp"
+#include <SFML/Graphics/RenderTarget.hpp>
 
 namespace cce{
 
 Region::Region(){
+  drawme=false;
 } 
 
 Region::~Region()
 {
+}
+
+void Region::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+  if(drawme)
+    target.draw(zone, states);
+}
+
+void Region::setDraw(bool drawme)
+{
+  this->drawme=drawme;
 }
 
 int Region::getIncome(){
@@ -28,7 +41,7 @@ list<Tile> Region::getTiles(){
 }
 
 Flag* Region::getFlag(){
-	return flag;
+	return &flag;
 }
 
 }

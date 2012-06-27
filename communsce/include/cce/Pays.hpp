@@ -28,17 +28,13 @@ virtual ~Pays();
 ///
     int getIncome();
 
-///
-///\brief nom du pays
-///\return Retourne le nom du pays
-///
-    string getNom();
-
     
 ///\brief regions du pays
 ///\return Retourne les regions du pays
 ///
     map<string,Region>* getRegions();
+    
+    const map<string,Region>* getConstRegions() const;
     
 ///\brief obtenir une région
 ///\return Retourne une région associée à l'argument 
@@ -68,7 +64,6 @@ virtual ~Pays();
     void serialize(Archive& ar, const unsigned int version)
     {
 	(void) version;
-	ar & make_nvp("nom", nom); 
 	ar & make_nvp("income", income);
 	ar & make_nvp("PointSpawn", ps);
 	ar & make_nvp("Regions", regions);
@@ -76,7 +71,6 @@ virtual ~Pays();
     
 protected : 
     int income;
-    string nom;
     map<string,Region> regions;
     PointSpawn* ps;
 };

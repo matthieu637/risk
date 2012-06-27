@@ -12,7 +12,7 @@ Region::Region(int _income, Polygon* _zone, list<UpgradeTemplate> _upgrades, lis
     zone = *_zone;
     upgrades = _upgrades;
     tiles = _tiles;
-    flag = _flag;
+    flag = *_flag;
 }
 
 Region::Region()
@@ -47,7 +47,7 @@ void Region::setTiles(const Tile& t){
 }
 
 void Region::setFlag(Flag* f){
-    flag = f;
+    flag = *f;
 }
 
 }
