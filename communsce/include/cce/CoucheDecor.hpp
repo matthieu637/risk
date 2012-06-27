@@ -2,10 +2,13 @@
 #define COUCHEDECOR_HPP
 
 #include <set>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/set.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 
 using sf::RenderTarget;
+using boost::serialization::make_nvp;
 using std::set;
 
 namespace cce
@@ -63,11 +66,17 @@ public:
     ///\param Les coordonnees
     ///
     void removeDecor(int x, int y);
-    
+
+    template<class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+        (void) version;
+        ar & make_nvp("Decors", decors);
+    }
+
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-    set<Decor> *decors;
+    set<Decor> decors;
     const Decor *d_move;
 };
 

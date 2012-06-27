@@ -39,6 +39,7 @@ public:
     {
 	(void) version;
 	ar & make_nvp("Repere", repere);
+	ar & make_nvp("CoucheDecor", couche_decor);
 	ar & make_nvp("Pays", mp);
     }
     
