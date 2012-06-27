@@ -19,6 +19,9 @@ Polygon::~Polygon()
 void Polygon::addPoint(Point p)
 {
     points.push_back(p);
+    int nb = getPointCount();
+    setPointCount(nb+1);
+    setPoint(nb, sf::Vector2f(p.getX(), p.getY()));
 }
 
 bool Polygon::contient(Point p)

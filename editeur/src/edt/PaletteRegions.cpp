@@ -51,7 +51,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     ebox = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Editbox", "PaletteFrames/Regions/EditboxRegions"));
     fenetre->addChildWindow(ebox);
     ebox->setWidth(UDim(1,0));
-    ebox->setHeight(UDim(0.0f,25));
+    ebox->setHeight(UDim(0.0f,32));
     ebox->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,0)));
 
     ebox->subscribeEvent(CEGUI::Editbox::EventKeyUp, CEGUI::Event::Subscriber(&PaletteRegions::onNameChange, this));
@@ -59,9 +59,26 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     eboxinc = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Editbox", "PaletteFrames/Regions/EditboxIncomeRegions"));
     fenetre->addChildWindow(eboxinc);
     eboxinc->setWidth(UDim(1,0));
-    eboxinc->setHeight(UDim(0.0f,25));
-    eboxinc->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,28)));
+    eboxinc->setHeight(UDim(0.0f,32));
+    eboxinc->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,34)));
 
+
+    resetPoly = static_cast<CEGUI::PushButton*>(WindowManager::getSingleton().createWindow("TaharezLook/Button", "PaletteFrames/Regions/ResetPoly"));
+    fenetre->addChildWindow(resetPoly);
+    resetPoly->setWidth(UDim(1,0));
+    resetPoly->setHeight(UDim(0.0f,32));
+    resetPoly->setText("Reset Polygone");
+    resetPoly->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,64)));
+    resetPoly->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onResetPoly, this));
+
+
+    addPoint = static_cast<CEGUI::PushButton*>(WindowManager::getSingleton().createWindow("TaharezLook/Button", "PaletteFrames/Regions/AddPoint"));
+    fenetre->addChildWindow(addPoint);
+    addPoint->setWidth(UDim(1,0));
+    addPoint->setHeight(UDim(0.0f,32));
+    addPoint->setText("Set Poly");
+    addPoint->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,96)));
+    addPoint->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onDefinirPoly, this));
 }
 
 void PaletteRegions::updateListRegions(list<string> noms)
@@ -73,17 +90,20 @@ void PaletteRegions::updateListRegions(list<string> noms)
 }
 
 
-bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
-{	
-    (void)e;
-  
-    //on efface tous les polygones
+void PaletteRegions::hideAllPoly()
+{
     map<string, cce::Region*> * allr = modele->getCarte()->getAllRegions();
     map<string, cce::Region* >::iterator it;
     for(it = allr->begin(); it != allr->end();  it++)
-      it->second->setDraw(false);
+        it->second->setDraw(false);
     delete allr;
-    
+}
+
+bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
+{
+    (void)e;
+    hideAllPoly();
+
     if(lbox->getFirstSelectedItem() != nullptr) {
         std::ostringstream oss;
         lbti=lbox->getFirstSelectedItem();
@@ -93,7 +113,11 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
         ebox->setText(lbti->getText());
         oss << modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome();
         eboxinc->setText(oss.str());
+    } else {
+        eboxinc->setText("");
+        ebox->setText("");
     }
+
     return true;
 }
 
@@ -105,6 +129,26 @@ bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
         lbox->handleUpdatedItemData();
     }
     return true;
+}
+
+bool PaletteRegions::onResetPoly(const CEGUI::EventArgs &e)
+{
+    if(lbox->getFirstSelectedItem() != nullptr) {
+        lbti=lbox->getFirstSelectedItem();
+        cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
+
+        r->resetPoly();
+    }
+}
+
+bool PaletteRegions::onDefinirPoly(const CEGUI::EventArgs &e)
+{
+    if(lbox->getFirstSelectedItem() != nullptr) {
+        lbti=lbox->getFirstSelectedItem();
+        cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
+	
+	modele->setPoly(new Polygon);
+    }
 }
 
 
