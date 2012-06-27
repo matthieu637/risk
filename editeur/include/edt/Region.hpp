@@ -64,6 +64,8 @@ public :
 ///
     void setFlag(Flag* f);
     
+    void setZone(const Polygon* p);
+    
 };
 }
 #endif // REGION_HPP

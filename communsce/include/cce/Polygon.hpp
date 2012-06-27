@@ -5,6 +5,7 @@
 #include <deque>
 #include <boost/serialization/deque.hpp>
 #include <Thor/Multimedia/ConcaveShape.hpp>
+#include <SFML/Graphics/ConvexShape.hpp>
 #include <bib/Logger.hpp>
 
 using std::deque;
@@ -12,7 +13,7 @@ using boost::serialization::make_nvp;
 
 namespace cce{
 
-class Polygon : public thor::ConcaveShape
+class Polygon : public sf::ConvexShape/* thor::ConcaveShape*/
 {
 
 public:
@@ -22,6 +23,10 @@ public:
   void addPoint(Point p);
 
   bool contient(Point p);
+  
+  void removeLastPoint();
+  
+  virtual void setPoint(unsigned int index, const sf::Vector2f& point);
   
       template<class Archive>
     void serialize(Archive& ar, const unsigned int version)
@@ -42,15 +47,17 @@ public:
         (void) file_version;
         (void) ar;
 
+	this->
 	setPointCount(points.size());
 	deque<Point>::iterator it;
 	unsigned int i=0;
 	for(it=points.begin();it != points.end(); it++){
 	  setPoint(i, sf::Vector2f(it->getX(), it->getY()));
-	  setOutlineColor(sf::Color::White);
-	  setOutlineThickness(2);
 	  i++;
 	}
+	setFillColor(sf::Color(100,100,100,100));
+	setOutlineColor(sf::Color::Red);
+	setOutlineThickness(3.);
     }
   
 private:
