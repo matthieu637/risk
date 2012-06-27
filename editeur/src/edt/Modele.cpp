@@ -191,9 +191,12 @@ void Modele::deleteObject(int x, int y) {
 
 void Modele::setSpawn(int x, int y)
 {
-    cce::Decor* d = carte->getCoucheDecor()->getDecor(x, y);
-    if(d != nullptr)
+    cce::Decor* d = (cce::Decor*)carte->getCoucheDecor()->getDecor(x, y);
+    if(d != nullptr){
+	carte->getPays(current_pays)->getPointSpawn()->setColor(sf::Color(255,255,255,255));
         carte->getPays(current_pays)->setSpawn(d);
+	d->setColor(sf::Color(255, 0, 0, 255));
+    }
 }
 
 void Modele::setCurrentPays(string nom)

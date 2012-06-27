@@ -97,20 +97,18 @@ void PalettePays::init(GUI const *gui, string nom, Controleur* c, Modele* m)
 bool PalettePays::onSelectionChange(const EventArgs &e)
 {
     (void) e;
-    //remettre la couleur du spawn de l'ancien pays à celle d'origine
-    modele->getCarte()->getPays(current_pays_item->getText().c_str())->getPointSpawn()->setColor(sf::Color(255, 255, 255, 255));
-    
     current_pays_item = (ListboxTextItem*) liste_pays->getFirstSelectedItem();
+    
     //box nom
     box_nom->setText(current_pays_item->getText());
+    
     //box income
     std::ostringstream oss;
     oss << modele->getCarte()->getPays(current_pays_item->getText().c_str())->getIncome();
     box_income->setText(oss.str());
+    
     //modele current pays
     modele->setCurrentPays(current_pays_item->getText().c_str());
-    //coloriser le spawn
-    modele->getCarte()->getPays(current_pays_item->getText().c_str())->getPointSpawn()->setColor(sf::Color(255, 0, 0, 255));
     return true;
 }
 
