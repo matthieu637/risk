@@ -7511,20 +7511,20 @@
 		</Tiles>
 	</Repere>
 	<CoucheDecor class_id="4" tracking_level="0" version="0">
-	<Decors class_id="5" tracking_level="0" version="0">
-		<count>2</count>
-		<item_version>0</item_version>
-		<item class_id="6" tracking_level="0" version="0">
-			<id>200000001</id>
-			<x>22</x>
-			<y>53</y>
-		</item>
-		<item>
-			<id>200000002</id>
-			<x>10</x>
-			<y>8</y>
-		</item>
-	</Decors>
+		<Decors class_id="5" tracking_level="0" version="0">
+			<count>2</count>
+			<item_version>0</item_version>
+			<item class_id="6" tracking_level="0" version="0">
+				<id>200000002</id>
+				<x>677</x>
+				<y>-65</y>
+			</item>
+			<item>
+				<id>200000001</id>
+				<x>216</x>
+				<y>345</y>
+			</item>
+		</Decors>
 	</CoucheDecor>
 	<Pays class_id="7" tracking_level="0" version="0">
 		<count>1</count>
