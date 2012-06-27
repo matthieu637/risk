@@ -106,6 +106,10 @@ public:
     void windowResized(int width, int height);
     
     void redimensionner(int x, int y);
+    
+    bool movePoly(int x, int y);
+    
+    bool addPoint(int x, int y);
 
 ///
 ///\brief sauvegarde une carte 
@@ -115,10 +119,14 @@ public:
     string openCarte(const string& chemin);
     string getCurrentMap();
     
+    void setPoly(cce::Polygon* poly);
 ///
 ///\brief Choisir la palette
 ///
     void selectPalette(palette_type p);
+    
+    
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 ///
 ///\brief Ajoute une region au pays actuellement sélectionné
@@ -129,6 +137,9 @@ public:
     void moveScrollVert(float pos);
     void moveScrollHori(float pos);
     void quit();
+    
+    cce::Polygon* getPoly(){return poly;}
+    void unsetPoly();
 
   private:
       Repere * getRepere();
@@ -140,6 +151,8 @@ public:
     string current_pays;
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
+    cce::Polygon* poly;
+    
     list < cce::Vue * >::iterator it;
     string current_map;
     

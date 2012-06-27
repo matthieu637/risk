@@ -70,6 +70,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["choix_palette"] = t_press || d_press || p_press || r_press;
     map["console"] = c_press;
     map["close_console"] = escape_press;
+    map["move_poly"] = mouse_move;
+    map["add_point_poly"] = left_release;
 
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -88,6 +90,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("console", BIND(&Controleur::onOpenConsole));
     system.connect("close_console", BIND(&Controleur::onCloseConsole));
     system.connect("set_spawn", BIND(&Controleur::onChooseSpawn));
+    system.connect("move_poly", BIND(&Controleur::onMovePoly));
+    system.connect("add_point_poly", BIND(&Controleur::onAddPoint));
 
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
@@ -223,6 +227,16 @@ void Controleur::onChooseSpawn(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     m->setSpawn(getX(mousePosition.x), getY(mousePosition.y));
     setSpawn = false;
+}
+
+bool Controleur::onMovePoly(thor::ActionContext < string > context)
+{
+    return m->movePoly(getX(context.event->mouseMove.x), getY(context.event->mouseMove.y));
+}
+
+bool Controleur::onAddPoint(thor::ActionContext < string > context)
+{
+    return m->addPoint(getX(context.event->mouseButton.x), getY(context.event->mouseButton.y));
 }
 
 int Controleur::getX(int mouseX) {

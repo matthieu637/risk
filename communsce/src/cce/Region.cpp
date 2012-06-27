@@ -3,11 +3,11 @@
 #include "cce/Flag.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
-namespace cce{
+namespace cce {
 
-Region::Region(){
-  drawme=false;
-} 
+Region::Region() {
+    drawme=false;
+}
 
 Region::~Region()
 {
@@ -15,33 +15,38 @@ Region::~Region()
 
 void Region::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-  if(drawme)
-    target.draw(zone, states);
+    if(drawme)
+        target.draw(zone, states);
 }
 
 void Region::setDraw(bool drawme)
 {
-  this->drawme=drawme;
+    this->drawme=drawme;
 }
 
-int Region::getIncome(){
-	return income;
+int Region::getIncome() {
+    return income;
 }
 
-Polygon* Region::getZone(){
-	return &zone;
+Polygon* Region::getZone() {
+    return &zone;
 }
 
-list<UpgradeTemplate> Region::getUpgrades(){
-	return upgrades;
+list<UpgradeTemplate> Region::getUpgrades() {
+    return upgrades;
 }
 
-list<Tile> Region::getTiles(){
-	return tiles;
+list<Tile> Region::getTiles() {
+    return tiles;
 }
 
-Flag* Region::getFlag(){
-	return &flag;
+Flag* Region::getFlag() {
+    return &flag;
+}
+
+void Region::resetPoly()
+{
+    zone.setPointCount(0);
 }
 
 }

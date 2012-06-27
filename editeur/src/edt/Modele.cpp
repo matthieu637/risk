@@ -27,7 +27,7 @@ Modele::Modele():cce::Modele() {
     coeff_zoom = 1;
     tt = cce::Univers::getInstance()->getTileTemplate(100000000);
     dt = cce::Univers::getInstance()->getDecorTemplate(200000000);
-   
+
     current_map = "";
     current_pays = "";
 }
@@ -61,7 +61,7 @@ void Modele::nouvelleCarte()
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
 }
 
- string Modele::saveCarte(const string& chemin) {
+string Modele::saveCarte(const string& chemin) {
     current_map = chemin;
     bib::XMLEngine::save<cce::Carte>(*carte,"Carte",chemin);
     return "La carte "+chemin+" a bien été sauvegardée";
@@ -78,8 +78,45 @@ string Modele::saveCarte() {
 }
 
 
-void Modele::quit(){
-     for (it = vues.begin(); it != vues.end(); it++) {
+void Modele::setPoly(cce::Polygon* poly) {
+    poly->setOutlineColor(sf::Color::Red);
+    poly->setOutlineThickness(3.);
+    poly->setFillColor(sf::Color(100,100,100,100));
+    this->poly = poly;
+}
+
+void Modele::unsetPoly()
+{
+    poly = nullptr;
+}
+
+bool Modele::movePoly(int x_, int y_)
+{
+    if(poly != nullptr) {
+        int index = poly->getPointCount();
+        if(index != 0) {
+            //poly->setPointCount(index);
+            poly->setPoint(index-1, sf::Vector2f(x_, y_));
+        }
+        return true;
+    }
+    return false;
+}
+
+bool Modele::addPoint(int x, int y)
+{
+    LOG_DEBUG(carte->getRegion("IsengardU")->getZone()->contient(cce::Point(x, y)));
+    if(poly != nullptr) {
+        poly->addPoint(cce::Point(x, y));
+        if(poly->getPointCount() == 1)
+            poly->addPoint(cce::Point(x+1, y+1));
+        return true;
+    }
+    return false;
+}
+
+void Modele::quit() {
+    for (it = vues.begin(); it != vues.end(); it++) {
         ((Vue*)*it)->quit();
     }
 }
@@ -232,9 +269,17 @@ void Modele::moveScrollHori(float pos)
 void Modele::redimensionner(int x, int y) {
     edt::Repere* r = static_cast<edt::Repere*> (getCarte()->getRepere());
     r->redimensionner(x, y);
-    
+
     for (it = vues.begin(); it != vues.end(); it++)
         ((Vue*)(*it))->initScrolls(x, y);
+}
+
+void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    cce::Modele::draw(target, states);
+    if(poly != nullptr) {
+        target.draw(*poly, states);
+    }
 }
 
 

@@ -23,6 +23,11 @@ Region::~Region()
 {
 }
 
+void Region::setZone(const Polygon* p)
+{
+  zone = *p;
+}
+
 void Region::resetPolygon()
 {
     zone.~Polygon();

@@ -53,6 +53,8 @@ public:
     Flag* getFlag();
     
     void setDraw(bool drawme);
+    
+    void resetPoly();
 
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version)

@@ -67,6 +67,7 @@ void Console::RegisterHandlers()
 
 bool Console::ignore(const CEGUI::EventArgs& e)
 {
+    (void) e;
     return true;
 }
 
@@ -82,11 +83,11 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
         if(commandeHistorique.size() == 0)
             return true;
 
-        if(index == -1 || index == 0) {
+        if(index == -1 || index == 0) 
             index = commandeHistorique.size()-1;
-        } else {
+         else 
             index--;
-        }
+        
         //recuperation du texte
         m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
         //placement correct du curseur
@@ -98,11 +99,11 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
         if(commandeHistorique.size() == 0)
             return true;
 
-        if(index == (int)commandeHistorique.size() - 1) {
+        if(index == (int)commandeHistorique.size() - 1) 
             index = 0;
-        } else {
+         else 
             index++;
-        }
+        
         //recuperation du texte
         m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
         //placement correct du curseur
@@ -182,20 +183,20 @@ string Console::onHelp(const string&  s) {
     (void) s;
     string outString = "commande /help : affiche les commandes disponibles\n";
     outString += "commande /save : enregistre la carte courante\n";
-    outString += "commande /save chemin : enregistre la carte sous le nom du chemin donnÃ©\n";
-    outString += "commande /open chemin : charge la carte ayant pour nom le chemin donnÃ©\n";
-    outString += "commande /quit : quitte l'Ã©diteur\n";
+    outString += "commande /save chemin : enregistre la carte sous le nom du chemin donné\n";
+    outString += "commande /open chemin : charge la carte ayant pour nom le chemin donné\n";
+    outString += "commande /quit : quitte l'éditeur\n";
     outString += "commande /redimensionner x y : redimensionne la carte aux dimensions x et y\n";
     outString += "commande /new_map : charge une carte vide\n\n";
 
-    outString += "touche escape : ferme la console\n"; //le curseur doit Ãªtre dans la console
-    outString += "touche enter :  affiche le message sur la console\n";//le curseur doit Ãªtre dans la console
+    outString += "touche escape : ferme la console\n"; //le curseur doit être dans la console
+    outString += "touche enter :  affiche le message sur la console\n";//le curseur doit être dans la console
     outString += "touche c : ouvre une console\n";
     outString += "touche t : affiche la palette des tiles\n";
-    outString += "touche d : affiche la palette des dÃ©cors\n";
-    outString += "touche r : affiche la palette des rÃ©gions\n";
+    outString += "touche d : affiche la palette des décors\n";
+    outString += "touche r : affiche la palette des régions\n";
     outString += "touche p : affiche la palette des pays\n";
-    outString += "touche space : pour se mettre en mode sÃ©lection\n";
+    outString += "touche space : pour se mettre en mode sélection\n";
 
     (this)->OutputText(outString,CEGUI::colour(1.0f,0.0f,0.0f));
     return outString;
@@ -226,8 +227,11 @@ void Console::OutputText(const string& message, CEGUI::colour colour)
 }
 
 void Console::setVisible(bool visible)
-{
+{   
     m_ConsoleWindow->setVisible(visible);
+    if (visible == true){
+      m_ConsoleWindow->getChild("Console/EditBox")->activate();
+    }
 }
 
 bool Console::isVisible()

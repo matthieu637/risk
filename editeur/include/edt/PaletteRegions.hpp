@@ -29,12 +29,20 @@ public :
   bool onNameChange(const CEGUI::EventArgs &e);
   bool onChangeSelection(const CEGUI::EventArgs &e);
   bool onIncomeChange(const CEGUI::EventArgs &e);
+  bool onResetPoly(const CEGUI::EventArgs &e);
+  bool onDefinirPoly(const CEGUI::EventArgs &e);
+  
   
 private :
+  void hideAllPoly();
+  
   CEGUI::Listbox* lbox;
   CEGUI::Editbox* ebox;
   CEGUI::Editbox* eboxinc;
   CEGUI::ListboxItem* lbti;
+  CEGUI::PushButton* resetPoly;
+  CEGUI::PushButton* addPoint;
+  
   Modele* modele;
 };
 }
