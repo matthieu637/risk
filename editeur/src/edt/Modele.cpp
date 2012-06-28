@@ -105,7 +105,6 @@ bool Modele::movePoly(int x_, int y_)
 
 bool Modele::addPoint(int x, int y)
 {
-    LOG_DEBUG(carte->getRegion("IsengardU")->getZone()->contient(cce::Point(x, y)));
     if(poly != nullptr) {
         int nb = poly->getPointCount();
         poly->setPointCount(nb+1);
