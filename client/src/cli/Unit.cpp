@@ -1,4 +1,5 @@
 #include "cli/Unit.hpp"
+#include "bib/Logger.hpp"
 
 
 namespace cli {
@@ -11,9 +12,18 @@ namespace cli {
   void Unit::setUnitTemplate(cce::UnitTemplate *ut){
 	unitTemplate = ut;//met a jour les caractéristiques de l'unité
 	setTexture(ut->getTexture());//met a jour l'image de l'unité
-	
+	animation = ut->getAnimation();
+	LOG_DEBUG(ut->getAnimation().isPlayingAnimation());
+	thor::FrameAnimation moveUp;
+	moveUp.addFrame(1.f, sf::IntRect(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
+  //   for (unsigned int i = 0; i < 6; i++)
+      // 	moveUp.addFrame(1.f, sf::IntRect(47*i, 0, 47, 64));
+    // Register animations with their corresponding durations
+      animation.addAnimation("moveUp", moveUp, sf::seconds(1.f));  
+   //   animation.playAnimation("moveUp",false);
   }
   
+
   void Unit::setId(int id){
       setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
   }

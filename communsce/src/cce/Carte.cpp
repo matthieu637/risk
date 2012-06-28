@@ -17,8 +17,9 @@ void Carte::draw(sf::RenderTarget& target, sf::RenderStates states) const
     map <string,Pays>::const_iterator it;
     map<string,Region>::const_iterator ir;
     for (it = mp.begin(); it != mp.end(); it++)
-        for(ir=it->second.getConstRegions()->begin(); ir!=it->second.getConstRegions()->end(); ir++)
+        for(ir=it->second.getConstRegions()->begin(); ir!=it->second.getConstRegions()->end(); ir++){
             target.draw(ir->second, states);
+	}
 }
 
 map<string, Region* >* Carte::getAllRegions()

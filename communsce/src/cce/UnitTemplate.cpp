@@ -1,5 +1,6 @@
 #include "cce/UnitTemplate.hpp"
 #include "cce/ImageManager.hpp"
+#include "bib/Logger.hpp"
 
 namespace cce {
 
@@ -24,6 +25,7 @@ void UnitTemplate::loadAfterXML(int id)
     //à supprimer pour ne pas charger toutes les textures des unités en mémoire
     ImageManager::getInstance()->load_asset(id, path);
     texture = &ImageManager::getInstance()->get_asset(id);
+    initAnimation();
 }
 
 UnitTemplate::~UnitTemplate()
@@ -31,6 +33,18 @@ UnitTemplate::~UnitTemplate()
 
 }
 
+ void UnitTemplate::initAnimation()
+{//LOG_DEBUG("coucou");
+   // Specify static subrect which is shown unless an other animation is active
+  thor::FrameAnimation defaultAnim;
+  defaultAnim.addFrame(1.f, sf::IntRect(0, 0, texture->getSize().x/6, texture->getSize().y/4));
+  animation.setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+}
+
+thor::Animator<sf::Sprite, std::string> UnitTemplate::getAnimation(){
+    return animation; 
+ }
+ 
 void UnitTemplate::setDamage(int dmg_min, int dmg_max) {
     this->dmg_min = dmg_min;
     this->dmg_max = dmg_max;

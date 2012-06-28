@@ -48,8 +48,10 @@ void CoucheDecor::moveDecor(int dx, int dy)
 void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     set<Decor>::iterator it = decors.begin();
-    for(; it != decors.end(); ++it)
+    for(; it != decors.end(); ++it){
       target.draw(*it, states);
+      ((Decor*)&(*it))->animate();
+    }
 }
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)

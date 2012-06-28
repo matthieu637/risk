@@ -6,6 +6,9 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/split_member.hpp>
 
+#include <SFML/Graphics.hpp>
+#include <Thor/Animation.hpp>
+
 using sf::Texture;
 using boost::serialization::make_nvp;
 using std::string;
@@ -30,6 +33,9 @@ public:
 ///\return Retourne l'id du DecorTemplate
 ///
     int getID();
+    
+    thor::Animator<sf::Sprite, std::string> getAnimation();
+    void initAnimation();
     
 ///
 ///\brief Le Decor est-elle passable?
@@ -59,6 +65,7 @@ private:
     bool bloquant_;
     string path;
     Texture *texture;
+    thor::Animator<sf::Sprite, std::string> animation;
 };
 
 }

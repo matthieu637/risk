@@ -6,6 +6,8 @@
 #include <boost/serialization/nvp.hpp>
 #include "DecorTemplate.hpp"
 #include "Univers.hpp"
+#include <SFML/Graphics.hpp>
+#include <Thor/Animation.hpp>
 
 using sf::Texture;
 using sf::Sprite;
@@ -41,7 +43,7 @@ public:
     void setTexture(Texture* texture);
     
     void move(float offsetX, float offsetY);
-
+    void animate();
 
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
@@ -80,6 +82,10 @@ public:
 
 private:
     DecorTemplate *dt;
+    
+protected:
+    thor::Animator<sf::Sprite, std::string> animation;
+    sf::Clock frameClock;
 };
 
 bool operator<(Decor const &d1, Decor const &d2);

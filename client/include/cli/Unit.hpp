@@ -10,7 +10,7 @@ namespace cli{
       Unit();
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
-     
+    
     private :
 	cce::UnitTemplate *unitTemplate;
   };
