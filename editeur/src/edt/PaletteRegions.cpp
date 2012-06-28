@@ -17,6 +17,7 @@ using CEGUI::Listbox;
 using CEGUI::ListboxTextItem;
 using CEGUI::Editbox;
 using CEGUI::UDim;
+using CEGUI::Combobox;
 
 namespace edt {
 
@@ -38,7 +39,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     lbox = static_cast<Listbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Listbox", "PaletteFrames/Regions/ListboxRegions"));
     fenetre->addChildWindow(lbox);
     lbox->setWidth(UDim(1.0f,0));
-    lbox->setHeight(UDim(0.75f,0));
+    lbox->setHeight(UDim(0.35f,0));
     map<string, cce::Region* >* lr= m->getCarte()->getAllRegions();
 
     map<string, cce::Region* >::iterator it;
@@ -52,7 +53,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     fenetre->addChildWindow(ebox);
     ebox->setWidth(UDim(1,0));
     ebox->setHeight(UDim(0.0f,32));
-    ebox->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,0)));
+    ebox->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.37,0)));
 
     ebox->subscribeEvent(CEGUI::Editbox::EventKeyUp, CEGUI::Event::Subscriber(&PaletteRegions::onNameChange, this));
 
@@ -60,7 +61,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     fenetre->addChildWindow(eboxinc);
     eboxinc->setWidth(UDim(1,0));
     eboxinc->setHeight(UDim(0.0f,32));
-    eboxinc->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,34)));
+    eboxinc->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.38,34)));
 
 
     resetPoly = static_cast<CEGUI::PushButton*>(WindowManager::getSingleton().createWindow("TaharezLook/Button", "PaletteFrames/Regions/ResetPoly"));
@@ -68,7 +69,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     resetPoly->setWidth(UDim(1,0));
     resetPoly->setHeight(UDim(0.0f,32));
     resetPoly->setText("Reset Polygone");
-    resetPoly->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,64)));
+    resetPoly->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.39,64)));
     resetPoly->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onResetPoly, this));
 
 
@@ -77,8 +78,23 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     addPoint->setWidth(UDim(1,0));
     addPoint->setHeight(UDim(0.0f,32));
     addPoint->setText("Set Poly");
-    addPoint->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.76,96)));
+    addPoint->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.40,96)));
     addPoint->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onDefinirPoly, this));
+    
+    cboxpoly = static_cast<CEGUI::Checkbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Checkbox", "PaletteFrames/Regions/CheckboxPoly"));
+    fenetre->addChildWindow(cboxpoly);
+    cboxpoly->setWidth(UDim(1,0));
+    cboxpoly->setText("Montrer tous les polygones");
+    cboxpoly->setHeight(UDim(0.0f,32));
+    cboxpoly->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.41,128)));
+    cboxpoly->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&PaletteRegions::onCheckedChange, this));
+    
+    comboBoxPays = static_cast<CEGUI::Combobox*>(WindowManager::getSingleton().createWindow("TaharezLook/Combobox", "PaletteFrames/Regions/ComboBoxPays"));
+    fenetre->addChildWindow(comboBoxPays);
+    comboBoxPays->setWidth(UDim(1,0));
+    comboBoxPays->setHeight(UDim(0.0f,32));
+    comboBoxPays->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,160)));
+    comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onCheckedChange, this));
 }
 
 void PaletteRegions::updateListRegions(list<string> noms)
@@ -99,12 +115,34 @@ void PaletteRegions::hideAllPoly()
     delete allr;
 }
 
+void PaletteRegions::showAllPoly()
+{
+    map<string, cce::Region*> * allr = modele->getCarte()->getAllRegions();
+    map<string, cce::Region* >::iterator it;
+    for(it = allr->begin(); it != allr->end();  it++)
+        it->second->setDraw(true);
+    delete allr;
+}
+
+bool PaletteRegions::onCheckedChange(const CEGUI::EventArgs &e)
+{
+  if(cboxpoly->isSelected())
+  {
+    showAllPoly();
+  }
+  else
+  { 
+    hideAllPoly();
+  }
+}
+
 bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
 {
     (void)e;
     hideAllPoly();
 
     if(lbox->getFirstSelectedItem() != nullptr) {
+	cboxpoly->setSelected(false);
         std::ostringstream oss;
         lbti=lbox->getFirstSelectedItem();
         cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
@@ -113,6 +151,7 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
         ebox->setText(lbti->getText());
         oss << modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome();
         eboxinc->setText(oss.str());
+	
     } else {
         eboxinc->setText("");
         ebox->setText("");
