@@ -3,7 +3,6 @@
 #include "cce/DecorTemplate.hpp"
 #include "cce/UnitTemplate.hpp"
 #include "bib/Logger.hpp"
-#include <cmath>
 
 namespace cce{
 
@@ -31,18 +30,21 @@ const Decor* CoucheDecor::getDecor(int x, int y)
 }
 
 void CoucheDecor::setDecorMove(int x, int y){
-    d_move = (Decor*)getDecor(x, y);
+    d_move = Decor();
+    const Decor* d = getDecor(x, y);
+    if(d != nullptr)
+	d_move = (Decor)*d;
 }
 
 void CoucheDecor::moveDecor(int dx, int dy)
 {
-    if(d_move == nullptr)
+    if(&d_move == nullptr)
 	return;
-    decors.erase(*d_move);
-    d_move->move(dx, dy);
-    if(decors.count(*d_move) > 0)
-	d_move->move(-dx, -dy);
-    decors.insert(*d_move);
+    decors.erase(d_move);
+    d_move.move(dx, dy);
+    if(decors.count(d_move) > 0)
+	d_move.move(-dx, -dy);
+    decors.insert(d_move);
 }
 
 void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -65,7 +67,7 @@ void CoucheDecor::addDecor(Decor *d)
 
 void CoucheDecor::removeDecor(int x, int y)
 {
-    Decor *d = (Decor*)getDecor(x,y);
+    const Decor *d = getDecor(x,y);
     if(d != nullptr)
       decors.erase(*d);
 }
