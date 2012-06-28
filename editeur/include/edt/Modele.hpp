@@ -118,7 +118,7 @@ public:
     string openCarte(const string& chemin);
     string getCurrentMap();
     
-    void setPoly(cce::Polygon* poly);
+    void setPoly(sf::ConvexShape* poly);
 ///
 ///\brief Choisir la palette
 ///
@@ -136,7 +136,7 @@ public:
     void moveScrollHori(float pos);
     void quit();
     
-    cce::Polygon* getPoly(){return poly;}
+    sf::ConvexShape* getPoly(){return poly;}
     void unsetPoly();
 
   private:
@@ -149,7 +149,7 @@ public:
     string current_pays;
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
-    cce::Polygon* poly;
+    sf::ConvexShape* poly;
     
     list < cce::Vue * >::iterator it;
     string current_map;

@@ -80,7 +80,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     addPoint->setText("Set Poly");
     addPoint->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.40,96)));
     addPoint->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onDefinirPoly, this));
-    
+
     cboxpoly = static_cast<CEGUI::Checkbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Checkbox", "PaletteFrames/Regions/CheckboxPoly"));
     fenetre->addChildWindow(cboxpoly);
     cboxpoly->setWidth(UDim(1,0));
@@ -88,7 +88,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     cboxpoly->setHeight(UDim(0.0f,32));
     cboxpoly->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.41,128)));
     cboxpoly->subscribeEvent(CEGUI::Checkbox::EventCheckStateChanged, CEGUI::Event::Subscriber(&PaletteRegions::onCheckedChange, this));
-    
+
     comboBoxPays = static_cast<CEGUI::Combobox*>(WindowManager::getSingleton().createWindow("TaharezLook/Combobox", "PaletteFrames/Regions/ComboBoxPays"));
     fenetre->addChildWindow(comboBoxPays);
     comboBoxPays->setWidth(UDim(1,0));
@@ -100,20 +100,20 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     int i=0;
     for(ite = mp->begin(); ite != mp->end(); ite++)
     {
-	  ListboxTextItem* itemCombobox = new ListboxTextItem(ite->first, ++i);
-	  itemCombobox->setSelectionBrushImage("TaharezLook","MultiListSelectionBrush");
+        ListboxTextItem* itemCombobox = new ListboxTextItem(ite->first, ++i);
+        itemCombobox->setSelectionBrushImage("TaharezLook","MultiListSelectionBrush");
 
-	  comboBoxPays->addItem(itemCombobox);
+        comboBoxPays->addItem(itemCombobox);
     }
     comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onComboboxSelectionChange, this));
 }
 
 bool PaletteRegions::onComboboxSelectionChange(const CEGUI::EventArgs &e)
 {
-  if(lbox->getFirstSelectedItem() != nullptr)
-  {
-    
-  }
+    if(lbox->getFirstSelectedItem() != nullptr)
+    {
+
+    }
 }
 
 void PaletteRegions::updateListRegions(list<string> noms)
@@ -145,14 +145,14 @@ void PaletteRegions::showAllPoly()
 
 bool PaletteRegions::onCheckedChange(const CEGUI::EventArgs &e)
 {
-  if(cboxpoly->isSelected())
-  {
-    showAllPoly();
-  }
-  else
-  { 
-    hideAllPoly();
-  }
+    if(cboxpoly->isSelected())
+    {
+        showAllPoly();
+    }
+    else
+    {
+        hideAllPoly();
+    }
 }
 
 bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
@@ -161,7 +161,7 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
     hideAllPoly();
 
     if(lbox->getFirstSelectedItem() != nullptr) {
-	cboxpoly->setSelected(false);
+        cboxpoly->setSelected(false);
         std::ostringstream oss;
         lbti=lbox->getFirstSelectedItem();
         cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
@@ -170,7 +170,7 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
         ebox->setText(lbti->getText());
         oss << modele->getCarte()->getRegion(lbti->getText().c_str())->getIncome();
         eboxinc->setText(oss.str());
-	
+
     } else {
         eboxinc->setText("");
         ebox->setText("");
@@ -207,17 +207,20 @@ bool PaletteRegions::onDefinirPoly(const CEGUI::EventArgs &e)
     if(lbox->getFirstSelectedItem() != nullptr) {
         lbti=lbox->getFirstSelectedItem();
         cce::Region* r =modele->getCarte()->getRegion(lbti->getText().c_str());
-	
-	if(modele->getPoly() == nullptr){
-	  modele->setPoly(new Polygon);
-	  addPoint->setText("Finish");
-	}else {
-	    Polygon* p = modele->getPoly();
-	    modele->unsetPoly();
-	    p->removeLastPoint();
-	    ((edt::Region*)r)->setZone(p);
-	    addPoint->setText("Set Poly");
-	}
+
+        if(modele->getPoly() == nullptr) {
+            modele->setPoly(new sf::ConvexShape);
+            addPoint->setText("Finish");
+        } else {
+
+            sf::ConvexShape* ch = modele->getPoly();
+            modele->unsetPoly();
+
+            Polygon* p = new Polygon(*ch);
+            p->removeLastPoint();
+            ((edt::Region*)r)->setZone(p);
+            addPoint->setText("Set Poly");
+        }
     }
     return true;
 }
