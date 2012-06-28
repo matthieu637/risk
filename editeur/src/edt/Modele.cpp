@@ -1,6 +1,7 @@
 #include "edt/Modele.hpp"
 #include "edt/Vue.hpp"
 #include "edt/Carte.hpp"
+#include "edt/Pays.hpp"
 #include "cce/Tile.hpp"
 #include "cce/Repere.hpp"
 #include "edt/Vue.hpp"
@@ -191,16 +192,37 @@ void Modele::deleteObject(int x, int y) {
 
 void Modele::setSpawn(int x, int y)
 {
-    cce::Decor* d = (cce::Decor*)carte->getCoucheDecor()->getDecor(x, y);
-    if(d != nullptr){
-	carte->getPays(current_pays)->getPointSpawn()->setColor(sf::Color(255,255,255,255));
-        carte->getPays(current_pays)->setSpawn(d);
-	d->setColor(sf::Color(255, 0, 0, 255));
+    cce::Decor* new_spawn = (cce::Decor*)carte->getCoucheDecor()->getDecor(x, y);
+    cce::Decor* old_spawn;
+    if(new_spawn != nullptr){
+	old_spawn = (cce::Decor*)carte->getPays(current_pays)->getPointSpawn();
+	if(old_spawn != nullptr)
+	    old_spawn->setColor(sf::Color(255,255,255,255));
+	new_spawn->setColor(sf::Color(255, 0, 0, 255));
+        carte->getPays(current_pays)->setSpawn(new_spawn);
     }
 }
 
 void Modele::setCurrentPays(string nom)
 {
+    cce::Pays* p;
+    cce::Decor* d;
+    
+    //décoloriser spawn du pays courant
+    p = carte->getPays(current_pays);
+    if(p != nullptr){
+      d = p->getPointSpawn();
+      if(d != nullptr)
+	d->setColor(sf::Color(255,255,255,255));
+    }
+    
+    //coloriser spawn du pays sélectionné
+    p = carte->getPays(nom);
+    if(p != nullptr){
+      d = p->getPointSpawn();
+      if(d != nullptr)
+	d->setColor(sf::Color(255, 0, 0, 255));
+    }
     current_pays = nom;
 }
 

@@ -6,6 +6,7 @@
 #include <boost/serialization/set.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Drawable.hpp>
+#include "cce/Decor.hpp"
 
 using sf::RenderTarget;
 using boost::serialization::make_nvp;
@@ -60,7 +61,8 @@ public:
     ///\return le decor créé
     ///
     void addDecor(DecorTemplate *d, int x, int y);
-
+    void addDecor(Decor *d);
+    
     ///
     ///\brief Supprime un decor selon ses coordonnees
     ///\param Les coordonnees

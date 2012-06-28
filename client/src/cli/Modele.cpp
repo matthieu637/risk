@@ -1,5 +1,6 @@
 #include "cli/Modele.hpp"
 #include "cli/Vue.hpp"
+#include <cli/Unit.hpp>
 #include "cce/Tile.hpp"
 #include "cce/Repere.hpp"
 #include "bib/XMLEngine.hpp"
@@ -31,7 +32,10 @@ void Modele::update() {
 }
 
 void Modele::spawnUnit(int id, int x, int y) {
-   
+   Unit u;
+   u.setId(id);
+   u.setPosition(x,y);
+   carte->getCoucheDecor()->addDecor(&u);
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY) {

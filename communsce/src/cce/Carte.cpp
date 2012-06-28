@@ -59,6 +59,8 @@ Region* Carte::getRegion(const string& nom_region)
 
 Pays* Carte::getPays(const string& nom_pays)
 {
+    if (mp.count(nom_pays) == 0)
+      return nullptr;
     return &mp[nom_pays];
 }
 

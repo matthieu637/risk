@@ -2,6 +2,9 @@
 #include "bib/Logger.hpp"
 #include "cce/Controleur.hpp" //BIND
 #include <cce/Modele.hpp>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 
 namespace cli {
@@ -24,11 +27,15 @@ string Console::onQuit(const std::string& s) {
     return "";
 }
 string Console::onSpawn(const std::string& s) {
-    string::size_type argEnd1 = s.find(" ", 1);
-    string::size_type argEnd2 = s.find(" ", argEnd1+1);
-    string id = s.substr(0, argEnd1);
-    string x = s.substr(argEnd1, argEnd2-1);
-    string y = s.substr(argEnd2);
+    std::istringstream iss(s);
+    string id;
+    string x;
+    string y;
+    
+    std::getline(iss, id, ' ');    
+    std::getline(iss, x, ' ');   
+    std::getline(iss, y, ' ');
+    
     
     LOG_DEBUG("id = "+id+"  x= "+x+"  y = "+y);
     if(s.find(' ') == s.npos)
