@@ -32,6 +32,8 @@ Modele::Modele():cce::Modele() {
 
     current_map = "";
     current_pays = "";
+    
+    poly = nullptr;
 }
 
 Modele::~Modele() {
