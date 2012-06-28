@@ -1,4 +1,5 @@
 #include "cce/UnitTemplate.hpp"
+#include "cce/ImageManager.hpp"
 
 namespace cce {
 
@@ -19,7 +20,10 @@ UnitTemplate::UnitTemplate()
 void UnitTemplate::loadAfterXML(int id)
 {
     this->id = id;
-
+    
+    //à supprimer pour ne pas charger toutes les textures des unités en mémoire
+    ImageManager::getInstance()->load_asset(id, path);
+    texture = &ImageManager::getInstance()->get_asset(id);
 }
 
 UnitTemplate::~UnitTemplate()
@@ -92,6 +96,10 @@ float UnitTemplate::getAttackSpeed() {
 }
 int UnitTemplate::getMoveSpeed() {
     return move_speed;
+}
+Texture* UnitTemplate::getTexture()
+{
+  return texture;
 }
 
 }

@@ -104,6 +104,12 @@ public:
     float getAttackSpeed();
 
 ///
+///\brief Texture de la tile
+///\return Retourne la texture de la tile
+///
+    Texture* getTexture();
+    
+///
 ///\brief Vitesse de déplacement en pixels/seconde?
 ///
     int getMoveSpeed();
@@ -114,6 +120,7 @@ private:
     bool collision_;
     damage_type dmg_type;
     defence_type def_type;
+    Texture *texture;
 };
 
 }

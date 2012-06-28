@@ -1,6 +1,7 @@
 #include "cce/CoucheDecor.hpp"
 #include "cce/Decor.hpp"
 #include "cce/DecorTemplate.hpp"
+#include "cce/UnitTemplate.hpp"
 #include "bib/Logger.hpp"
 #include <cmath>
 
@@ -54,6 +55,11 @@ void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)
 {
     decors.insert(Decor(dt, x - dt->getTexture()->getSize().x/2, y - dt->getTexture()->getSize().y * 3/4));
+}
+
+void CoucheDecor::addDecor(Decor *d)
+{
+    decors.insert(*d);
 }
 
 
