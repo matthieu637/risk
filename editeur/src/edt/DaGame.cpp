@@ -18,10 +18,14 @@ DaGame::DaGame()
     vue = new Vue(ms, g);
     control = new Controleur(ms, modele, g);
     g->init(modele, control);
-    control->setGUI(g);
+    
+    // si segfault sur un element du menu, décommenter
+    //control->setGUI(g); //FIXME WTF?
+    
     
     modele->addVue(vue);
     modele->resetZoom();
+    modele->moveView(ms->getFenetre()->getSize().x/2,ms->getFenetre()->getSize().y/2 - 25,0,0);
 }
 
 void DaGame::gameloop()
