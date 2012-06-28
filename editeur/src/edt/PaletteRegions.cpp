@@ -92,9 +92,28 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     comboBoxPays = static_cast<CEGUI::Combobox*>(WindowManager::getSingleton().createWindow("TaharezLook/Combobox", "PaletteFrames/Regions/ComboBoxPays"));
     fenetre->addChildWindow(comboBoxPays);
     comboBoxPays->setWidth(UDim(1,0));
-    comboBoxPays->setHeight(UDim(0.0f,32));
+    comboBoxPays->setHeight(UDim(0.0f,64));
     comboBoxPays->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,160)));
-    comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onCheckedChange, this));
+    comboBoxPays->setReadOnly(true);
+    map<string, cce::Pays>* mp= m->getCarte()->getAllPays();
+    map<string, cce::Pays>::iterator ite;
+    int i=0;
+    for(ite = mp->begin(); ite != mp->end(); ite++)
+    {
+	  ListboxTextItem* itemCombobox = new ListboxTextItem(ite->first, ++i);
+	  itemCombobox->setSelectionBrushImage("TaharezLook","MultiListSelectionBrush");
+
+	  comboBoxPays->addItem(itemCombobox);
+    }
+    comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onComboboxSelectionChange, this));
+}
+
+bool PaletteRegions::onComboboxSelectionChange(const CEGUI::EventArgs &e)
+{
+  if(lbox->getFirstSelectedItem() != nullptr)
+  {
+    
+  }
 }
 
 void PaletteRegions::updateListRegions(list<string> noms)

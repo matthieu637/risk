@@ -35,6 +35,7 @@ public :
   bool onIncomeChange(const CEGUI::EventArgs &e);
   bool onResetPoly(const CEGUI::EventArgs &e);
   bool onDefinirPoly(const CEGUI::EventArgs &e);
+  bool onComboboxSelectionChange(const CEGUI::EventArgs &e);
   
   
 private :
