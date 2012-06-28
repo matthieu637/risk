@@ -1,3 +1,4 @@
+
 #ifndef PALETTEREGIONS_HPP
 #define PALETTEREGIONS_HPP
 
@@ -12,6 +13,8 @@ namespace CEGUI{
   class Listbox;
   class Editbox;
   class ListboxItem;
+  class Checkbox;
+  class Combobox;
 }
 namespace edt{
 
@@ -27,14 +30,17 @@ public :
   void init(GUI const *gui, string nom, Modele* m);
   void updateListRegions(list<string> noms);
   bool onNameChange(const CEGUI::EventArgs &e);
+  bool onCheckedChange(const CEGUI::EventArgs &e);
   bool onChangeSelection(const CEGUI::EventArgs &e);
   bool onIncomeChange(const CEGUI::EventArgs &e);
   bool onResetPoly(const CEGUI::EventArgs &e);
   bool onDefinirPoly(const CEGUI::EventArgs &e);
+  bool onComboboxSelectionChange(const CEGUI::EventArgs &e);
   
   
 private :
   void hideAllPoly();
+  void showAllPoly();
   
   CEGUI::Listbox* lbox;
   CEGUI::Editbox* ebox;
@@ -42,6 +48,8 @@ private :
   CEGUI::ListboxItem* lbti;
   CEGUI::PushButton* resetPoly;
   CEGUI::PushButton* addPoint;
+  CEGUI::Checkbox* cboxpoly;
+  CEGUI::Combobox* comboBoxPays;
   
   Modele* modele;
 };

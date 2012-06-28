@@ -13,11 +13,12 @@ using boost::serialization::make_nvp;
 
 namespace cce{
 
-class Polygon : public sf::ConvexShape/* thor::ConcaveShape*/
+class Polygon : public thor::ConcaveShape
 {
 
 public:
   Polygon();
+  Polygon(const sf::ConvexShape& ch);
   virtual ~Polygon();
   
   void addPoint(Point p);

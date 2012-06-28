@@ -97,6 +97,9 @@ void PalettePays::init(GUI const *gui, string nom, Controleur* c, Modele* m)
 bool PalettePays::onSelectionChange(const EventArgs &e)
 {
     (void) e;
+    if(liste_pays->getFirstSelectedItem() == nullptr)
+      return true;
+    
     current_pays_item = (ListboxTextItem*) liste_pays->getFirstSelectedItem();
     
     //box nom
@@ -109,21 +112,31 @@ bool PalettePays::onSelectionChange(const EventArgs &e)
     
     //modele current pays
     modele->setCurrentPays(current_pays_item->getText().c_str());
+    
+    //nom du pays séléctionné
+    ancien = current_pays_item->getText().c_str();
     return true;
 }
 
 bool PalettePays::onNameChange(const EventArgs &e)
 {
     (void) e;
-    if(current_pays_item == nullptr)
-      return true;
-    const string &ancien = current_pays_item->getText().c_str();
+    if(liste_pays->getFirstSelectedItem() != current_pays_item)
+	return true;
+    
     const string &nouveau = box_nom->getText().c_str();
+    
+    if(nouveau.length() == 0 || nouveau == ancien){
+	box_nom->setText(current_pays_item->getText());
+	return true;
+    }
+    
     Pays *p = (edt::Pays*) modele->getCarte()->getPays(ancien);
     modele->getCarte()->addPays(nouveau, *p);
     modele->getCarte()->getAllPays()->erase(ancien);
     current_pays_item->setText(box_nom->getText());
     liste_pays->handleUpdatedItemData();
+    ancien = current_pays_item->getText().c_str();
     
     return true;
 }
@@ -131,6 +144,8 @@ bool PalettePays::onNameChange(const EventArgs &e)
 bool PalettePays::onIncomeChange(const EventArgs &e)
 {
     (void) e;
+    if(liste_pays->getFirstSelectedItem() != current_pays_item)
+      return true;
     const string &nom = current_pays_item->getText().c_str();
     Pays *p = (edt::Pays*) modele->getCarte()->getPays(nom);
     p->setIncome(atoi(box_income->getText().c_str()));
@@ -143,18 +158,20 @@ bool PalettePays::onNewPays(const EventArgs &e)
     const Pays p;
     const string &nom = "Nouveau Pays";
     modele->getCarte()->addPays(nom, p);
-    ListboxTextItem* nouveau = new ListboxTextItem(nom);
-    liste_pays->addItem(nouveau);
+    current_pays_item = new ListboxTextItem(nom);
+    liste_pays->addItem(current_pays_item);
+    
     return true;
 }
 
 bool PalettePays::onDeletePays(const EventArgs &e)
 {
     (void) e;
-    if(current_pays_item == nullptr)
+    if(liste_pays->getFirstSelectedItem() != current_pays_item)
       return true;
     modele->getCarte()->getAllPays()->erase(current_pays_item->getText().c_str());
     liste_pays->removeItem(current_pays_item);
+    current_pays_item = nullptr;
     return true;
 }
 

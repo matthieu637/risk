@@ -40,6 +40,7 @@ Console::Console()
     mapCommandes["help"] = BIND(&Console::onHelp);
     confirmQuit = false;
     wantQuit = false;
+    setVisible(false);
 }
 
 void Console::RegisterHandlers()

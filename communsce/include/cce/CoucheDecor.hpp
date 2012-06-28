@@ -79,7 +79,7 @@ public:
 
 private:
     set<Decor> decors;
-    Decor *d_move;
+    Decor d_move;
 };
 
 } /* End of namespace cce */

@@ -4,6 +4,7 @@ namespace cce{
 
 Pays::Pays()
 {
+  spawn = nullptr;
 }
 
 Pays::~Pays()

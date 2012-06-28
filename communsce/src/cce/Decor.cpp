@@ -51,16 +51,13 @@ bool Decor::inferieurA(const Decor &d) const
     if(yCompare < d.yCompare)
 	return true;
     else if(yCompare == d.yCompare)
-      return getPosition().x < d.getPosition().x;
+	return getPosition().x < d.getPosition().x;
     return false;
 }
 
 bool operator<(Decor const &d1, Decor const &d2)
 {
-  if(d1.inferieurA(d2))
-    return true;
-  else
-    return false;
+    return d1.inferieurA(d2);
 }
 
 }

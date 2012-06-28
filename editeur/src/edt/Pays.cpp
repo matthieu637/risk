@@ -3,13 +3,13 @@
 
 namespace edt {
   
-Pays::Pays(int _income, Decor* _ps)
+Pays::Pays(int _income, Decor* _ps) : cce::Pays()
 {
     income = _income;
     spawn = _ps;
 }
 
-Pays::Pays()
+Pays::Pays() : cce::Pays()
 {
 
 }

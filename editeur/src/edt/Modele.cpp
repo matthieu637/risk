@@ -1,6 +1,7 @@
 #include "edt/Modele.hpp"
 #include "edt/Vue.hpp"
 #include "edt/Carte.hpp"
+#include "edt/Pays.hpp"
 #include "cce/Tile.hpp"
 #include "cce/Repere.hpp"
 #include "edt/Vue.hpp"
@@ -12,6 +13,7 @@
 #include <CEGUI/CEGUI.h>
 #include <bib/StringUtils.hpp>
 #include "cce/MoteurSFML.hpp"
+#include <Thor/Multimedia/Shapes.hpp>
 
 using std::list;
 using std::string;
@@ -30,6 +32,8 @@ Modele::Modele():cce::Modele() {
 
     current_map = "";
     current_pays = "";
+    
+    poly = nullptr;
 }
 
 Modele::~Modele() {
@@ -76,7 +80,7 @@ string Modele::saveCarte() {
     }
 }
 
-void Modele::setPoly(cce::Polygon* poly) {
+void Modele::setPoly(sf::ConvexShape* poly) {
     poly->setOutlineColor(sf::Color::Red);
     poly->setOutlineThickness(3.);
     poly->setFillColor(sf::Color(100,100,100,100));
@@ -103,11 +107,14 @@ bool Modele::movePoly(int x_, int y_)
 
 bool Modele::addPoint(int x, int y)
 {
-    LOG_DEBUG(carte->getRegion("IsengardU")->getZone()->contient(cce::Point(x, y)));
     if(poly != nullptr) {
-        poly->addPoint(cce::Point(x, y));
-        if(poly->getPointCount() == 1)
-            poly->addPoint(cce::Point(x+1, y+1));
+        int nb = poly->getPointCount();
+        poly->setPointCount(nb+1);
+        poly->setPoint(nb, sf::Vector2f(x, y));
+        if(nb == 0) {
+            poly->setPointCount(nb+2);
+            poly->setPoint(nb+1, sf::Vector2f(x, y));
+        }
         return true;
     }
     return false;
@@ -191,16 +198,37 @@ void Modele::deleteObject(int x, int y) {
 
 void Modele::setSpawn(int x, int y)
 {
-    cce::Decor* d = (cce::Decor*)carte->getCoucheDecor()->getDecor(x, y);
-    if(d != nullptr){
-	carte->getPays(current_pays)->getPointSpawn()->setColor(sf::Color(255,255,255,255));
-        carte->getPays(current_pays)->setSpawn(d);
-	d->setColor(sf::Color(255, 0, 0, 255));
+    cce::Decor* new_spawn = (cce::Decor*)carte->getCoucheDecor()->getDecor(x, y);
+    cce::Decor* old_spawn;
+    if(new_spawn != nullptr) {
+        old_spawn = (cce::Decor*)carte->getPays(current_pays)->getPointSpawn();
+        if(old_spawn != nullptr)
+            old_spawn->setColor(sf::Color(255,255,255,255));
+        new_spawn->setColor(sf::Color(255, 0, 0, 255));
+        carte->getPays(current_pays)->setSpawn(new_spawn);
     }
 }
 
 void Modele::setCurrentPays(string nom)
 {
+    cce::Pays* p;
+    cce::Decor* d;
+
+    //décoloriser spawn du pays courant
+    p = carte->getPays(current_pays);
+    if(p != nullptr) {
+        d = p->getPointSpawn();
+        if(d != nullptr)
+            d->setColor(sf::Color(255,255,255,255));
+    }
+
+    //coloriser spawn du pays sélectionné
+    p = carte->getPays(nom);
+    if(p != nullptr) {
+        d = p->getPointSpawn();
+        if(d != nullptr)
+            d->setColor(sf::Color(255, 0, 0, 255));
+    }
     current_pays = nom;
 }
 

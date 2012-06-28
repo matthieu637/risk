@@ -127,9 +127,6 @@ void GUI::chargerRessources() {
     CEGUI::FontManager::getSingleton().create("DejaVuSans-10.font");
     CEGUI::SchemeManager::getSingleton().create( "TaharezLook.scheme" );
     CEGUI::ImagesetManager::getSingleton().create("TaharezLook.imageset");
-
-    CEGUI::ImagesetManager::getSingleton().create("Vanilla.imageset");
-    CEGUI::SchemeManager::getSingleton().create( "VanillaSkin.scheme" );
 }
 
 CEGUI::Key::Scan GUI::toCEGUIKey(const sf::Keyboard::Key& Code) const
