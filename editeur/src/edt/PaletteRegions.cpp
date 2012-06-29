@@ -9,6 +9,7 @@
 #include "edt/GUI.hpp"
 #include <edt/Carte.hpp>
 #include <edt/Modele.hpp>
+#include <edt/Pays.hpp>
 #include "cce/Carte.hpp"
 
 using CEGUI::WindowManager;
@@ -192,22 +193,31 @@ bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
     return true;
     
     const string &nouveau = ebox->getText().c_str();
-    
     if(nouveau.length() == 0 || nouveau == ancien){
 	ebox->setText(lbti->getText());
 	return true;
     }
     
-    Region *r = (edt::Region*) modele->getCarte()->getRegion(ancien);
-  
+    /*
     string current_pays=comboBoxPays->getSelectedItem()->getText().c_str();
     modele->getCarte()->addRegion(current_pays,nouveau, *r);
     modele->getCarte()->getAllRegions()->erase(ancien);
     lbti->setText(ebox->getText());
     lbox->handleUpdatedItemData();
-    ancien = lbti->getText().c_str();
-   
-    return true;
+    ancien = lbti->getText().c_str();*/
+    
+    Region *r = (edt::Region*) modele->getCarte()->getRegion(ancien);
+    map<string, cce::Pays>* mp= modele->getCarte()->getAllPays();
+    map <string,cce::Pays>::iterator it;
+    for (it = mp->begin(); it != mp->end(); it++)
+      if(it->second.getRegion(ancien)!= nullptr)
+      {
+	it->second.getRegions()->erase(ancien);
+	it->second.addRegion(nouveau,*r);
+	return true;
+      }
+     
+    
 }
 
 bool PaletteRegions::onResetPoly(const CEGUI::EventArgs &e)
