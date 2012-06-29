@@ -47,13 +47,21 @@ void CoucheDecor::moveDecor(int dx, int dy)
     decors.insert(d_move);
 }
 
-void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void CoucheDecor::update()
 {
     set<Decor>::iterator it = decors.begin();
     for(; it != decors.end(); ++it){
-      target.draw(*it, states);
-      ((Decor*)&(*it))->animate();
+      cce::Decor dd = *it;
+      dd.animate();
     }
+      //((Decor*)&(*it))->animate();
+}
+
+void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    set<Decor>::iterator it = decors.begin();
+    for(; it != decors.end(); ++it)
+      target.draw(*it, states);
 }
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)

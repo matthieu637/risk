@@ -25,6 +25,9 @@ Decor::~Decor()
 
 void Decor::animate(){  
   // Update animator and apply current animation state to the sprite
+  
+  LOG_DEBUG("brrrrrrrrrrrrra");
+  
   animation.update(frameClock.restart());
   animation.animate(*this);
 }

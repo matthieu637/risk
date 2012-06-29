@@ -76,7 +76,8 @@ public:
     }
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
+    void update();
+    
 private:
     set<Decor> decors;
     Decor d_move;

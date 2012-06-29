@@ -26,7 +26,7 @@ Modele::~Modele()
 
 void Modele::update()
 {
-
+  carte->getCoucheDecor()->update();
 }
 
 string Modele::openCarte(const string& chemin) {
