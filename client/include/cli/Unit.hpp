@@ -16,8 +16,19 @@ namespace cli{
       Unit();
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
+
+///
+///\brief Pour ordonner l'unité de bouger quelque part, se met en mode "move"
+///
       void orderMove(sf::Vector2i point);
+
+///
+///\brief Appliquer les ordres reçus
+///
       void applyOrder();
+
+      
+  private:
       void deplacer();
     
     private :
