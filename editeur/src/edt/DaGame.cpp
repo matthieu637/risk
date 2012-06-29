@@ -25,7 +25,6 @@ DaGame::DaGame()
     
     modele->addVue(vue);
     modele->resetZoom();
-    modele->moveView(ms->getFenetre()->getSize().x/2,ms->getFenetre()->getSize().y/2 - 25,0,0);
 }
 
 void DaGame::gameloop()

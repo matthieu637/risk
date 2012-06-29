@@ -69,7 +69,7 @@ int Repere::getIndice(int x, int y) const {
 		    indice += largeur;
 
     if(indice >= nbTiles)
-      return -1;
+      return 0;
     
     return indice;
 }
@@ -92,7 +92,7 @@ void Repere::draw(sf::RenderTarget& target, sf::RenderStates states) const
     int indice_debut = getIndice(gauche, haut);
     
     //decalage d'une tile vers la gauche si possible
-    if(indice_debut % largeur != 0)
+    if(indice_debut % largeur > 0)
       indice_debut--;
     if(indice_debut / largeur > 0)
       indice_debut -= largeur;
@@ -102,6 +102,7 @@ void Repere::draw(sf::RenderTarget& target, sf::RenderStates states) const
     int nbTileHauteur = (taille.y / h_tile) * 2 + 4;
 
     //si la zone de vue est plus grande que la carte
+    
     if (indice_debut%largeur + nbTileLargeur >= largeur) //reduit la largeur
         nbTileLargeur = largeur - indice_debut%largeur;
     if (indice_debut/largeur + nbTileHauteur >= hauteur) //reduit la hauteur
@@ -109,8 +110,7 @@ void Repere::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
     for(int i = 0; i < nbTileHauteur; i++)
         for(int j = 0; j < nbTileLargeur; j++)
-            target.draw(tiles[indice_debut + i*largeur + j], states);
+	    target.draw(tiles[indice_debut + i*largeur + j], states);
 }
-
 
 }

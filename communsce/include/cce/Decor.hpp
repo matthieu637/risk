@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <Thor/Animation.hpp>
 #include "DecorTemplate.hpp"
 #include "Univers.hpp"
 
