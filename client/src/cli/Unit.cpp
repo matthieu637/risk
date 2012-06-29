@@ -21,8 +21,7 @@ namespace cli {
 	 
     // Register animations with their corresponding durations
       animation.addAnimation("moveUp", moveUp, sf::seconds(0.4f));  
-      
-     // animation.playAnimation("moveUp", true);
+      animation.playAnimation("moveUp", true);
   }
   
 

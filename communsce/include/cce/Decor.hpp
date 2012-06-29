@@ -80,7 +80,7 @@ public:
 public:
     int yCompare;
 
-private:
+protected:
     DecorTemplate *dt;
     
 protected:

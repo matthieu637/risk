@@ -33,10 +33,10 @@ void Modele::update() {
 }
 
 void Modele::spawnUnit(int id, int x, int y) {
-   Unit u;
-   u.setId(id);
-   u.setPosition(x,y);
-   carte->getCoucheDecor()->addDecor(&u);
+   Unit* u = new Unit;
+   u->setId(id);
+   u->setPosition(x,y);
+   carte->getCoucheDecor()->addDecor(u);
  
 }
 
