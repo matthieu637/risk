@@ -1371,7 +1371,7 @@
 				<id>100000002</id>
 			</item>
 			<item>
-				<id>100000002</id>
+				<id>100000000</id>
 			</item>
 			<item>
 				<id>100000002</id>
@@ -7514,15 +7514,15 @@
 		<Decors class_id="5" tracking_level="0" version="0">
 			<count>2</count>
 			<item_version>0</item_version>
-			<item class_id="6" tracking_level="0" version="0">
-				<id>200000002</id>
-				<x>677</x>
-				<y>-65</y>
-			</item>
-			<item>
+			<item class_id="6" tracking_level="1" version="0" object_id="_0">
 				<id>200000001</id>
 				<x>216</x>
 				<y>345</y>
+			</item>
+			<item class_id_reference="6" object_id="_1">
+				<id>200000002</id>
+				<x>677</x>
+				<y>-65</y>
 			</item>
 		</Decors>
 	</CoucheDecor>
@@ -7533,28 +7533,24 @@
 			<first>Noobsland</first>
 			<second class_id="9" tracking_level="0" version="0">
 				<income>100</income>
-				<PointSpawn class_id="10" tracking_level="1" version="0" object_id="_0">
-					<x>100</x>
-					<y>100</y>
-					<id>200000000</id>
-				</PointSpawn>
-				<Regions class_id="11" tracking_level="0" version="0">
+				<PointSpawn class_id="-1"></PointSpawn>
+				<Regions class_id="10" tracking_level="0" version="0">
 					<count>2</count>
 					<item_version>0</item_version>
-					<item class_id="12" tracking_level="0" version="0">
+					<item class_id="11" tracking_level="0" version="0">
 						<first>IsengardU</first>
-						<second class_id="13" tracking_level="0" version="0">
+						<second class_id="12" tracking_level="0" version="0">
 							<income>100</income>
-							<Flag class_id="14" tracking_level="0" version="0">
+							<Flag class_id="13" tracking_level="0" version="0">
 								<x>10</x>
 								<y>10</y>
 								<id>200000000</id>
 							</Flag>
-							<Polygon class_id="15" tracking_level="0" version="0">
-								<Points class_id="16" tracking_level="0" version="0">
+							<Polygon class_id="14" tracking_level="0" version="0">
+								<Points class_id="15" tracking_level="0" version="0">
 									<count>6</count>
 									<item_version>0</item_version>
-									<item class_id="17" tracking_level="0" version="0">
+									<item class_id="16" tracking_level="0" version="0">
 										<x>582</x>
 										<y>120</y>
 									</item>
@@ -7580,11 +7576,11 @@
 									</item>
 								</Points>
 							</Polygon>
-							<Upgrades class_id="18" tracking_level="0" version="0">
+							<Upgrades class_id="17" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</Upgrades>
-							<Tiles class_id="19" tracking_level="0" version="0">
+							<Tiles class_id="18" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</Tiles>
