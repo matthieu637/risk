@@ -14,14 +14,14 @@ namespace cli {
 	setTexture(ut->getTexture());//met a jour l'image de l'unité
 	animation = ut->getAnimation();
 	
-	thor::FrameAnimation moveUp;
-	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
-	 for (unsigned int i = 0; i < 6; ++i)
-	    moveUp.addFrame(1.f, sf::IntRect(47*i, 0, 47, 64));
-	 
-    // Register animations with their corresponding durations
-      animation.addAnimation("moveUp", moveUp, sf::seconds(0.4f));  
-      animation.playAnimation("moveUp", true);
+// 	thor::FrameAnimation moveUp;
+// 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
+// 	 for (unsigned int i = 0; i < 6; ++i)
+// 	    moveUp.addFrame(1.f, sf::IntRect(47*i, 0, 47, 64));
+// 	 
+//     // Register animations with their corresponding durations
+//       animation.addAnimation("moveUp", moveUp, sf::seconds(0.4f));  
+//       animation.playAnimation("moveUp", true);
   }
   
 
