@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="9">
+<AnimationTemplates class_id="0" tracking_level="0" version="0">
+	<count>1</count>
+	<item_version>0</item_version>
+	<item class_id="1" tracking_level="0" version="0">
+		<first>400000000</first>
+		<second class_id="2" tracking_level="0" version="0">
+			<nom>100</nom>
+			<num_Animation>100</num_Animation>
+			<temps>100</temps>
+			<rect_hauteur>100</rect_hauteur>
+			<rect_largeur>100</rect_largeur>
+		</second>
+	</item>
+</UnitTemplates>
+</boost_serialization>
