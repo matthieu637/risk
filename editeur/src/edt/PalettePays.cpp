@@ -137,6 +137,7 @@ bool PalettePays::onNameChange(const EventArgs &e)
     current_pays_item->setText(box_nom->getText());
     liste_pays->handleUpdatedItemData();
     ancien = current_pays_item->getText().c_str();
+    modele->setCurrentPays(current_pays_item->getText().c_str());
     
     return true;
 }

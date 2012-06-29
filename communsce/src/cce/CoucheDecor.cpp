@@ -59,8 +59,6 @@ void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
     set<Decor*>::iterator it = decors.begin();
     for(; it != decors.end(); it++)
             target.draw(**it, states);
-    
-
 }
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)

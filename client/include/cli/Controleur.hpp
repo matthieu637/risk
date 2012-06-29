@@ -37,6 +37,7 @@ public:
     void onZoom(thor::ActionContext < string > context);
     void onResetZoom(thor::ActionContext < string > context);
     bool onWindowResized(thor::ActionContext<string> context);
+    void onMoveUnit(thor::ActionContext < string > context);
     bool onQuit(const CEGUI::EventArgs & e);
 
     int getX(int mouseX);

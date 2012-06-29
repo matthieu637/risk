@@ -1,6 +1,6 @@
 #include "cli/Modele.hpp"
 #include "cli/Vue.hpp"
-#include <cli/Unit.hpp>
+#include "cli/Unit.hpp"
 #include "cce/Tile.hpp"
 #include "cce/Repere.hpp"
 #include "bib/XMLEngine.hpp"
@@ -30,14 +30,19 @@ Modele::~Modele() {
 
 void Modele::update() {
     cce::Modele::update();
+    list<Unit*>::iterator it;
+    for(it = allUnits.begin(); it != allUnits.end(); ++it){
+	(*it)->applyOrder();
+    }
 }
 
 void Modele::spawnUnit(int id, int x, int y) {
-   Unit* u = new Unit;
-   u->setId(id);
-   u->setPosition(x,y);
-   carte->getCoucheDecor()->addDecor(u);
- 
+    Unit* u = new Unit;
+    u->setId(id);
+    u->setPosition(x,y);
+    carte->getCoucheDecor()->addDecor(u);
+    selectionUnits.push_back(u);
+    allUnits.push_back(u);
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY) {
@@ -82,6 +87,14 @@ void Modele::windowResized(int width, int height)
         ((Vue*)(*it))->updateSize(width, height);
     }
     resetZoom();
+}
+
+void Modele::moveSelection(sf::Vector2i mousePosition)
+{
+    list<Unit*>::iterator it;
+    for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it){
+	(*it)->orderMove(mousePosition);LOG_DEBUG("yo");
+    }
 }
 
 }
