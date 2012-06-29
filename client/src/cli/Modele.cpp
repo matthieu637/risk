@@ -21,6 +21,7 @@ Modele::Modele():cce::Modele() {
     carte = bib::XMLEngine::load < cce::Carte > ("Carte", "data/map/sf/alpha.map");
     // carte = new Carte; FIXME
     coeff_zoom = 1;
+    spawnUnit(300000000,40,40);
 }
 
 Modele::~Modele() {
@@ -32,10 +33,11 @@ void Modele::update() {
 }
 
 void Modele::spawnUnit(int id, int x, int y) {
-   Unit u;
-   u.setId(id);
-   u.setPosition(x,y);
-   carte->getCoucheDecor()->addDecor(&u);
+   Unit* u = new Unit;
+   u->setId(id);
+   u->setPosition(x,y);
+   carte->getCoucheDecor()->addDecor(u);
+ 
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY) {

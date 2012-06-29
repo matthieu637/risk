@@ -11,15 +11,23 @@ Decor::Decor(DecorTemplate *_dt, int x, int y) : Sprite()
   dt = _dt;
   setPosition(x,y);
   setTexture(dt->getTexture());
+  animation = dt->getAnimation();
 }
 
 Decor::Decor()
 {
+  dt = nullptr;
 }
 
 Decor::~Decor()
 {
     
+}
+
+void Decor::animate(){  
+  // Update animator and apply current animation state to the sprite
+  animation.update(frameClock.restart());
+  animation.animate(*this);
 }
 
 DecorTemplate* Decor::getTemplate() const
