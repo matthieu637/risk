@@ -107,7 +107,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     }
     //region ajoutee par defaut au premier pays de la comboBoxPays
     comboBoxPays->getListboxItemFromIndex(0)->setSelected(true);
-    LOG_DEBUG(comboBoxPays->getListboxItemFromIndex(0)->getText());
+    comboBoxPays->setText(comboBoxPays->getListboxItemFromIndex(0)->getText()); 
     comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onComboboxSelectionChange, this));
 }
 
