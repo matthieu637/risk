@@ -61,12 +61,12 @@ public:
     ///\return le decor créé
     ///
     void addDecor(DecorTemplate *d, int x, int y);
-    
+
     ///
     ///\brief please dont send me a local object
     ///
     void addDecor(Decor *d);
-    
+
     ///
     ///\brief Supprime un decor selon ses coordonnees
     ///\param Les coordonnees
@@ -81,9 +81,17 @@ public:
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     void update();
-    
+
 private:
-    set<Decor*> decors;
+    struct CompareDecorPtr
+    {
+        bool operator()(Decor* obj1, Decor* obj2) const
+        {
+            return obj1->inferieurA(*obj2);
+        }
+    };
+
+    set<Decor*, CompareDecorPtr> decors;
     Decor* d_move;
 };
 
