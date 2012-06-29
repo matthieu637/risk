@@ -105,6 +105,9 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
 
         comboBoxPays->addItem(itemCombobox);
     }
+    //region ajoutee par defaut au premier pays de la comboBoxPays
+    comboBoxPays->getListboxItemFromIndex(0)->setSelected(true);
+    LOG_DEBUG(comboBoxPays->getListboxItemFromIndex(0)->getText());
     comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onComboboxSelectionChange, this));
 }
 
@@ -112,7 +115,7 @@ bool PaletteRegions::onComboboxSelectionChange(const CEGUI::EventArgs &e)
 {
     if(lbox->getFirstSelectedItem() != nullptr)
     {
-
+	
     }
 }
 
@@ -175,7 +178,7 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
         eboxinc->setText("");
         ebox->setText("");
     }
-
+    ancien = lbti->getText().c_str();
     return true;
 }
 
@@ -186,6 +189,24 @@ bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
         lbti->setText(ebox->getText());
         lbox->handleUpdatedItemData();
     }
+    return true;
+    
+    const string &nouveau = ebox->getText().c_str();
+    
+    if(nouveau.length() == 0 || nouveau == ancien){
+	ebox->setText(lbti->getText());
+	return true;
+    }
+    
+    Region *r = (edt::Region*) modele->getCarte()->getRegion(ancien);
+  
+    string current_pays=comboBoxPays->getSelectedItem()->getText().c_str();
+    modele->getCarte()->addRegion(current_pays,nouveau, *r);
+    modele->getCarte()->getAllRegions()->erase(ancien);
+    lbti->setText(ebox->getText());
+    lbox->handleUpdatedItemData();
+    ancien = lbti->getText().c_str();
+   
     return true;
 }
 

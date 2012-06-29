@@ -50,6 +50,7 @@ private :
   CEGUI::PushButton* addPoint;
   CEGUI::Checkbox* cboxpoly;
   CEGUI::Combobox* comboBoxPays;
+  string ancien;
   
   Modele* modele;
 };
