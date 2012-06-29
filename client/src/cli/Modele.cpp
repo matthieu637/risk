@@ -92,9 +92,8 @@ void Modele::windowResized(int width, int height)
 void Modele::moveSelection(sf::Vector2i mousePosition)
 {
     list<Unit*>::iterator it;
-    for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it){
-	(*it)->orderMove(mousePosition);LOG_DEBUG("yo");
-    }
+    for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+	(*it)->orderMove(mousePosition);
 }
 
 }
