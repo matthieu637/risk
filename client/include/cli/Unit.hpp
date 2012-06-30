@@ -28,6 +28,11 @@ namespace cli{
       void applyOrder();
 
 ///
+///\brief Renvoie le vecteur entre position et socle
+///
+      sf::Vector2f getSocle();
+
+///
 ///\brief Ordre courant
 ///\return order: l'ordre courant
 ///
@@ -38,7 +43,8 @@ namespace cli{
     
     private :
 	cce::UnitTemplate *unitTemplate;
-	sf::Vector2i destination;
+	sf::Vector2f destination;
+	sf::Vector2f socle;
 	order current_order;
   };
 

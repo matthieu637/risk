@@ -76,7 +76,6 @@ void CoucheDecor::addDecor(Decor *d)
     this->clearRedoDecors();
 }
 
-
 void CoucheDecor::removeDecor(int x, int y)
 {
     Decor *d = getDecor(x,y);

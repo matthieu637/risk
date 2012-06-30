@@ -3,16 +3,16 @@
 
 namespace cli {
 
-  Unit::Unit()
-  {
-      current_order = hold;
-  }
-  
-  void Unit::setUnitTemplate(cce::UnitTemplate *ut){
-	unitTemplate = ut;//met a jour les caractéristiques de l'unité
-	setTexture(ut->getTexture());//met a jour l'image de l'unité
-	animation = ut->getAnimation();
-	unitTemplate = ut;
+Unit::Unit()
+{
+    current_order = hold;
+}
+
+void Unit::setUnitTemplate(cce::UnitTemplate *ut){
+      unitTemplate = ut;//met a jour les caractéristiques de l'unité
+      setTexture(ut->getTexture());//met a jour l'image de l'unité
+      animation = ut->getAnimation();
+      unitTemplate = ut;
 // 	thor::FrameAnimation moveUp;
 // 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
 // 	 for (unsigned int i = 0; i < 6; ++i)
@@ -21,17 +21,23 @@ namespace cli {
 //     // Register animations with their corresponding durations
 //       animation.addAnimation("moveUp", moveUp, sf::seconds(0.4f));  
 //       animation.playAnimation("moveUp", true);
-  }
-  
+}
 
-  void Unit::setId(int id){
-      setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
-  }
-  
+
+void Unit::setId(int id){
+    setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
+}
+
+sf::Vector2f Unit::getSocle()
+{
+    socle = sf::Vector2f(getLocalBounds().width/2, getLocalBounds().height * 3 / 4);
+    return socle;
+}
+
 void Unit::orderMove(sf::Vector2i point)
 {
     //pour que les pieds arrivent au point cliqué
-    sf::Vector2i point_socle(point.x - getLocalBounds().width/2, point.y - getLocalBounds().height * 3 / 4);
+    sf::Vector2f point_socle(point.x - getSocle().x, point.y - getSocle().y);
     destination = point_socle;
     current_order = order::move;
 }

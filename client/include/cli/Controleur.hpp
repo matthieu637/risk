@@ -39,13 +39,18 @@ public:
     bool onWindowResized(thor::ActionContext<string> context);
     void onMoveUnit(thor::ActionContext < string > context);
     bool onQuit(const CEGUI::EventArgs & e);
-
+    void selectionOn(thor::ActionContext < string > context);
+    void selectionOff(thor::ActionContext < string > context);
+    void selectionMove(thor::ActionContext < string > context);
+    
     int getX(int mouseX);
     int getY(int mouseY);
 
 private:
     int clickX, clickY;
-    bool moveCam, moveDecor, selection;
+    bool moveCam, moveDecor;
+
+    
     GUI *gui;
     Modele *m;
 };

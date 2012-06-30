@@ -44,7 +44,6 @@ public:
     ///
     void moveDecor(int dx, int dy);
 
-
     ///
     ///\brief Initialise le decor à déplacer
     ///\param x, y: coordonnees du decor à déplacer
@@ -90,7 +89,6 @@ public:
     ///
     void clearRedoDecors();
     
-
     ///
     ///\brief Supprime un decor selon son pointeur
     ///\param Le Decor à enlever
@@ -106,7 +104,7 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     void update();
 
-private:
+protected:
     struct CompareDecorPtr
     {
         bool operator()(Decor* obj1, Decor* obj2) const
