@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Clock.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <Thor/Animation.hpp>
 #include "DecorTemplate.hpp"
@@ -45,7 +46,11 @@ public:
     
     void move(float offsetX, float offsetY);
     void animate();
-
+    
+    ///
+    ///\brief Permet de reset la clock de l'animation pour une ré-insertion dans l'arbre décors
+    void unpause();
+    
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
         boost::serialization::split_member(ar, *this, version);

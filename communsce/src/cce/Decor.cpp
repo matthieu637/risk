@@ -61,4 +61,10 @@ bool operator<(Decor const &d1, Decor const &d2)
     return d1.inferieurA(d2);
 }
 
+void Decor::unpause(){
+  frameClock.restart();
+  
+}
+  
+
 }

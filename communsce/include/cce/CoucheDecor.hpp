@@ -2,6 +2,7 @@
 #define COUCHEDECOR_HPP
 
 #include <set>
+#include <stack>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/set.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -11,6 +12,7 @@
 using sf::RenderTarget;
 using boost::serialization::make_nvp;
 using std::set;
+using std::stack;
 
 namespace cce
 {
@@ -73,6 +75,22 @@ public:
     ///
     void removeDecor(int x, int y);
 
+    
+     ///
+    ///\brief Annule le dernier décor de la pile undoDecors
+    ///
+    void undoDecor();
+    
+    ///
+    ///\brief Rétablie la derniere action de la pile undoDecors et l'ajoute dans redoDecors
+    ///
+    void redoDecor();
+    
+    ///
+    ///\brief Efface les actions de la pile redoDecors
+    ///
+    void clearRedoDecors();
+    
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
         (void) version;
@@ -93,6 +111,8 @@ private:
 
     set<Decor*, CompareDecorPtr> decors;
     Decor* d_move;
+    stack<Decor*> undoDecors; 
+    stack<Decor*> redoDecors;
 };
 
 } /* End of namespace cce */
