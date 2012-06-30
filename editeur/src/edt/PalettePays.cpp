@@ -179,7 +179,8 @@ bool PalettePays::onDeletePays(const EventArgs &e)
     if(liste_pays->getFirstSelectedItem() == nullptr)
       return true;
     string nom = liste_pays->getFirstSelectedItem()->getText().c_str();
-    modele->getCarte()->getPays(nom)->getPointSpawn()->setColor(sf::Color(255,255,255,255));
+    if(modele->getCarte()->getPays(nom)->getPointSpawn() != nullptr)
+      modele->getCarte()->getPays(nom)->getPointSpawn()->setColor(sf::Color(255,255,255,255));
     modele->getCarte()->getAllPays()->erase(nom);
     liste_pays->removeItem(liste_pays->getFirstSelectedItem());
     return true;
