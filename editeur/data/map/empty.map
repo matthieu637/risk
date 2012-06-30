@@ -7510,7 +7510,13 @@
 			</item>
 		</Tiles>
 	</Repere>
-	<Pays class_id="4" tracking_level="0" version="0">
+	<CoucheDecor class_id="4" tracking_level="0" version="0">
+		<Decors class_id="5" tracking_level="0" version="0">
+			<count>0</count>
+			<item_version>0</item_version>
+		</Decors>
+	</CoucheDecor>
+	<Pays class_id="6" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</Pays>

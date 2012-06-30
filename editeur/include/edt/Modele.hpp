@@ -140,6 +140,7 @@ public:
     void unsetPoly();
 
   private:
+      void reloadGUI();
       Repere * getRepere();
 
   private:

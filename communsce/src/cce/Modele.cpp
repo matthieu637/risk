@@ -30,7 +30,6 @@ void Modele::update()
 }
 
 string Modele::openCarte(const string& chemin) {
-    LOG_DEBUG(chemin);
     ifstream fichier(chemin, std::ios::in);
     if(fichier) {
         fichier.close();

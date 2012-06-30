@@ -118,4 +118,10 @@ void Vue::updateSize(int width, int height)
     CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Size(width, height));
 }
 
+void Vue::reloadGUI()
+{
+    getGUI()->deleteGUI();
+    getGUI()->loadCustomGUI();
+}
+
 }

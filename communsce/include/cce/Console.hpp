@@ -20,6 +20,7 @@ class Console
 {
 public:
     Console();
+    ~Console();
     void setVisible(bool visible);
     bool isVisible();
     bool getConfirmQuit();

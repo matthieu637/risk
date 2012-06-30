@@ -51,7 +51,15 @@ Repere *Modele::getRepere() {
 //herite de edt::openCarte
 string Modele::openCarte(const string& chemin) {
     current_map = chemin;
-    return cce::Modele::openCarte(chemin);
+    string retour = cce::Modele::openCarte(chemin);
+    reloadGUI();
+    return retour;
+}
+
+void Modele::reloadGUI()
+{
+     for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)*it)->reloadGUI(); 
 }
 
 string Modele::getCurrentMap() {
@@ -63,6 +71,7 @@ void Modele::nouvelleCarte()
     current_map = "";
     delete carte;
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
+    reloadGUI();
 }
 
 string Modele::saveCarte(const string& chemin) {
