@@ -190,7 +190,6 @@ bool PaletteRegions::onNameChange(const CEGUI::EventArgs &e)
         lbti->setText(ebox->getText());
         lbox->handleUpdatedItemData();
     }
-    return true;
     
     const string &nouveau = ebox->getText().c_str();
     if(nouveau.length() == 0 || nouveau == ancien){
