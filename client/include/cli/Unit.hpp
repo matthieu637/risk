@@ -27,6 +27,11 @@ namespace cli{
 ///
       void applyOrder();
 
+///
+///\brief Ordre courant
+///\return order: l'ordre courant
+///
+      order getOrder();
       
   private:
       void deplacer();

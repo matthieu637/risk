@@ -82,4 +82,10 @@ void CoucheDecor::removeDecor(int x, int y)
     }
 }
 
+void CoucheDecor::removeDecor(Decor* d)
+{
+    if(d != nullptr)
+        decors.erase(d);
+}
+
 }

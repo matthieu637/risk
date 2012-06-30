@@ -73,6 +73,12 @@ public:
     ///
     void removeDecor(int x, int y);
 
+    ///
+    ///\brief Supprime un decor selon son pointeur
+    ///\param Le Decor à enlever
+    ///
+    void removeDecor(Decor* d);
+
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
         (void) version;

@@ -32,7 +32,13 @@ void Modele::update() {
     cce::Modele::update();
     list<Unit*>::iterator it;
     for(it = allUnits.begin(); it != allUnits.end(); ++it){
-	(*it)->applyOrder();
+      switch ((*it)->getOrder()){
+	case move:
+	  carte->getCoucheDecor()->removeDecor(*it);
+	  break;
+      }
+      (*it)->applyOrder();
+	  carte->getCoucheDecor()->addDecor(*it);
     }
 }
 

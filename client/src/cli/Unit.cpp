@@ -30,8 +30,15 @@ namespace cli {
   
 void Unit::orderMove(sf::Vector2i point)
 {
-    destination = point;
+    //pour que les pieds arrivent au point cliqué
+    sf::Vector2i point_socle(point.x - getLocalBounds().width/2, point.y - getLocalBounds().height * 3 / 4);
+    destination = point_socle;
     current_order = order::move;
+}
+
+order Unit::getOrder()
+{
+    return current_order;
 }
 
 void Unit::applyOrder()
@@ -43,21 +50,28 @@ void Unit::applyOrder()
     }
 }
 
-void Unit::deplacer(){
+void Unit::deplacer()
+{
     float speed = unitTemplate->getMoveSpeed();
     float x_to_go = destination.x - getPosition().x; //distance à parcourir x
     float y_to_go = destination.y - getPosition().y; //distance à parcourir y
-    if(abs(y_to_go) == 0)
-	y_to_go = 0;
-    if(abs(x_to_go) == 0)
+    float x_to_go_abs = abs(x_to_go);
+    float y_to_go_abs = abs(y_to_go);
+    if(x_to_go_abs == 0)
 	x_to_go = 0;
-    float distance = abs(x_to_go) + abs(y_to_go); //distance à parcourir totale
+    if(y_to_go_abs == 0)
+	y_to_go = 0;
+    float distance = x_to_go_abs + y_to_go_abs; //distance à parcourir totale
     if (distance == 0){
 	current_order = stop;
 	return;
     }
-    float dx = (x_to_go * speed/100) / distance;
-    float dy = (y_to_go * speed/100) / distance;
+    float dx = (x_to_go * speed) / distance;
+    float dy = (y_to_go * speed) / distance;
+    if(abs(dx) > x_to_go_abs)
+      dx = x_to_go;
+    if(abs(dy) > y_to_go_abs)
+      dy = y_to_go;
     move(dx, dy);
 }
 
