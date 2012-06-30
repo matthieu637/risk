@@ -32,7 +32,7 @@ Modele::Modele():cce::Modele() {
 
     current_map = "";
     current_pays = "";
-    
+
     poly = nullptr;
 }
 
@@ -58,8 +58,8 @@ string Modele::openCarte(const string& chemin) {
 
 void Modele::reloadGUI()
 {
-     for (it = vues.begin(); it != vues.end(); it++)
-        ((Vue*)*it)->reloadGUI(); 
+    for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)*it)->reloadGUI();
 }
 
 string Modele::getCurrentMap() {
@@ -118,6 +118,11 @@ bool Modele::addPoint(int x, int y)
 {
     if(poly != nullptr) {
         int nb = poly->getPointCount();
+        if(nb != 0) {
+            sf::Vector2f v = poly->getPoint(nb - 2);
+            if((int)v.x == x && (int)v.y == y)
+                return true;
+        }
         poly->setPointCount(nb+1);
         poly->setPoint(nb, sf::Vector2f(x, y));
         if(nb == 0) {
