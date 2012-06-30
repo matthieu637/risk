@@ -120,6 +120,10 @@ bool Modele::addPoint(int x, int y)
         int nb = poly->getPointCount();
         if(nb != 0) {
             sf::Vector2f v = poly->getPoint(nb - 2);
+<<<<<<< HEAD
+=======
+	    LOG_DEBUG("iok " << ((int)v.x == x && (int)v.y == y) << " " << v.x << " " << v.y << " " << x << " " << y );
+>>>>>>> 27716ebdc7e837f5d0764d91caad2ea1eaf70adb
             if((int)v.x == x && (int)v.y == y)
                 return true;
         }
