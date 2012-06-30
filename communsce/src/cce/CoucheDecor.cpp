@@ -113,4 +113,11 @@ void CoucheDecor::redoDecor(){
 void CoucheDecor::clearRedoDecors(){
   redoDecors = stack<Decor*>();
 }
+
+void CoucheDecor::removeDecor(Decor* d)
+{
+    if(d != nullptr)
+        decors.erase(d);
+}
+
 }

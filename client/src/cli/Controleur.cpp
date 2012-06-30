@@ -53,6 +53,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["start_cam"] = wheel_press;
     map["stop_cam"] = wheel_release;
     map["move_camera"] = drag_wheel;
+    map["move_unit"] = right_press;
 
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -61,6 +62,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("zoom", BIND(&Controleur::onZoom));
     system.connect("reset_zoom", BIND(&Controleur::onResetZoom));
     system.connect("resize", BIND(&Controleur::onWindowResized));
+    system.connect("move_unit", BIND(&Controleur::onMoveUnit));
 
     //Binding fonctions CEGUI
 
@@ -121,6 +123,10 @@ int Controleur::getY(int mouseY) {
     return y_absolu;
 }
 
-
+void Controleur::onMoveUnit(thor::ActionContext < string > context) {
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    sf::Vector2i movePosition = sf::Vector2i(getX(mousePosition.x), getY(mousePosition.y));
+    m->moveSelection(movePosition);
+}
 
 }

@@ -74,7 +74,6 @@ public:
     ///\param Les coordonnees
     ///
     void removeDecor(int x, int y);
-
     
      ///
     ///\brief Annule le dernier décor de la pile undoDecors
@@ -91,6 +90,13 @@ public:
     ///
     void clearRedoDecors();
     
+
+    ///
+    ///\brief Supprime un decor selon son pointeur
+    ///\param Le Decor à enlever
+    ///
+    void removeDecor(Decor* d);
+
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
         (void) version;

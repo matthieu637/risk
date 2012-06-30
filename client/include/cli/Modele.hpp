@@ -17,6 +17,8 @@ using std::string;
 
 namespace cli {
 
+class Unit;
+
 enum palette_type
 {
     tiles, decors, regions, pays
@@ -55,6 +57,11 @@ public:
 ///\brief Remettre le zoom à 0
 ///
     void resetZoom();
+
+///
+///\brief Initier le déplacement de la selection d'unités vers le point mousePosition
+///
+    void moveSelection(sf::Vector2i mousePosition);
     
     void windowResized(int width, int height);
     
@@ -64,6 +71,8 @@ public:
     int cameraOrigineX, cameraOrigineY;
     float coeff_zoom;
     list < cce::Vue * >::iterator it;
+    list <Unit*> selectionUnits;
+    list <Unit*> allUnits;
 };
 
 }

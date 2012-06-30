@@ -1,4 +1,4 @@
-#ifndef CONTROLEUREDITEUR_HPP
+  #ifndef CONTROLEUREDITEUR_HPP
 #define CONTROLEUREDITEUR_HPP
 #include <cce/Controleur.hpp>
 #include <string>
