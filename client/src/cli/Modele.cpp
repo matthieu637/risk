@@ -161,12 +161,14 @@ void Modele::endSelection()
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    //Rendu de la map et des décors
-    cce::Modele::draw(target, states);
+    //Rendu du repere
+    target.draw(*carte->getRepere(), states);
     //Rendu des cercles de sélection
     list<Unit*>::const_iterator it;
     for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
  	target.draw(*(*it)->getSelectionCircle());
+    //Rendu des décors
+    target.draw(*carte->getCoucheDecor(), states);
     //Rendu du rectangle de selection
     if(selectionBool)
        target.draw(*rectangleSelection, states);
