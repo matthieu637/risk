@@ -34,17 +34,27 @@ sf::Vector2f Unit::getSocle()
     return socle;
 }
 
+order Unit::getOrder()
+{
+    return current_order;
+}
+
+sf::CircleShape* Unit::getSelectionCircle()
+{
+    selection_circle = new sf::CircleShape(getSocle().x);
+    selection_circle->setPosition(getPosition().x, getPosition().y + getSocle().y - getSocle().x/2);
+    selection_circle->setOutlineThickness(3);
+    selection_circle->setOutlineColor(sf::Color(0,150,0,255));
+    selection_circle->setFillColor(sf::Color(0,0,0,0));
+    return selection_circle;
+}
+
 void Unit::orderMove(sf::Vector2i point)
 {
     //pour que les pieds arrivent au point cliqué
     sf::Vector2f point_socle(point.x - getSocle().x, point.y - getSocle().y);
     destination = point_socle;
     current_order = order::move;
-}
-
-order Unit::getOrder()
-{
-    return current_order;
 }
 
 void Unit::applyOrder()

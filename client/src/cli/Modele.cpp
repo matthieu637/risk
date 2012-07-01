@@ -27,7 +27,8 @@ Modele::Modele():cce::Modele()
     
     coeff_zoom = 1;
     
-    spawnUnit(300000000,150,150);
+    for(int i=1;i<10;i++)
+    spawnUnit(300000000,i*150,150);
     
     //parametres du rectangle de selection
     rectangleSelection = new sf::RectangleShape();
@@ -160,10 +161,15 @@ void Modele::endSelection()
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    //Rendu de la map et des décors
     cce::Modele::draw(target, states);
-    if(selectionBool) {
+    //Rendu des cercles de sélection
+    list<Unit*>::const_iterator it;
+    for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+ 	target.draw(*(*it)->getSelectionCircle());
+    //Rendu du rectangle de selection
+    if(selectionBool)
        target.draw(*rectangleSelection, states);
-   }
 }
   
 }
