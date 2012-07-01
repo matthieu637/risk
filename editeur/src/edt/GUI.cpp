@@ -26,12 +26,20 @@ GUI::~GUI()
 
 }
 
+void GUI::hidePalette()
+{
+    palette_decor->hide();
+    palette_pays->hide();
+    palette_regions->hide();
+    palette_tile->hide();
+}
+
 void GUI::init(Modele* modele, Controleur* controleur)
 {
     cce::GUI::init(modele);
     this->controleur = controleur;
     this->modele = modele;
-    
+
     console = new edt::Console(modele);
     loadCustomGUI();
 }
@@ -67,7 +75,7 @@ void GUI::deleteGUI()
     delete palette_tile;
     delete palette_decor;
     delete palette_pays;
-    delete palette_regions; 
+    delete palette_regions;
 }
 
 void GUI::updateListRegions(list<string> noms)

@@ -61,10 +61,16 @@ Region* Carte::getRegion(const string& nom_region)
 
 Pays* Carte::getPays(const string& nom_pays)
 {
-    if (mp.count(nom_pays) == 0)
-        return nullptr;
     return &mp[nom_pays];
 }
 
+string Carte::getPaysWithRegion(const string& nom_region)
+{
+    map <string,Pays>::iterator it;
+    for (it = mp.begin(); it != mp.end(); it++)
+        if(it->second.getRegion(nom_region) != nullptr)
+            return it->first;
+    return nullptr;
+}
 
 }

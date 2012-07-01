@@ -23,6 +23,10 @@ Palette::~Palette()
  //   delete fenetre;
 }
 
+void Palette::hide(){
+    fenetre->setVisible(false);
+}
+
 void Palette::init(GUI const *gui, string nom)
 {
     fenetre = (FrameWindow*) WindowManager::getSingleton().createWindow("TaharezLook/FrameWindow", nom);

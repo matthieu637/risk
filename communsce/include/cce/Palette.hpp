@@ -17,7 +17,7 @@ public:
   virtual ~Palette();
 
   void init(const GUI* gui, string nom);
-  
+  void hide();
   bool onClose(const CEGUI::EventArgs&);
 
 protected:

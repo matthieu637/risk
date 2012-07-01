@@ -18,6 +18,8 @@ namespace CEGUI{
 }
 namespace edt{
 
+class Region;
+
 class Modele;
   
 class GUI;
@@ -29,7 +31,7 @@ public :
   virtual ~PaletteRegions();
   void init(GUI const *gui, string nom, Modele* m);
   void updateListRegions(list<string> noms);
-  bool onNameChange(const CEGUI::EventArgs &e);
+  bool onRegionNameChange(const CEGUI::EventArgs &e);
   bool onCheckedChange(const CEGUI::EventArgs &e);
   bool onChangeSelection(const CEGUI::EventArgs &e);
   bool onIncomeChange(const CEGUI::EventArgs &e);
@@ -45,7 +47,7 @@ private :
   CEGUI::Listbox* lbox;
   CEGUI::Editbox* ebox;
   CEGUI::Editbox* eboxinc;
-  CEGUI::ListboxItem* lbti;
+
   CEGUI::PushButton* resetPoly;
   CEGUI::PushButton* addPoint;
   CEGUI::Checkbox* cboxpoly;
@@ -53,6 +55,7 @@ private :
   string ancien;
   
   Modele* modele;
+  Region* current_reg;
 };
 }
 

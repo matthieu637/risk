@@ -62,6 +62,8 @@ public:
     Region* getRegion(const string& nom_region);
     
     Pays* getPays(const string& nom_pays);
+    
+    string getPaysWithRegion(const string& nom_region);
 
 protected:
 ///
