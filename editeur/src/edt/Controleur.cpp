@@ -51,6 +51,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
+    Action ctrl_hold(sf::Keyboard::LControl, Action::Hold);
+    Action z_hold(sf::Keyboard::Z, Action::Hold);
+    Action y_hold(sf::Keyboard::Y, Action::Hold);
 
     // Map
     map["quit"] = close;
@@ -72,7 +75,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["close_console"] = escape_press;
     map["move_poly"] = mouse_move;
     map["add_point_poly"] = left_release;
-
+    map["undo"] = ctrl_hold && z_hold;
+    map["redo"] = ctrl_hold && y_hold;  
+     
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
     system.connect("stop_cam", BIND(&Controleur::onStopCam));
@@ -92,7 +97,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("set_spawn", BIND(&Controleur::onChooseSpawn));
     system.connect("move_poly", BIND(&Controleur::onMovePoly));
     system.connect("add_point_poly", BIND(&Controleur::onAddPoint));
-
+    system.connect("undo", BIND(&Controleur::onUndoThor));
+    system.connect("redo", BIND(&Controleur::onRedoThor));   
+    
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
     moduleGUI->ajouterHandler("selection", BIND(&Controleur::onSelection));
@@ -105,7 +112,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
     moduleGUI->ajouterHandler("redimensionner", BIND(&Controleur::onRedimensionner));
     moduleGUI->ajouterHandler("new_map", BIND(&Controleur::onNewMap));
-
+    moduleGUI->ajouterHandler("undo", BIND(&Controleur::onUndo));
+    
     gui->setScriptModule(moduleGUI);
 }
 
@@ -335,6 +343,35 @@ bool Controleur::onNewMap(const CEGUI::EventArgs & e) {
     gui->getConsole()->afficherCommande("/new_map");
     return true;
 }
+
+void Controleur::onUndoThor(thor::ActionContext < string > context){
+    (void)context;
+    const CEGUI::EventArgs ma;
+    this->onUndo(ma);
+}
+
+bool Controleur::onUndo(const CEGUI::EventArgs & e) {
+    (void) e;
+    m->getCarte()->getCoucheDecor()->undoDecor();
+
+    return true;
+}
+
+void Controleur::onRedoThor(thor::ActionContext < string > context){
+    (void)context;
+    const CEGUI::EventArgs ma;
+    this->onRedo(ma);
+}
+
+
+bool Controleur::onRedo(const CEGUI::EventArgs & e) {
+    (void) e;
+    m->getCarte()->getCoucheDecor()->redoDecor();
+
+    return true;
+}
+
+
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;

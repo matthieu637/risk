@@ -1,4 +1,4 @@
-#ifndef CONTROLEUREDITEUR_HPP
+  #ifndef CONTROLEUREDITEUR_HPP
 #define CONTROLEUREDITEUR_HPP
 #include <cce/Controleur.hpp>
 #include <string>
@@ -48,6 +48,8 @@ namespace cce {
 	bool onCloseConsole(thor::ActionContext < string > context);
 	bool onMovePoly(thor::ActionContext < string > context);
 	bool onAddPoint(thor::ActionContext < string > context);
+	void onUndoThor(thor::ActionContext < string > context);
+	void onRedoThor(thor::ActionContext < string > context);
 	
 	bool onSelection(const CEGUI::EventArgs & e);
 	bool onQuit(const CEGUI::EventArgs & e);
@@ -61,7 +63,9 @@ namespace cce {
 	bool onMainScrollHoriChange(const CEGUI::EventArgs & e);
 	bool onChoixPalette(const CEGUI::EventArgs & e);
 	bool onSetSpawn(const CEGUI::EventArgs &e);
-
+	bool onUndo(const CEGUI::EventArgs & e);
+	bool onRedo(const CEGUI::EventArgs & e);
+	
 	int getX(int mouseX);
 	int getY(int mouseY);
 

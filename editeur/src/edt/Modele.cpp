@@ -32,7 +32,7 @@ Modele::Modele():cce::Modele() {
 
     current_map = "";
     current_pays = "";
-    
+
     poly = nullptr;
 }
 
@@ -51,7 +51,15 @@ Repere *Modele::getRepere() {
 //herite de edt::openCarte
 string Modele::openCarte(const string& chemin) {
     current_map = chemin;
-    return cce::Modele::openCarte(chemin);
+    string retour = cce::Modele::openCarte(chemin);
+    reloadGUI();
+    return retour;
+}
+
+void Modele::reloadGUI()
+{
+    for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)*it)->reloadGUI();
 }
 
 string Modele::getCurrentMap() {
@@ -63,6 +71,7 @@ void Modele::nouvelleCarte()
     current_map = "";
     delete carte;
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
+    reloadGUI();
 }
 
 string Modele::saveCarte(const string& chemin) {
@@ -109,6 +118,11 @@ bool Modele::addPoint(int x, int y)
 {
     if(poly != nullptr) {
         int nb = poly->getPointCount();
+        if(nb != 0) {
+            sf::Vector2f v = poly->getPoint(nb - 2);
+            if((int)v.x == x && (int)v.y == y)
+                return true;
+        }
         poly->setPointCount(nb+1);
         poly->setPoint(nb, sf::Vector2f(x, y));
         if(nb == 0) {

@@ -43,6 +43,10 @@ Console::Console()
     setVisible(false);
 }
 
+Console::~Console() {
+    delete m_ConsoleWindow;
+}
+
 void Console::RegisterHandlers()
 {
     m_ConsoleWindow->getChild("Console/SendButton")->subscribeEvent(
@@ -84,11 +88,11 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
         if(commandeHistorique.size() == 0)
             return true;
 
-        if(index == -1 || index == 0) 
+        if(index == -1 || index == 0)
             index = commandeHistorique.size()-1;
-         else 
+        else
             index--;
-        
+
         //recuperation du texte
         m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
         //placement correct du curseur
@@ -100,11 +104,11 @@ bool Console::Handle_ButtonKeyPressed(const CEGUI::EventArgs &e)
         if(commandeHistorique.size() == 0)
             return true;
 
-        if(index == (int)commandeHistorique.size() - 1) 
+        if(index == (int)commandeHistorique.size() - 1)
             index = 0;
-         else 
+        else
             index++;
-        
+
         //recuperation du texte
         m_ConsoleWindow->getChild("Console/EditBox")->setText(CEGUI::String((const CEGUI::utf8*)commandeHistorique.at(index).c_str()));
         //placement correct du curseur
@@ -228,10 +232,10 @@ void Console::OutputText(const string& message, CEGUI::colour colour)
 }
 
 void Console::setVisible(bool visible)
-{   
+{
     m_ConsoleWindow->setVisible(visible);
-    if (visible == true){
-      m_ConsoleWindow->getChild("Console/EditBox")->activate();
+    if (visible == true) {
+        m_ConsoleWindow->getChild("Console/EditBox")->activate();
     }
 }
 

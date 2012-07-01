@@ -17,6 +17,9 @@ using std::string;
 
 namespace cli {
 
+class CoucheDecor;
+class Unit;
+
 enum palette_type
 {
     tiles, decors, regions, pays
@@ -55,15 +58,34 @@ public:
 ///\brief Remettre le zoom à 0
 ///
     void resetZoom();
+
+///
+///\brief Initier le déplacement de la selection d'unités vers le point mousePosition
+///
+    void moveUnitSelection(sf::Vector2i mousePosition);
     
     void windowResized(int width, int height);
     
     void spawnUnit(int id, int x, int y);
-
+    
+    void initSelection(int x, int y);
+    void endSelection();
+    void moveSelection(int x, int y);   
+    
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+  
+  private:
+    CoucheDecor* getCoucheDecor(){return (CoucheDecor*)carte->getCoucheDecor();}
+  
   private:
     int cameraOrigineX, cameraOrigineY;
+    bool selectionBool;
     float coeff_zoom;
-    list < cce::Vue * >::iterator it;
+    list <cce::Vue*>::iterator it;
+    list <Unit*> selectionUnits;
+
+    sf::Vector2f originSelection;
+    sf::RectangleShape* rectangleSelection;
 };
 
 }

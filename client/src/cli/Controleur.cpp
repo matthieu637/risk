@@ -53,7 +53,11 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["start_cam"] = wheel_press;
     map["stop_cam"] = wheel_release;
     map["move_camera"] = drag_wheel;
-
+    map["move_unit"] = right_press;
+    map["selectionOn"] = left_press;
+    map["selectionMove"] = drag_left;
+    map["selectionOff"] = left_release;
+    
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
     system.connect("stop_cam", BIND(&Controleur::onStopCam));
@@ -61,13 +65,17 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("zoom", BIND(&Controleur::onZoom));
     system.connect("reset_zoom", BIND(&Controleur::onResetZoom));
     system.connect("resize", BIND(&Controleur::onWindowResized));
+    system.connect("move_unit", BIND(&Controleur::onMoveUnit));
+    system.connect("selectionOn", BIND(&Controleur::selectionOn));
+    system.connect("selectionOff", BIND(&Controleur::selectionOff));
+    system.connect("selectionMove", BIND(&Controleur::selectionMove));
 
     //Binding fonctions CEGUI
-
-
+    
     gui->setScriptModule(moduleGUI);
 }
-void Controleur::onStartCam(thor::ActionContext < string > context) {
+void Controleur::onStartCam(thor::ActionContext < string > context)
+{
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     clickX = mousePosition.x;
     clickY = mousePosition.y;
@@ -77,12 +85,14 @@ void Controleur::onStartCam(thor::ActionContext < string > context) {
     moveCam = true;
 }
 
-void Controleur::onStopCam(thor::ActionContext < string > context) {
+void Controleur::onStopCam(thor::ActionContext < string > context)
+{
     (void) context;
     moveCam = false;
 }
 
-void Controleur::onMoveCamera(thor::ActionContext < string > context) {
+void Controleur::onMoveCamera(thor::ActionContext < string > context)
+{
     if (!moveCam) //bug si exécuté avant le rightPress
         return;
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
@@ -93,34 +103,63 @@ void Controleur::onMoveCamera(thor::ActionContext < string > context) {
     m->moveView(dx, dy, cameraX, cameraY);
 }
 
-void Controleur::onZoom(thor::ActionContext < string > context) {
+void Controleur::onZoom(thor::ActionContext < string > context)
+{
     int ticks = context.event->mouseWheel.delta;
     m->zoom(ticks);
 }
 
-bool Controleur::onWindowResized(thor::ActionContext<string> context) {
+bool Controleur::onWindowResized(thor::ActionContext<string> context)
+{
     m->windowResized(context.event->size.width, context.event->size.height);
     return true;
 }
 
-void Controleur::onResetZoom(thor::ActionContext < string > context) {
+void Controleur::onResetZoom(thor::ActionContext < string > context)
+{
     (void) context;
     m->resetZoom();
 }
-int Controleur::getX(int mouseX) {
+
+int Controleur::getX(int mouseX)
+{
     int x_view = engine->getView()->getCenter().x - engine->getView()->getSize().x / 2;
     float coeff_x = engine->getView()->getSize().x / engine->getFenetre()->getSize().x;
     int x_absolu = x_view + mouseX * coeff_x;
     return x_absolu;
 }
 
-int Controleur::getY(int mouseY) {
+int Controleur::getY(int mouseY)
+{
     int y_view = engine->getView()->getCenter().y - engine->getView()->getSize().y / 2;
     float coeff_y = engine->getView()->getSize().y / engine->getFenetre()->getSize().y;
     int y_absolu = y_view + mouseY * coeff_y;
     return y_absolu;
 }
 
+void Controleur::onMoveUnit(thor::ActionContext < string > context)
+{
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    sf::Vector2i movePosition = sf::Vector2i(getX(mousePosition.x), getY(mousePosition.y));
+    m->moveUnitSelection(movePosition);
+}
 
+void Controleur::selectionOn(thor::ActionContext < string > context)
+{
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    m->initSelection(getX(mousePosition.x), getY(mousePosition.y));
+}
+
+void Controleur::selectionMove(thor::ActionContext < string > context)
+{
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    m->moveSelection(getX(mousePosition.x), getY(mousePosition.y));
+}
+
+void Controleur::selectionOff(thor::ActionContext < string > context)
+{
+    (void) context;
+    m->endSelection();
+}
 
 }

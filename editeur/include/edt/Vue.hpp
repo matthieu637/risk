@@ -51,6 +51,8 @@ public:
     
     void updateSize(int width, int height);
     
+    void reloadGUI();
+    
     GUI* getGUI();
 
     
