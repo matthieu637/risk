@@ -84,16 +84,22 @@ void Modele::moveView(int dx, int dy, int cameraL, int cameraH)
       y = y_min;
     if (y > y_max)
       y = y_max;
-
+    
     for(it = vues.begin(); it != vues.end(); it++)
       (*it)->updateCameraPosition(x, y);
 }
 
 void Modele::zoom(int ticks)
 {
-    coeff_zoom *= 1 - ticks * 0.05;
+    float coeff_ajout = 1 - ticks * 0.05;
+    float coeff_new = coeff_zoom * coeff_ajout;
+    
+    if(coeff_new < 0.75 || coeff_new > 1.5)
+      return;
+    
+    coeff_zoom = coeff_new;
     for (it = vues.begin(); it != vues.end(); it++)
-        ((Vue*)*it)->updateCameraZoom(1 - ticks * 0.05);
+        ((Vue*)*it)->updateCameraZoom(coeff_ajout);
 }
 
 void Modele::resetZoom()

@@ -38,9 +38,9 @@ public:
     void update();
 
 ///
-///\brief Changer les coordonées par (dx,dy) de la caméra selon sa largeur et sa hauteur.
+///\brief Changer les coordonées par (dx,dy) de la caméra.
 ///
-    void moveView(int dx, int dy, int cameraL, int cameraH);
+    void moveView(int dx, int dy);
 
 ///
 ///\brief stocker le point d'origine de la caméra avant de commencer le déplacement par drag

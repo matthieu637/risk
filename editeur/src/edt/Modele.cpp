@@ -145,10 +145,10 @@ void Modele::setCamOrigine(int cameraX, int cameraY) {
     cameraOrigineY = cameraY;
 }
 
-void Modele::moveView(int dx, int dy, int cameraL, int cameraH)
+void Modele::moveView(int dx, int dy)
 {
-    int x = cameraOrigineX + dx;
-    int y = cameraOrigineY + dy;
+    int x = cameraOrigineX + dx * coeff_zoom;
+    int y = cameraOrigineY + dy * coeff_zoom;
     int x_max = carte->getRepere()->largeur_pixels;
     int y_max = carte->getRepere()->hauteur_pixels;
 

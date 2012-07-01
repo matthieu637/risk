@@ -88,6 +88,9 @@ void Controleur::onStartCam(thor::ActionContext < string > context)
 void Controleur::onStopCam(thor::ActionContext < string > context)
 {
     (void) context;
+    int cameraX = engine->getView()->getCenter().x;
+    int cameraY = engine->getView()->getCenter().y;
+    m->setCamOrigine(cameraX, cameraY);
     moveCam = false;
 }
 
@@ -107,6 +110,12 @@ void Controleur::onZoom(thor::ActionContext < string > context)
 {
     int ticks = context.event->mouseWheel.delta;
     m->zoom(ticks);
+    
+    //dimensions camera une fois le zoom effectué
+    int cameraL = engine->getView()->getSize().x;
+    int cameraH = engine->getView()->getSize().y;
+    //deplacement nul pour éviter que le champ de la cam déborde de la map
+    m->moveView(0, 0, cameraL, cameraH);
 }
 
 bool Controleur::onWindowResized(thor::ActionContext<string> context)

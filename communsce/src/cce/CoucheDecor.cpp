@@ -74,7 +74,6 @@ void CoucheDecor::addDecor(Decor *d)
     decors.insert(d);
     undoDecors.push(d);
     clearRedoDecors();
-    LOG_DEBUG(decors.size());
 }
 
 void CoucheDecor::removeDecor(int x, int y)

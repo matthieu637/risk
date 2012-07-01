@@ -133,6 +133,9 @@ void Controleur::onStartCam(thor::ActionContext < string > context) {
 
 void Controleur::onStopCam(thor::ActionContext < string > context) {
     (void) context;
+    int cameraX = engine->getView()->getCenter().x;
+    int cameraY = engine->getView()->getCenter().y;
+    m->setCamOrigine(cameraX, cameraY);
     moveCam = false;
 }
 
@@ -142,17 +145,13 @@ void Controleur::onMoveCamera(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = clickX - mousePosition.x;
     int dy = clickY - mousePosition.y;
-    int cameraL = engine->getView()->getSize().x;
-    int cameraH = engine->getView()->getSize().y;
-    m->moveView(dx, dy, cameraL, cameraH);
+    m->moveView(dx, dy);
 }
 
 void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
-
     if(!selection)
         return;
-
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     clickX = getX(mousePosition.x);
     clickY = getY(mousePosition.y);
     m->setDecorMove(clickX, clickY);
