@@ -104,7 +104,7 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     void update();
 
-protected:
+
     struct CompareDecorPtr
     {
         bool operator()(Decor* obj1, Decor* obj2) const
@@ -113,6 +113,8 @@ protected:
         }
     };
 
+protected:
+    
     set<Decor*, CompareDecorPtr> decors;
     Decor* d_move;
     stack<Decor*> undoDecors; 

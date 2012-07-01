@@ -145,21 +145,24 @@ void Modele::setCamOrigine(int cameraX, int cameraY) {
     cameraOrigineY = cameraY;
 }
 
-void Modele::moveView(int dx, int dy, int cameraX, int cameraY) {
-    int x = cameraOrigineX + dx * coeff_zoom;
-    int y = cameraOrigineY + dy * coeff_zoom;
-    int x_max = carte->getRepere()->getLargeur() * 158;
-    int y_max = carte->getRepere()->getHauteur() * 44;
+void Modele::moveView(int dx, int dy, int cameraL, int cameraH)
+{
+    int x = cameraOrigineX + dx;
+    int y = cameraOrigineY + dy;
+    int x_max = carte->getRepere()->largeur_pixels;
+    int y_max = carte->getRepere()->hauteur_pixels;
 
-    if ((x < 0 && cameraX < 0) || (x > x_max && cameraX > x_max))
-        x = cameraX;
-    if ((y < 0 && cameraY < 0) || (y > y_max && cameraY > y_max))
-        y = cameraY;
+    if (x < 0)
+      x = 0;
+    if (x > x_max)
+      x = x_max;
+    if (y < 0)
+      y = 0;
+    if (y > y_max)
+      y = y_max;
 
-    for (it = vues.begin(); it != vues.end(); it++) {
-        (*it)->updateCameraPosition(x, y);
-        ((Vue*)*it)->updateScrolls();
-    }
+    for(it = vues.begin(); it != vues.end(); it++)
+      (*it)->updateCameraPosition(x, y);
 }
 
 void Modele::zoom(int ticks) {
@@ -193,7 +196,7 @@ void Modele::setDecorMove(int x, int y) {
 }
 
 void Modele::moveDecor(int dx, int dy) {
-    carte->getCoucheDecor()->moveDecor(dx*coeff_zoom, dy*coeff_zoom);
+    carte->getCoucheDecor()->moveDecor(dx, dy);
 }
 
 void Modele::placeObject(int x, int y) {

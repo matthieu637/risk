@@ -6,7 +6,7 @@ namespace cli{
 
 Carte::Carte()
 {
-    couche_decor = cli::CoucheDecor();
+    
 }
 
 Carte::~Carte()

@@ -38,7 +38,7 @@ std::pair <int, int> Repere::getCoordonnees(int indice)
 
 int Repere::getIndice(int x, int y) const {
     if (x<0 || y<0 || x>largeur_pixels || y>hauteur_pixels)
-      return -1;
+      return 0;
 
     int indice = largeur_double * (y/h_tile) + x/l_tile;
     float x_rect = x % l_tile, y_rect = y % h_tile; //coord du clic à l'intérieur du rectangle de la tile

@@ -65,15 +65,16 @@ void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)
     Decor* d = new Decor(dt, x - dt->getTexture()->getSize().x/2, y - dt->getTexture()->getSize().y * 3/4);
     decors.insert(d);
     undoDecors.push(d);
-    this->clearRedoDecors();
-  
+    clearRedoDecors();
 }
 
 void CoucheDecor::addDecor(Decor *d)
 {
+    d->unpause();
     decors.insert(d);
     undoDecors.push(d);
-    this->clearRedoDecors();
+    clearRedoDecors();
+    LOG_DEBUG(decors.size());
 }
 
 void CoucheDecor::removeDecor(int x, int y)
@@ -82,6 +83,12 @@ void CoucheDecor::removeDecor(int x, int y)
     if(d != nullptr) {
         decors.erase(d);
     }
+}
+
+void CoucheDecor::removeDecor(Decor* d)
+{
+    if(d != nullptr)
+        decors.erase(d);
 }
 
 void CoucheDecor::undoDecor(){
@@ -111,12 +118,6 @@ void CoucheDecor::redoDecor(){
 
 void CoucheDecor::clearRedoDecors(){
   redoDecors = stack<Decor*>();
-}
-
-void CoucheDecor::removeDecor(Decor* d)
-{
-    if(d != nullptr)
-        decors.erase(d);
 }
 
 }

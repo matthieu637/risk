@@ -22,9 +22,10 @@ DaGame::DaGame()
     // si segfault sur un element du menu, décommenter
     //control->setGUI(g); //FIXME WTF?
     
-    
     modele->addVue(vue);
     modele->resetZoom();
+    modele->setCamOrigine(ms->getView()->getSize().x/2, ms->getView()->getSize().y/2 - ms->getView()->getSize().y * 0.03);
+    modele->moveView(0, 0, ms->getView()->getSize().x, ms->getView()->getSize().y);
 }
 
 void DaGame::gameloop()

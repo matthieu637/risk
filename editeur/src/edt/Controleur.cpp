@@ -142,9 +142,9 @@ void Controleur::onMoveCamera(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = clickX - mousePosition.x;
     int dy = clickY - mousePosition.y;
-    int cameraX = engine->getView()->getCenter().x;
-    int cameraY = engine->getView()->getCenter().y;
-    m->moveView(dx, dy, cameraX, cameraY);
+    int cameraL = engine->getView()->getSize().x;
+    int cameraH = engine->getView()->getSize().y;
+    m->moveView(dx, dy, cameraL, cameraH);
 }
 
 void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
@@ -153,9 +153,9 @@ void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
     if(!selection)
         return;
 
-    clickX = mousePosition.x;
-    clickY = mousePosition.y;
-    m->setDecorMove(getX(clickX), getY(clickY));
+    clickX = getX(mousePosition.x);
+    clickY = getY(mousePosition.y);
+    m->setDecorMove(clickX, clickY);
     moveDecor = true;
 }
 
@@ -168,13 +168,13 @@ void Controleur::onMoveDecor(thor::ActionContext < string > context) {
     if (!moveDecor) //bug si exécuté avant le leftPress
         return;
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
-    int dx = mousePosition.x - clickX;
-    int dy = mousePosition.y - clickY;
+    int dx = getX(mousePosition.x) - clickX;
+    int dy = getY(mousePosition.y) - clickY;
 
     m->moveDecor(dx, dy);
 
-    clickX = mousePosition.x;
-    clickY = mousePosition.y;
+    clickX = getX(mousePosition.x);
+    clickY = getY(mousePosition.y);
 }
 
 void Controleur::onZoom(thor::ActionContext < string > context) {

@@ -98,9 +98,9 @@ void Controleur::onMoveCamera(thor::ActionContext < string > context)
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = clickX - mousePosition.x;
     int dy = clickY - mousePosition.y;
-    int cameraX = engine->getView()->getCenter().x;
-    int cameraY = engine->getView()->getCenter().y;
-    m->moveView(dx, dy, cameraX, cameraY);
+    int cameraL = engine->getView()->getSize().x;
+    int cameraH = engine->getView()->getSize().y;
+    m->moveView(dx, dy, cameraL, cameraH);
 }
 
 void Controleur::onZoom(thor::ActionContext < string > context)

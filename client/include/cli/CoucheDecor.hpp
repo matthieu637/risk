@@ -21,6 +21,8 @@ public:
 
     ~CoucheDecor();
     
+    void init();
+    
     void addUnit(Unit* u);
     
     void removeUnit(Unit* u);
@@ -33,10 +35,10 @@ public:
 ///
 ///\brief liste exhaustive des unités
 ///
-    set<Unit*>* getAllUnits();
+    list<Unit*>* getAllUnits();
 
 private:
-    set<Unit*> allUnits;
+    list<Unit*>* allUnits;
 };
 
 }

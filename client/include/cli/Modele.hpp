@@ -42,7 +42,7 @@ public:
 ///
 ///\brief Changer les coordonées par (dx,dy) de la caméra selon sa largeur et sa hauteur.
 ///
-    void moveView(int dx, int dy, int cameraX, int cameraY);
+    void moveView(int dx, int dy, int cameraL, int cameraH);
 
 ///
 ///\brief stocker le point d'origine de la caméra avant de commencer le déplacement par drag
@@ -84,7 +84,7 @@ public:
     list <cce::Vue*>::iterator it;
     list <Unit*> selectionUnits;
 
-    sf::Vector2f originSelection;
+    sf::Vector2f origineSelection;
     sf::RectangleShape* rectangleSelection;
 };
 

@@ -71,7 +71,7 @@ public:
         nbTiles = largeur * hauteur;
         nbTiles_sans_derniere_ligne = nbTiles - largeur;
         largeur_pixels = largeur * l_tile;
-        hauteur_pixels = hauteur * h_tile;
+        hauteur_pixels = hauteur * h_tile_demi;
         largeur_double = largeur * 2;
 
         for(int i=0; i<nbTiles; i++) {
@@ -95,9 +95,7 @@ protected:
     vector<Tile> tiles;
     int largeur;
     int largeur_double;
-    int largeur_pixels;
     int hauteur;
-    int hauteur_pixels;
     int nbTiles;
     int nbTiles_sans_derniere_ligne;
 
@@ -107,6 +105,8 @@ public:
     static constexpr int h_tile_demi = h_tile/2;
     static constexpr int l_tile_demi = l_tile/2;
     static constexpr float h_sur_l = h_tile/l_tile;
+    int largeur_pixels;
+    int hauteur_pixels;
 };
 
 }
