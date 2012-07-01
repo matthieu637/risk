@@ -72,7 +72,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["selection"] = space_press;
     map["choix_palette"] = t_press || d_press || p_press || r_press;
     map["console"] = c_press;
-    map["close_console"] = escape_press;
+    map["close_gui"] = escape_press;
     map["move_poly"] = mouse_move;
     map["add_point_poly"] = left_release;
     map["undo"] = ctrl_hold && z_hold;
@@ -93,7 +93,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("choix_palette", BIND(&Controleur::onChoixPaletteThor));
     system.connect("console", BIND(&Controleur::onOpenConsole));
-    system.connect("close_console", BIND(&Controleur::onCloseConsole));
+    system.connect("close_gui", BIND(&Controleur::onCloseGUI));
     system.connect("set_spawn", BIND(&Controleur::onChooseSpawn));
     system.connect("move_poly", BIND(&Controleur::onMovePoly));
     system.connect("add_point_poly", BIND(&Controleur::onAddPoint));
@@ -320,9 +320,10 @@ bool Controleur::onOpenConsole(thor::ActionContext < string > context){
     return true;
 }
 
-bool Controleur::onCloseConsole(thor::ActionContext < string > context){
+bool Controleur::onCloseGUI(thor::ActionContext < string > context){
     (void)context;
     gui->getConsole()->setVisible(false);
+    ((edt::GUI*) gui)->hidePalette();
     return true;
 }
 

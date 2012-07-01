@@ -125,7 +125,7 @@ bool PalettePays::onNameChange(const EventArgs &e)
 	return true;
     
     //Verif si le nom de pays dans la box est déjà dans la liste pour éviter un doublon
-    for(int i=0; i<liste_pays->getItemCount(); i++)
+    for(unsigned int i=0; i<liste_pays->getItemCount(); i++)
       if(liste_pays->getListboxItemFromIndex(i)->getText() == box_nom->getText() && liste_pays->getListboxItemFromIndex(i) != liste_pays->getFirstSelectedItem())
 	return true;
     
@@ -162,7 +162,7 @@ bool PalettePays::onNewPays(const EventArgs &e)
 {
     (void) e;
     const string &nom = "Nouveau Pays";
-    for(int i=0; i<liste_pays->getItemCount(); i++)
+    for(unsigned int i=0; i<liste_pays->getItemCount(); i++)
       if(liste_pays->getListboxItemFromIndex(i)->getText() == nom)
 	return true;
     const Pays p;

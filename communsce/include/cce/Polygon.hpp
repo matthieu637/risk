@@ -18,6 +18,7 @@ class Polygon : public thor::ConcaveShape
 
 public:
   Polygon();
+  Polygon(const Polygon& p);
   Polygon(const sf::ConvexShape& ch);
   virtual ~Polygon();
   

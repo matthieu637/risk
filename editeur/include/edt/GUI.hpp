@@ -23,6 +23,7 @@ class GUI : public cce::GUI
 public:
     GUI(const string& conteneur);
     virtual ~GUI();
+    void hidePalette();
     void init(Modele* module, Controleur* controleur);
     void initScrollPane(int largeur, int hauteur);
     void updateListRegions(list<string> noms);

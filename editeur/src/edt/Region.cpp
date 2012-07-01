@@ -6,13 +6,13 @@ using cce::Polygon;
 
 namespace edt{
 
-Region::Region(int _income, Polygon* _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag)
+Region::Region(const Region& r)
 {
-    income = _income;
-    zone = *_zone;
-    upgrades = _upgrades;
-    tiles = _tiles;
-    flag = *_flag;
+    income = r.income;
+    zone = r.zone;
+    upgrades = r.upgrades;
+    tiles = r.tiles;
+    flag = r.flag;
 }
 
 Region::Region()

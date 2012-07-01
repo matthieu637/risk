@@ -25,7 +25,7 @@ namespace edt{
 class Region : public cce::Region
 {
 public :
-    Region(int _income, Polygon* _zone, list<UpgradeTemplate> _upgrades, list<Tile> _tiles, Flag* _flag);
+    Region(const Region& r);
     Region();
     virtual ~Region();
     
