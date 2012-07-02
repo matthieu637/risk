@@ -42,12 +42,6 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     fenetre->addChildWindow(lbox);
     lbox->setWidth(UDim(1.0f,0));
     lbox->setHeight(UDim(0.35f,0));
-    map<string, cce::Region* >* lr= m->getCarte()->getAllRegions();
-
-    map<string, cce::Region* >::iterator it;
-    for(it = lr->begin(); it != lr->end(); it++)
-        lbox->addItem(new ListboxTextItem(it->first));
-
     lbox->subscribeEvent(CEGUI::Listbox::EventSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onChangeSelection, this));
 
     ebox = static_cast<CEGUI::Editbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Editbox", "PaletteFrames/Regions/EditboxRegions"));
@@ -98,19 +92,79 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     comboBoxPays->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,160)));
     comboBoxPays->setReadOnly(true);
     comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&PaletteRegions::onComboboxSelectionChange, this));
+
+
+    CEGUI::PushButton* newReg = static_cast<CEGUI::PushButton*>(WindowManager::getSingleton().createWindow("TaharezLook/Button", "PaletteFrames/Regions/NewReg"));
+    fenetre->addChildWindow(newReg);
+    newReg->setWidth(UDim(1,0));
+    newReg->setHeight(UDim(0.0f,32));
+    newReg->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,196)));
+    newReg->setText((CEGUI::utf8*)"Nouvelle Région");
+    newReg->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onNewReg, this));
+
+
+    CEGUI::PushButton* delReg = static_cast<CEGUI::PushButton*>(WindowManager::getSingleton().createWindow("TaharezLook/Button", "PaletteFrames/Regions/RmReg"));
+    fenetre->addChildWindow(delReg);
+    delReg->setWidth(UDim(1,0));
+    delReg->setHeight(UDim(0.0f,32));
+    delReg->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,232)));
+    delReg->setText((CEGUI::utf8*)"Supprimer Région");
+    delReg->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onRmReg, this));
+}
+
+bool PaletteRegions::onNewReg(const CEGUI::EventArgs &e)
+{
+    (void) e;
+    if(modele->getCarte()->getAllPays()->begin() == modele->getCarte()->getAllPays()->end())
+        return true;
+
+    Region r;
+    r.setIncome(50);
+    string pays = modele->getCarte()->getAllPays()->begin()->first;
+    modele->getCarte()->getPays(pays)->addRegion("Nouvelle Région", r);
+    lbox->addItem(new ListboxTextItem((CEGUI::utf8*)"Nouvelle Région"));
+
+    return true;
+}
+
+bool PaletteRegions::onRmReg(const CEGUI::EventArgs &e)
+{
+    (void) e;
+    if(lbox->getFirstSelectedItem() != nullptr)
+    {
+        string region = ebox->getText().c_str();
+        string pays = modele->getCarte()->getPaysWithRegion(region);
+        modele->getCarte()->getPays(pays)->getRegions()->erase(region);
+        lbox->removeItem(lbox->getFirstSelectedItem());
+        current_reg = nullptr;
+    }
+    return true;
 }
 
 bool PaletteRegions::onShow(const CEGUI::EventArgs &e)
 {
     (void) e;
+    reloadListBox();
     reloadPaysBox();
     return true;
 }
 
+void PaletteRegions::reloadListBox()
+{
+    lbox->resetList();
+
+    map<string, cce::Region* >* lr= modele->getCarte()->getAllRegions();
+
+    map<string, cce::Region* >::iterator it;
+    for(it = lr->begin(); it != lr->end(); it++)
+        lbox->addItem(new ListboxTextItem(it->first));
+
+    delete lr;
+}
+
 void PaletteRegions::reloadPaysBox()
 {
-    while(comboBoxPays->getItemCount() > 0)
-        comboBoxPays->removeItem(comboBoxPays->getListboxItemFromIndex(0));
+    comboBoxPays->resetList();
 
     map<string, cce::Pays>* mp= modele->getCarte()->getAllPays();
     map<string, cce::Pays>::iterator ite;

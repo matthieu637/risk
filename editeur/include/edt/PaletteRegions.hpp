@@ -39,12 +39,14 @@ public :
   bool onDefinirPoly(const CEGUI::EventArgs &e);
   bool onComboboxSelectionChange(const CEGUI::EventArgs &e);
   bool onShow(const CEGUI::EventArgs &e);
-  
+  bool onNewReg(const CEGUI::EventArgs &e);
+  bool onRmReg(const CEGUI::EventArgs &e);
   
 private :
   void hideAllPoly();
   void showAllPoly();
   void reloadPaysBox();
+  void reloadListBox();
   
   CEGUI::Listbox* lbox;
   CEGUI::Editbox* ebox;
