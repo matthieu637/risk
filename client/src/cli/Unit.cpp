@@ -16,8 +16,8 @@ Unit::Unit()
 	unitTemplate = ut;//met a jour les caractéristiques de l'unité
 	setTexture(ut->getTexture());//met a jour l'image de l'unité
 	animation = ut->getAnimation();
-	anim = cce::Animation();
-	anim.makeAnimation();
+	//anim = cce::Animation();
+	//anim.makeAnimation();
 	 // unitTemplate = ut;
 // 	thor::FrameAnimation moveUp;
 // 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
@@ -29,10 +29,6 @@ Unit::Unit()
 //       animation.playAnimation("moveUp", true);
 }
 
-
-void Unit::setId(int id){
-    setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
-}
 
 order Unit::getOrder()
 {

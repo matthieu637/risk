@@ -130,11 +130,10 @@ private:
     defence_type def_type;
     Texture *texture;
     thor::Animator<sf::Sprite, std::string> animation;
-<<<<<<< HEAD
     map<std::string,AnimationTemplate>  mapAnimTemplate;
-=======
+
     sf::CircleShape* selection_circle;
->>>>>>> 25edd02a4265e91ca29ee2e1bbe020c16b1a3451
+
 };
 
 }
