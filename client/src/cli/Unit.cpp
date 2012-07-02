@@ -46,42 +46,40 @@ void Unit::orderFollow(Unit* to_follow)
       current_order = stop;
     followed_unit = to_follow;
     current_order = follow;
-    distance_min_follow = getSocleCenter().x + followed_unit->getSocleCenter().x + 50;
+    distance_min_follow = getSelectionCircle()->getRadius() + followed_unit->getSelectionCircle()->getRadius() + 50;
 }
 
 void Unit::applyOrder()
 {
     switch(current_order){
       case order::move:
-	deplacer(destination);
+	deplacer();
 	break;
       case order::follow:
-	sf::Vector2f followed_unit_socle_center = followed_unit->getPosition() + followed_unit->getSocleCenter();
-	deplacer(followed_unit_socle_center);
+	destination = followed_unit->getSocleCenterGlobal();
+	deplacer();
 	break;
     }
 }
 
-void Unit::deplacer(sf::Vector2f destination)
+void Unit::deplacer()
 {
     float speed = unitTemplate->getMoveSpeed();
     
-    sf::Vector2f to_go = destination - (getPosition() + getSocleCenter()); // vector jusqu'à destination
+    sf::Vector2f to_go = destination - socleGlobal; // vector jusqu'à destination
     float distance = sqrt(to_go.x * to_go.x + to_go.y * to_go.y); //distance à parcourir (pythagore)
+    
     if(current_order == order::follow && distance < distance_min_follow)
       return;
     
-    sf::Vector2f distance_parcourue;
-    
     if(distance < speed){ //si la destination est à portée de speed
-      setPosition(destination - getSocleCenter()); // on va jusqu'à destination
+      deplacement = to_go; // on va jusqu'à destination
       if(current_order == order::move)
-	current_order = order::stop; // si on est en move, on stop
+	current_order = order::stop;
     }
-    else{
-      distance_parcourue = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
-      move(distance_parcourue.x, distance_parcourue.y);
-    }
+    else
+      deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
+    move(deplacement.x, deplacement.y);
 }
 
 }

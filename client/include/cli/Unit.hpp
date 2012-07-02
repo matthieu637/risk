@@ -38,12 +38,12 @@ namespace cli{
 ///
       order getOrder();
       
-  private:
-      void deplacer(sf::Vector2f destination);
+    private:
+	void deplacer();
     
     private :
 	cce::UnitTemplate *unitTemplate;
-	sf::Vector2f destination;
+	sf::Vector2f destination, deplacement;
 	order current_order;
 	Unit* followed_unit;
 	float distance_min_follow;

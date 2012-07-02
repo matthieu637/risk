@@ -55,7 +55,7 @@ Unit* CoucheDecor::getUnit(sf::Vector2f position)
     return nullptr;
 }
 
-bool CoucheDecor::collision(cce::Decor* d, sf::Vector2f position)
+bool CoucheDecor::collision(cce::Decor* d, sf::Vector2f position) //optimiser avec une fonction collisionUnit (les decors sont fixes pour le pathfinding)
 {
     sf::Vector2f distance;
     float d_rad = d->getSelectionCircle()->getRadius();

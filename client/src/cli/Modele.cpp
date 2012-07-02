@@ -48,9 +48,9 @@ void Modele::update()
     list<Unit*>::iterator it;
     list<Unit*>* allunits = getCoucheDecor()->getAllUnits();
     for(it = allunits->begin(); it !=  allunits->end(); ++it){
- 	getCoucheDecor()->removeDecor(*it);
- 	(*it)->applyOrder();
- 	getCoucheDecor()->addDecor(*it);
+      getCoucheDecor()->removeDecor(*it);
+      (*it)->applyOrder();
+      getCoucheDecor()->addDecor(*it);
     }
 }
 
