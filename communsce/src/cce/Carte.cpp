@@ -61,7 +61,10 @@ Region* Carte::getRegion(const string& nom_region)
 
 Pays* Carte::getPays(const string& nom_pays)
 {
-    return &mp[nom_pays];
+    if(mp.count(nom_pays) == 0) //WTF obligatoire sinon   
+        return nullptr;         //getPays crée un nouveau pays
+
+    return &mp[nom_pays]; 
 }
 
 string Carte::getPaysWithRegion(const string& nom_region)

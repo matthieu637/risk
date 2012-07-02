@@ -26,6 +26,8 @@ const map<string,Region>* Pays::getConstRegions() const{
 
 Region* Pays::getRegion(const string& nom)
 {
+    if(regions.count(nom) == 0)
+      return nullptr;
     return &regions[nom];
 }
 
