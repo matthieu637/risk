@@ -62,7 +62,6 @@ void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)
 {
-    LOG_DEBUG("da");
     Decor* d = new Decor(dt, x - dt->getTexture()->getSize().x/2, y - dt->getTexture()->getSize().y * 3/4);
     decors.insert(d);
     undoDecors.push(d);
