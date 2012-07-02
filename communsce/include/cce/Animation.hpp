@@ -9,6 +9,7 @@ namespace cce{
   class Animation 
   {
     public:
+      Animation();
       Animation(AnimationTemplate *animTemplate);
       AnimationTemplate* getTemplate();
       void makeAnimation();

@@ -1,7 +1,11 @@
 #include "cce/Animation.hpp"
 
 namespace cce{
-    
+ 
+ Animation::Animation(){
+  
+ }
+ 
  Animation::Animation(AnimationTemplate *animTemplate){
       animationTemplate = animTemplate;
     

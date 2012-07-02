@@ -16,7 +16,10 @@ UnitTemplate::UnitTemplate()
 //     collision_ = true;
 //     dmg_type = laser;
 //     def_type = acier;
+
+ mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",6,64,47,1);
 }
+
 
 void UnitTemplate::loadAfterXML(int id)
 {

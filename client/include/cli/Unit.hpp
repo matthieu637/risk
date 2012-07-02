@@ -1,7 +1,8 @@
 #ifndef UNIT_HPP
 #define UNIT_HPP
-#include <cce/Decor.hpp>
-#include <cce/UnitTemplate.hpp>
+#include "cce/Decor.hpp"
+#include "cce/UnitTemplate.hpp"
+#include "cce/Animation.hpp"
 
 namespace cli{
   
@@ -43,10 +44,13 @@ namespace cli{
     
     private :
 	cce::UnitTemplate *unitTemplate;
+	cce::Animation anim;
+	
 	sf::Vector2f destination, deplacement;
 	order current_order;
 	Unit* followed_unit;
 	float distance_min_follow;
+
   };
 
 }

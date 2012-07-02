@@ -9,11 +9,16 @@ Unit::Unit()
     current_order = stop;
 }
 
-void Unit::setUnitTemplate(cce::UnitTemplate *ut){
-      unitTemplate = ut;//met a jour les caractéristiques de l'unité
-      setTexture(ut->getTexture());//met a jour l'image de l'unité
-      animation = ut->getAnimation();
-      unitTemplate = ut;
+
+  
+  
+  void Unit::setUnitTemplate(cce::UnitTemplate *ut){
+	unitTemplate = ut;//met a jour les caractéristiques de l'unité
+	setTexture(ut->getTexture());//met a jour l'image de l'unité
+	animation = ut->getAnimation();
+	//anim = cce::Animation();
+	//anim.makeAnimation();
+	 // unitTemplate = ut;
 // 	thor::FrameAnimation moveUp;
 // 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
 // 	 for (unsigned int i = 0; i < 6; ++i)
@@ -24,10 +29,6 @@ void Unit::setUnitTemplate(cce::UnitTemplate *ut){
 //       animation.playAnimation("moveUp", true);
 }
 
-
-void Unit::setId(int id){
-    setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
-}
 
 order Unit::getOrder()
 {
@@ -62,6 +63,10 @@ void Unit::applyOrder()
     }
 }
 
+  void Unit::setId(int id){
+      setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
+  }
+
 void Unit::deplacer()
 {
     float speed = unitTemplate->getMoveSpeed();
@@ -81,5 +86,6 @@ void Unit::deplacer()
       deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
     move(deplacement.x, deplacement.y);
 }
+
 
 }
