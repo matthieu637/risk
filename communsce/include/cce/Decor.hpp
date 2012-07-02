@@ -117,7 +117,7 @@ protected:
     DecorTemplate *dt;
     
 protected:
-    thor::Animator<sf::Sprite, std::string> animation;
+    thor::Animator<sf::Sprite, std::string>* animathor;
     sf::Clock frameClock;
     sf::CircleShape* selection_circle;
     sf::Vector2f socle;

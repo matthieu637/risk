@@ -102,7 +102,7 @@ public:
     int getDefence();
     damage_type getDamageType();
     defence_type getDefenseType();
-    thor::Animator<sf::Sprite, std::string> getAnimation();
+   // thor::Animator<sf::Sprite, std::string> getAnimation();
     void initAnimation();
     
 
@@ -121,7 +121,8 @@ public:
 ///\brief Vitesse de déplacement en pixels/seconde?
 ///
     int getMoveSpeed();
-
+  
+    AnimationTemplate* getMapTemplate();
 private:
     int id, dmg_min, dmg_max, defence, move_speed, attack_speed;
     string nom, description, path;
@@ -129,7 +130,7 @@ private:
     damage_type dmg_type;
     defence_type def_type;
     Texture *texture;
-    thor::Animator<sf::Sprite, std::string> animation;
+    //thor::Animator<sf::Sprite, std::string> animation;
     map<std::string,AnimationTemplate>  mapAnimTemplate;
 
     sf::CircleShape* selection_circle;

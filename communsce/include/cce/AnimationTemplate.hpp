@@ -3,6 +3,8 @@
 
 #include <string>
 #include <boost/serialization/nvp.hpp>
+#include <Thor/Animation.hpp>
+#include <SFML/Graphics.hpp>
 
 using std::string;
 using boost::serialization::make_nvp;
@@ -32,11 +34,13 @@ namespace cce {
     float getTemps();
     float getRect_hauteur();
     float getRect_largeur();
+    thor::Animator<sf::Sprite, std::string>* getAnimathor();
     
   private:
     float temps,rect_hauteur,rect_largeur;
     string nom;
     int num_Animation;
+    thor::Animator<sf::Sprite, std::string> animathor;
   
   
   };

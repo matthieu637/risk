@@ -16,7 +16,7 @@ namespace cce{
     
     private :
 	AnimationTemplate *animationTemplate;
-	 thor::Animator<sf::Sprite, std::string> anim;
+	// thor::Animator<sf::Sprite, std::string> anim;
   };
 
 }

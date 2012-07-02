@@ -18,6 +18,10 @@ AnimationTemplate::AnimationTemplate(string n, int num,float hauteur, float larg
   temps = tps;
 }
 
+thor::Animator<sf::Sprite, std::string>* AnimationTemplate::getAnimathor(){
+    return &animathor; 
+ }
+ 
 void AnimationTemplate::loadAfterXML(int id)
 {
 //   this->id = id;
