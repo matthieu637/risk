@@ -32,7 +32,7 @@ Modele::Modele():cce::Modele() {
 
     current_map = "";
     current_pays = "";
-    
+
     poly = nullptr;
 }
 
@@ -51,7 +51,15 @@ Repere *Modele::getRepere() {
 //herite de edt::openCarte
 string Modele::openCarte(const string& chemin) {
     current_map = chemin;
-    return cce::Modele::openCarte(chemin);
+    string retour = cce::Modele::openCarte(chemin);
+    reloadGUI();
+    return retour;
+}
+
+void Modele::reloadGUI()
+{
+    for (it = vues.begin(); it != vues.end(); it++)
+        ((Vue*)*it)->reloadGUI();
 }
 
 string Modele::getCurrentMap() {
@@ -63,6 +71,7 @@ void Modele::nouvelleCarte()
     current_map = "";
     delete carte;
     carte =  bib::XMLEngine::load<cce::Carte>("CARTE","data/map/empty.map");
+    reloadGUI();
 }
 
 string Modele::saveCarte(const string& chemin) {
@@ -109,6 +118,11 @@ bool Modele::addPoint(int x, int y)
 {
     if(poly != nullptr) {
         int nb = poly->getPointCount();
+        if(nb != 0) {
+            sf::Vector2f v = poly->getPoint(nb - 2);
+            if((int)v.x == x && (int)v.y == y)
+                return true;
+        }
         poly->setPointCount(nb+1);
         poly->setPoint(nb, sf::Vector2f(x, y));
         if(nb == 0) {
@@ -131,21 +145,24 @@ void Modele::setCamOrigine(int cameraX, int cameraY) {
     cameraOrigineY = cameraY;
 }
 
-void Modele::moveView(int dx, int dy, int cameraX, int cameraY) {
+void Modele::moveView(int dx, int dy)
+{
     int x = cameraOrigineX + dx * coeff_zoom;
     int y = cameraOrigineY + dy * coeff_zoom;
-    int x_max = carte->getRepere()->getLargeur() * 158;
-    int y_max = carte->getRepere()->getHauteur() * 44;
+    int x_max = carte->getRepere()->largeur_pixels;
+    int y_max = carte->getRepere()->hauteur_pixels;
 
-    if ((x < 0 && cameraX < 0) || (x > x_max && cameraX > x_max))
-        x = cameraX;
-    if ((y < 0 && cameraY < 0) || (y > y_max && cameraY > y_max))
-        y = cameraY;
+    if (x < 0)
+      x = 0;
+    if (x > x_max)
+      x = x_max;
+    if (y < 0)
+      y = 0;
+    if (y > y_max)
+      y = y_max;
 
-    for (it = vues.begin(); it != vues.end(); it++) {
-        (*it)->updateCameraPosition(x, y);
-        ((Vue*)*it)->updateScrolls();
-    }
+    for(it = vues.begin(); it != vues.end(); it++)
+      (*it)->updateCameraPosition(x, y);
 }
 
 void Modele::zoom(int ticks) {
@@ -179,14 +196,14 @@ void Modele::setDecorMove(int x, int y) {
 }
 
 void Modele::moveDecor(int dx, int dy) {
-    carte->getCoucheDecor()->moveDecor(dx*coeff_zoom, dy*coeff_zoom);
+    carte->getCoucheDecor()->moveDecor(dx, dy);
 }
 
 void Modele::placeObject(int x, int y) {
     if(palette == tiles)
         getRepere()->setTile(tt, x, y);
     else if(palette == decors)
-        carte->getCoucheDecor()->addDecor(dt, x, y);
+	carte->getCoucheDecor()->addDecor(dt, x, y);
 }
 
 void Modele::deleteObject(int x, int y) {

@@ -3,12 +3,14 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Clock.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <Thor/Animation.hpp>
 #include "DecorTemplate.hpp"
 #include "Univers.hpp"
 #include <SFML/Graphics.hpp>
 #include <Thor/Animation.hpp>
+#include <SFML/Graphics/CircleShape.hpp>
 
 using sf::Texture;
 using sf::Sprite;
@@ -45,7 +47,37 @@ public:
     
     void move(float offsetX, float offsetY);
     void animate();
+    
+///
+///\brief Permet de reset la clock de l'animation pour une ré-insertion dans l'arbre décors
+void unpause();
 
+///
+///\brief le cercle apparaissant sous l'unité lorsqu'elle fait partie de la sélection courante
+///\return le cercle CircleShape.
+///
+      sf::CircleShape* getSelectionCircle();
+
+///
+///\brief Renvoie le vecteur entre position et socle
+///
+      sf::Vector2f getSocleCenter();
+
+///
+///\brief Renvoie le vecteur entre position et socle
+///
+      sf::Vector2f getSocleCenterGlobal();
+
+///
+///\brief maj socle sur le changement de position
+///
+      void setPosition(float x, float y);
+
+///
+///\brief maj socle sur le changement de position
+///
+      void setPosition(const sf::Vector2f& position);
+    
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {
         boost::serialization::split_member(ar, *this, version);
@@ -87,6 +119,9 @@ protected:
 protected:
     thor::Animator<sf::Sprite, std::string> animation;
     sf::Clock frameClock;
+    sf::CircleShape* selection_circle;
+    sf::Vector2f socle;
+    sf::Vector2f socleGlobal;
 };
 
 bool operator<(Decor const &d1, Decor const &d2);

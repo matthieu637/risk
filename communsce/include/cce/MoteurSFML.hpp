@@ -27,7 +27,6 @@ public:
 	LOG_INFO("Chargement d'une fenetre " << fenetre.getSize().x << "x" << fenetre.getSize().y);
         fenetre.setFramerateLimit(60);
 	fenetre.setMouseCursorVisible(false);
-	camera.setCenter(fenetre.getSize().x/2, fenetre.getSize().y/2 - 25);
     }
     
     

@@ -11,9 +11,15 @@ Polygon::Polygon()
 
 }
 
+Polygon::Polygon(const Polygon& p) : ConcaveShape(p)
+{
+   for(const Point& pp: p.points)
+     points.push_back(pp);
+}
+
 Polygon::Polygon(const sf::ConvexShape& ch) : thor::ConcaveShape(ch)
 {
-    for(int i=0; i < ch.getPointCount(); i++)
+    for(unsigned int i=0; i < ch.getPointCount(); i++)
         points.push_back(cce::Point(ch.getPoint(i).x, ch.getPoint(i).y));
 
 }
@@ -24,7 +30,9 @@ Polygon::~Polygon()
 }
 
 void Polygon::addPoint(Point p)
-{   /* Only work with sf::ConvexShape
+{
+  (void) p;
+  /* Only work with sf::ConvexShape
        points.push_back(p);
        int nb = getPointCount();
        setPointCount(nb+1);

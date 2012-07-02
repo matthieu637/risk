@@ -26,10 +26,26 @@ GUI::~GUI()
 
 }
 
+void GUI::hidePalette()
+{
+    palette_decor->hide();
+    palette_pays->hide();
+    palette_regions->hide();
+    palette_tile->hide();
+}
+
 void GUI::init(Modele* modele, Controleur* controleur)
 {
     cce::GUI::init(modele);
+    this->controleur = controleur;
+    this->modele = modele;
 
+    console = new edt::Console(modele);
+    loadCustomGUI();
+}
+
+void GUI::loadCustomGUI()
+{
     palette_tile = new PaletteTile();
     palette_tile->init(this, "PaletteFrames/Tiles", (edt::Modele*)modele);
     palette_decor = new PaletteDecor();
@@ -38,8 +54,6 @@ void GUI::init(Modele* modele, Controleur* controleur)
     palette_pays->init(this, "PaletteFrames/Pays", (edt::Controleur*)controleur, (edt::Modele*)modele);
     palette_regions = new PaletteRegions();
     palette_regions->init(this, "PaletteFrames/Regions", modele);
-
-    console = new edt::Console(modele);
 
     cce::Repere* rep = modele->getCarte()->getRepere();
     initScrollPane(rep->getHauteur(), rep->getLargeur());
@@ -56,7 +70,16 @@ void GUI::initScrollPane(int largeur, int hauteur)
     hori->setPageSize(1);
 }
 
+void GUI::deleteGUI()
+{
+    delete palette_tile;
+    delete palette_decor;
+    delete palette_pays;
+    delete palette_regions;
+}
+
 void GUI::updateListRegions(list<string> noms)
 {
     palette_regions->updateListRegions(noms);
 }
+

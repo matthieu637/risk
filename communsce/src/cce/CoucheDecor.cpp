@@ -51,37 +51,72 @@ void CoucheDecor::update()
         cce::Decor* dd = *it;
         dd->animate();
     }
-    //((Decor*)&(*it))->animate();
 }
 
 void CoucheDecor::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     set<Decor*>::iterator it = decors.begin();
     for(; it != decors.end(); it++)
-            target.draw(**it, states);
-    
-
+	target.draw(**it, states);
 }
 
 void CoucheDecor::addDecor(DecorTemplate *dt, int x, int y)
 {
     Decor* d = new Decor(dt, x - dt->getTexture()->getSize().x/2, y - dt->getTexture()->getSize().y * 3/4);
     decors.insert(d);
+    undoDecors.push(d);
+    clearRedoDecors();
 }
 
 void CoucheDecor::addDecor(Decor *d)
 {
+    d->unpause();
     decors.insert(d);
+    undoDecors.push(d);
+    clearRedoDecors();
 }
-
 
 void CoucheDecor::removeDecor(int x, int y)
 {
     Decor *d = getDecor(x,y);
     if(d != nullptr) {
         decors.erase(d);
-        delete d;
     }
+}
+
+void CoucheDecor::removeDecor(Decor* d)
+{
+    if(d != nullptr)
+        decors.erase(d);
+}
+
+void CoucheDecor::undoDecor(){
+  if(!undoDecors.empty()){
+    while(undoDecors.top() == nullptr){
+      redoDecors.pop();  
+    }
+    redoDecors.push(undoDecors.top());
+    decors.erase(undoDecors.top());
+    undoDecors.pop();
+  }
+
+}
+    
+void CoucheDecor::redoDecor(){
+  if(!redoDecors.empty()){
+    while(redoDecors.top() == nullptr){
+      redoDecors.pop();
+      return ;	  
+    }
+    undoDecors.push(redoDecors.top());
+    redoDecors.top()->unpause();
+    decors.insert(redoDecors.top());
+    redoDecors.pop();
+  }
+}
+
+void CoucheDecor::clearRedoDecors(){
+  redoDecors = stack<Decor*>();
 }
 
 }

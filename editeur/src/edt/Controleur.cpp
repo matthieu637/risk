@@ -51,6 +51,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
+    Action ctrl_hold(sf::Keyboard::LControl, Action::Hold);
+    Action z_hold(sf::Keyboard::Z, Action::Hold);
+    Action y_hold(sf::Keyboard::Y, Action::Hold);
 
     // Map
     map["quit"] = close;
@@ -69,10 +72,12 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["selection"] = space_press;
     map["choix_palette"] = t_press || d_press || p_press || r_press;
     map["console"] = c_press;
-    map["close_console"] = escape_press;
+    map["close_gui"] = escape_press;
     map["move_poly"] = mouse_move;
     map["add_point_poly"] = left_release;
-
+    map["undo"] = ctrl_hold && z_hold;
+    map["redo"] = ctrl_hold && y_hold;  
+     
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
     system.connect("stop_cam", BIND(&Controleur::onStopCam));
@@ -88,11 +93,13 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("choix_palette", BIND(&Controleur::onChoixPaletteThor));
     system.connect("console", BIND(&Controleur::onOpenConsole));
-    system.connect("close_console", BIND(&Controleur::onCloseConsole));
+    system.connect("close_gui", BIND(&Controleur::onCloseGUI));
     system.connect("set_spawn", BIND(&Controleur::onChooseSpawn));
     system.connect("move_poly", BIND(&Controleur::onMovePoly));
     system.connect("add_point_poly", BIND(&Controleur::onAddPoint));
-
+    system.connect("undo", BIND(&Controleur::onUndoThor));
+    system.connect("redo", BIND(&Controleur::onRedoThor));   
+    
     //Binding fonctions CEGUI
     moduleGUI->ajouterHandler("quitter", BIND(&Controleur::onQuit));
     moduleGUI->ajouterHandler("selection", BIND(&Controleur::onSelection));
@@ -105,7 +112,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     moduleGUI->ajouterHandler("choix_palette", BIND(&Controleur::onChoixPalette));
     moduleGUI->ajouterHandler("redimensionner", BIND(&Controleur::onRedimensionner));
     moduleGUI->ajouterHandler("new_map", BIND(&Controleur::onNewMap));
-
+    moduleGUI->ajouterHandler("undo", BIND(&Controleur::onUndo));
+    
     gui->setScriptModule(moduleGUI);
 }
 
@@ -125,6 +133,9 @@ void Controleur::onStartCam(thor::ActionContext < string > context) {
 
 void Controleur::onStopCam(thor::ActionContext < string > context) {
     (void) context;
+    int cameraX = engine->getView()->getCenter().x;
+    int cameraY = engine->getView()->getCenter().y;
+    m->setCamOrigine(cameraX, cameraY);
     moveCam = false;
 }
 
@@ -134,20 +145,16 @@ void Controleur::onMoveCamera(thor::ActionContext < string > context) {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     int dx = clickX - mousePosition.x;
     int dy = clickY - mousePosition.y;
-    int cameraX = engine->getView()->getCenter().x;
-    int cameraY = engine->getView()->getCenter().y;
-    m->moveView(dx, dy, cameraX, cameraY);
+    m->moveView(dx, dy);
 }
 
 void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
-
     if(!selection)
         return;
-
-    clickX = mousePosition.x;
-    clickY = mousePosition.y;
-    m->setDecorMove(getX(clickX), getY(clickY));
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    clickX = getX(mousePosition.x);
+    clickY = getY(mousePosition.y);
+    m->setDecorMove(clickX, clickY);
     moveDecor = true;
 }
 
@@ -160,13 +167,13 @@ void Controleur::onMoveDecor(thor::ActionContext < string > context) {
     if (!moveDecor) //bug si exécuté avant le leftPress
         return;
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
-    int dx = mousePosition.x - clickX;
-    int dy = mousePosition.y - clickY;
+    int dx = getX(mousePosition.x) - clickX;
+    int dy = getY(mousePosition.y) - clickY;
 
     m->moveDecor(dx, dy);
 
-    clickX = mousePosition.x;
-    clickY = mousePosition.y;
+    clickX = getX(mousePosition.x);
+    clickY = getY(mousePosition.y);
 }
 
 void Controleur::onZoom(thor::ActionContext < string > context) {
@@ -312,9 +319,10 @@ bool Controleur::onOpenConsole(thor::ActionContext < string > context){
     return true;
 }
 
-bool Controleur::onCloseConsole(thor::ActionContext < string > context){
+bool Controleur::onCloseGUI(thor::ActionContext < string > context){
     (void)context;
     gui->getConsole()->setVisible(false);
+    ((edt::GUI*) gui)->hidePalette();
     return true;
 }
 
@@ -335,6 +343,35 @@ bool Controleur::onNewMap(const CEGUI::EventArgs & e) {
     gui->getConsole()->afficherCommande("/new_map");
     return true;
 }
+
+void Controleur::onUndoThor(thor::ActionContext < string > context){
+    (void)context;
+    const CEGUI::EventArgs ma;
+    this->onUndo(ma);
+}
+
+bool Controleur::onUndo(const CEGUI::EventArgs & e) {
+    (void) e;
+    m->getCarte()->getCoucheDecor()->undoDecor();
+
+    return true;
+}
+
+void Controleur::onRedoThor(thor::ActionContext < string > context){
+    (void)context;
+    const CEGUI::EventArgs ma;
+    this->onRedo(ma);
+}
+
+
+bool Controleur::onRedo(const CEGUI::EventArgs & e) {
+    (void) e;
+    m->getCarte()->getCoucheDecor()->redoDecor();
+
+    return true;
+}
+
+
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;

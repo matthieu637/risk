@@ -23,15 +23,19 @@ class GUI : public cce::GUI
 public:
     GUI(const string& conteneur);
     virtual ~GUI();
+    void hidePalette();
     void init(Modele* module, Controleur* controleur);
     void initScrollPane(int largeur, int hauteur);
     void updateListRegions(list<string> noms);
     edt::Console* getConsole(){return (edt::Console*) console; } 
-    
+    void loadCustomGUI();
+    void deleteGUI();
 private:
     
 
 private:
+    Controleur* controleur;
+    Modele* modele;
     PaletteTile* palette_tile;
     PaletteDecor* palette_decor;
     PaletteRegions* palette_regions;

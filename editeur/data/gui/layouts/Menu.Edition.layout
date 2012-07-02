@@ -11,10 +11,12 @@
     <Window Type="TaharezLook/MenuItem" Name="Edition/Annuler" >
 	<Property Name="Text" Value="Annuler" />
 	<Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	<Event Name="Clicked" Function="undo" />
     </Window>
     <Window Type="TaharezLook/MenuItem" Name="Edition/Retablir" >
 	<Property Name="Text" Value="Rétablir" />
 	<Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	<Event Name="Clicked" Function="redo" />
     </Window>
     <Window Type="TaharezLook/MenuItem" Name="Edition/Selection">
     <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />

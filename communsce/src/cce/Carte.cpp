@@ -12,14 +12,15 @@ Carte::Carte()
 void Carte::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(repere, states);
-    target.draw(couche_decor, states);
 
     map <string,Pays>::const_iterator it;
     map<string,Region>::const_iterator ir;
     for (it = mp.begin(); it != mp.end(); it++)
-        for(ir=it->second.getConstRegions()->begin(); ir!=it->second.getConstRegions()->end(); ir++){
+        for(ir=it->second.getConstRegions()->begin(); ir!=it->second.getConstRegions()->end(); ir++) {
             target.draw(ir->second, states);
-	}
+        }
+
+    target.draw(couche_decor, states);
 }
 
 map<string, Region* >* Carte::getAllRegions()
@@ -60,10 +61,19 @@ Region* Carte::getRegion(const string& nom_region)
 
 Pays* Carte::getPays(const string& nom_pays)
 {
-    if (mp.count(nom_pays) == 0)
-      return nullptr;
-    return &mp[nom_pays];
+    if(mp.count(nom_pays) == 0) //WTF obligatoire sinon   
+        return nullptr;         //getPays crée un nouveau pays
+
+    return &mp[nom_pays]; 
 }
 
+string Carte::getPaysWithRegion(const string& nom_region)
+{
+    map <string,Pays>::iterator it;
+    for (it = mp.begin(); it != mp.end(); it++)
+        if(it->second.getRegion(nom_region) != nullptr)
+            return it->first;
+    return nullptr;
+}
 
 }

@@ -37,14 +37,22 @@ public:
     void onZoom(thor::ActionContext < string > context);
     void onResetZoom(thor::ActionContext < string > context);
     bool onWindowResized(thor::ActionContext<string> context);
+    void onMoveUnit(thor::ActionContext < string > context);
     bool onQuit(const CEGUI::EventArgs & e);
-
+    void selectionOn(thor::ActionContext < string > context);
+    void selectionOff(thor::ActionContext < string > context);
+    void selectionMove(thor::ActionContext < string > context);
+    
     int getX(int mouseX);
     int getY(int mouseY);
+    
+    void spawnUnit(thor::ActionContext < string > context);
 
 private:
     int clickX, clickY;
-    bool moveCam, moveDecor, selection;
+    bool moveCam, moveDecor;
+
+    
     GUI *gui;
     Modele *m;
 };

@@ -18,6 +18,8 @@ namespace CEGUI{
 }
 namespace edt{
 
+class Region;
+
 class Modele;
   
 class GUI;
@@ -29,29 +31,35 @@ public :
   virtual ~PaletteRegions();
   void init(GUI const *gui, string nom, Modele* m);
   void updateListRegions(list<string> noms);
-  bool onNameChange(const CEGUI::EventArgs &e);
+  bool onRegionNameChange(const CEGUI::EventArgs &e);
   bool onCheckedChange(const CEGUI::EventArgs &e);
   bool onChangeSelection(const CEGUI::EventArgs &e);
   bool onIncomeChange(const CEGUI::EventArgs &e);
   bool onResetPoly(const CEGUI::EventArgs &e);
   bool onDefinirPoly(const CEGUI::EventArgs &e);
   bool onComboboxSelectionChange(const CEGUI::EventArgs &e);
-  
+  bool onShow(const CEGUI::EventArgs &e);
+  bool onNewReg(const CEGUI::EventArgs &e);
+  bool onRmReg(const CEGUI::EventArgs &e);
   
 private :
   void hideAllPoly();
   void showAllPoly();
+  void reloadPaysBox();
+  void reloadListBox();
   
   CEGUI::Listbox* lbox;
   CEGUI::Editbox* ebox;
   CEGUI::Editbox* eboxinc;
-  CEGUI::ListboxItem* lbti;
+
   CEGUI::PushButton* resetPoly;
   CEGUI::PushButton* addPoint;
   CEGUI::Checkbox* cboxpoly;
   CEGUI::Combobox* comboBoxPays;
+  string ancien;
   
   Modele* modele;
+  Region* current_reg;
 };
 }
 

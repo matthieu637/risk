@@ -100,7 +100,7 @@ bool PalettePays::onSelectionChange(const EventArgs &e)
     if(liste_pays->getFirstSelectedItem() == nullptr)
       return true;
     
-    current_pays_item = (ListboxTextItem*) liste_pays->getFirstSelectedItem();
+    ListboxTextItem* current_pays_item = (ListboxTextItem*) liste_pays->getFirstSelectedItem();
     
     //box nom
     box_nom->setText(current_pays_item->getText());
@@ -121,22 +121,28 @@ bool PalettePays::onSelectionChange(const EventArgs &e)
 bool PalettePays::onNameChange(const EventArgs &e)
 {
     (void) e;
-    if(liste_pays->getFirstSelectedItem() != current_pays_item)
+    if(liste_pays->getFirstSelectedItem() == nullptr)
+	return true;
+    
+    //Verif si le nom de pays dans la box est déjà dans la liste pour éviter un doublon
+    for(unsigned int i=0; i<liste_pays->getItemCount(); i++)
+      if(liste_pays->getListboxItemFromIndex(i)->getText() == box_nom->getText() && liste_pays->getListboxItemFromIndex(i) != liste_pays->getFirstSelectedItem())
 	return true;
     
     const string &nouveau = box_nom->getText().c_str();
     
     if(nouveau.length() == 0 || nouveau == ancien){
-	box_nom->setText(current_pays_item->getText());
+	box_nom->setText(liste_pays->getFirstSelectedItem()->getText());
 	return true;
     }
     
     Pays *p = (edt::Pays*) modele->getCarte()->getPays(ancien);
     modele->getCarte()->addPays(nouveau, *p);
     modele->getCarte()->getAllPays()->erase(ancien);
-    current_pays_item->setText(box_nom->getText());
+    liste_pays->getFirstSelectedItem()->setText(box_nom->getText());
     liste_pays->handleUpdatedItemData();
-    ancien = current_pays_item->getText().c_str();
+    ancien = liste_pays->getFirstSelectedItem()->getText().c_str();
+    modele->setCurrentPays(liste_pays->getFirstSelectedItem()->getText().c_str());
     
     return true;
 }
@@ -144,9 +150,9 @@ bool PalettePays::onNameChange(const EventArgs &e)
 bool PalettePays::onIncomeChange(const EventArgs &e)
 {
     (void) e;
-    if(liste_pays->getFirstSelectedItem() != current_pays_item)
+    if(liste_pays->getFirstSelectedItem() == nullptr)
       return true;
-    const string &nom = current_pays_item->getText().c_str();
+    const string &nom = liste_pays->getFirstSelectedItem()->getText().c_str();
     Pays *p = (edt::Pays*) modele->getCarte()->getPays(nom);
     p->setIncome(atoi(box_income->getText().c_str()));
     return true;
@@ -155,11 +161,14 @@ bool PalettePays::onIncomeChange(const EventArgs &e)
 bool PalettePays::onNewPays(const EventArgs &e)
 {
     (void) e;
-    const Pays p;
     const string &nom = "Nouveau Pays";
+    for(unsigned int i=0; i<liste_pays->getItemCount(); i++)
+      if(liste_pays->getListboxItemFromIndex(i)->getText() == nom)
+	return true;
+    const Pays p;
     modele->getCarte()->addPays(nom, p);
-    current_pays_item = new ListboxTextItem(nom);
-    liste_pays->addItem(current_pays_item);
+    ListboxTextItem* new_item = new ListboxTextItem(nom);
+    liste_pays->addItem(new_item);
     
     return true;
 }
@@ -167,11 +176,13 @@ bool PalettePays::onNewPays(const EventArgs &e)
 bool PalettePays::onDeletePays(const EventArgs &e)
 {
     (void) e;
-    if(liste_pays->getFirstSelectedItem() != current_pays_item)
+    if(liste_pays->getFirstSelectedItem() == nullptr)
       return true;
-    modele->getCarte()->getAllPays()->erase(current_pays_item->getText().c_str());
-    liste_pays->removeItem(current_pays_item);
-    current_pays_item = nullptr;
+    string nom = liste_pays->getFirstSelectedItem()->getText().c_str();
+    if(modele->getCarte()->getPays(nom)->getPointSpawn() != nullptr)
+      modele->getCarte()->getPays(nom)->getPointSpawn()->setColor(sf::Color(255,255,255,255));
+    modele->getCarte()->getAllPays()->erase(nom);
+    liste_pays->removeItem(liste_pays->getFirstSelectedItem());
     return true;
 }
 

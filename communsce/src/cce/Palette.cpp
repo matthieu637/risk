@@ -3,13 +3,14 @@
 #include <CEGUI/CEGUIWindowManager.h>
 #include <CEGUI/CEGUIVector.h>
 #include <CEGUI/CEGUIUDim.h>
+#include <bib/Logger.hpp>
 
 using CEGUI::WindowManager;
 using CEGUI::FrameWindow;
 using CEGUI::UVector2;
 using CEGUI::UDim;
 
-namespace cce{
+namespace cce {
 
 Palette::Palette()
 {
@@ -17,7 +18,13 @@ Palette::Palette()
 
 Palette::~Palette()
 {
-    
+    CEGUI::WindowManager *pWindowManager = CEGUI::WindowManager::getSingletonPtr();
+    pWindowManager->destroyWindow(fenetre);
+ //   delete fenetre;
+}
+
+void Palette::hide(){
+    fenetre->setVisible(false);
 }
 
 void Palette::init(GUI const *gui, string nom)
@@ -29,7 +36,7 @@ void Palette::init(GUI const *gui, string nom)
     fenetre->subscribeEvent(FrameWindow::EventCloseClicked,CEGUI::Event::Subscriber(&Palette::onClose, this));
     fenetre->setVisible(false);
     fenetre->setSizingEnabled(false);
-    
+
     //gui->getRootWindow()->getChild(conteneur)->addChildWindow(fenetre);
     gui->getRootWindow()->addChildWindow(fenetre);
 }
