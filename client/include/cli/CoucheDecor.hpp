@@ -38,6 +38,14 @@ public:
     Unit* getUnit(sf::Vector2f position);
 
 ///
+///\brief savoir si un décor entre en collision avec un autre
+///\param d: le décor à tester
+///\param position: la position où le tester
+///\return true si ce décor entre en collision avec un autre à l'endroit indiqué
+///
+    bool collision(cce::Decor* d, sf::Vector2f position);
+
+///
 ///\brief liste exhaustive des unités
 ///
     list<Unit*>* getAllUnits();

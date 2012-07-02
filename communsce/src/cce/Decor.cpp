@@ -12,11 +12,13 @@ Decor::Decor(DecorTemplate *_dt, int x, int y) : Sprite()
   setPosition(x,y);
   setTexture(dt->getTexture());
   animation = dt->getAnimation();
+  selection_circle = new sf::CircleShape();
 }
 
 Decor::Decor()
 {
   dt = nullptr;
+  selection_circle = new sf::CircleShape();
 }
 
 Decor::~Decor()
@@ -38,13 +40,49 @@ DecorTemplate* Decor::getTemplate() const
 void Decor::setTexture(Texture* texture)
 {
     Sprite::setTexture(*texture, true);
-    yCompare = getPosition().y * 1.5 + getGlobalBounds().height;
+    
+    yCompare = getPosition().y + getSocleCenter().y;
 }
 
 void Decor::move(float offsetX, float offsetY)
 {
     Sprite::move(offsetX, offsetY);
-    yCompare = getPosition().y * 1.5 + getGlobalBounds().height;
+    yCompare = getPosition().y + getSocleCenter().y;
+    selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y);
+    socleGlobal += getPosition() + getSocleCenter();
+}
+
+void Decor::setPosition(float x, float y)
+{
+    Sprite::setPosition(x, y);
+    socleGlobal = getPosition() + getSocleCenter();
+}
+
+void Decor::setPosition(const sf::Vector2f& position)
+{
+    Sprite::setPosition(position);
+    socleGlobal += getPosition() + getSocleCenter();
+}
+
+sf::CircleShape* Decor::getSelectionCircle()
+{
+    selection_circle->setRadius(getSocleCenter().x);
+    selection_circle->setOutlineThickness(3);
+    selection_circle->setOutlineColor(sf::Color(0,150,0,255));
+    selection_circle->setFillColor(sf::Color(0,0,0,0));
+    selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y - getSocleCenter().x);
+    return selection_circle;
+}
+
+sf::Vector2f Decor::getSocleCenter()
+{
+    socle = sf::Vector2f(getLocalBounds().width/2, getLocalBounds().height - getLocalBounds().width * (86/156));
+    return socle;
+}
+
+sf::Vector2f Decor::getSocleCenterGlobal()
+{
+    return socleGlobal;
 }
 
 bool Decor::inferieurA(const Decor &d) const

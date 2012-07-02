@@ -6,7 +6,7 @@ namespace cli {
 
 Unit::Unit()
 {
-    current_order = hold;
+    current_order = stop;
 }
 
 void Unit::setUnitTemplate(cce::UnitTemplate *ut){
@@ -29,24 +29,9 @@ void Unit::setId(int id){
     setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
 }
 
-sf::Vector2f Unit::getSocleCenter()
-{
-    socle = sf::Vector2f(getLocalBounds().width/2, getLocalBounds().height * 3 / 4);
-    return socle;
-}
-
 order Unit::getOrder()
 {
     return current_order;
-}
-
-sf::CircleShape* Unit::getSelectionCircle()
-{
-    selection_circle = new sf::CircleShape(getSocleCenter().x);
-    selection_circle->setOutlineThickness(3);
-    selection_circle->setOutlineColor(sf::Color(0,150,0,255));
-    selection_circle->setFillColor(sf::Color(0,0,0,0));
-    return selection_circle;
 }
 
 void Unit::orderMove(sf::Vector2i point)
@@ -97,7 +82,6 @@ void Unit::deplacer(sf::Vector2f destination)
       distance_parcourue = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
       move(distance_parcourue.x, distance_parcourue.y);
     }
-    selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y - getSocleCenter().x/2);
 }
 
 }

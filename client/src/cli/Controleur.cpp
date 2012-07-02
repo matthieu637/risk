@@ -73,6 +73,10 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     //Binding fonctions CEGUI
     
     gui->setScriptModule(moduleGUI);
+    
+    Action add_press(sf::Keyboard::Add, Action::ReleaseOnce);
+    map["add_press"] = add_press;
+    system.connect("add_press", BIND(&Controleur::spawnUnit));
 }
 void Controleur::onStartCam(thor::ActionContext < string > context)
 {
@@ -169,6 +173,15 @@ void Controleur::selectionOff(thor::ActionContext < string > context)
 {
     (void) context;
     m->endSelection();
+}
+
+///*********** FONCTIONS DE TESTS *************///
+
+void Controleur::spawnUnit(thor::ActionContext<string> context)
+{
+    for(int i=1;i<100;i++)
+    for(int j=1;j<10;j++)
+    m->spawnUnit(300000000, 200+5*i, 200+5*j);
 }
 
 }
