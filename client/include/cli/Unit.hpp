@@ -8,7 +8,7 @@ namespace cli{
   
   enum order
   {
-      move, attack, hold, stop
+      stop, hold, move, follow, attack
   };
   
   class Unit : public cce::Decor
@@ -24,6 +24,11 @@ namespace cli{
       void orderMove(sf::Vector2i point);
 
 ///
+///\brief Ordonner à l'unité d'en suivre une autre
+///
+      void orderFollow(Unit* to_follow);
+
+///
 ///\brief Appliquer les ordres reçus
 ///
       void applyOrder();
@@ -31,7 +36,7 @@ namespace cli{
 ///
 ///\brief Renvoie le vecteur entre position et socle
 ///
-      sf::Vector2f getSocle();
+      sf::Vector2f getSocleCenter();
 
 ///
 ///\brief Ordre courant
@@ -46,14 +51,16 @@ namespace cli{
       sf::CircleShape* getSelectionCircle();
       
   private:
-      void deplacer();
+      void deplacer(sf::Vector2f destination);
     
     private :
 	cce::UnitTemplate *unitTemplate;
 	sf::Vector2f destination;
-	sf::Vector2f socle;
-	sf::CircleShape* selection_circle;
 	order current_order;
+	Unit* followed_unit;
+	float distance_min_follow;
+	sf::CircleShape* selection_circle;
+	sf::Vector2f socle;
   };
 
 }

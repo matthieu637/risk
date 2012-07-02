@@ -120,7 +120,14 @@ void Modele::windowResized(int width, int height)
 void Modele::moveUnitSelection(sf::Vector2i mousePosition)
 {
     list<Unit*>::iterator it;
-    for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+    //si on clique sur un décor, on le suit
+    Unit* to_follow = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
+    if(to_follow != nullptr)
+      for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+	(*it)->orderFollow(to_follow);
+    //sinon on bouge au point cliqué
+    else
+      for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
 	(*it)->orderMove(mousePosition);
 }
 

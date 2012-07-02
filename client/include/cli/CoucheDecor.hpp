@@ -33,6 +33,11 @@ public:
     list<Unit*> getUnitsInRect(sf::RectangleShape* rectangleSelection);
 
 ///
+///\brief unité visible au point cliqué
+///
+    Unit* getUnit(sf::Vector2f position);
+
+///
 ///\brief liste exhaustive des unités
 ///
     list<Unit*>* getAllUnits();

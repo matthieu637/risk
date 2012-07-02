@@ -10,7 +10,7 @@
 			<dmg_min>10</dmg_min>
 			<dmg_max>100</dmg_max>
 			<defence>40</defence>
-			<move_speed>100</move_speed>
+			<move_speed>10</move_speed>
 			<attack_speed>100</attack_speed>
 			<nom>WOL</nom>
 			<description>Wake On Lan, ç é ?</description>

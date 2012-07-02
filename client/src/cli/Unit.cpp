@@ -1,5 +1,6 @@
 #include "cli/Unit.hpp"
 #include "bib/Logger.hpp"
+#include <cmath>
 
 namespace cli {
 
@@ -28,7 +29,7 @@ void Unit::setId(int id){
     setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
 }
 
-sf::Vector2f Unit::getSocle()
+sf::Vector2f Unit::getSocleCenter()
 {
     socle = sf::Vector2f(getLocalBounds().width/2, getLocalBounds().height * 3 / 4);
     return socle;
@@ -41,8 +42,7 @@ order Unit::getOrder()
 
 sf::CircleShape* Unit::getSelectionCircle()
 {
-    selection_circle = new sf::CircleShape(getSocle().x);
-    selection_circle->setPosition(getPosition().x, getPosition().y + getSocle().y - getSocle().x/2);
+    selection_circle = new sf::CircleShape(getSocleCenter().x);
     selection_circle->setOutlineThickness(3);
     selection_circle->setOutlineColor(sf::Color(0,150,0,255));
     selection_circle->setFillColor(sf::Color(0,0,0,0));
@@ -51,44 +51,53 @@ sf::CircleShape* Unit::getSelectionCircle()
 
 void Unit::orderMove(sf::Vector2i point)
 {
-    //pour que les pieds arrivent au point cliqué
-    sf::Vector2f point_socle(point.x - getSocle().x, point.y - getSocle().y);
-    destination = point_socle;
+    destination = sf::Vector2f(point);
     current_order = order::move;
+}
+
+void Unit::orderFollow(Unit* to_follow)
+{
+    if(this == to_follow)
+      current_order = stop;
+    followed_unit = to_follow;
+    current_order = follow;
+    distance_min_follow = getSocleCenter().x + followed_unit->getSocleCenter().x + 50;
 }
 
 void Unit::applyOrder()
 {
     switch(current_order){
       case order::move:
-	deplacer();
+	deplacer(destination);
+	break;
+      case order::follow:
+	sf::Vector2f followed_unit_socle_center = followed_unit->getPosition() + followed_unit->getSocleCenter();
+	deplacer(followed_unit_socle_center);
 	break;
     }
 }
 
-void Unit::deplacer()
+void Unit::deplacer(sf::Vector2f destination)
 {
     float speed = unitTemplate->getMoveSpeed();
-    float x_to_go = destination.x - getPosition().x; //distance à parcourir x
-    float y_to_go = destination.y - getPosition().y; //distance à parcourir y
-    float x_to_go_abs = abs(x_to_go);
-    float y_to_go_abs = abs(y_to_go);
-    if(x_to_go_abs == 0)
-	x_to_go = 0;
-    if(y_to_go_abs == 0)
-	y_to_go = 0;
-    float distance = x_to_go_abs + y_to_go_abs; //distance à parcourir totale
-    if (distance == 0){
-	current_order = stop;
-	return;
+    
+    sf::Vector2f to_go = destination - (getPosition() + getSocleCenter()); // vector jusqu'à destination
+    float distance = sqrt(to_go.x * to_go.x + to_go.y * to_go.y); //distance à parcourir (pythagore)
+    if(current_order == order::follow && distance < distance_min_follow)
+      return;
+    
+    sf::Vector2f distance_parcourue;
+    
+    if(distance < speed){ //si la destination est à portée de speed
+      setPosition(destination - getSocleCenter()); // on va jusqu'à destination
+      if(current_order == order::move)
+	current_order = order::stop; // si on est en move, on stop
     }
-    float dx = (x_to_go * speed) / distance;
-    float dy = (y_to_go * speed) / distance;
-    if(abs(dx) > x_to_go_abs)
-      dx = x_to_go;
-    if(abs(dy) > y_to_go_abs)
-      dy = y_to_go;
-    move(dx, dy);
+    else{
+      distance_parcourue = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
+      move(distance_parcourue.x, distance_parcourue.y);
+    }
+    selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y - getSocleCenter().x/2);
 }
 
 }

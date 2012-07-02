@@ -36,9 +36,22 @@ list<Unit*> CoucheDecor::getUnitsInRect(sf::RectangleShape* rectangleSelection)
     list<Unit*> liste;
     list<Unit*>::iterator it;
     for(it = allUnits->begin(); it != allUnits->end(); it++)
-      if(rectangleSelection->getGlobalBounds().contains((*it)->getPosition().x + (*it)->getSocle().x, (*it)->getPosition().y + (*it)->getSocle().y)) 
+      if(rectangleSelection->getGlobalBounds().contains((*it)->getPosition().x + (*it)->getSocleCenter().x, (*it)->getPosition().y + (*it)->getSocleCenter().y)) 
 	liste.push_back(*it);
     return liste;
+}
+
+Unit* CoucheDecor::getUnit(sf::Vector2f position)
+{
+    int a;
+    list<Unit*>::iterator it;
+    for(it = allUnits->begin(); it != allUnits->end(); it++)
+        if((*it)->getGlobalBounds().contains(position)) {
+            a = (*it)->getTexture()->copyToImage().getPixel(position.x - (*it)->getPosition().x, position.y - (*it)->getPosition().y).a;
+            if(a > 122) //pixel transparent? Permet de détecter véritablement le decor cliqué lorsqu'ils sont superposés
+                return *it;
+        }
+    return nullptr;
 }
 
 list<Unit*>* CoucheDecor::getAllUnits()

@@ -127,6 +127,7 @@ private:
     defence_type def_type;
     Texture *texture;
     thor::Animator<sf::Sprite, std::string> animation;
+    sf::CircleShape* selection_circle;
 };
 
 }
