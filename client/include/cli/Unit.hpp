@@ -28,9 +28,26 @@ namespace cli{
       void orderFollow(Unit* to_follow);
 
 ///
+///\brief Attaque si à portée, sinon déplacement.
+///
+      void attaquer();
+
+///
+///\brief Renvoie une quantité de degats aléatoire de l'intervalle [min,max]
+///
+      int rollDamage();
+
+///
 ///\brief Appliquer les ordres reçus
 ///
       void applyOrder();
+
+///
+///\brief se fait attaquer
+///\param type: le type de degats
+///\param degats: les degats
+///
+      void takeDamages(cce::damage_type machin,int degats);
 
 ///
 ///\brief Ordre courant
@@ -45,8 +62,10 @@ namespace cli{
 	cce::UnitTemplate *unitTemplate;
 	sf::Vector2f destination, deplacement;
 	order current_order;
-	Unit* followed_unit;
+	Unit* target_unit;
 	float distance_min_follow;
+	bool attaque_prete;
+	int current_hp;
   };
 
 }
