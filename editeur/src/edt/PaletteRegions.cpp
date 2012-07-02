@@ -35,6 +35,7 @@ PaletteRegions::~PaletteRegions()
 void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
 {
     Palette::init(gui, nom);
+    fenetre->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&PaletteRegions::onShow, this));
 
     modele=m;
     lbox = static_cast<Listbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Listbox", "PaletteFrames/Regions/ListboxRegions"));
@@ -93,22 +94,33 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     comboBoxPays = static_cast<CEGUI::Combobox*>(WindowManager::getSingleton().createWindow("TaharezLook/Combobox", "PaletteFrames/Regions/ComboBoxPays"));
     fenetre->addChildWindow(comboBoxPays);
     comboBoxPays->setWidth(UDim(1,0));
-    comboBoxPays->setHeight(UDim(0.0f,64));
+    comboBoxPays->setHeight(UDim(0.0f,128));
     comboBoxPays->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,160)));
     comboBoxPays->setReadOnly(true);
-    map<string, cce::Pays>* mp= m->getCarte()->getAllPays();
+    comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted, CEGUI::Event::Subscriber(&PaletteRegions::onComboboxSelectionChange, this));
+}
+
+bool PaletteRegions::onShow(const CEGUI::EventArgs &e)
+{
+    (void) e;
+    reloadPaysBox();
+    return true;
+}
+
+void PaletteRegions::reloadPaysBox()
+{
+    while(comboBoxPays->getItemCount() > 0)
+        comboBoxPays->removeItem(comboBoxPays->getListboxItemFromIndex(0));
+
+    map<string, cce::Pays>* mp= modele->getCarte()->getAllPays();
     map<string, cce::Pays>::iterator ite;
-    int i=0;
+
     for(ite = mp->begin(); ite != mp->end(); ite++)
     {
-        ListboxTextItem* itemCombobox = new ListboxTextItem(ite->first, ++i);
+        ListboxTextItem* itemCombobox = new ListboxTextItem(ite->first);
         itemCombobox->setSelectionBrushImage("TaharezLook","MultiListSelectionBrush");
-
         comboBoxPays->addItem(itemCombobox);
     }
-    //region ajoutee par defaut au premier pays de la comboBoxPays
-    comboBoxPays->getListboxItemFromIndex(0)->setSelected(true);
-    comboBoxPays->subscribeEvent(CEGUI::Combobox::EventListSelectionChanged, CEGUI::Event::Subscriber(&PaletteRegions::onComboboxSelectionChange, this));
 }
 
 bool PaletteRegions::onComboboxSelectionChange(const CEGUI::EventArgs &e)
@@ -116,7 +128,15 @@ bool PaletteRegions::onComboboxSelectionChange(const CEGUI::EventArgs &e)
     (void) e;
     if(lbox->getFirstSelectedItem() != nullptr)
     {
+        string region = ebox->getText().c_str();
+        string ancienPays = modele->getCarte()->getPaysWithRegion(region);
+        string nouveauPays = comboBoxPays->getText().c_str();
 
+        if(ancienPays == nouveauPays)
+            return true;
+        modele->getCarte()->getPays(nouveauPays)->addRegion(region, *current_reg);
+        modele->getCarte()->getPays(ancienPays)->getRegions()->erase(region);
+        current_reg = (edt::Region*) modele->getCarte()->getRegion(region);
     }
 
     return true;
@@ -176,16 +196,16 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
         current_reg->setDraw(true);
         oss << current_reg->getIncome();
         eboxinc->setText(oss.str());
-	comboBoxPays->setText(modele->getCarte()->getPaysWithRegion(lbti->getText().c_str()));
+        comboBoxPays->setText(modele->getCarte()->getPaysWithRegion(lbti->getText().c_str()));
     } else {
         eboxinc->setText("");
         ebox->setText("");
-	comboBoxPays->setText("");
+        comboBoxPays->setText("");
         current_reg = nullptr;
     }
-    
+
     if(lbti != nullptr)
-      ancien = lbti->getText().c_str();
+        ancien = lbti->getText().c_str();
     return true;
 }
 
