@@ -9,10 +9,10 @@ namespace cce{
 Decor::Decor(DecorTemplate *_dt, int x, int y) : Sprite()
 {
   dt = _dt;
+  selection_circle = new sf::CircleShape();//avant setPosition qui le repositionne
   setPosition(x,y);
   setTexture(dt->getTexture());
   animation = dt->getAnimation();
-  selection_circle = new sf::CircleShape();
 }
 
 Decor::Decor()

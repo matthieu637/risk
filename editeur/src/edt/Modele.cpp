@@ -203,7 +203,7 @@ void Modele::placeObject(int x, int y) {
     if(palette == tiles)
         getRepere()->setTile(tt, x, y);
     else if(palette == decors)
-        carte->getCoucheDecor()->addDecor(dt, x, y);
+	carte->getCoucheDecor()->addDecor(dt, x, y);
 }
 
 void Modele::deleteObject(int x, int y) {
