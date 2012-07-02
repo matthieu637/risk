@@ -2,6 +2,7 @@
 #define UNIT_HPP
 #include <cce/Decor.hpp>
 #include <cce/UnitTemplate.hpp>
+#include <cce/Animation.hpp>
 
 namespace cli{
   class Unit : public cce::Decor
@@ -13,6 +14,7 @@ namespace cli{
     
     private :
 	cce::UnitTemplate *unitTemplate;
+	cce::Animation anim;
   };
 
 }

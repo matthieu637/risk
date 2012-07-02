@@ -1,7 +1,11 @@
 #include "cce/Animation.hpp"
 
 namespace cce{
-    
+ 
+ Animation::Animation(){
+  
+ }
+ 
  Animation::Animation(AnimationTemplate *animTemplate){
       animationTemplate = animTemplate;
     
@@ -15,7 +19,7 @@ namespace cce{
 	 franim.addFrame(1.f, sf::IntRect(animationTemplate->getRect_largeur()*i, animationTemplate->getNum_Animation()*animationTemplate->getRect_hauteur(), animationTemplate->getRect_largeur(),  animationTemplate->getRect_hauteur()));
 	 
     // Register animations with their corresponding durations
-      anim.addAnimation(animationTemplate->getNom(), franim, sf::seconds(animationTemplate->getTemps().f));  
+      anim.addAnimation(animationTemplate->getNom(), franim, sf::seconds(animationTemplate->getTemps()));  
       anim.playAnimation(animationTemplate->getNom(), true);
   }
   

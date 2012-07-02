@@ -12,6 +12,7 @@ namespace cce {
   {
   public:
     AnimationTemplate();
+    AnimationTemplate(string n, int num,float hauteur, float largeur, float tps);
     virtual ~AnimationTemplate();
     
     void loadAfterXML(int _id);

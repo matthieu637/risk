@@ -6,8 +6,10 @@
 #include <boost/serialization/nvp.hpp>
 #include <SFML/Graphics.hpp>
 #include <Thor/Animation.hpp>
+#include "cce/AnimationTemplate.hpp"
+#include <map>
 
-
+using std::map;
 using std::string;
 using sf::Texture;
 using boost::serialization::make_nvp;
@@ -102,6 +104,7 @@ public:
     defence_type getDefenseType();
     thor::Animator<sf::Sprite, std::string> getAnimation();
     void initAnimation();
+    
 
 ///
 ///\brief attaques/seconde
@@ -127,6 +130,7 @@ private:
     defence_type def_type;
     Texture *texture;
     thor::Animator<sf::Sprite, std::string> animation;
+    map<std::string,AnimationTemplate>  mapAnimTemplate;
 };
 
 }

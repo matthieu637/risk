@@ -8,6 +8,16 @@ AnimationTemplate::AnimationTemplate()
   
 }
 
+
+AnimationTemplate::AnimationTemplate(string n, int num,float hauteur, float largeur, float tps)
+{
+  nom = n;
+  num_Animation = num;
+  rect_hauteur = hauteur;
+  rect_largeur = largeur;
+  temps = tps;
+}
+
 void AnimationTemplate::loadAfterXML(int id)
 {
 //   this->id = id;
