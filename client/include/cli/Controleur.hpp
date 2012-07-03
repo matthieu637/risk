@@ -40,7 +40,9 @@ public:
     void onMoveUnit(thor::ActionContext < string > context);
     bool onQuit(const CEGUI::EventArgs & e);
     void onLeftClick(thor::ActionContext < string > context);
+    void onLeftClickShift(thor::ActionContext < string > context);
     void selectionOff(thor::ActionContext < string > context);
+    void selectionOffShift(thor::ActionContext < string > context);
     void selectionMove(thor::ActionContext < string > context);
     void prepareAttack(thor::ActionContext < string > context);
     void onattack(thor::ActionContext < string > context);

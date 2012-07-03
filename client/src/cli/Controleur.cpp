@@ -35,6 +35,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action wheel_release(sf::Mouse::Middle, Action::ReleaseOnce);
     Action molette(sf::Event::MouseWheelMoved);
     Action mouse_move(sf::Event::MouseMoved);
+    Action shift_hold(sf::Keyboard::LShift, Action::Hold);
     Action drag_wheel = mouse_move && wheel_hold;
     Action drag_left = mouse_move && left_hold;
 
@@ -45,7 +46,9 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
-    
+    Action shift_hold_Left_click = shift_hold && left_press;
+    Action shift_hold_Left_release = shift_hold && left_release;
+
     // Map
     map["quit"] = close;
     map["zoom"] = molette;
@@ -56,8 +59,10 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["move_camera"] = drag_wheel;
     map["move_unit"] = right_press;
     map["leftClick"] = left_press;
+    map["leftClickShift"] = shift_hold_Left_click;
     map["selectionMove"] = drag_left;
     map["selectionOff"] = left_release;
+    map["selectionOffShift"] = shift_hold_Left_release;
     map["prepareAttack"] = a_press;
     
     //Binding map-fonctions
@@ -69,10 +74,12 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("move_unit", BIND(&Controleur::onMoveUnit));
     system.connect("leftClick", BIND(&Controleur::onLeftClick));
+    system.connect("leftClickShift", BIND(&Controleur::onLeftClick));
     system.connect("selectionOff", BIND(&Controleur::selectionOff));
+    system.connect("selectionOffShift", BIND(&Controleur::selectionOffShift));
     system.connect("selectionMove", BIND(&Controleur::selectionMove));
     system.connect("prepareAttack", BIND(&Controleur::prepareAttack));
-    
+
     //Binding fonctions CEGUI
     
     gui->setScriptModule(moduleGUI);
@@ -173,6 +180,7 @@ void Controleur::onLeftClick(thor::ActionContext < string > context)
     }
 }
 
+
 void Controleur::selectionMove(thor::ActionContext < string > context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
@@ -183,6 +191,12 @@ void Controleur::selectionOff(thor::ActionContext < string > context)
 {
     (void) context;
     m->endSelection();
+}
+
+void Controleur::selectionOffShift(thor::ActionContext < string > context)
+{
+    (void) context;
+    m->endSelectionShift();
 }
 
 void Controleur::prepareAttack(thor::ActionContext < string > context){
