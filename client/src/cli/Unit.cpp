@@ -23,6 +23,7 @@ Unit::Unit(Modele* ma)
 {
     this->m = ma;
     current_order = stop;
+    yCompare = getPosition().y + getLocalBounds().height *3/4;
 }
 
 void Unit::setUnitTemplate(cce::UnitTemplate *ut){
@@ -80,6 +81,8 @@ void Unit::orderAttack(Unit* to_attack)
       current_order = order::stop;
       return;
     }
+    if(current_order == order::follow || current_order == order::attack)
+      target_unit->removeTraqueur(this);
     target_unit = to_attack;
     current_order = order::attack;
     target_unit->addTraqueur(this);
@@ -156,13 +159,16 @@ void Unit::takeDamages(cce::damage_type type_degat, int degats)
       calcul_real_dmg = 1;
     }
     current_hp -= calcul_real_dmg;
-    if(this->current_hp <= 0){ // mort
+    if(current_hp <= 0){ // mort
       //on met les traqueurs en mode stop
       set<Unit*>::iterator it;
       for(it = traqueurs.begin(); it != traqueurs.end(); it++)
 	(*it)->orderStop();
-      (*m).getCoucheDecor()->deleteUnit(this);
     }
+}
+
+bool Unit::isDead(){
+  return current_hp <= 0;
 }
 
 int Unit::rollDamage()

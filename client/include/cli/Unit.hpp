@@ -61,7 +61,7 @@ namespace cli{
 ///\param degats: les degats
 ///
       void takeDamages(cce::damage_type machin,int degats);
-
+bool isDead();
 ///
 ///\brief Ordre courant
 ///\return order: l'ordre courant

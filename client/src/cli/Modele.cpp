@@ -45,13 +45,17 @@ Modele::~Modele() {
 void Modele::update()
 {
     cce::Modele::update();
-    list<Unit*>::iterator it;
-    list<Unit*>* allunits = getCoucheDecor()->getAllUnits();
-    for(it = allunits->begin(); it !=  allunits->end(); ++it){
-      getCoucheDecor()->removeDecor(*it);
+    set<Unit*>::iterator it;
+    set<Unit*> allunits = *getCoucheDecor()->getAllUnits();
+    for(it = allunits.begin(); it !=  allunits.end(); ++it){
+      getCoucheDecor()->removeUnit(*it);
       (*it)->applyOrder();
-      getCoucheDecor()->addDecor(*it);    
+      getCoucheDecor()->addUnit(*it);
     }
+    //detruire les unités mortes
+    for(it = getCoucheDecor()->getAllUnits()->begin(); it !=  getCoucheDecor()->getAllUnits()->end(); ++it)
+      if((*it)->isDead())
+	deleteUnit(*it);
 }
 
 void Modele::spawnUnit(int id, int x, int y)
@@ -131,6 +135,17 @@ void Modele::moveUnitSelection(sf::Vector2i mousePosition)
 	(*it)->orderMove(mousePosition);
 }
 
+void Modele::on_attack(sf::Vector2i mousePosition)
+{
+    Unit* to_attack = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
+  
+    if(to_attack != nullptr){
+      list<Unit*>::iterator it;
+      for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+	(*it)->orderAttack(to_attack);
+    }
+}
+
 void Modele::initSelection(int x, int y)
 {
     rectangleSelection->setSize(sf::Vector2f(0,0));
@@ -166,6 +181,13 @@ void Modele::endSelection()
       selectionUnits = units_in_rect;
 }
 
+void Modele::deleteUnit(Unit* u)
+{
+    getCoucheDecor()->removeUnit(u);
+    selectionUnits.remove(u);
+    delete u;
+}
+
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     //Rendu du repere
@@ -180,18 +202,5 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
     if(selectionBool)
        target.draw(*rectangleSelection, states);
 }
-  
-  
-  
-void Modele::on_attack(sf::Vector2i mousePosition){
-    Unit* to_follow = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
-  
-    if(to_follow != nullptr){
-      list<Unit*>::iterator it;
-      for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
-	(*it)->orderAttack(to_follow);
-    }
-}
-
   
 }

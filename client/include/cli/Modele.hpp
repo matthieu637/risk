@@ -63,6 +63,11 @@ public:
 ///\brief Initier le déplacement de la selection d'unités vers le point mousePosition
 ///
     void moveUnitSelection(sf::Vector2i mousePosition);
+
+///
+///\brief Supprimer une unité de la mémoire, l'enlève également des collections où elle apparait.
+///
+    void deleteUnit(Unit* u);
     
     void windowResized(int width, int height);
     
