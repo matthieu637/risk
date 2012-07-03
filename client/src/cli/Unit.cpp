@@ -31,6 +31,7 @@ void Unit::setUnitTemplate(cce::UnitTemplate *ut){
       animation = ut->getAnimation();
       unitTemplate = ut;
       current_hp = ut->getHP();
+      attaque_prete = true;
 
 // 	thor::FrameAnimation moveUp;
 // 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
