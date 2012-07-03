@@ -17,7 +17,7 @@ UnitTemplate::UnitTemplate()
 //     dmg_type = laser;
 //     def_type = acier;
 
- mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",6,64,47,1);
+ mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",0,64,47,1);
 }
 
 AnimationTemplate *UnitTemplate::getMapTemplate(){
@@ -124,3 +124,4 @@ Texture* UnitTemplate::getTexture()
 }
 
 }
+

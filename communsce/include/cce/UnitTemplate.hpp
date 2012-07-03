@@ -132,7 +132,7 @@ private:
     Texture *texture;
     //thor::Animator<sf::Sprite, std::string> animation;
     map<std::string,AnimationTemplate>  mapAnimTemplate;
-
+    
     sf::CircleShape* selection_circle;
 
 };

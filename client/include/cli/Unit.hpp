@@ -22,6 +22,8 @@ namespace cli{
 ///\brief Pour ordonner l'unité de bouger quelque part, se met en mode "move"
 ///
       void orderMove(sf::Vector2i point);
+      
+      void animate();
 
 ///
 ///\brief Ordonner à l'unité d'en suivre une autre
@@ -44,7 +46,7 @@ namespace cli{
     
     private :
 	cce::UnitTemplate *unitTemplate;
-	cce::Animation anim;
+	cce::Animation* anim;
 	
 	sf::Vector2f destination, deplacement;
 	order current_order;

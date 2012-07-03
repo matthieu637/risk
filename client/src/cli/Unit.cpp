@@ -9,15 +9,25 @@ Unit::Unit()
     current_order = stop;
 }
 
+void Unit::animate(){  
+  // Update animator and apply current animation state to the sprite
+  
+//   animathor->update(frameClock.restart());
+//   animathor->animate(*this);
 
+    //cce::Decor::animate();
+   anim->getTemplate()->getAnimathor()->update(frameClock.restart());
+  anim->getTemplate()->getAnimathor()->animate(*this);
+}
   
   
   void Unit::setUnitTemplate(cce::UnitTemplate *ut){
 	unitTemplate = ut;//met a jour les caractéristiques de l'unité
 	setTexture(ut->getTexture());//met a jour l'image de l'unité
 	//animation = ut->getAnimation();
-	anim = cce::Animation(ut->getMapTemplate());
-	anim.makeAnimation();//commande qui fait bugger! a toi de jouer gourou
+	anim = new cce::Animation(ut->getMapTemplate());
+	
+	anim->makeAnimation();//commande qui fait bugger! a toi de jouer gourou
 	 // unitTemplate = ut;
 // 	thor::FrameAnimation moveUp;
 // 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));

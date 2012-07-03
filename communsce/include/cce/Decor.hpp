@@ -46,7 +46,7 @@ public:
     void setTexture(Texture* texture);
     
     void move(float offsetX, float offsetY);
-    void animate();
+    virtual void animate();
     
 ///
 ///\brief Permet de reset la clock de l'animation pour une ré-insertion dans l'arbre décors
@@ -115,8 +115,7 @@ public:
 
 protected:
     DecorTemplate *dt;
-    
-protected:
+
     thor::Animator<sf::Sprite, std::string>* animathor;
     sf::Clock frameClock;
     sf::CircleShape* selection_circle;
