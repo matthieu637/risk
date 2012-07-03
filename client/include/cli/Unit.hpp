@@ -2,6 +2,7 @@
 #define UNIT_HPP
 #include <cce/Decor.hpp>
 #include <cce/UnitTemplate.hpp>
+#include "Modele.hpp"
 
 namespace cli{
   
@@ -14,6 +15,8 @@ namespace cli{
   {
     public:
       Unit();
+      ~Unit();
+      Unit(cli::Modele* ma);
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
 
@@ -26,6 +29,11 @@ namespace cli{
 ///\brief Ordonner à l'unité d'en suivre une autre
 ///
       void orderFollow(Unit* to_follow);
+
+///
+///\brief Ordonne à l'unité d'en attaquer une autre.
+///      
+      void orderAttack(Unit* to_attack);
 
 ///
 ///\brief Attaque si à portée, sinon déplacement.
@@ -55,6 +63,8 @@ namespace cli{
 ///
       order getOrder();
       
+
+      
     private:
 	void deplacer();
     
@@ -66,6 +76,7 @@ namespace cli{
 	float distance_min_follow;
 	bool attaque_prete;
 	int current_hp;
+	cli::Modele* m;
   };
 
 }

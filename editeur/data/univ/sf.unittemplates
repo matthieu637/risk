@@ -19,6 +19,7 @@
 			<def_type>0</def_type>
 			<hp_max>1000</hp_max>
 			<path>unit2.png</path>
+			<range>200</range>
 		</second>
 	</item>
 </UnitTemplates>

@@ -2,13 +2,25 @@
 #include <cli/BastonManager.hpp>
 #include "bib/Logger.hpp"
 #include <cmath>
+#include <cli/Modele.hpp>
+#include <cli/CoucheDecor.hpp>
 #include <stdlib.h>
 #include <time.h>
 
 namespace cli {
 
+  
 Unit::Unit()
 {
+    current_order = stop;
+}
+
+Unit::~Unit(){
+  
+}
+Unit::Unit(Modele* ma)
+{
+    this->m = ma;
     current_order = stop;
 }
 
@@ -46,11 +58,21 @@ void Unit::orderMove(sf::Vector2i point)
 
 void Unit::orderFollow(Unit* to_follow)
 {
-    if(this == to_follow)
-      current_order = stop;
+    if(this == to_follow){
+      current_order = order::stop;
+    }
     target_unit = to_follow;
-    current_order = follow;
+    current_order = order::follow;
     distance_min_follow = getSelectionCircle()->getRadius() + target_unit->getSelectionCircle()->getRadius() + 50;
+}
+
+void Unit::orderAttack(Unit* to_attack)
+{
+   if(this == to_attack){
+      current_order = order::stop;
+   }
+  target_unit = to_attack;
+  current_order = order::attack;
 }
 
 void Unit::applyOrder()
@@ -64,7 +86,9 @@ void Unit::applyOrder()
 	deplacer();
 	break;
       case order::attack:
-	attaquer();
+	  attaquer();
+	break;
+      default:
 	break;
     }
 }
@@ -91,6 +115,14 @@ void Unit::deplacer()
 
 void Unit::attaquer()
 {
+    if(target_unit == nullptr || target_unit == this){
+      current_order = order::stop;
+      return; 
+    }
+    
+  //  LOG_DEBUG("test"<< target_unit);
+    destination = target_unit->getSocleCenterGlobal();
+
     float range = unitTemplate->getRange();
     float speed = unitTemplate->getMoveSpeed();
     
@@ -100,23 +132,36 @@ void Unit::attaquer()
     if(distance > range){ // pas à portée
       deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
       move(deplacement.x, deplacement.y); // on avance vers la cible
+ //     LOG_DEBUG("deplacement unité vers target");     
+  //    LOG_DEBUG("distance "<<distance<<" " << "range " << range);
     }
-    
     else // à portée
       if(this->attaque_prete){
 	target_unit->takeDamages(unitTemplate->getDamageType(), rollDamage());
+	//LOG_DEBUG("target a pris dmg, vie : " << target_unit->current_hp);
+	if(target_unit != nullptr){
+	  if(target_unit->current_hp<=0){
+	  current_order = order::stop;
+	  }
+	}else{
+	    current_order = order::stop;
+	}
     }
 }
 
 void Unit::takeDamages(cce::damage_type type_degat, int degats)
 {
     float coeff_reduction = BastonManager::getInstance()->reduction_degats(unitTemplate->getDefenseType(),type_degat);
-    float calcul_real_dmg = coeff_reduction * (degats - unitTemplate->getDefence()); 
+    float calcul_real_dmg = (unitTemplate->getDefence() * coeff_reduction) * degats; 
     ///Si les dégats sont inférieurs à 1 alors on définit les dégats subits à 1
     if(calcul_real_dmg<1){
       calcul_real_dmg = 1;
     }
     current_hp -= calcul_real_dmg;
+    if(this->current_hp <= 0){
+    //  LOG_DEBUG("test mort");
+      (*m).getCoucheDecor()->deleteUnit(this);
+    }
 }
 
 int Unit::rollDamage()

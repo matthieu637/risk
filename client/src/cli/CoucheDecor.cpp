@@ -76,4 +76,9 @@ list<Unit*>* CoucheDecor::getAllUnits()
     return allUnits;
 }
 
+void CoucheDecor::deleteUnit(Unit* u){
+    removeUnit(u);
+    delete u;
+}
+
 }

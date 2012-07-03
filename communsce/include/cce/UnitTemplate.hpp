@@ -49,6 +49,7 @@ public:
 	ar & make_nvp("def_type", def_type);
 	ar & make_nvp("hp_max", hp_max);
 	ar & make_nvp("path", path);
+	ar & make_nvp("range", range);	
     }
     
 
