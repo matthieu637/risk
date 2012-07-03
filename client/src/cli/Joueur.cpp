@@ -6,10 +6,14 @@ using namespace cli;
 using cce::Pays;
 using cce::Region;
 
-Joueur::Joueur(int num, player_color couleur)
+Joueur::Joueur(int num, player_color couleur, int nbPlayers)
 {
   player_number = num;
   color = couleur;
+  income = 10;
+  for(int i=0; i < nbPlayers; i++)
+    if(i != player_number)
+      allied_player[nbPlayers] = false;
 }
 
 Joueur::~Joueur()
@@ -39,6 +43,17 @@ void Joueur::removeRegion(Region* r)
 {
   income -= r->getIncome();
   regions_controles.remove(r);
+}
+
+void Joueur::setAllied(int num_joueur, bool allied)
+{
+  if(num_joueur != player_number)
+    allied_player[num_joueur] = allied;
+}
+
+bool Joueur::isAllied(int num_joueur)
+{
+  return allied_player[num_joueur];
 }
 
 list<Region*> Joueur::getRegions()

@@ -1,7 +1,10 @@
 #ifndef JOUEUR_HPP
 #define JOUEUR_HPP
 #include <list>
+#include <vector>
 #include "Vue.hpp"
+
+using std::vector;
 
 namespace cce{
   class Pays;
@@ -18,30 +21,67 @@ class Joueur
 {
 
 public:
-  Joueur(int num, player_color couleur);
+  Joueur(int num, player_color couleur, int nbPlayers);
   virtual ~Joueur();
   
+  ///
+  ///\brief Ajoute un pays à ceux possédés, ajoute l'income du pays à l'income du joueur.
+  ///
   void addPays(cce::Pays* p);
-
+  
+  ///
+  ///\brief Ajoute une région à celles possédées, ajoute l'income de la région à l'income du joueur.
+  ///
   void addRegion(cce::Region* r);
-
+  
+  ///
+  ///\brief Enlève un pays à ceux possédés, soustrait l'income du pays à l'income du joueur.
+  ///
   void removePays(cce::Pays* p);
-
+  
+  ///
+  ///\brief Enlève une région à celles possédées, soustrait l'income de la région à l'income du joueur.
+  ///
   void removeRegion(cce::Region* r);
   
+  ///
+  ///\brief Regions possédées par le joueur.
+  ///
   list<cce::Region*> getRegions();
-    
+  
+  ///
+  ///\brief Pays possédées par le joueur.
+  ///
   list<cce::Pays*> getPays();
   
+  ///
+  ///\brief Income total du joueur.
+  ///
   int getIncome();
   
+  ///
+  ///\brief Gold disponible.
+  ///
   int getGold();
+  
+  ///
+  ///\brief Changer le statut d'un joueur à son égard.
+  ///\param num_joueur le numéro du joueur
+  ///\param allied s'il devient allié ou ennemi
+  ///
+  void setAllied(int num_joueur, bool allied);
+  
+  ///
+  ///\brief Tester si un joueur est allié ou ennemi selon son numéro
+  ///
+  bool isAllied(int num_joueur);
 
 private:
   int player_number, income, gold;
   player_color color;
   list<cce::Pays*> pays_controles;
   list<cce::Region*> regions_controles;
+  vector<bool> allied_player;
 };
 
 }
