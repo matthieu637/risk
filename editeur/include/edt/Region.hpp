@@ -62,7 +62,7 @@ public :
 ///\brief Definit le flag d'une region
 ///\param f : flag à associer
 ///
-    void setFlag(Flag* f);
+    void setFlag(cce::Decor* d);
     
     void setZone(const Polygon* p);
     

@@ -41,10 +41,11 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action space_press(sf::Keyboard::Space, Action::ReleaseOnce);
     Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
     Action d_press(sf::Keyboard::D, Action::ReleaseOnce);
+    Action a_press(sf::Keyboard::A, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
-
+    
     // Map
     map["quit"] = close;
     map["zoom"] = molette;
@@ -54,9 +55,10 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["stop_cam"] = wheel_release;
     map["move_camera"] = drag_wheel;
     map["move_unit"] = right_press;
-    map["selectionOn"] = left_press;
+    map["leftClick"] = left_press;
     map["selectionMove"] = drag_left;
     map["selectionOff"] = left_release;
+    map["prepareAttack"] = a_press;
     
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -66,17 +68,17 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("reset_zoom", BIND(&Controleur::onResetZoom));
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("move_unit", BIND(&Controleur::onMoveUnit));
-    system.connect("selectionOn", BIND(&Controleur::selectionOn));
+    system.connect("leftClick", BIND(&Controleur::onLeftClick));
     system.connect("selectionOff", BIND(&Controleur::selectionOff));
     system.connect("selectionMove", BIND(&Controleur::selectionMove));
-
+    system.connect("prepareAttack", BIND(&Controleur::prepareAttack));
+    
     //Binding fonctions CEGUI
     
     gui->setScriptModule(moduleGUI);
-    
-    Action add_press(sf::Keyboard::Add, Action::ReleaseOnce);
-    map["add_press"] = add_press;
-    system.connect("add_press", BIND(&Controleur::spawnUnit));
+
+    //Inialize some variables
+    attackMode = false;
 }
 void Controleur::onStartCam(thor::ActionContext < string > context)
 {
@@ -157,10 +159,14 @@ void Controleur::onMoveUnit(thor::ActionContext < string > context)
     m->moveUnitSelection(movePosition);
 }
 
-void Controleur::selectionOn(thor::ActionContext < string > context)
+void Controleur::onLeftClick(thor::ActionContext < string > context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     m->initSelection(getX(mousePosition.x), getY(mousePosition.y));
+    
+    if(attackMode){
+      onattack(context);
+    }
 }
 
 void Controleur::selectionMove(thor::ActionContext < string > context)
@@ -175,13 +181,16 @@ void Controleur::selectionOff(thor::ActionContext < string > context)
     m->endSelection();
 }
 
-///*********** FONCTIONS DE TESTS *************///
+void Controleur::prepareAttack(thor::ActionContext < string > context){
+  (void) context;
+  attackMode = true;
+}
 
-void Controleur::spawnUnit(thor::ActionContext<string> context)
-{
-    for(int i=1;i<100;i++)
-    for(int j=1;j<10;j++)
-    m->spawnUnit(300000000, 200+5*i, 200+5*j);
+void Controleur::onattack(thor::ActionContext < string > context){
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    sf::Vector2i attackPosition = sf::Vector2i(getX(mousePosition.x), getY(mousePosition.y));
+    m->on_attack(attackPosition);
+    attackMode = false;
 }
 
 }

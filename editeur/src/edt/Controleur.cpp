@@ -24,6 +24,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     selection = false;
     moveDecor = false;
     setSpawn = false;
+    setFlag = false;
 
     // Evenements Thor
     Action close(sf::Event::Closed);
@@ -66,6 +67,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["start_move_decor"] = left_press;
     map["stop_move_decor"] = left_release;
     map["set_spawn"] = left_release;
+    map["set_flag"] = left_release;
     map["move_decor"] = drag_left;
     map["placer_objet"] = drag_left || left_release;
     map["supprimer_objet"] = right_release;
@@ -95,6 +97,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("console", BIND(&Controleur::onOpenConsole));
     system.connect("close_gui", BIND(&Controleur::onCloseGUI));
     system.connect("set_spawn", BIND(&Controleur::onChooseSpawn));
+    system.connect("set_flag", BIND(&Controleur::onChooseFlag));
     system.connect("move_poly", BIND(&Controleur::onMovePoly));
     system.connect("add_point_poly", BIND(&Controleur::onAddPoint));
     system.connect("undo", BIND(&Controleur::onUndoThor));
@@ -236,6 +239,14 @@ void Controleur::onChooseSpawn(thor::ActionContext < string > context) {
     setSpawn = false;
 }
 
+void Controleur::onChooseFlag(thor::ActionContext < string > context) {
+    if(!setFlag)
+      return;
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    m->setFlag(getX(mousePosition.x), getY(mousePosition.y));
+    setFlag = false;
+}
+
 bool Controleur::onMovePoly(thor::ActionContext < string > context)
 {
     return m->movePoly(getX(context.event->mouseMove.x), getY(context.event->mouseMove.y));
@@ -264,6 +275,13 @@ bool Controleur::onSetSpawn(const CEGUI::EventArgs &e)
 {
     (void)e;
     setSpawn = true;
+    return true;
+}
+
+bool Controleur::onSetFlag(const CEGUI::EventArgs &e)
+{
+    (void)e;
+    setFlag = true;
     return true;
 }
 

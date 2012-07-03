@@ -48,10 +48,10 @@ public:
 ///
 ///\brief liste exhaustive des unités
 ///
-    list<Unit*>* getAllUnits();
+    set<Unit*>* getAllUnits();
 
 private:
-    list<Unit*>* allUnits;
+    set<Unit*>* allUnits;
 };
 
 }

@@ -7,6 +7,7 @@ namespace cce {
 
 Region::Region() {
     drawme=false;
+    flag=nullptr;
 }
 
 Region::~Region()
@@ -40,8 +41,8 @@ list<Tile> Region::getTiles() {
     return tiles;
 }
 
-Flag* Region::getFlag() {
-    return &flag;
+Decor* Region::getFlag() {
+    return flag;
 }
 
 void Region::resetPoly()

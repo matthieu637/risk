@@ -50,7 +50,7 @@ public:
 ///\brief flag de la region
 ///\return Retourne le flag de la region
 ///
-    Flag* getFlag();
+    Decor* getFlag();
     
     void setDraw(bool drawme);
     
@@ -76,7 +76,7 @@ protected:
     bool drawme;
     list<UpgradeTemplate> upgrades;
     list<Tile> tiles;
-    Flag flag;
+    Decor* flag;
 };
 }
 #endif

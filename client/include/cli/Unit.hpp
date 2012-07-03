@@ -1,8 +1,10 @@
 #ifndef UNIT_HPP
 #define UNIT_HPP
-#include "cce/Decor.hpp"
-#include "cce/UnitTemplate.hpp"
+
 #include "cce/Animation.hpp"
+#include <cce/Decor.hpp>
+#include <cce/UnitTemplate.hpp>
+#include "Modele.hpp"
 
 namespace cli{
   
@@ -15,9 +17,14 @@ namespace cli{
   {
     public:
       Unit();
+      ~Unit();
+      Unit(cli::Modele* ma);
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
-
+///
+///\brief Pour ordonner l'unité d'arreter son action, se met en mode "stop"
+///
+      void orderStop();
 ///
 ///\brief Pour ordonner l'unité de bouger quelque part, se met en mode "move"
 ///
@@ -26,9 +33,24 @@ namespace cli{
       void animate();
 
 ///
-///\brief Ordonner à l'unité d'en suivre une autre
+///\brief Ordonner à l'unité d'en suivre une autre, se met en mode "follow"
 ///
       void orderFollow(Unit* to_follow);
+
+///
+///\brief Ordonne à l'unité d'en attaquer une autre, se met en mode "attack"
+///      
+      void orderAttack(Unit* to_attack);
+
+///
+///\brief Attaque si à portée, sinon déplacement.
+///
+      void attaquer();
+
+///
+///\brief Renvoie une quantité de degats aléatoire de l'intervalle [min,max]
+///
+      int rollDamage();
 
 ///
 ///\brief Appliquer les ordres reçus
@@ -36,10 +58,28 @@ namespace cli{
       void applyOrder();
 
 ///
+///\brief se fait attaquer
+///\param type: le type de degats
+///\param degats: les degats
+///
+      void takeDamages(cce::damage_type machin,int degats);
+bool isDead();
+///
 ///\brief Ordre courant
 ///\return order: l'ordre courant
 ///
       order getOrder();
+
+///
+///\brief ajouter un traqueur à cette unité
+///
+      void addTraqueur(Unit* traqueur);
+
+///
+///\brief enlève un traqueur à cette unité
+///
+      void removeTraqueur(Unit* traqueur);
+
       
     private:
 	void deplacer();
@@ -50,9 +90,12 @@ namespace cli{
 	
 	sf::Vector2f destination, deplacement;
 	order current_order;
-	Unit* followed_unit;
+	Unit* target_unit;
 	float distance_min_follow;
-
+	bool attaque_prete;
+	int current_hp;
+	cli::Modele* m;
+	set<Unit*> traqueurs;
   };
 
 }

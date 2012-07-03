@@ -17,7 +17,9 @@
 			<collision>1</collision>
 			<dmg_type>1</dmg_type>
 			<def_type>0</def_type>
+			<hp_max>1000</hp_max>
 			<path>unit2.png</path>
+			<range>200</range>
 		</second>
 	</item>
 </UnitTemplates>

@@ -39,20 +39,27 @@ public:
     bool onWindowResized(thor::ActionContext<string> context);
     void onMoveUnit(thor::ActionContext < string > context);
     bool onQuit(const CEGUI::EventArgs & e);
-    void selectionOn(thor::ActionContext < string > context);
+    void onLeftClick(thor::ActionContext < string > context);
     void selectionOff(thor::ActionContext < string > context);
     void selectionMove(thor::ActionContext < string > context);
+    void prepareAttack(thor::ActionContext < string > context);
+    void onattack(thor::ActionContext < string > context);
     
     int getX(int mouseX);
     int getY(int mouseY);
     
     void spawnUnit(thor::ActionContext < string > context);
 
+      
+    bool getAttackMode();
+    void setAttackMode(bool b);
+    
 private:
     int clickX, clickY;
     bool moveCam, moveDecor;
 
-    
+    bool attackMode;
+
     GUI *gui;
     Modele *m;
 };

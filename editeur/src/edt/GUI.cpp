@@ -53,7 +53,7 @@ void GUI::loadCustomGUI()
     palette_pays = new PalettePays();
     palette_pays->init(this, "PaletteFrames/Pays", (edt::Controleur*)controleur, (edt::Modele*)modele);
     palette_regions = new PaletteRegions();
-    palette_regions->init(this, "PaletteFrames/Regions", modele);
+    palette_regions->init(this, "PaletteFrames/Regions", modele, controleur);
 
     cce::Repere* rep = modele->getCarte()->getRepere();
     initScrollPane(rep->getHauteur(), rep->getLargeur());
