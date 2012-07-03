@@ -1,9 +1,10 @@
 #include "cli/Unit.hpp"
-#include <cli/BastonManager.hpp>
+#include "cli/BastonManager.hpp"
 #include "bib/Logger.hpp"
 #include <cmath>
-#include <cli/Modele.hpp>
-#include <cli/CoucheDecor.hpp>
+#include "cli/Modele.hpp"
+#include "cli/CoucheDecor.hpp"
+#include "cli/Joueur.hpp"
 #include <stdlib.h>
 #include <time.h>
 
@@ -19,11 +20,11 @@ Unit::Unit()
 Unit::~Unit(){
   
 }
-Unit::Unit(Modele* ma)
+Unit::Unit(Modele* ma, int joueur)
 {
     this->m = ma;
     current_order = stop;
-    yCompare = getPosition().y + getLocalBounds().height *3/4;
+    player_number = joueur;
 }
 
 void Unit::setUnitTemplate(cce::UnitTemplate *ut){
@@ -177,6 +178,10 @@ int Unit::rollDamage()
     int degats_range = (unitTemplate->getDamageMax() - unitTemplate->getDamageMin() + 1);
     int degats_bonus = rand() % degats_range;
     return unitTemplate->getDamageMin() + degats_bonus;
+}
+
+int Unit::getPlayerNumber(){
+    return player_number;
 }
 
 void Unit::addTraqueur(Unit* traqueur)

@@ -17,9 +17,6 @@ using std::string;
 
 namespace cli {
 
-class CoucheDecor;
-class Unit;
-
 enum palette_type
 {
     tiles, decors, regions, pays
@@ -27,6 +24,9 @@ enum palette_type
 
 class Vue;
 class Repere;
+class Joueur;
+class CoucheDecor;
+class Unit;
 
 class Modele:public cce::Modele {
 
@@ -71,7 +71,7 @@ public:
     
     void windowResized(int width, int height);
     
-    void spawnUnit(int id, int x, int y);
+    void spawnUnit(int id, int x, int y, int joueur);
     
     void initSelection(int x, int y);
     void endSelection();
@@ -85,16 +85,14 @@ public:
 
 
   private:
-    int cameraOrigineX, cameraOrigineY;
+    int cameraOrigineX, cameraOrigineY, player_number;
     bool selectionBool;
     float coeff_zoom;
     list <cce::Vue*>::iterator it;
     list <Unit*> selectionUnits;
-
+    vector <Joueur> players;
     sf::Vector2f origineSelection;
     sf::RectangleShape* rectangleSelection;
-    
-    
 };
 
 }

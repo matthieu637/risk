@@ -1,10 +1,12 @@
 #ifndef UNIT_HPP
 #define UNIT_HPP
 
+#include "cce/Decor.hpp"
 #include "cce/Animation.hpp"
-#include <cce/Decor.hpp>
-#include <cce/UnitTemplate.hpp>
-#include "Modele.hpp"
+#include "cce/UnitTemplate.hpp"
+#include <set>
+
+using std::set;
 
 namespace cli{
   
@@ -13,12 +15,15 @@ namespace cli{
       stop, hold, move, follow, attack
   };
   
+  class Joueur;
+  class Modele;
+  
   class Unit : public cce::Decor
   {
     public:
       Unit();
       ~Unit();
-      Unit(cli::Modele* ma);
+      Unit(Modele* ma, int joueur);
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
 ///
@@ -78,6 +83,11 @@ bool isDead();
 ///
       void removeTraqueur(Unit* traqueur);
 
+///
+///\brief numéro du joueur propriétaire
+///
+      int getPlayerNumber();
+
       
     private:
 	void deplacer();
@@ -90,8 +100,8 @@ bool isDead();
 	Unit* target_unit;
 	float distance_min_follow;
 	bool attaque_prete;
-	int current_hp;
-	cli::Modele* m;
+	int current_hp, player_number;
+	Modele* m;
 	set<Unit*> traqueurs;
   };
 

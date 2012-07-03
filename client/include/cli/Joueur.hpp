@@ -2,6 +2,7 @@
 #define JOUEUR_HPP
 #include <list>
 #include <vector>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include "Vue.hpp"
 
 using std::vector;
@@ -17,10 +18,13 @@ enum player_color {
   rouge, bleu, vert, violet, jaune, orange
 };
 
+class Unit;
+
 class Joueur
 {
 
 public:
+  Joueur();
   Joueur(int num, player_color couleur, int nbPlayers);
   virtual ~Joueur();
   
@@ -45,6 +49,16 @@ public:
   void removeRegion(cce::Region* r);
   
   ///
+  ///\brief Ajoute l'unité à ce joueur.
+  ///
+  void addUnit(Unit* u);
+  
+  ///
+  ///\brief Enlève l'unité à ce joueur.
+  ///
+  void removeUnit(Unit* u);
+  
+  ///
   ///\brief Regions possédées par le joueur.
   ///
   list<cce::Region*> getRegions();
@@ -65,6 +79,11 @@ public:
   int getGold();
   
   ///
+  ///\brief Unités du joueur dans la région.
+  ///
+  list<Unit*> getUnitsInRect(sf::RectangleShape* rectangleSelection);
+  
+  ///
   ///\brief Changer le statut d'un joueur à son égard.
   ///\param num_joueur le numéro du joueur
   ///\param allied s'il devient allié ou ennemi
@@ -81,6 +100,7 @@ private:
   player_color color;
   list<cce::Pays*> pays_controles;
   list<cce::Region*> regions_controles;
+  list<Unit*> units;
   vector<bool> allied_player;
 };
 

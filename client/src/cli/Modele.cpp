@@ -12,6 +12,7 @@
 #include <CEGUI/CEGUI.h>
 #include "cli/CoucheDecor.hpp"
 #include "cce/CoucheDecor.hpp"
+#include "cli/Joueur.hpp"
 
 using std::list;
 using std::set;
@@ -27,15 +28,26 @@ Modele::Modele():cce::Modele()
     
     coeff_zoom = 1;
     
-    for(int i=1;i<10;i++)
-    spawnUnit(300000000,i*150,150);
-    
     //parametres du rectangle de selection
     rectangleSelection = new sf::RectangleShape();
     rectangleSelection->setOutlineColor(sf::Color(0,150,0,255));
     rectangleSelection->setOutlineThickness(1);
     rectangleSelection->setFillColor(sf::Color(0,150,0,50));
     selectionBool = false;
+    
+    //joueurs
+    player_number = 1;
+    int nbJoueurs = 2;
+    
+    players = vector<Joueur>(nbJoueurs+1);
+    
+    for(int i=1; i<=nbJoueurs; i++)
+      players[i] = Joueur(i, player_color::rouge, nbJoueurs);
+    
+    for(int i=1;i<10;i++){
+      spawnUnit(300000000,i*150,150, 1);
+      spawnUnit(300000000,i*150,1000, 2);
+    }
 }
 
 Modele::~Modele() {
@@ -58,12 +70,13 @@ void Modele::update()
 	deleteUnit(*it);
 }
 
-void Modele::spawnUnit(int id, int x, int y)
+void Modele::spawnUnit(int id, int x, int y, int joueur)
 {
-    Unit* u = new Unit(this);
+    Unit* u = new Unit(this, joueur);
     u->setId(id);
     u->setPosition(x,y);
     getCoucheDecor()->addUnit(u);
+    players[joueur].addUnit(u);
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY)
@@ -138,8 +151,8 @@ void Modele::moveUnitSelection(sf::Vector2i mousePosition)
 void Modele::on_attack(sf::Vector2i mousePosition)
 {
     Unit* to_attack = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
-  
-    if(to_attack != nullptr){
+    
+    if(to_attack != nullptr && to_attack->getPlayerNumber() != player_number){
       list<Unit*>::iterator it;
       for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
 	(*it)->orderAttack(to_attack);
@@ -176,7 +189,7 @@ void Modele::moveSelection(int x, int y)
 void Modele::endSelection()
 {
     selectionBool = false;
-    list<Unit*> units_in_rect = getCoucheDecor()->getUnitsInRect(rectangleSelection);
+    list<Unit*> units_in_rect = players[player_number].getUnitsInRect(rectangleSelection);
     if(!units_in_rect.empty())
       selectionUnits = units_in_rect;
 }

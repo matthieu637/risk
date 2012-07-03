@@ -31,17 +31,19 @@ string Console::onSpawn(const std::string& s) {
     string id;
     string x;
     string y;
+    string player;
     
     std::getline(iss, id, ' ');    
     std::getline(iss, x, ' ');   
     std::getline(iss, y, ' ');
+    std::getline(iss, player, ' ');
     
     
     LOG_DEBUG("id = "+id+"  x= "+x+"  y = "+y);
     if(s.find(' ') == s.npos)
         return "vous devez utiliser la commande : /spawn id x y";
     else {
-        m->spawnUnit(atoi(id.c_str()),atoi(x.c_str()),atoi(y.c_str()));
+        m->spawnUnit(atoi(id.c_str()),atoi(x.c_str()),atoi(y.c_str()),atoi(player.c_str()));
         return "unité bien spawnée";
     }
 }
