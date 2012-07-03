@@ -9,7 +9,7 @@
 
 namespace cli {
 
-  
+  static bool init = true;
 Unit::Unit()
 {
     current_order = stop;
@@ -45,7 +45,10 @@ void Unit::setUnitTemplate(cce::UnitTemplate *ut){
       attaque_prete = true;
   
       anim = new cce::Animation(ut->getMapTemplate());
+      if(init){
 	anim->makeAnimation();//commande qui fait bugger! a toi de jouer gourou
+	init = false;
+      }
 
 // 	thor::FrameAnimation moveUp;
 // 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));

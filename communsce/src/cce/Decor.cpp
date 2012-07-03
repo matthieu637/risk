@@ -41,6 +41,7 @@ DecorTemplate* Decor::getTemplate() const
     return dt;
 }
 
+
 void Decor::setTexture(Texture* texture)
 {
     Sprite::setTexture(*texture, true);

@@ -27,9 +27,9 @@ Modele::Modele():cce::Modele()
     
     coeff_zoom = 1;
     
-//     for(int i=1;i<3;i++)
-    spawnUnit(300000000,150,150);// erreur ac le i
-    spawnUnit(300000000,151,150);
+     for(int i=1;i<5;i++)
+    spawnUnit(300000000,150*i,150);// erreur ac le i
+
     
     //parametres du rectangle de selection
     rectangleSelection = new sf::RectangleShape();

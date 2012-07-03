@@ -96,6 +96,10 @@ bool isDead();
 	int current_hp;
 	cli::Modele* m;
 	set<Unit*> traqueurs;
+	
+  public:
+    
+    //static bool init =;
   };
 
 }
