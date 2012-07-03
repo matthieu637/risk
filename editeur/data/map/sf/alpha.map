@@ -7541,16 +7541,12 @@
 						<first>IsengardU</first>
 						<second class_id="12" tracking_level="0" version="0">
 							<income>100</income>
-							<Flag class_id="13" tracking_level="0" version="0">
-								<x>10</x>
-								<y>10</y>
-								<id>200000000</id>
-							</Flag>
-							<Polygon class_id="14" tracking_level="0" version="0">
-								<Points class_id="15" tracking_level="0" version="0">
+							<Flag class_id="-1" ></Flag>
+							<Polygon class_id="13" tracking_level="0" version="0">
+								<Points class_id="14" tracking_level="0" version="0">
 									<count>6</count>
 									<item_version>0</item_version>
-									<item class_id="16" tracking_level="0" version="0">
+									<item class_id="15" tracking_level="0" version="0">
 										<x>582</x>
 										<y>120</y>
 									</item>
@@ -7576,11 +7572,11 @@
 									</item>
 								</Points>
 							</Polygon>
-							<Upgrades class_id="17" tracking_level="0" version="0">
+							<Upgrades class_id="16" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</Upgrades>
-							<Tiles class_id="18" tracking_level="0" version="0">
+							<Tiles class_id="17" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</Tiles>
@@ -7590,11 +7586,7 @@
 						<first>Srly?</first>
 						<second>
 							<income>666</income>
-							<Flag>
-								<x>300</x>
-								<y>300</y>
-								<id>200000001</id>
-							</Flag>
+							<Flag class_id="-1"></Flag>
 							<Polygon>
 								<Points>
 									<count>37</count>

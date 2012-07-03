@@ -10,6 +10,7 @@
 #include <edt/Carte.hpp>
 #include <edt/Modele.hpp>
 #include <edt/Pays.hpp>
+#include "edt/Controleur.hpp"
 #include "cce/Carte.hpp"
 
 using CEGUI::WindowManager;
@@ -32,11 +33,12 @@ PaletteRegions::~PaletteRegions()
 
 }
 
-void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
+void PaletteRegions::init(GUI const *gui, string nom, Modele* m,  Controleur* c)
 {
     Palette::init(gui, nom);
     fenetre->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&PaletteRegions::onShow, this));
-
+    
+    control = c;
     modele=m;
     lbox = static_cast<Listbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Listbox", "PaletteFrames/Regions/ListboxRegions"));
     fenetre->addChildWindow(lbox);
@@ -110,7 +112,16 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m)
     delReg->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,232)));
     delReg->setText((CEGUI::utf8*)"Supprimer Région");
     delReg->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&PaletteRegions::onRmReg, this));
+    
+    CEGUI::PushButton* newFlag = static_cast<CEGUI::PushButton*>(WindowManager::getSingleton().createWindow("TaharezLook/Button", "PaletteFrames/Regions/newFlag"));
+    fenetre->addChildWindow(newFlag);
+    newFlag->setWidth(UDim(1,0));
+    newFlag->setHeight(UDim(0.0f,32));
+    newFlag->setPosition(CEGUI::UVector2(UDim(0,0),UDim(0.42,270)));
+    newFlag->setText((CEGUI::utf8*)"Ajouter Flag");
+    newFlag->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&edt::Controleur::onSetFlag, c));
 }
+
 
 bool PaletteRegions::onNewReg(const CEGUI::EventArgs &e)
 {
@@ -242,11 +253,13 @@ bool PaletteRegions::onChangeSelection(const CEGUI::EventArgs &e)
     if(!cboxpoly->isSelected())
         hideAllPoly();
 
+     
     if(lbox->getFirstSelectedItem() != nullptr) {
         std::ostringstream oss;
         current_reg = (edt::Region*) modele->getCarte()->getRegion(lbti->getText().c_str());
 
         ebox->setText(lbti->getText());
+	modele->setCurrentRegion(lbti->getText().c_str());
         current_reg->setDraw(true);
         oss << current_reg->getIncome();
         eboxinc->setText(oss.str());

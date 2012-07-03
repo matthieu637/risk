@@ -51,8 +51,8 @@ void Region::setTiles(const Tile& t){
     tiles.push_back(t);
 }
 
-void Region::setFlag(Flag* f){
-    flag = *f;
+void Region::setFlag(cce::Decor* d){
+    flag = d;
 }
 
 }

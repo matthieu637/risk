@@ -18,6 +18,7 @@ namespace CEGUI{
 }
 namespace edt{
 
+class Controleur;
 class Region;
 
 class Modele;
@@ -29,7 +30,7 @@ class PaletteRegions : public cce::Palette
 public :
   PaletteRegions();
   virtual ~PaletteRegions();
-  void init(GUI const *gui, string nom, Modele* m);
+  void init(GUI const *gui, string nom, Modele* m,  Controleur* c);
   void updateListRegions(list<string> noms);
   bool onRegionNameChange(const CEGUI::EventArgs &e);
   bool onCheckedChange(const CEGUI::EventArgs &e);
@@ -60,6 +61,7 @@ private :
   
   Modele* modele;
   Region* current_reg;
+  Controleur* control;
 };
 }
 

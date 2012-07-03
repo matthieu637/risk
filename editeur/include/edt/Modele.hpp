@@ -91,12 +91,19 @@ public:
 ///
 ///\brief Changer le pays sur lequel on opère
 ///
-    void setCurrentPays(string nom);
+    void setCurrentPays(const string& nom);
+    
+ ///
+///\brief Changer la région sur laquelle on opère
+///   
+    void setCurrentRegion(const string& nom);
 
 ///
 ///\brief Changer le decorTemplate à placer par son id
 ///
     void setSpawn(int x, int y);
+    
+    void setFlag(int x, int y);
 
     void deleteTile(int x, int y);
     
@@ -148,6 +155,7 @@ public:
     float coeff_zoom;
     palette_type palette;
     string current_pays;
+    string current_region;
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
     sf::ConvexShape* poly;

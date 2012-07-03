@@ -3,6 +3,7 @@
 #include "edt/Carte.hpp"
 #include "edt/Pays.hpp"
 #include "cce/Tile.hpp"
+#include "edt/Region.hpp"
 #include "cce/Repere.hpp"
 #include "edt/Vue.hpp"
 #include "bib/XMLEngine.hpp"
@@ -226,7 +227,21 @@ void Modele::setSpawn(int x, int y)
     }
 }
 
-void Modele::setCurrentPays(string nom)
+void Modele::setFlag(int x, int y)
+{
+    cce::Decor* new_flag = (cce::Decor*)carte->getCoucheDecor()->getDecor(x, y);
+    cce::Decor* old_flag;
+    
+    if(new_flag != nullptr) {
+        old_flag = (cce::Decor*)carte->getRegion(current_region)->getFlag();
+        if(old_flag != nullptr)
+            old_flag->setColor(sf::Color(255,255,255,255));
+        new_flag->setColor(sf::Color(255, 0, 0, 255));
+        ((edt::Region*) carte->getRegion(current_region))->setFlag(new_flag);
+    }
+}
+
+void Modele::setCurrentPays(const string& nom)
 {
     cce::Pays* p;
     cce::Decor* d;
@@ -247,6 +262,29 @@ void Modele::setCurrentPays(string nom)
             d->setColor(sf::Color(255, 0, 0, 255));
     }
     current_pays = nom;
+}
+
+void Modele::setCurrentRegion(const string& nom)
+{
+    cce::Region* r;
+    cce::Decor* d;
+
+    //décoloriser flag de la région courante
+    r= carte->getRegion(current_region);
+    if(r != nullptr) {
+        d = r->getFlag();
+        if(d != nullptr)
+            d->setColor(sf::Color(255,255,255,255));
+    }
+
+    //coloriser flag de la région sélectionnée
+    r = carte->getRegion(nom);
+    if(r != nullptr) {
+        d = r->getFlag();
+        if(d != nullptr)
+            d->setColor(sf::Color(255, 0, 0, 255));
+    }
+    current_region = nom;
 }
 
 void Modele::selectPalette(palette_type p)

@@ -43,6 +43,7 @@ namespace cce {
 	void onSelectionThor(thor::ActionContext < string > context);
 	void onChoixPaletteThor(thor::ActionContext < string > context);
 	void onChooseSpawn(thor::ActionContext < string > context);
+	void onChooseFlag(thor::ActionContext < string > context);
 	bool onWindowResized(thor::ActionContext<string> context);
 	bool onOpenConsole(thor::ActionContext < string > context);
 	bool onCloseGUI(thor::ActionContext < string > context);
@@ -63,6 +64,7 @@ namespace cce {
 	bool onMainScrollHoriChange(const CEGUI::EventArgs & e);
 	bool onChoixPalette(const CEGUI::EventArgs & e);
 	bool onSetSpawn(const CEGUI::EventArgs &e);
+	bool onSetFlag(const CEGUI::EventArgs &e);
 	bool onUndo(const CEGUI::EventArgs & e);
 	bool onRedo(const CEGUI::EventArgs & e);
 	
@@ -71,7 +73,7 @@ namespace cce {
 
       private:
 	int clickX, clickY;
-	bool moveCam, moveDecor, selection, setSpawn;
+	bool moveCam, moveDecor, selection, setSpawn, setFlag;
 	Modele *m;
     };
 
