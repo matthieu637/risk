@@ -19,12 +19,12 @@ namespace cce {
 
 enum damage_type
 {
-    normal, laser, percant
+    physical, laser, plasma, energy
 };
 
 enum defence_type
 {
-    acier, bouclier, reflexion
+    tough, reflection, shield, massive
 };
 
 class UnitTemplate
@@ -49,7 +49,9 @@ public:
 	ar & make_nvp("collision", collision_);
 	ar & make_nvp("dmg_type", dmg_type);
 	ar & make_nvp("def_type", def_type);
+	ar & make_nvp("hp_max", hp_max);
 	ar & make_nvp("path", path);
+	ar & make_nvp("range", range);	
     }
     
 
@@ -121,11 +123,22 @@ public:
 ///\brief Vitesse de déplacement en pixels/seconde?
 ///
     int getMoveSpeed();
+    
+///
+///\brief Portée d'attaque de l'unité
+///
+    int getRange();
+    
+///
+///\brief Portée d'attaque de l'unité
+///
+    int getHP();
 
 private:
-    int id, dmg_min, dmg_max, defence, move_speed, attack_speed;
+    int id, dmg_min, dmg_max, defence, move_speed, attack_speed, hp_max;
     string nom, description, path;
     bool collision_;
+    float range;
     damage_type dmg_type;
     defence_type def_type;
     Texture *texture;

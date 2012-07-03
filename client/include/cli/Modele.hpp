@@ -72,11 +72,13 @@ public:
     void endSelection();
     void moveSelection(int x, int y);   
     
+    void on_attack(sf::Vector2i mousePosition);
+    
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-  
-  private:
+    
     CoucheDecor* getCoucheDecor(){return (CoucheDecor*)carte->getCoucheDecor();}
-  
+
+
   private:
     int cameraOrigineX, cameraOrigineY;
     bool selectionBool;
@@ -86,6 +88,8 @@ public:
 
     sf::Vector2f origineSelection;
     sf::RectangleShape* rectangleSelection;
+    
+    
 };
 
 }

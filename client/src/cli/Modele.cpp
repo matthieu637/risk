@@ -50,13 +50,13 @@ void Modele::update()
     for(it = allunits->begin(); it !=  allunits->end(); ++it){
       getCoucheDecor()->removeDecor(*it);
       (*it)->applyOrder();
-      getCoucheDecor()->addDecor(*it);
+      getCoucheDecor()->addDecor(*it);    
     }
 }
 
 void Modele::spawnUnit(int id, int x, int y)
 {
-    Unit* u = new Unit;
+    Unit* u = new Unit(this);
     u->setId(id);
     u->setPosition(x,y);
     getCoucheDecor()->addUnit(u);
@@ -180,5 +180,20 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
     if(selectionBool)
        target.draw(*rectangleSelection, states);
 }
+  
+  
+  
+void Modele::on_attack(sf::Vector2i mousePosition){
+      list<Unit*>::iterator it;
+      Unit* to_follow = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
+    
+      if(to_follow != nullptr){
+	for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it){
+	  (*it)->orderAttack(to_follow);
+	}
+      }
+   
+}
+
   
 }

@@ -26,6 +26,8 @@ public:
     void addUnit(Unit* u);
     
     void removeUnit(Unit* u);
+    
+    void deleteUnit(Unit* u);
 
 ///
 ///\brief liste des unités dont le socle est dans le rectangle

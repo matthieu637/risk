@@ -119,4 +119,14 @@ Texture* UnitTemplate::getTexture()
   return texture;
 }
 
+int UnitTemplate::getRange()
+{
+    return range;
+}
+
+int UnitTemplate::getHP()
+{
+    return hp_max;
+}
+
 }
