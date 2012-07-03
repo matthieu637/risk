@@ -21,19 +21,22 @@ namespace cli{
       Unit(cli::Modele* ma);
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
-
+///
+///\brief Pour ordonner l'unité d'arreter son action, se met en mode "stop"
+///
+      void orderStop();
 ///
 ///\brief Pour ordonner l'unité de bouger quelque part, se met en mode "move"
 ///
       void orderMove(sf::Vector2i point);
 
 ///
-///\brief Ordonner à l'unité d'en suivre une autre
+///\brief Ordonner à l'unité d'en suivre une autre, se met en mode "follow"
 ///
       void orderFollow(Unit* to_follow);
 
 ///
-///\brief Ordonne à l'unité d'en attaquer une autre.
+///\brief Ordonne à l'unité d'en attaquer une autre, se met en mode "attack"
 ///      
       void orderAttack(Unit* to_attack);
 
@@ -64,7 +67,16 @@ namespace cli{
 ///\return order: l'ordre courant
 ///
       order getOrder();
-      
+
+///
+///\brief ajouter un traqueur à cette unité
+///
+      void addTraqueur(Unit* traqueur);
+
+///
+///\brief enlève un traqueur à cette unité
+///
+      void removeTraqueur(Unit* traqueur);
 
       
     private:
@@ -73,15 +85,14 @@ namespace cli{
     private :
 	cce::UnitTemplate *unitTemplate;
 	cce::Animation anim;
-	
 	sf::Vector2f destination, deplacement;
 	order current_order;
 	Unit* target_unit;
 	float distance_min_follow;
-
 	bool attaque_prete;
 	int current_hp;
 	cli::Modele* m;
+	set<Unit*> traqueurs;
   };
 
 }

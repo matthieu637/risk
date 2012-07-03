@@ -184,15 +184,13 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
   
   
 void Modele::on_attack(sf::Vector2i mousePosition){
+    Unit* to_follow = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
+  
+    if(to_follow != nullptr){
       list<Unit*>::iterator it;
-      Unit* to_follow = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
-    
-      if(to_follow != nullptr){
-	for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it){
-	  (*it)->orderAttack(to_follow);
-	}
-      }
-   
+      for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+	(*it)->orderAttack(to_follow);
+    }
 }
 
   

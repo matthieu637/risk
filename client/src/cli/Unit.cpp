@@ -48,6 +48,11 @@ order Unit::getOrder()
     return current_order;
 }
 
+void Unit::orderStop()
+{
+    current_order = order::stop;
+}
+
 void Unit::orderMove(sf::Vector2i point)
 {
     destination = sf::Vector2f(point);
@@ -58,19 +63,25 @@ void Unit::orderFollow(Unit* to_follow)
 {
     if(this == to_follow){
       current_order = order::stop;
+      return;
     }
+    if(current_order == order::follow || current_order == order::attack)
+      target_unit->removeTraqueur(this);
     target_unit = to_follow;
     current_order = order::follow;
+    target_unit->addTraqueur(this);
     distance_min_follow = getSelectionCircle()->getRadius() + target_unit->getSelectionCircle()->getRadius() + 50;
 }
 
 void Unit::orderAttack(Unit* to_attack)
 {
-   if(this == to_attack){
+    if(this == to_attack){
       current_order = order::stop;
-   }
-  target_unit = to_attack;
-  current_order = order::attack;
+      return;
+    }
+    target_unit = to_attack;
+    current_order = order::attack;
+    target_unit->addTraqueur(this);
 }
 
 void Unit::applyOrder()
@@ -84,16 +95,16 @@ void Unit::applyOrder()
 	deplacer();
 	break;
       case order::attack:
-	  attaquer();
+	attaquer();
 	break;
       default:
 	break;
     }
 }
 
-  void Unit::setId(int id){
-      setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
-  }
+void Unit::setId(int id){
+    setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
+}
 
 void Unit::deplacer()
 {
@@ -117,12 +128,6 @@ void Unit::deplacer()
 
 void Unit::attaquer()
 {
-    if(target_unit == nullptr || target_unit == this){
-      current_order = order::stop;
-      return; 
-    }
-    
-  //  LOG_DEBUG("test"<< target_unit);
     destination = target_unit->getSocleCenterGlobal();
 
     float range = unitTemplate->getRange();
@@ -134,21 +139,11 @@ void Unit::attaquer()
     if(distance > range){ // pas à portée
       deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
       move(deplacement.x, deplacement.y); // on avance vers la cible
- //     LOG_DEBUG("deplacement unité vers target");     
-  //    LOG_DEBUG("distance "<<distance<<" " << "range " << range);
+    
     }
     else // à portée
-      if(this->attaque_prete){
+      if(this->attaque_prete)
 	target_unit->takeDamages(unitTemplate->getDamageType(), rollDamage());
-	//LOG_DEBUG("target a pris dmg, vie : " << target_unit->current_hp);
-	if(target_unit != nullptr){
-	  if(target_unit->current_hp<=0){
-	  current_order = order::stop;
-	  }
-	}else{
-	    current_order = order::stop;
-	}
-    }
 }
 
 void Unit::takeDamages(cce::damage_type type_degat, int degats)
@@ -160,8 +155,11 @@ void Unit::takeDamages(cce::damage_type type_degat, int degats)
       calcul_real_dmg = 1;
     }
     current_hp -= calcul_real_dmg;
-    if(this->current_hp <= 0){
-    //  LOG_DEBUG("test mort");
+    if(this->current_hp <= 0){ // mort
+      //on met les traqueurs en mode stop
+      set<Unit*>::iterator it;
+      for(it = traqueurs.begin(); it != traqueurs.end(); it++)
+	(*it)->orderStop();
       (*m).getCoucheDecor()->deleteUnit(this);
     }
 }
@@ -172,6 +170,16 @@ int Unit::rollDamage()
     int degats_range = (unitTemplate->getDamageMax() - unitTemplate->getDamageMin() + 1);
     int degats_bonus = rand() % degats_range;
     return unitTemplate->getDamageMin() + degats_bonus;
+}
+
+void Unit::addTraqueur(Unit* traqueur)
+{
+    traqueurs.insert(traqueur);
+}
+
+void Unit::removeTraqueur(Unit* traqueur)
+{
+    traqueurs.erase(traqueur);
 }
 
 }
