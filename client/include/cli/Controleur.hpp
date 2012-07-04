@@ -46,6 +46,8 @@ public:
     void shiftOff(thor::ActionContext < string > context);
     void prepareAttack(thor::ActionContext < string > context);
     void onattack(thor::ActionContext < string > context);
+    void onOpenConsole(thor::ActionContext < string > context);
+    void onCloseConsole(thor::ActionContext < string > context);
     
     int getX(int mouseX);
     int getY(int mouseY);
@@ -66,7 +68,7 @@ private:
     //variables privées necessaires à la détection d'Action pour des Action à touches multiples
     bool shiftBool;
   
-    GUI *gui;
+   // GUI *gui;
     Modele *m;
 };
 

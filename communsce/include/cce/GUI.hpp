@@ -7,6 +7,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/Clock.hpp>
 #include <string>
+#include "cce/Console.hpp"
+
 
 ///
 ///\file GUI.hpp

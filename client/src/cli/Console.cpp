@@ -37,9 +37,7 @@ string Console::onSpawn(const std::string& s) {
     std::getline(iss, x, ' ');   
     std::getline(iss, y, ' ');
     std::getline(iss, player, ' ');
-    
-    
-    LOG_DEBUG("id = "+id+"  x= "+x+"  y = "+y);
+   
     if(s.find(' ') == s.npos)
         return "vous devez utiliser la commande : /spawn id x y";
     else {

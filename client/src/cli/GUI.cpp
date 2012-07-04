@@ -29,8 +29,3 @@ void GUI::init(Modele* modele)
     
     console = new cli::Console(modele);
 }
-
-
-cce::Console *GUI::getConsole(){
-  return console;
-}
