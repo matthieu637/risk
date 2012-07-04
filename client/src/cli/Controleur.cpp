@@ -35,6 +35,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action wheel_release(sf::Mouse::Middle, Action::ReleaseOnce);
     Action molette(sf::Event::MouseWheelMoved);
     Action mouse_move(sf::Event::MouseMoved);
+    Action shift_hold(sf::Keyboard::LShift, Action::Hold);
+    Action shift_release(sf::Keyboard::LShift, Action::ReleaseOnce);
     Action drag_wheel = mouse_move && wheel_hold;
     Action drag_left = mouse_move && left_hold;
 
@@ -45,7 +47,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
-    
+
+
     // Map
     map["quit"] = close;
     map["zoom"] = molette;
@@ -56,6 +59,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["move_camera"] = drag_wheel;
     map["move_unit"] = right_press;
     map["leftClick"] = left_press;
+    map["shift_hold"] = shift_hold;
+    map["shift_release"] = shift_release;
     map["selectionMove"] = drag_left;
     map["selectionOff"] = left_release;
     map["prepareAttack"] = a_press;
@@ -71,14 +76,19 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("leftClick", BIND(&Controleur::onLeftClick));
     system.connect("selectionOff", BIND(&Controleur::selectionOff));
     system.connect("selectionMove", BIND(&Controleur::selectionMove));
+    system.connect("shift_hold", BIND(&Controleur::shiftOn));
+    system.connect("shift_release", BIND(&Controleur::shiftOff));
     system.connect("prepareAttack", BIND(&Controleur::prepareAttack));
-    
+
     //Binding fonctions CEGUI
     
     gui->setScriptModule(moduleGUI);
 
-    //Inialize some variables
+    //Initialize some variables
     attackMode = false;
+    
+    //Initialize variables for Action
+    shiftBool = false;
 }
 void Controleur::onStartCam(thor::ActionContext < string > context)
 {
@@ -169,6 +179,7 @@ void Controleur::onLeftClick(thor::ActionContext < string > context)
     }
 }
 
+
 void Controleur::selectionMove(thor::ActionContext < string > context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
@@ -178,7 +189,25 @@ void Controleur::selectionMove(thor::ActionContext < string > context)
 void Controleur::selectionOff(thor::ActionContext < string > context)
 {
     (void) context;
-    m->endSelection();
+    if(shiftBool){
+      m->endSelectionShift();
+    }else{
+      m->endSelection();
+    }
+}
+
+void Controleur::shiftOn(thor::ActionContext < string > context)
+{
+    (void) context;
+    shiftBool = true;
+  
+}
+
+void Controleur::shiftOff(thor::ActionContext < string > context)
+{
+    (void) context;
+    shiftBool = false;
+  
 }
 
 void Controleur::prepareAttack(thor::ActionContext < string > context){

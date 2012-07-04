@@ -81,7 +81,8 @@ public:
     void initSelection(int x, int y);
     
     void endSelection();
-    
+    void endSelectionShift();
+
     void moveSelection(int x, int y);   
     
     void on_attack(sf::Vector2i mousePosition);
