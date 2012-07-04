@@ -33,7 +33,7 @@ void CoucheDecor::removeUnit(Unit* u)
     allUnits->erase(u);
 }
 
-list<Unit*> CoucheDecor::getUnitsInRect(sf::FloatRect* rectangleSelection)
+list<Unit*> CoucheDecor::getUnitsInRect(sf::FloatRect* rectangleSelection)//FIXME set de selection pour ajout à la selection en log N
 {
     list<Unit*> liste;
     set<Unit*>::iterator it;
@@ -62,6 +62,7 @@ Unit* CoucheDecor::closestEnemyInRange(int range, sf::Vector2f position, Joueur*
     int sizeRect = range*2;
     sf::FloatRect rect = sf::FloatRect(position, sf::Vector2f(sizeRect, sizeRect));
     list<Unit*> liste = getUnitsInRect(&rect);
+    
     if(liste.empty())
       return nullptr;
     

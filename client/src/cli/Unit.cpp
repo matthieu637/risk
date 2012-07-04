@@ -110,7 +110,7 @@ void Unit::applyOrder()
 {
     switch(current_order){
       case order::stop:
-	checkAggro();
+// 	checkAggro();
 	break;
       case order::move:
 	deplacer();
@@ -156,6 +156,9 @@ void Unit::deplacer()
     else
       deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
     move(deplacement.x, deplacement.y);
+    //tri dand l'arbre après déplacement
+    m->getCoucheDecor()->removeUnit(this);
+    m->getCoucheDecor()->addUnit(this);
 }
 
 void Unit::attaquer()
@@ -171,7 +174,9 @@ void Unit::attaquer()
     if(distance > range){ // pas à portée
       deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
       move(deplacement.x, deplacement.y); // on avance vers la cible
-    
+      //tri dand l'arbre après déplacement
+      m->getCoucheDecor()->removeUnit(this);
+      m->getCoucheDecor()->addUnit(this);
     }
     else // à portée
       if(this->attaque_prete)
@@ -188,6 +193,7 @@ void Unit::takeDamages(cce::damage_type type_degat, int degats)
     }
     current_hp -= calcul_real_dmg;
     if(current_hp <= 0){ // mort
+      dead = true;
       //on met les traqueurs en mode stop
       set<Unit*>::iterator it;
       for(it = traqueurs.begin(); it != traqueurs.end(); it++)
@@ -196,7 +202,7 @@ void Unit::takeDamages(cce::damage_type type_degat, int degats)
 }
 
 bool Unit::isDead(){
-  return current_hp <= 0;
+  return dead;
 }
 
 int Unit::rollDamage()

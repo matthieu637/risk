@@ -110,7 +110,7 @@ namespace cli{
 	order current_order;
 	Unit* target_unit;
 	float distance_min_follow;
-	bool attaque_prete;
+	bool attaque_prete, dead;
 	int current_hp, distance_aggro;
 	Joueur* owner;
 	Modele* m;

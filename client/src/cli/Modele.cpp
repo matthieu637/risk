@@ -44,9 +44,9 @@ Modele::Modele():cce::Modele()
     for(int i=1; i<=nbJoueurs; i++)
       players[i] = Joueur(i, player_color::rouge, nbJoueurs);
     
-    for(int i=1;i<10;i++){
-      spawnUnit(300000000,i*150,150, 1);
-      spawnUnit(300000000,i*150,1000, 2);
+    for(int i=1;i<1000;i++){
+      spawnUnit(300000000,100+i*2,150, 1);
+      spawnUnit(300000000,101+i*2,1000, 2);
     }
 }
 
@@ -59,11 +59,8 @@ void Modele::update()
     cce::Modele::update();
     set<Unit*>::iterator it;
     set<Unit*> allunits = *getCoucheDecor()->getAllUnits();
-    for(it = allunits.begin(); it !=  allunits.end(); ++it){
-      getCoucheDecor()->removeUnit(*it);
+    for(it = allunits.begin(); it !=  allunits.end(); ++it)
       (*it)->applyOrder();
-      getCoucheDecor()->addUnit(*it);
-    }
     //detruire les unités mortes
     for(it = getCoucheDecor()->getAllUnits()->begin(); it !=  getCoucheDecor()->getAllUnits()->end(); ++it)
       if((*it)->isDead())
