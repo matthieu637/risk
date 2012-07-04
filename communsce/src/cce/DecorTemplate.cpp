@@ -5,7 +5,7 @@ namespace cce{
 
 DecorTemplate::DecorTemplate()
 {
-  mapAnimTemplate["default"] = AnimationTemplate("default",0,64,47,1);
+
 }
 
 void DecorTemplate::loadAfterXML(int id)
@@ -16,9 +16,7 @@ void DecorTemplate::loadAfterXML(int id)
   ImageManager::getInstance()->load_asset(id, path);
   
   texture = &ImageManager::getInstance()->get_asset(id);
-  initAnimation();
- 
-  
+  initAnimation(); 
 }
 
 AnimationTemplate *DecorTemplate::getMapTemplate(){
@@ -41,10 +39,7 @@ DecorTemplate::~DecorTemplate()
 
 }
 
-// thor::Animator<sf::Sprite, std::string> *DecorTemplate::getAnimathor(){
-//     return animathor; 
-//  }
- 
+
 Texture* DecorTemplate::getTexture()
 {
   return texture;

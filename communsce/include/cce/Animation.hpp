@@ -9,14 +9,12 @@ namespace cce{
   class Animation 
   {
     public:
-      Animation();
       Animation(AnimationTemplate *animTemplate);
       AnimationTemplate* getTemplate();
       void makeAnimation();
     
     private :
 	AnimationTemplate *animationTemplate;
-	// thor::Animator<sf::Sprite, std::string> anim;
   };
 
 }

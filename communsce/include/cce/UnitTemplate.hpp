@@ -104,7 +104,7 @@ public:
     int getDefence();
     damage_type getDamageType();
     defence_type getDefenseType();
-   // thor::Animator<sf::Sprite, std::string> getAnimation();
+
     void initAnimation();
     
 
@@ -145,7 +145,6 @@ private:
     damage_type dmg_type;
     defence_type def_type;
     Texture *texture;
-    //thor::Animator<sf::Sprite, std::string> animation;
     map<std::string,AnimationTemplate>  mapAnimTemplate;
     
     sf::CircleShape* selection_circle;
