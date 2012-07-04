@@ -8,6 +8,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <Thor/Animation.hpp>
+#include "cce/AnimationTemplate.hpp"
+#include <map>
+
+using std::map;
 
 using sf::Texture;
 using boost::serialization::make_nvp;
@@ -34,7 +38,8 @@ public:
 ///
     int getID();
     
-    thor::Animator<sf::Sprite, std::string> getAnimation();
+    //thor::Animator<sf::Sprite, std::string> *getAnimathor();
+    AnimationTemplate* getMapTemplate();
     void initAnimation();
     
 ///
@@ -65,7 +70,8 @@ private:
     bool bloquant_;
     string path;
     Texture *texture;
-    thor::Animator<sf::Sprite, std::string> animation;
+    //thor::Animator<sf::Sprite, std::string> *animathor;
+    map<std::string,AnimationTemplate>  mapAnimTemplate;
 };
 
 }

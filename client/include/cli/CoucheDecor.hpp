@@ -11,6 +11,8 @@ using std::set;
 namespace cli
 {
 
+class Joueur;
+
 class Unit;
   
 class CoucheDecor: public cce::CoucheDecor{
@@ -26,18 +28,21 @@ public:
     void addUnit(Unit* u);
     
     void removeUnit(Unit* u);
-    
-    void deleteUnit(Unit* u);
 
 ///
 ///\brief liste des unités dont le socle est dans le rectangle
 ///
-    list<Unit*> getUnitsInRect(sf::RectangleShape* rectangleSelection);
+    list<Unit*> getUnitsInRect(sf::FloatRect* rectangleSelection);
 
 ///
 ///\brief unité visible au point cliqué
 ///
     Unit* getUnit(sf::Vector2f position);
+
+///
+///\brief unité ennemie la plus proche de position dans le cercle de rayon range.
+///
+    Unit* closestEnemyInRange(int range, sf::Vector2f position, Joueur* j);
 
 ///
 ///\brief savoir si un décor entre en collision avec un autre
@@ -50,10 +55,10 @@ public:
 ///
 ///\brief liste exhaustive des unités
 ///
-    list<Unit*>* getAllUnits();
+    set<Unit*>* getAllUnits();
 
 private:
-    list<Unit*>* allUnits;
+    set<Unit*>* allUnits;
 };
 
 }

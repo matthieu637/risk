@@ -12,6 +12,7 @@
 #include <CEGUI/CEGUI.h>
 #include "cli/CoucheDecor.hpp"
 #include "cce/CoucheDecor.hpp"
+#include "cli/Joueur.hpp"
 
 using std::list;
 using std::set;
@@ -27,15 +28,26 @@ Modele::Modele():cce::Modele()
     
     coeff_zoom = 1;
     
-    for(int i=1;i<10;i++)
-    spawnUnit(300000000,i*150,150);
-    
     //parametres du rectangle de selection
     rectangleSelection = new sf::RectangleShape();
     rectangleSelection->setOutlineColor(sf::Color(0,150,0,255));
     rectangleSelection->setOutlineThickness(1);
     rectangleSelection->setFillColor(sf::Color(0,150,0,50));
     selectionBool = false;
+    
+    //joueurs
+    player_number = 1;
+    int nbJoueurs = 2;
+    
+    players = vector<Joueur>(nbJoueurs+1);
+    
+    for(int i=1; i<=nbJoueurs; i++)
+      players[i] = Joueur(i, player_color::rouge, nbJoueurs);
+    
+    for(int i=1;i<10;i++){
+      spawnUnit(300000000,i*150,150, 1);
+      spawnUnit(300000000,i*150,1000, 2);
+    }
 }
 
 Modele::~Modele() {
@@ -45,21 +57,26 @@ Modele::~Modele() {
 void Modele::update()
 {
     cce::Modele::update();
-    list<Unit*>::iterator it;
-    list<Unit*>* allunits = getCoucheDecor()->getAllUnits();
-    for(it = allunits->begin(); it !=  allunits->end(); ++it){
-      getCoucheDecor()->removeDecor(*it);
+    set<Unit*>::iterator it;
+    set<Unit*> allunits = *getCoucheDecor()->getAllUnits();
+    for(it = allunits.begin(); it !=  allunits.end(); ++it){
+      getCoucheDecor()->removeUnit(*it);
       (*it)->applyOrder();
-      getCoucheDecor()->addDecor(*it);    
+      getCoucheDecor()->addUnit(*it);
     }
+    //detruire les unités mortes
+    for(it = getCoucheDecor()->getAllUnits()->begin(); it !=  getCoucheDecor()->getAllUnits()->end(); ++it)
+      if((*it)->isDead())
+	deleteUnit(*it);
 }
 
-void Modele::spawnUnit(int id, int x, int y)
+void Modele::spawnUnit(int id, int x, int y, int joueur)
 {
-    Unit* u = new Unit(this);
+    Unit* u = new Unit(this, &players[joueur]);
     u->setId(id);
     u->setPosition(x,y);
     getCoucheDecor()->addUnit(u);
+    players[joueur].addUnit(u);
 }
 
 void Modele::setCamOrigine(int cameraX, int cameraY)
@@ -131,6 +148,17 @@ void Modele::moveUnitSelection(sf::Vector2i mousePosition)
 	(*it)->orderMove(mousePosition);
 }
 
+void Modele::on_attack(sf::Vector2i mousePosition)
+{
+    Unit* to_attack = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
+    
+    if(to_attack != nullptr && to_attack->getOwner()->getNumber() != player_number){
+      list<Unit*>::iterator it;
+      for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+	(*it)->orderAttack(to_attack);
+    }
+}
+
 void Modele::initSelection(int x, int y)
 {
     rectangleSelection->setSize(sf::Vector2f(0,0));
@@ -161,25 +189,40 @@ void Modele::moveSelection(int x, int y)
 void Modele::endSelection()
 {
     selectionBool = false;
-    LOG_DEBUG("test");
-    list<Unit*> units_in_rect = getCoucheDecor()->getUnitsInRect(rectangleSelection);
+
+    list<Unit*> units_in_rect = players[player_number].getUnitsInRect(rectangleSelection->getGlobalBounds());
     if(!units_in_rect.empty())
       selectionUnits = units_in_rect;
 }
 
+
 void Modele::endSelectionShift(){
     selectionBool = false;
-    list<Unit*> units_in_rect = getCoucheDecor()->getUnitsInRect(rectangleSelection);
+    list<Unit*> units_in_rect =  players[player_number].getUnitsInRect(rectangleSelection->getGlobalBounds());
     if(!units_in_rect.empty()){
-      LOG_DEBUG("test selectunitssizebefore : " << selectionUnits.size());
+     // LOG_DEBUG("test selectunitssizebefore : " << selectionUnits.size());
       list<Unit*>::const_iterator it;
       for(it = units_in_rect.begin(); it != units_in_rect.end(); ++it){
 	//Des unités vont être en double, triple dans cette liste car on ne teste pas leurs existence. A IMPLEMENTER
 	//Il faudra à terme passer la liste en un set pour pouvoir effectuer une recherche rapide si jamais il y a une centaine d'unités selectionnées et que l'on veuille en rajouter une centaine à la selection
 	selectionUnits.push_back((*it));
       }
-      LOG_DEBUG("test selectunitssizeafter : " << selectionUnits.size());      
+     // LOG_DEBUG("test selectunitssizeafter : " << selectionUnits.size());      
     }
+}
+
+Unit* Modele::closestEnemyInRange(int range, sf::Vector2f position, Joueur* j)
+{
+    return getCoucheDecor()->closestEnemyInRange(range, position, j);
+}
+
+void Modele::deleteUnit(Unit* u)
+{
+    getCoucheDecor()->removeUnit(u);
+    u->getOwner()->removeUnit(u);
+    selectionUnits.remove(u);
+    delete u;
+
 }
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -198,20 +241,5 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
        target.draw(*rectangleSelection, states);
     }
 }
-  
-  
-  
-void Modele::on_attack(sf::Vector2i mousePosition){
-      list<Unit*>::iterator it;
-      Unit* to_follow = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
-    
-      if(to_follow != nullptr){
-	for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it){
-	  (*it)->orderAttack(to_follow);
-	}
-      }
-   
-}
-
   
 }

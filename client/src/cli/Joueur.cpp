@@ -1,19 +1,25 @@
 #include "cli/Joueur.hpp"
 #include "cce/Pays.hpp"
 #include "cce/Region.hpp"
+#include "cli/Unit.hpp"
 
 using namespace cli;
 using cce::Pays;
 using cce::Region;
+
+Joueur::Joueur()
+{
+  
+}
 
 Joueur::Joueur(int num, player_color couleur, int nbPlayers)
 {
   player_number = num;
   color = couleur;
   income = 10;
-  for(int i=0; i < nbPlayers; i++)
-    if(i != player_number)
-      allied_player[nbPlayers] = false;
+  
+  allied_player = vector<bool>(nbPlayers+1);
+  allied_player[player_number] = true; //allié à soi-même
 }
 
 Joueur::~Joueur()
@@ -45,6 +51,16 @@ void Joueur::removeRegion(Region* r)
   regions_controles.remove(r);
 }
 
+void Joueur::addUnit(Unit* u)
+{
+  units.push_back(u);
+}
+
+void Joueur::removeUnit(Unit* u)
+{
+  units.remove(u);
+}
+
 void Joueur::setAllied(int num_joueur, bool allied)
 {
   if(num_joueur != player_number)
@@ -66,6 +82,11 @@ list<Pays*> Joueur::getPays()
   return pays_controles;
 }
 
+int Joueur::getNumber()
+{
+  return player_number;
+}
+
 int Joueur::getIncome()
 {
   return income;
@@ -74,4 +95,14 @@ int Joueur::getIncome()
 int Joueur::getGold()
 {
   return gold;
+}
+
+list<Unit*> Joueur::getUnitsInRect(sf::FloatRect rectangleSelection)
+{
+    list<Unit*> liste;
+    list<Unit*>::iterator it;
+    for(it = units.begin(); it != units.end(); it++)
+      if(rectangleSelection.contains((*it)->getPosition().x + (*it)->getSocleCenter().x, (*it)->getPosition().y + (*it)->getSocleCenter().y)) 
+	liste.push_back(*it);
+    return liste;
 }
