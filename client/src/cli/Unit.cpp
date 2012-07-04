@@ -1,9 +1,10 @@
 #include "cli/Unit.hpp"
-#include <cli/BastonManager.hpp>
+#include "cli/BastonManager.hpp"
 #include "bib/Logger.hpp"
 #include <cmath>
-#include <cli/Modele.hpp>
-#include <cli/CoucheDecor.hpp>
+#include "cli/Modele.hpp"
+#include "cli/CoucheDecor.hpp"
+#include "cli/Joueur.hpp"
 #include <stdlib.h>
 #include <time.h>
 
@@ -25,11 +26,12 @@ void Unit::animate(){
 Unit::~Unit(){
   
 }
-Unit::Unit(Modele* ma)
+Unit::Unit(Modele* ma, Joueur* joueur)
 {
     this->m = ma;
     current_order = stop;
-    yCompare = getPosition().y + getLocalBounds().height *3/4;
+    owner = joueur;
+    distance_aggro = 500;
 }
 
 void Unit::setUnitTemplate(cce::UnitTemplate *ut){
@@ -93,6 +95,9 @@ void Unit::orderAttack(Unit* to_attack)
 void Unit::applyOrder()
 {
     switch(current_order){
+      case order::stop:
+	checkAggro();
+	break;
       case order::move:
 	deplacer();
 	break;
@@ -110,6 +115,13 @@ void Unit::applyOrder()
 
 void Unit::setId(int id){
     setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
+}
+
+void Unit::checkAggro()
+{
+    Unit* u = m->closestEnemyInRange(distance_aggro, getPosition(), owner);
+    if(u != nullptr)
+      orderAttack(u);
 }
 
 void Unit::deplacer()
@@ -179,6 +191,10 @@ int Unit::rollDamage()
     int degats_range = (unitTemplate->getDamageMax() - unitTemplate->getDamageMin() + 1);
     int degats_bonus = rand() % degats_range;
     return unitTemplate->getDamageMin() + degats_bonus;
+}
+
+Joueur* Unit::getOwner(){
+    return owner;
 }
 
 void Unit::addTraqueur(Unit* traqueur)

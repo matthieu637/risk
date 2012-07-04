@@ -17,9 +17,6 @@ using std::string;
 
 namespace cli {
 
-class CoucheDecor;
-class Unit;
-
 enum palette_type
 {
     tiles, decors, regions, pays
@@ -27,6 +24,9 @@ enum palette_type
 
 class Vue;
 class Repere;
+class Joueur;
+class CoucheDecor;
+class Unit;
 
 class Modele:public cce::Modele {
 
@@ -68,14 +68,23 @@ public:
 ///\brief Supprimer une unité de la mémoire, l'enlève également des collections où elle apparait.
 ///
     void deleteUnit(Unit* u);
+
+///
+///\brief unité ennemie au joueur j la plus proche de position dans le rayon range.
+///
+    Unit* closestEnemyInRange(int range, sf::Vector2f position, Joueur* j);
     
     void windowResized(int width, int height);
     
-    void spawnUnit(int id, int x, int y);
+    void spawnUnit(int id, int x, int y, int joueur);
     
     void initSelection(int x, int y);
+    
     void endSelection();
+    void endSelectionShift();
+
     void moveSelection(int x, int y);   
+    void removeSelection(int x, int y);
     
     void on_attack(sf::Vector2i mousePosition);
     
@@ -84,17 +93,20 @@ public:
     CoucheDecor* getCoucheDecor(){return (CoucheDecor*)carte->getCoucheDecor();}
 
 
+    
   private:
-    int cameraOrigineX, cameraOrigineY;
+    int cameraOrigineX, cameraOrigineY, player_number;
     bool selectionBool;
     float coeff_zoom;
     list <cce::Vue*>::iterator it;
-    list <Unit*> selectionUnits;
-
+    set<Unit*> selectionUnits;
+    vector <Joueur> players;
     sf::Vector2f origineSelection;
     sf::RectangleShape* rectangleSelection;
     
-    
+    void removeUnitSelection(Unit* un);
+
+    void addUnitSelection(Unit* un);
 };
 
 }

@@ -1,10 +1,12 @@
 #ifndef UNIT_HPP
 #define UNIT_HPP
 
+#include "cce/Decor.hpp"
 #include "cce/Animation.hpp"
-#include <cce/Decor.hpp>
-#include <cce/UnitTemplate.hpp>
-#include "Modele.hpp"
+#include "cce/UnitTemplate.hpp"
+#include <set>
+
+using std::set;
 
 namespace cli{
   
@@ -13,12 +15,15 @@ namespace cli{
       stop, hold, move, follow, attack
   };
   
+  class Joueur;
+  class Modele;
+  
   class Unit : public cce::Decor
   {
     public:
       Unit();
       ~Unit();
-      Unit(cli::Modele* ma);
+      Unit(Modele* ma, Joueur* joueur);
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
 ///
@@ -43,6 +48,11 @@ namespace cli{
       void orderAttack(Unit* to_attack);
 
 ///
+///\brief Vérifie si des unités ennemies sont à portée d'aggro.
+///
+      void checkAggro();
+
+///
 ///\brief Attaque si à portée, sinon déplacement.
 ///
       void attaquer();
@@ -63,7 +73,10 @@ namespace cli{
 ///\param degats: les degats
 ///
       void takeDamages(cce::damage_type machin,int degats);
-bool isDead();
+///
+///\brief Teste si l'unité est morte.
+///
+      bool isDead();
 ///
 ///\brief Ordre courant
 ///\return order: l'ordre courant
@@ -80,6 +93,11 @@ bool isDead();
 ///
       void removeTraqueur(Unit* traqueur);
 
+///
+///\brief joueur propriétaire
+///
+      Joueur* getOwner();
+
       
     private:
 	void deplacer();
@@ -93,8 +111,9 @@ bool isDead();
 	Unit* target_unit;
 	float distance_min_follow;
 	bool attaque_prete;
-	int current_hp;
-	cli::Modele* m;
+	int current_hp, distance_aggro;
+	Joueur* owner;
+	Modele* m;
 	set<Unit*> traqueurs;
 
   };

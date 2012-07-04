@@ -3,6 +3,7 @@
 #include <list>
 #include <vector>
 #include "Vue.hpp"
+#include <SFML/Graphics/Rect.hpp>
 
 using std::vector;
 
@@ -17,10 +18,13 @@ enum player_color {
   rouge, bleu, vert, violet, jaune, orange
 };
 
+class Unit;
+
 class Joueur
 {
 
 public:
+  Joueur();
   Joueur(int num, player_color couleur, int nbPlayers);
   virtual ~Joueur();
   
@@ -45,6 +49,16 @@ public:
   void removeRegion(cce::Region* r);
   
   ///
+  ///\brief Ajoute l'unité à ce joueur.
+  ///
+  void addUnit(Unit* u);
+  
+  ///
+  ///\brief Enlève l'unité à ce joueur.
+  ///
+  void removeUnit(Unit* u);
+  
+  ///
   ///\brief Regions possédées par le joueur.
   ///
   list<cce::Region*> getRegions();
@@ -55,6 +69,11 @@ public:
   list<cce::Pays*> getPays();
   
   ///
+  ///\brief Numéro du joueur
+  ///
+  int getNumber();
+  
+  ///
   ///\brief Income total du joueur.
   ///
   int getIncome();
@@ -63,6 +82,11 @@ public:
   ///\brief Gold disponible.
   ///
   int getGold();
+  
+  ///
+  ///\brief Unités du joueur dans la région.
+  ///
+  list<Unit*> getUnitsInRect(sf::FloatRect rectangleSelection);
   
   ///
   ///\brief Changer le statut d'un joueur à son égard.
@@ -81,6 +105,7 @@ private:
   player_color color;
   list<cce::Pays*> pays_controles;
   list<cce::Region*> regions_controles;
+  list<Unit*> units;
   vector<bool> allied_player;
 };
 
