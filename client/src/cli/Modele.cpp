@@ -161,9 +161,25 @@ void Modele::moveSelection(int x, int y)
 void Modele::endSelection()
 {
     selectionBool = false;
+    LOG_DEBUG("test");
     list<Unit*> units_in_rect = getCoucheDecor()->getUnitsInRect(rectangleSelection);
     if(!units_in_rect.empty())
       selectionUnits = units_in_rect;
+}
+
+void Modele::endSelectionShift(){
+    selectionBool = false;
+    list<Unit*> units_in_rect = getCoucheDecor()->getUnitsInRect(rectangleSelection);
+    if(!units_in_rect.empty()){
+      LOG_DEBUG("test selectunitssizebefore : " << selectionUnits.size());
+      list<Unit*>::const_iterator it;
+      for(it = units_in_rect.begin(); it != units_in_rect.end(); ++it){
+	//Des unités vont être en double, triple dans cette liste car on ne teste pas leurs existence. A IMPLEMENTER
+	//Il faudra à terme passer la liste en un set pour pouvoir effectuer une recherche rapide si jamais il y a une centaine d'unités selectionnées et que l'on veuille en rajouter une centaine à la selection
+	selectionUnits.push_back((*it));
+      }
+      LOG_DEBUG("test selectunitssizeafter : " << selectionUnits.size());      
+    }
 }
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -172,13 +188,15 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(*carte->getRepere(), states);
     //Rendu des cercles de sélection
     list<Unit*>::const_iterator it;
-    for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
+    for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it){
  	target.draw(*(*it)->getSelectionCircle());
+    }
     //Rendu des décors
     target.draw(*carte->getCoucheDecor(), states);
     //Rendu du rectangle de selection
-    if(selectionBool)
+    if(selectionBool){
        target.draw(*rectangleSelection, states);
+    }
 }
   
   

@@ -42,6 +42,8 @@ public:
     void onLeftClick(thor::ActionContext < string > context);
     void selectionOff(thor::ActionContext < string > context);
     void selectionMove(thor::ActionContext < string > context);
+    void shiftOn(thor::ActionContext < string > context);
+    void shiftOff(thor::ActionContext < string > context);
     void prepareAttack(thor::ActionContext < string > context);
     void onattack(thor::ActionContext < string > context);
     
@@ -60,6 +62,9 @@ private:
 
     bool attackMode;
 
+    //variables privées necessaires à la détection d'Action pour des Action à touches multiples
+    bool shiftBool;
+    
     GUI *gui;
     Modele *m;
 };
