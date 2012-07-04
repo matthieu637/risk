@@ -18,13 +18,17 @@ UnitTemplate::UnitTemplate()
 //     def_type = acier;
 
  mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",0,0,6,64,47,1);
- mapAnimTemplate["moveRight"] = AnimationTemplate("moveRight",1,0,6,64,47,1);
- mapAnimTemplate["moveDown"] = AnimationTemplate("moveDown",2,0,6,64,47,1);
- mapAnimTemplate["moveLeft"] = AnimationTemplate("moveLeft",3,0,6,64,47,1);
+ mapAnimTemplate["moveRight"] = AnimationTemplate("moveRight",1,0,6,64,47,2);
+ mapAnimTemplate["moveDown"] = AnimationTemplate("moveDown",2,0,6,64,47,1.5);
+ mapAnimTemplate["moveLeft"] = AnimationTemplate("moveLeft",3,0,6,64,47,0.5);
 }
 
-AnimationTemplate *UnitTemplate::getMapTemplate(){
-    return &mapAnimTemplate["moveRight"];
+// AnimationTemplate *UnitTemplate::getMapTemplate(){
+//     return &mapAnimTemplate["moveLeft"];
+// }
+
+map<std::string,AnimationTemplate> *UnitTemplate::getMapTemplate(){
+    return &mapAnimTemplate;
 }
 
 void UnitTemplate::loadAfterXML(int id)
@@ -47,7 +51,8 @@ UnitTemplate::~UnitTemplate()
    // Specify static subrect which is shown unless an other animation is active
   thor::FrameAnimation defaultAnim;
   defaultAnim.addFrame(1.f, sf::IntRect(0, 0, texture->getSize().x, texture->getSize().y));
-  getMapTemplate()->getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+  (*getMapTemplate())["moveUp"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+  (*getMapTemplate())["moveRight"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
 }
  
 void UnitTemplate::setDamage(int dmg_min, int dmg_max) {

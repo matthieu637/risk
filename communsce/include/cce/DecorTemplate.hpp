@@ -38,7 +38,8 @@ public:
 ///
     int getID();
     
-    AnimationTemplate* getMapTemplate();
+//     AnimationTemplate* getMapTemplate();
+    map<std::string,AnimationTemplate> * getMapTemplate();
     void initAnimation();
     
 ///

@@ -52,8 +52,25 @@ public:
 	ar & make_nvp("hp_max", hp_max);
 	ar & make_nvp("path", path);
 	ar & make_nvp("range", range);	
+	
+	ar & make_nvp("mapAnimTemplate", mapAnimTemplate);
+	//boost::serialization::split_member(ar, *this, version);
     }
     
+    template<class Archive>
+    void save(Archive& ar, const unsigned int version) const {
+// 	map<std::string,AnimationTemplate>  mapAnimTemplate;
+// 	mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",0,0,6,64,47,1);
+// 	mapAnimTemplate["moveRight"] = AnimationTemplate("moveRight",1,0,6,64,47,1);
+// 	mapAnimTemplate["moveDown"] = AnimationTemplate("moveDown",2,0,6,64,47,1);
+// 	mapAnimTemplate["moveLeft"] = AnimationTemplate("moveLeft",3,0,6,64,47,1);
+// 	ar & make_nvp("mapAnimTemplate", mapAnimTemplate);
+    }
+
+    template<class Archive>
+    void load( Archive & ar, const unsigned int file_version ) {
+      
+    }
 
 ///
 ///\brief Description visible dans le client et l'editeur
@@ -124,7 +141,8 @@ public:
 ///
     int getMoveSpeed();
  
-    AnimationTemplate* getMapTemplate();
+//     AnimationTemplate* getMapTemplate();
+    map<std::string,AnimationTemplate> * getMapTemplate();
 
     
 ///

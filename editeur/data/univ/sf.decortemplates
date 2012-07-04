@@ -10,56 +10,8 @@
 			<path>spawn.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate class_id="3" tracking_level="0" version="0">
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item class_id="4" tracking_level="0" version="0">
-					<first>moveDown</first>
-					<second class_id="5" tracking_level="0" version="0">
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -69,56 +21,8 @@
 			<path>caisse1_petit.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -128,56 +32,8 @@
 			<path>arbre.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -187,56 +43,8 @@
 			<path>arbre.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -246,56 +54,8 @@
 			<path>maison1.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -305,56 +65,8 @@
 			<path>rocher1.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -364,56 +76,8 @@
 			<path>rocher2.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -423,56 +87,8 @@
 			<path>rocher3.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>
@@ -482,56 +98,8 @@
 			<path>buisson1.png</path>
 			<bloquant>0</bloquant>
 			<mapAnimTemplate>
-				<count>4</count>
+				<count>0</count>
 				<item_version>0</item_version>
-				<item>
-					<first>moveDown</first>
-					<second>
-						<num_Animation>2</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveLeft</first>
-					<second>
-						<num_Animation>3</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveRight</first>
-					<second>
-						<num_Animation>1</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
-				<item>
-					<first>moveUp</first>
-					<second>
-						<num_Animation>0</num_Animation>
-						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
-						<debut>0</debut>
-						<fin>6</fin>
-					</second>
-				</item>
 			</mapAnimTemplate>
 		</second>
 	</item>

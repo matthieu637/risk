@@ -104,7 +104,7 @@ namespace cli{
     
     private :
 	cce::UnitTemplate *unitTemplate;
-	cce::Animation* anim;
+	map<string,cce::Animation*> anim;
 	
 	sf::Vector2f destination, deplacement;
 	order current_order;

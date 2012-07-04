@@ -27,8 +27,12 @@ Decor::~Decor()
 
 void Decor::animate(){  
   // Update animator and apply current animation state to the sprite
-   dt->getMapTemplate()->getAnimathor()->update(frameClock.restart());
-   dt->getMapTemplate()->getAnimathor()->animate(*this);
+//    dt->getMapTemplate()->getAnimathor()->update(frameClock.restart());
+//    dt->getMapTemplate()->getAnimathor()->animate(*this);
+  (*dt->getMapTemplate())["moveUp"].getAnimathor()->update(frameClock.restart());
+  (*dt->getMapTemplate())["moveUp"].getAnimathor()->animate(*this);
+   (*dt->getMapTemplate())["moveRight"].getAnimathor()->update(frameClock.restart());
+   (*dt->getMapTemplate())["moveRight"].getAnimathor()->animate(*this);
 }
 
 DecorTemplate* Decor::getTemplate() const
