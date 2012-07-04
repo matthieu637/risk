@@ -86,7 +86,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
 
     //Initialize some variables
     attackMode = false;
-    
+    selectionRemove = true;
     //Initialize variables for Action
     shiftBool = false;
 }
@@ -172,28 +172,38 @@ void Controleur::onMoveUnit(thor::ActionContext < string > context)
 void Controleur::onLeftClick(thor::ActionContext < string > context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+
     m->initSelection(getX(mousePosition.x), getY(mousePosition.y));
+    
+    selectionRemove = true;
     
     if(attackMode){
       onattack(context);
     }
 }
 
-
 void Controleur::selectionMove(thor::ActionContext < string > context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     m->moveSelection(getX(mousePosition.x), getY(mousePosition.y));
+    
+    selectionRemove = false;
 }
 
 void Controleur::selectionOff(thor::ActionContext < string > context)
 {
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    
     (void) context;
     if(shiftBool){
       m->endSelectionShift();
     }else{
       m->endSelection();
     }
+    if(selectionRemove){
+      m->removeSelection(getX(mousePosition.x), getY(mousePosition.y));
+    }
+    
 }
 
 void Controleur::shiftOn(thor::ActionContext < string > context)

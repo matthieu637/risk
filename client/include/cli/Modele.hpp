@@ -84,6 +84,7 @@ public:
     void endSelectionShift();
 
     void moveSelection(int x, int y);   
+    void removeSelection(int x, int y);
     
     void on_attack(sf::Vector2i mousePosition);
     
@@ -92,15 +93,20 @@ public:
     CoucheDecor* getCoucheDecor(){return (CoucheDecor*)carte->getCoucheDecor();}
 
 
+    
   private:
     int cameraOrigineX, cameraOrigineY, player_number;
     bool selectionBool;
     float coeff_zoom;
     list <cce::Vue*>::iterator it;
-    list <Unit*> selectionUnits;
+    set<Unit*> selectionUnits;
     vector <Joueur> players;
     sf::Vector2f origineSelection;
     sf::RectangleShape* rectangleSelection;
+    
+    void removeUnitSelection(Unit* un);
+
+    void addUnitSelection(Unit* un);
 };
 
 }

@@ -136,10 +136,11 @@ void Modele::windowResized(int width, int height)
 
 void Modele::moveUnitSelection(sf::Vector2i mousePosition)
 {
-    list<Unit*>::iterator it;
+    set<Unit*>::iterator it;
     //si on clique sur un décor, on le suit
     Unit* to_follow = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
     if(to_follow != nullptr)
+      
       for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
 	(*it)->orderFollow(to_follow);
     //sinon on bouge au point cliqué
@@ -153,7 +154,7 @@ void Modele::on_attack(sf::Vector2i mousePosition)
     Unit* to_attack = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
     
     if(to_attack != nullptr && to_attack->getOwner()->getNumber() != player_number){
-      list<Unit*>::iterator it;
+      set<Unit*>::iterator it;
       for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
 	(*it)->orderAttack(to_attack);
     }
@@ -192,7 +193,11 @@ void Modele::endSelection()
 
     list<Unit*> units_in_rect = players[player_number].getUnitsInRect(rectangleSelection->getGlobalBounds());
     if(!units_in_rect.empty())
-      selectionUnits = units_in_rect;
+      selectionUnits.clear();
+      list<Unit*>::const_iterator it;
+      for(it = units_in_rect.begin(); it != units_in_rect.end(); ++it){
+	this->addUnitSelection(*it);
+      }
 }
 
 
@@ -203,11 +208,18 @@ void Modele::endSelectionShift(){
      // LOG_DEBUG("test selectunitssizebefore : " << selectionUnits.size());
       list<Unit*>::const_iterator it;
       for(it = units_in_rect.begin(); it != units_in_rect.end(); ++it){
-	//Des unités vont être en double, triple dans cette liste car on ne teste pas leurs existence. A IMPLEMENTER
-	//Il faudra à terme passer la liste en un set pour pouvoir effectuer une recherche rapide si jamais il y a une centaine d'unités selectionnées et que l'on veuille en rajouter une centaine à la selection
-	selectionUnits.push_back((*it));
+	this->addUnitSelection(*it);
       }
      // LOG_DEBUG("test selectunitssizeafter : " << selectionUnits.size());      
+    }
+}
+
+void Modele::removeSelection(int x, int y){
+    selectionBool = false;
+    sf::Vector2f i = sf::Vector2f(x, y);
+    Unit* u = this->getCoucheDecor()->getUnit(i);
+    if(u!=nullptr){
+      this->removeUnitSelection(u);
     }
 }
 
@@ -220,7 +232,7 @@ void Modele::deleteUnit(Unit* u)
 {
     getCoucheDecor()->removeUnit(u);
     u->getOwner()->removeUnit(u);
-    selectionUnits.remove(u);
+    this->removeUnitSelection(u);
     delete u;
 
 }
@@ -230,7 +242,7 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
     //Rendu du repere
     target.draw(*carte->getRepere(), states);
     //Rendu des cercles de sélection
-    list<Unit*>::const_iterator it;
+    set<Unit*>::const_iterator it;
     for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it){
  	target.draw(*(*it)->getSelectionCircle());
     }
@@ -241,5 +253,13 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
        target.draw(*rectangleSelection, states);
     }
 }
+  
+  void Modele::addUnitSelection(Unit* un){
+    selectionUnits.insert(un);
+  }
+  
+  void Modele::removeUnitSelection(Unit* un){
+    selectionUnits.erase(un);
+  }
   
 }

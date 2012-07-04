@@ -61,10 +61,11 @@ private:
     bool moveCam, moveDecor;
 
     bool attackMode;
-
+    bool selectionRemove;
+    
     //variables privées necessaires à la détection d'Action pour des Action à touches multiples
     bool shiftBool;
-    
+  
     GUI *gui;
     Modele *m;
 };
