@@ -19,9 +19,7 @@ Joueur::Joueur(int num, player_color couleur, int nbPlayers)
   income = 10;
   
   allied_player = vector<bool>(nbPlayers+1);
-  for(int i=1; i <= nbPlayers; i++)
-    if(i != player_number)
-      allied_player[nbPlayers] = false;
+  allied_player[player_number] = true; //allié à soi-même
 }
 
 Joueur::~Joueur()
@@ -84,6 +82,11 @@ list<Pays*> Joueur::getPays()
   return pays_controles;
 }
 
+int Joueur::getNumber()
+{
+  return player_number;
+}
+
 int Joueur::getIncome()
 {
   return income;
@@ -94,12 +97,12 @@ int Joueur::getGold()
   return gold;
 }
 
-list<Unit*> Joueur::getUnitsInRect(sf::RectangleShape* rectangleSelection)
+list<Unit*> Joueur::getUnitsInRect(sf::FloatRect rectangleSelection)
 {
     list<Unit*> liste;
     list<Unit*>::iterator it;
     for(it = units.begin(); it != units.end(); it++)
-      if(rectangleSelection->getGlobalBounds().contains((*it)->getPosition().x + (*it)->getSocleCenter().x, (*it)->getPosition().y + (*it)->getSocleCenter().y)) 
+      if(rectangleSelection.contains((*it)->getPosition().x + (*it)->getSocleCenter().x, (*it)->getPosition().y + (*it)->getSocleCenter().y)) 
 	liste.push_back(*it);
     return liste;
 }

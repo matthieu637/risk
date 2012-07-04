@@ -17,9 +17,12 @@ UnitTemplate::UnitTemplate()
 //     dmg_type = laser;
 //     def_type = acier;
 
- mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",6,64,47,1);
+ mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",0,64,47,1);
 }
 
+AnimationTemplate *UnitTemplate::getMapTemplate(){
+    return &mapAnimTemplate["moveUp"];
+}
 
 void UnitTemplate::loadAfterXML(int id)
 {
@@ -41,12 +44,13 @@ UnitTemplate::~UnitTemplate()
    // Specify static subrect which is shown unless an other animation is active
   thor::FrameAnimation defaultAnim;
   defaultAnim.addFrame(1.f, sf::IntRect(0, 0, texture->getSize().x/6, texture->getSize().y/4));
-  animation.setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+  //animation.setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+  getMapTemplate()->getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
 }
 
-thor::Animator<sf::Sprite, std::string> UnitTemplate::getAnimation(){
-    return animation; 
- }
+// thor::Animator<sf::Sprite, std::string> UnitTemplate::getAnimation(){
+//     return animation; 
+//  }
  
 void UnitTemplate::setDamage(int dmg_min, int dmg_max) {
     this->dmg_min = dmg_min;
@@ -130,3 +134,4 @@ int UnitTemplate::getHP()
 }
 
 }
+

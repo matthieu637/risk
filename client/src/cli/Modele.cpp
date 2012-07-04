@@ -72,7 +72,7 @@ void Modele::update()
 
 void Modele::spawnUnit(int id, int x, int y, int joueur)
 {
-    Unit* u = new Unit(this, joueur);
+    Unit* u = new Unit(this, &players[joueur]);
     u->setId(id);
     u->setPosition(x,y);
     getCoucheDecor()->addUnit(u);
@@ -152,7 +152,7 @@ void Modele::on_attack(sf::Vector2i mousePosition)
 {
     Unit* to_attack = getCoucheDecor()->getUnit(sf::Vector2f(mousePosition));
     
-    if(to_attack != nullptr && to_attack->getPlayerNumber() != player_number){
+    if(to_attack != nullptr && to_attack->getOwner()->getNumber() != player_number){
       list<Unit*>::iterator it;
       for(it = selectionUnits.begin(); it != selectionUnits.end(); ++it)
 	(*it)->orderAttack(to_attack);
@@ -189,9 +189,14 @@ void Modele::moveSelection(int x, int y)
 void Modele::endSelection()
 {
     selectionBool = false;
-    list<Unit*> units_in_rect = players[player_number].getUnitsInRect(rectangleSelection);
+    list<Unit*> units_in_rect = players[player_number].getUnitsInRect(rectangleSelection->getGlobalBounds());
     if(!units_in_rect.empty())
       selectionUnits = units_in_rect;
+}
+
+Unit* Modele::closestEnemyInRange(int range, sf::Vector2f position, Joueur* j)
+{
+    return getCoucheDecor()->closestEnemyInRange(range, position, j);
 }
 
 void Modele::deleteUnit(Unit* u)

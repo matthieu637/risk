@@ -23,7 +23,7 @@ namespace cli{
     public:
       Unit();
       ~Unit();
-      Unit(Modele* ma, int joueur);
+      Unit(Modele* ma, Joueur* joueur);
       void setUnitTemplate(cce::UnitTemplate *ut);
       void setId(int id);
 ///
@@ -34,6 +34,8 @@ namespace cli{
 ///\brief Pour ordonner l'unité de bouger quelque part, se met en mode "move"
 ///
       void orderMove(sf::Vector2i point);
+      
+      void animate();
 
 ///
 ///\brief Ordonner à l'unité d'en suivre une autre, se met en mode "follow"
@@ -44,6 +46,11 @@ namespace cli{
 ///\brief Ordonne à l'unité d'en attaquer une autre, se met en mode "attack"
 ///      
       void orderAttack(Unit* to_attack);
+
+///
+///\brief Vérifie si des unités ennemies sont à portée d'aggro.
+///
+      void checkAggro();
 
 ///
 ///\brief Attaque si à portée, sinon déplacement.
@@ -66,7 +73,10 @@ namespace cli{
 ///\param degats: les degats
 ///
       void takeDamages(cce::damage_type machin,int degats);
-bool isDead();
+///
+///\brief Teste si l'unité est morte.
+///
+      bool isDead();
 ///
 ///\brief Ordre courant
 ///\return order: l'ordre courant
@@ -84,9 +94,9 @@ bool isDead();
       void removeTraqueur(Unit* traqueur);
 
 ///
-///\brief numéro du joueur propriétaire
+///\brief joueur propriétaire
 ///
-      int getPlayerNumber();
+      Joueur* getOwner();
 
       
     private:
@@ -94,15 +104,21 @@ bool isDead();
     
     private :
 	cce::UnitTemplate *unitTemplate;
-	cce::Animation anim;
+	cce::Animation* anim;
+	
 	sf::Vector2f destination, deplacement;
 	order current_order;
 	Unit* target_unit;
 	float distance_min_follow;
 	bool attaque_prete;
-	int current_hp, player_number;
+	int current_hp, distance_aggro;
+	Joueur* owner;
 	Modele* m;
 	set<Unit*> traqueurs;
+	
+  public:
+    
+    //static bool init =;
   };
 
 }

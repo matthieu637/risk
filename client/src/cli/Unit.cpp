@@ -10,30 +10,47 @@
 
 namespace cli {
 
-  
+  static bool init = true;
 Unit::Unit()
 {
     current_order = stop;
 }
 
+void Unit::animate(){  
+  // Update animator and apply current animation state to the sprite
+  
+//   animathor->update(frameClock.restart());
+//   animathor->animate(*this);
+
+    //cce::Decor::animate();
+   anim->getTemplate()->getAnimathor()->update(frameClock.restart());
+  anim->getTemplate()->getAnimathor()->animate(*this);
+}
+  
 
 Unit::~Unit(){
   
 }
-Unit::Unit(Modele* ma, int joueur)
+Unit::Unit(Modele* ma, Joueur* joueur)
 {
     this->m = ma;
     current_order = stop;
-    player_number = joueur;
+    owner = joueur;
+    distance_aggro = 500;
 }
 
 void Unit::setUnitTemplate(cce::UnitTemplate *ut){
       unitTemplate = ut;//met a jour les caractéristiques de l'unité
       setTexture(ut->getTexture());//met a jour l'image de l'unité
-      animation = ut->getAnimation();
       unitTemplate = ut;
       current_hp = ut->getHP();
       attaque_prete = true;
+  
+      anim = new cce::Animation(ut->getMapTemplate());
+      if(init){
+	anim->makeAnimation();//commande qui fait bugger! a toi de jouer gourou
+	init = false;
+      }
 
 // 	thor::FrameAnimation moveUp;
 // 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
@@ -92,6 +109,9 @@ void Unit::orderAttack(Unit* to_attack)
 void Unit::applyOrder()
 {
     switch(current_order){
+      case order::stop:
+	checkAggro();
+	break;
       case order::move:
 	deplacer();
 	break;
@@ -109,6 +129,13 @@ void Unit::applyOrder()
 
 void Unit::setId(int id){
     setUnitTemplate(cce::Univers::getInstance()->getUnitTemplate(id));
+}
+
+void Unit::checkAggro()
+{
+    Unit* u = m->closestEnemyInRange(distance_aggro, getPosition(), owner);
+    if(u != nullptr)
+      orderAttack(u);
 }
 
 void Unit::deplacer()
@@ -180,8 +207,8 @@ int Unit::rollDamage()
     return unitTemplate->getDamageMin() + degats_bonus;
 }
 
-int Unit::getPlayerNumber(){
-    return player_number;
+Joueur* Unit::getOwner(){
+    return owner;
 }
 
 void Unit::addTraqueur(Unit* traqueur)

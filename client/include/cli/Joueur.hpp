@@ -2,8 +2,8 @@
 #define JOUEUR_HPP
 #include <list>
 #include <vector>
-#include <SFML/Graphics/RectangleShape.hpp>
 #include "Vue.hpp"
+#include <SFML/Graphics/Rect.hpp>
 
 using std::vector;
 
@@ -69,6 +69,11 @@ public:
   list<cce::Pays*> getPays();
   
   ///
+  ///\brief Numéro du joueur
+  ///
+  int getNumber();
+  
+  ///
   ///\brief Income total du joueur.
   ///
   int getIncome();
@@ -81,7 +86,7 @@ public:
   ///
   ///\brief Unités du joueur dans la région.
   ///
-  list<Unit*> getUnitsInRect(sf::RectangleShape* rectangleSelection);
+  list<Unit*> getUnitsInRect(sf::FloatRect rectangleSelection);
   
   ///
   ///\brief Changer le statut d'un joueur à son égard.

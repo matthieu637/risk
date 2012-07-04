@@ -68,13 +68,20 @@ public:
 ///\brief Supprimer une unité de la mémoire, l'enlève également des collections où elle apparait.
 ///
     void deleteUnit(Unit* u);
+
+///
+///\brief unité ennemie au joueur j la plus proche de position dans le rayon range.
+///
+    Unit* closestEnemyInRange(int range, sf::Vector2f position, Joueur* j);
     
     void windowResized(int width, int height);
     
     void spawnUnit(int id, int x, int y, int joueur);
     
     void initSelection(int x, int y);
+    
     void endSelection();
+    
     void moveSelection(int x, int y);   
     
     void on_attack(sf::Vector2i mousePosition);

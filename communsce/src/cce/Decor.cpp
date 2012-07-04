@@ -12,7 +12,7 @@ Decor::Decor(DecorTemplate *_dt, int x, int y) : Sprite()
   selection_circle = new sf::CircleShape();//avant setPosition qui le repositionne
   setPosition(x,y);
   setTexture(dt->getTexture());
-  animation = dt->getAnimation();
+  //animathor = dt->getAnimathor();
 }
 
 Decor::Decor()
@@ -28,14 +28,19 @@ Decor::~Decor()
 
 void Decor::animate(){  
   // Update animator and apply current animation state to the sprite
-  animation.update(frameClock.restart());
-  animation.animate(*this);
+  
+//   animathor->update(frameClock.restart());
+//   animathor->animate(*this);
+
+   dt->getMapTemplate()->getAnimathor()->update(frameClock.restart());
+   dt->getMapTemplate()->getAnimathor()->animate(*this);
 }
 
 DecorTemplate* Decor::getTemplate() const
 {
     return dt;
 }
+
 
 void Decor::setTexture(Texture* texture)
 {
