@@ -36,6 +36,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action molette(sf::Event::MouseWheelMoved);
     Action mouse_move(sf::Event::MouseMoved);
     Action shift_hold(sf::Keyboard::LShift, Action::Hold);
+    Action shift_release(sf::Keyboard::LShift, Action::ReleaseOnce);
     Action drag_wheel = mouse_move && wheel_hold;
     Action drag_left = mouse_move && left_hold;
 
@@ -46,8 +47,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
-    Action shift_hold_Left_click = shift_hold && left_press;
-    Action shift_hold_Left_release = shift_hold && left_release;
+
 
     // Map
     map["quit"] = close;
@@ -59,10 +59,10 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["move_camera"] = drag_wheel;
     map["move_unit"] = right_press;
     map["leftClick"] = left_press;
-    map["leftClickShift"] = shift_hold_Left_click;
+    map["shift_hold"] = shift_hold;
+    map["shift_release"] = shift_release;
     map["selectionMove"] = drag_left;
     map["selectionOff"] = left_release;
-    map["selectionOffShift"] = shift_hold_Left_release;
     map["prepareAttack"] = a_press;
     
     //Binding map-fonctions
@@ -74,10 +74,10 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("resize", BIND(&Controleur::onWindowResized));
     system.connect("move_unit", BIND(&Controleur::onMoveUnit));
     system.connect("leftClick", BIND(&Controleur::onLeftClick));
-    system.connect("leftClickShift", BIND(&Controleur::onLeftClick));
     system.connect("selectionOff", BIND(&Controleur::selectionOff));
-    system.connect("selectionOffShift", BIND(&Controleur::selectionOffShift));
     system.connect("selectionMove", BIND(&Controleur::selectionMove));
+    system.connect("shift_hold", BIND(&Controleur::shiftOn));
+    system.connect("shift_release", BIND(&Controleur::shiftOff));
     system.connect("prepareAttack", BIND(&Controleur::prepareAttack));
 
     //Binding fonctions CEGUI
@@ -88,8 +88,11 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["add_press"] = add_press;
     system.connect("add_press", BIND(&Controleur::spawnUnit));
 
-    //Inialize some variables
+    //Initialize some variables
     attackMode = false;
+    
+    //Initialize variables for Action
+    shiftBool = false;
 }
 void Controleur::onStartCam(thor::ActionContext < string > context)
 {
@@ -190,13 +193,25 @@ void Controleur::selectionMove(thor::ActionContext < string > context)
 void Controleur::selectionOff(thor::ActionContext < string > context)
 {
     (void) context;
-    m->endSelection();
+    if(shiftBool){
+      m->endSelectionShift();
+    }else{
+      m->endSelection();
+    }
 }
 
-void Controleur::selectionOffShift(thor::ActionContext < string > context)
+void Controleur::shiftOn(thor::ActionContext < string > context)
 {
     (void) context;
-    m->endSelectionShift();
+    shiftBool = true;
+  
+}
+
+void Controleur::shiftOff(thor::ActionContext < string > context)
+{
+    (void) context;
+    shiftBool = false;
+  
 }
 
 void Controleur::prepareAttack(thor::ActionContext < string > context){
