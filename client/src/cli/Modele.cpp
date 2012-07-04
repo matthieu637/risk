@@ -202,6 +202,7 @@ Unit* Modele::closestEnemyInRange(int range, sf::Vector2f position, Joueur* j)
 void Modele::deleteUnit(Unit* u)
 {
     getCoucheDecor()->removeUnit(u);
+    u->getOwner()->removeUnit(u);
     selectionUnits.remove(u);
     delete u;
 }

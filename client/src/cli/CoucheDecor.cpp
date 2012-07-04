@@ -70,7 +70,7 @@ Unit* CoucheDecor::closestEnemyInRange(int range, sf::Vector2f position, Joueur*
     sf::Vector2f distance;
     
     for(it = liste.begin(); it != liste.end(); it++){
-      if(j->isAllied((*it)->getOwner()->getNumber())) // joueur allié (ou soi)
+      if(j->isAllied((*it)->getOwner()->getNumber()) || (*it)->isDead()) // joueur allié (ou soi) ou unité morte
 	continue;
       
       distance = position - (*it)->getPosition();

@@ -23,7 +23,7 @@ Decor::Decor()
 
 Decor::~Decor()
 {
-    
+    delete selection_circle;
 }
 
 void Decor::animate(){  
