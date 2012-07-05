@@ -49,6 +49,8 @@ void Univers::chargerDecorTemplates()
 
     for(; it != itEnd; ++it)
         it->second.loadAfterXML(it->first);
+	  
+   // bib::XMLEngine::save<map<int,DecorTemplate>>(*decorTemplate,"DecorTemplates","nimp");
 }
 
 void Univers::chargerUnitTemplates()
@@ -63,6 +65,8 @@ void Univers::chargerUnitTemplates()
 
     for(; it != itEnd; ++it)
         it->second.loadAfterXML(it->first);
+    
+    // bib::XMLEngine::save<map<int,UnitTemplate>>(*unitTemplate,"UnitTemplates","nimpUnit");
 }
 
 

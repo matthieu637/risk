@@ -9,6 +9,10 @@
 		<second class_id="2" tracking_level="0" version="0">
 			<path>spawn.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate class_id="3" tracking_level="0" version="0">
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -16,6 +20,10 @@
 		<second>
 			<path>caisse1_petit.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -23,6 +31,10 @@
 		<second>
 			<path>arbre.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -30,6 +42,10 @@
 		<second>
 			<path>arbre.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -37,6 +53,10 @@
 		<second>
 			<path>maison1.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -44,6 +64,10 @@
 		<second>
 			<path>rocher1.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -51,6 +75,10 @@
 		<second>
 			<path>rocher2.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -58,6 +86,10 @@
 		<second>
 			<path>rocher3.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 	<item>
@@ -65,7 +97,12 @@
 		<second>
 			<path>buisson1.png</path>
 			<bloquant>0</bloquant>
+			<mapAnimTemplate>
+				<count>0</count>
+				<item_version>0</item_version>
+			</mapAnimTemplate>
 		</second>
 	</item>
 </DecorTemplates>
 </boost_serialization>
+

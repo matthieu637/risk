@@ -233,10 +233,10 @@ void Console::OutputText(const string& message, CEGUI::colour colour)
 
 void Console::setVisible(bool visible)
 {
-    m_ConsoleWindow->setVisible(visible);
-    if (visible == true) {
-        m_ConsoleWindow->getChild("Console/EditBox")->activate();
-    }
+  CEGUI::Window *w =  CEGUI::System::getSingleton().getGUISheet()->getChild("Console");
+  w->setVisible(visible);
+  if (visible == true) 
+      w->getChild("Console/EditBox")->activate();
 }
 
 bool Console::isVisible()

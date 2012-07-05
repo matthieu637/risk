@@ -146,6 +146,7 @@ CEGUI::MouseButton GUI::toCEGUIMouseButton(const sf::Mouse::Button& Button) cons
 }
 
 cce::Console *GUI::getConsole(){
+  LOG_DEBUG("cce gui getConsole");
   return console;
 }
 

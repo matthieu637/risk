@@ -10,7 +10,7 @@
 
 namespace cli {
 
-  static bool init = true;
+   bool init = true;
 Unit::Unit()
 {
     current_order = stop;
@@ -18,13 +18,11 @@ Unit::Unit()
 
 void Unit::animate(){  
   // Update animator and apply current animation state to the sprite
+  anim["anim1"]->getTemplate()->getAnimathor()->update(frameClock.restart());
+  anim["anim1"]->getTemplate()->getAnimathor()->animate(*this);
   
-//   animathor->update(frameClock.restart());
-//   animathor->animate(*this);
-
-    //cce::Decor::animate();
-   anim->getTemplate()->getAnimathor()->update(frameClock.restart());
-  anim->getTemplate()->getAnimathor()->animate(*this);
+//   anim["anim2"]->getTemplate()->getAnimathor()->update(frameClock.restart());
+//   anim["anim2"]->getTemplate()->getAnimathor()->animate(*this);
 }
   
 
@@ -45,21 +43,14 @@ void Unit::setUnitTemplate(cce::UnitTemplate *ut){
       unitTemplate = ut;
       current_hp = ut->getHP();
       attaque_prete = true;
-  
-      anim = new cce::Animation(ut->getMapTemplate());
+      
+      anim["anim1"] = new cce::Animation(&(*ut->getMapTemplate())["moveUp"]);
+     // anim["anim2"] = new cce::Animation(&(*ut->getMapTemplate())["moveRight"]);
       if(init){
-	anim->makeAnimation();//commande qui fait bugger! a toi de jouer gourou
+	anim["anim1"]->makeAnimation();
+	//anim["anim2"]->makeAnimation();
 	init = false;
       }
-
-// 	thor::FrameAnimation moveUp;
-// 	//moveUp.addFrame(1.f, sf::IntRectanimation.playAnimation("moveUp",true);(0, 0, ut->getTexture()->getSize().x/6, getTexture()->getSize().y/4));
-// 	 for (unsigned int i = 0; i < 6; ++i)
-// 	    moveUp.addFrame(1.f, sf::IntRect(47*i, 0, 47, 64));
-// 	 
-//     // Register animations with their corresponding durations
-//       animation.addAnimation("moveUp", moveUp, sf::seconds(0.4f));  
-//       animation.playAnimation("moveUp", true);
 }
 
 

@@ -44,6 +44,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
     Action d_press(sf::Keyboard::D, Action::ReleaseOnce);
     Action a_press(sf::Keyboard::A, Action::ReleaseOnce);
+    Action c_press(sf::Keyboard::C, Action::ReleaseOnce);
+    Action escape_press(sf::Keyboard::Escape, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
     Action num0_press(sf::Keyboard::Num0, Action::Hold);
     Action rctrl_num0 = rctrl_press && num0_press;
@@ -64,6 +66,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["selectionMove"] = drag_left;
     map["selectionOff"] = left_release;
     map["prepareAttack"] = a_press;
+    map["openConsole"] = c_press;
+    map["closeConsole"] = escape_press;
     
     //Binding map-fonctions
     system.connect("start_cam", BIND(&Controleur::onStartCam));
@@ -79,6 +83,8 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     system.connect("shift_hold", BIND(&Controleur::shiftOn));
     system.connect("shift_release", BIND(&Controleur::shiftOff));
     system.connect("prepareAttack", BIND(&Controleur::prepareAttack));
+    system.connect("openConsole", BIND(&Controleur::onOpenConsole));
+    system.connect("closeConsole", BIND(&Controleur::onCloseConsole));
 
     //Binding fonctions CEGUI
     
@@ -86,7 +92,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
 
     //Initialize some variables
     attackMode = false;
-    
+    selectionRemove = true;
     //Initialize variables for Action
     shiftBool = false;
     
@@ -189,28 +195,38 @@ void Controleur::onMoveUnit(thor::ActionContext < string > context)
 void Controleur::onLeftClick(thor::ActionContext < string > context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+
     m->initSelection(getX(mousePosition.x), getY(mousePosition.y));
+    
+    selectionRemove = true;
     
     if(attackMode){
       onattack(context);
     }
 }
 
-
 void Controleur::selectionMove(thor::ActionContext < string > context)
 {
     sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
     m->moveSelection(getX(mousePosition.x), getY(mousePosition.y));
+    
+    selectionRemove = false;
 }
 
 void Controleur::selectionOff(thor::ActionContext < string > context)
 {
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*context.window);
+    
     (void) context;
     if(shiftBool){
       m->endSelectionShift();
     }else{
       m->endSelection();
     }
+    if(selectionRemove){
+      m->removeSelection(getX(mousePosition.x), getY(mousePosition.y));
+    }
+    
 }
 
 void Controleur::shiftOn(thor::ActionContext < string > context)
@@ -237,6 +253,16 @@ void Controleur::onattack(thor::ActionContext < string > context){
     sf::Vector2i attackPosition = sf::Vector2i(getX(mousePosition.x), getY(mousePosition.y));
     m->on_attack(attackPosition);
     attackMode = false;
+}
+
+void Controleur::onOpenConsole(thor::ActionContext < string > context){
+    (void)context;  
+    gui->getConsole()->setVisible(true);
+}
+
+void Controleur::onCloseConsole(thor::ActionContext < string > context){
+    (void)context;  
+    gui->getConsole()->setVisible(false);
 }
 
 void Controleur::spawnUnits(thor::ActionContext < string > context)

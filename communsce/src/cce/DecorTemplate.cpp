@@ -5,7 +5,7 @@ namespace cce{
 
 DecorTemplate::DecorTemplate()
 {
-  mapAnimTemplate["default"] = AnimationTemplate("default",0,64,47,1);
+
 }
 
 void DecorTemplate::loadAfterXML(int id)
@@ -16,13 +16,15 @@ void DecorTemplate::loadAfterXML(int id)
   ImageManager::getInstance()->load_asset(id, path);
   
   texture = &ImageManager::getInstance()->get_asset(id);
-  initAnimation();
- 
-  
+  initAnimation(); 
 }
 
-AnimationTemplate *DecorTemplate::getMapTemplate(){
-    return &mapAnimTemplate["moveUp"];
+// AnimationTemplate *DecorTemplate::getMapTemplate(){
+//     return &mapAnimTemplate["moveUp"];
+// }
+
+map<std::string,AnimationTemplate> *DecorTemplate::getMapTemplate(){
+    return &mapAnimTemplate;
 }
 
 void DecorTemplate::initAnimation()
@@ -31,7 +33,9 @@ void DecorTemplate::initAnimation()
   thor::FrameAnimation defaultAnim;
   defaultAnim.addFrame(1.f, sf::IntRect(0, 0, texture->getSize().x, texture->getSize().y)); 
   // Register animations with their corresponding durations
-  getMapTemplate()->getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+  (*getMapTemplate())["moveUp"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+  (*getMapTemplate())["moveRight"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
+  
 
 }
 
@@ -41,10 +45,7 @@ DecorTemplate::~DecorTemplate()
 
 }
 
-// thor::Animator<sf::Sprite, std::string> *DecorTemplate::getAnimathor(){
-//     return animathor; 
-//  }
- 
+
 Texture* DecorTemplate::getTexture()
 {
   return texture;

@@ -20,6 +20,58 @@
 			<hp_max>1000</hp_max>
 			<path>unit2.png</path>
 			<range>200</range>
+			<mapAnimTemplate class_id="3" tracking_level="0" version="0">
+				<count>4</count>
+				<item_version>0</item_version>
+				<item class_id="4" tracking_level="0" version="0">
+					<first>moveDown</first>
+					<second class_id="5" tracking_level="0" version="0">
+						<num_Animation>2</num_Animation>
+						<temps>1.5</temps>
+						<rect_hauteur>64</rect_hauteur>
+						<rect_largeur>47</rect_largeur>
+						<nom>moveDown</nom>
+						<debut>0</debut>
+						<fin>6</fin>
+					</second>
+				</item>
+				<item>
+					<first>moveLeft</first>
+					<second>
+						<num_Animation>3</num_Animation>
+						<temps>0.5</temps>
+						<rect_hauteur>64</rect_hauteur>
+						<rect_largeur>47</rect_largeur>
+						<nom>moveLeft</nom>
+						<debut>0</debut>
+						<fin>6</fin>
+					</second>
+				</item>
+				<item>
+					<first>moveRight</first>
+					<second>
+						<num_Animation>1</num_Animation>
+						<temps>2</temps>
+						<rect_hauteur>64</rect_hauteur>
+						<rect_largeur>47</rect_largeur>
+						<nom>moveRight</nom>
+						<debut>0</debut>
+						<fin>6</fin>
+					</second>
+				</item>
+				<item>
+					<first>moveUp</first>
+					<second>
+						<num_Animation>0</num_Animation>
+						<temps>1</temps>
+						<rect_hauteur>64</rect_hauteur>
+						<rect_largeur>47</rect_largeur>
+						<nom>moveUp</nom>
+						<debut>0</debut>
+						<fin>6</fin>
+					</second>
+				</item>
+			</mapAnimTemplate>
 		</second>
 	</item>
 </UnitTemplates>
