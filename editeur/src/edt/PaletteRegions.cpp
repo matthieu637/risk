@@ -39,7 +39,7 @@ void PaletteRegions::init(GUI const *gui, string nom, Modele* m,  Controleur* c)
     fenetre->subscribeEvent(CEGUI::Window::EventShown, CEGUI::Event::Subscriber(&PaletteRegions::onShow, this));
     
     control = c;
-    modele=m;
+    modele = m;
     lbox = static_cast<Listbox*>(WindowManager::getSingleton().createWindow("TaharezLook/Listbox", "PaletteFrames/Regions/ListboxRegions"));
     fenetre->addChildWindow(lbox);
     lbox->setWidth(UDim(1.0f,0));

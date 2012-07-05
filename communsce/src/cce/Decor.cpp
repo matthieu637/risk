@@ -73,7 +73,7 @@ void Decor::setPosition(const sf::Vector2f& position)
 
 sf::CircleShape* Decor::getSelectionCircle()
 {
-    selection_circle->setRadius(getSocleCenter().x);
+//     selection_circle->setRadius(getSocleCenter().x);
     selection_circle->setOutlineThickness(3);
     selection_circle->setOutlineColor(sf::Color(0,150,0,255));
     selection_circle->setFillColor(sf::Color(0,0,0,0));

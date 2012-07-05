@@ -116,9 +116,12 @@ public:
 protected:
     
     set<Decor*, CompareDecorPtr> decors;
-    Decor* d_move;
+
     stack<Decor*> undoDecors; 
     stack<Decor*> redoDecors;
+    
+public:
+    Decor* d_move;
 };
 
 } /* End of namespace cce */

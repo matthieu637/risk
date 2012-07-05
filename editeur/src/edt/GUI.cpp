@@ -11,6 +11,7 @@
 #include "edt/Carte.hpp"
 #include "edt/Modele.hpp"
 #include "edt/Controleur.hpp"
+#include <edt/PaletteInformationSelection.hpp>
 #include "CEGUI/CEGUIScriptModule.h"
 #include "CEGUI/elements/CEGUIScrollbar.h"
 
@@ -32,6 +33,7 @@ void GUI::hidePalette()
     palette_pays->hide();
     palette_regions->hide();
     palette_tile->hide();
+    palette_informationSelection->hide();
 }
 
 void GUI::init(Modele* modele, Controleur* controleur)
@@ -54,7 +56,9 @@ void GUI::loadCustomGUI()
     palette_pays->init(this, "PaletteFrames/Pays", (edt::Controleur*)controleur, (edt::Modele*)modele);
     palette_regions = new PaletteRegions();
     palette_regions->init(this, "PaletteFrames/Regions", modele, controleur);
-
+    palette_informationSelection = new PaletteInformationSelection();
+    palette_informationSelection->init(this, "PaletteFrames/InformationSelection", controleur,  modele);
+    
     cce::Repere* rep = modele->getCarte()->getRepere();
     initScrollPane(rep->getHauteur(), rep->getLargeur());
 }
@@ -76,6 +80,10 @@ void GUI::deleteGUI()
     delete palette_decor;
     delete palette_pays;
     delete palette_regions;
+}
+
+PaletteInformationSelection* GUI::getPaletteInformationSelection(){
+  return palette_informationSelection;
 }
 
 void GUI::updateListRegions(list<string> noms)

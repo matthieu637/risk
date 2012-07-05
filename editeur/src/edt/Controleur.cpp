@@ -4,6 +4,7 @@
 #include "cce/MoteurSFML.hpp"
 #include <cce/CppScriptModule.hpp>
 #include "edt/Console.hpp"
+#include <edt/PaletteInformationSelection.hpp>
 #include <SFML/Window/Event.hpp>
 #include <CEGUI/elements/CEGUIScrollbar.h>
 #include <CEGUI/elements/CEGUIFrameWindow.h>
@@ -21,6 +22,8 @@ namespace edt {
 
 Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Controleur(engine, gui) {
     this->m = m;
+    this->guiEdt = gui;
+    
     selection = false;
     moveDecor = false;
     setSpawn = false;
@@ -47,6 +50,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     Action d_press(sf::Keyboard::D, Action::ReleaseOnce);
     Action p_press(sf::Keyboard::P, Action::ReleaseOnce);
     Action r_press(sf::Keyboard::R, Action::ReleaseOnce);
+    Action i_press(sf::Keyboard::I, Action::ReleaseOnce);
     Action escape_press(sf::Keyboard::Escape, Action::ReleaseOnce);
     Action t_press(sf::Keyboard::T, Action::ReleaseOnce);
     Action rctrl_press(sf::Keyboard::RControl, Action::Hold);
@@ -72,7 +76,7 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     map["placer_objet"] = drag_left || left_release;
     map["supprimer_objet"] = right_release;
     map["selection"] = space_press;
-    map["choix_palette"] = t_press || d_press || p_press || r_press;
+    map["choix_palette"] = t_press || d_press || p_press || r_press || i_press;
     map["console"] = c_press;
     map["close_gui"] = escape_press;
     map["move_poly"] = mouse_move;
@@ -159,6 +163,11 @@ void Controleur::onStartMoveDecor(thor::ActionContext < string > context) {
     clickY = getY(mousePosition.y);
     m->setDecorMove(clickX, clickY);
     moveDecor = true;
+    
+    //actions suivantes necessaires à la mise à jour de la palette InformationSelection
+    m->setCurrentSelection(clickX,clickY);
+    this->guiEdt->getPaletteInformationSelection()->setCurrentSelection(m->getCurrentSelection());
+    
 }
 
 void Controleur::onStopMoveDecor(thor::ActionContext < string > context) {
@@ -226,9 +235,11 @@ void Controleur::onChoixPaletteThor(thor::ActionContext < string > context) {
 	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Pays");
     else if(key.code == sf::Keyboard::R)
 	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/Regions");
-    
-    CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
-    onChoixPalette(wea);
+    else if(key.code == sf::Keyboard::I)
+	mi = (CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("Palettes/InformationSelection");
+	
+      CEGUI::WindowEventArgs wea = CEGUI::WindowEventArgs(mi);
+      onChoixPalette(wea);
 }
 
 void Controleur::onChooseSpawn(thor::ActionContext < string > context) {
@@ -286,7 +297,7 @@ bool Controleur::onSetFlag(const CEGUI::EventArgs &e)
 }
 
 bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
-{
+{	
     const CEGUI::WindowEventArgs& wea = static_cast<const CEGUI::WindowEventArgs&>(e);
     CEGUI::FrameWindow* fw = static_cast<CEGUI::FrameWindow*>(wea.window);
     const string nom = fw->getName().c_str();
@@ -298,6 +309,11 @@ bool Controleur::onChoixPalette(const CEGUI::EventArgs & e)
 	m->selectPalette(regions);
     else if(nom == "Palettes/Pays")
         m->selectPalette(pays);
+    else if(nom == "Palettes/InformationSelection")
+      if(selection){
+	m->selectPalette(informationSelection);
+      }
+
     return true;
 }
 
@@ -393,6 +409,9 @@ bool Controleur::onRedo(const CEGUI::EventArgs & e) {
 bool Controleur::onSelection(const CEGUI::EventArgs & e) {
     (void) e;
     selection = !selection;
+    if(selection == false){
+     guiEdt->getPaletteInformationSelection()->hide(); 
+    }
     return true;
 }
 
@@ -411,5 +430,7 @@ bool Controleur::onMainScrollHoriChange(const CEGUI::EventArgs & e) {
     m->moveScrollHori(sb->getScrollPosition());
     return true;
 }
+
+
 
 }

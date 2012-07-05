@@ -28,4 +28,9 @@
 	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
 	  <Event Name="Clicked" Function="choix_palette" />
       </Window>
+      <Window Type="TaharezLook/MenuItem" Name="Palettes/InformationSelection" >
+	  <Property Name="Text" Value="Informations sur selection" />
+	  <Property Name="UnifiedMaxSize" Value="{{1,0},{1,0}}" />
+	  <Event Name="Clicked" Function="choix_palette" />
+      </Window>
 </Window>

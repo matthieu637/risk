@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <cce/Modele.hpp>
+#include <cce/Decor.hpp>
 #include <string>
 
 
@@ -20,11 +21,12 @@ namespace edt {
 
 enum palette_type
 {
-    tiles, decors, regions, pays
+    tiles, decors, regions, pays, informationSelection
 };
 
 class Vue;
 class Repere;
+
 
 class Modele:public cce::Modele {
 
@@ -98,6 +100,16 @@ public:
 ///   
     void setCurrentRegion(const string& nom);
 
+ ///
+///\brief Changer le décor sur lequel on opère
+///   
+    void setCurrentSelection(int x, int y);
+
+///
+///\brief Retourne le pointeur du décor actuellement modifié
+///   
+    cce::Decor* getCurrentSelection();
+
 ///
 ///\brief Changer le decorTemplate à placer par son id
 ///
@@ -156,6 +168,7 @@ public:
     palette_type palette;
     string current_pays;
     string current_region;
+    cce::Decor* current_selection;
     cce::TileTemplate * tt;
     cce::DecorTemplate * dt;
     sf::ConvexShape* poly;

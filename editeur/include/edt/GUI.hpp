@@ -15,6 +15,7 @@ class PaletteTile;
 class PaletteDecor;
 class PaletteRegions;
 class PalettePays;
+class PaletteInformationSelection;
 class Console;
   
 class GUI : public cce::GUI
@@ -30,6 +31,8 @@ public:
     edt::Console* getConsole(){return (edt::Console*) console; } 
     void loadCustomGUI();
     void deleteGUI();
+    PaletteInformationSelection* getPaletteInformationSelection();
+
 private:
     
 
@@ -40,6 +43,7 @@ private:
     PaletteDecor* palette_decor;
     PaletteRegions* palette_regions;
     PalettePays* palette_pays;
+    PaletteInformationSelection* palette_informationSelection;
 };
 
 }

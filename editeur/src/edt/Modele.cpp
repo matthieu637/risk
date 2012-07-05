@@ -33,7 +33,8 @@ Modele::Modele():cce::Modele() {
 
     current_map = "";
     current_pays = "";
-
+    current_selection = nullptr;
+    
     poly = nullptr;
 }
 
@@ -287,12 +288,23 @@ void Modele::setCurrentRegion(const string& nom)
     current_region = nom;
 }
 
+void Modele::setCurrentSelection(int x, int y)
+{
+    cce::Decor* d = carte->getCoucheDecor()->getDecor(x,y);
+    current_selection = d;
+}
+
+cce::Decor* Modele::getCurrentSelection(){
+  return current_selection;
+}
+
 void Modele::selectPalette(palette_type p)
 {
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Tiles"))->setVisible(false);
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Decors"))->setVisible(false);
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Regions"))->setVisible(false);
     ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Pays"))->setVisible(false);
+    ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/InformationSelection"))->setVisible(false);
     palette = p;
     switch(p)
     {
@@ -307,6 +319,9 @@ void Modele::selectPalette(palette_type p)
         break;
     case regions:
         ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/Regions"))->setVisible(true);
+        break;
+    case informationSelection:
+        ((CEGUI::FrameWindow*)CEGUI::WindowManager::getSingleton().getWindow("PaletteFrames/InformationSelection"))->setVisible(true);
         break;
     }
 }
@@ -361,8 +376,13 @@ void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     cce::Modele::draw(target, states);
     if(poly != nullptr) {
-        target.draw(*poly, states);
+        target.draw(*poly,states);
     }
+   /* if(carte->getCoucheDecor()->d_move != nullptr){
+      if(carte->getCoucheDecor()->d_move->getSelectionCircle() != nullptr){
+	target.draw(*carte->getCoucheDecor()->d_move->getSelectionCircle());
+      }	
+   }*/
 }
 
 

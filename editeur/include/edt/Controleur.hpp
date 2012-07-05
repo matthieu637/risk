@@ -75,6 +75,7 @@ namespace cce {
 	int clickX, clickY;
 	bool moveCam, moveDecor, selection, setSpawn, setFlag;
 	Modele *m;
+	GUI* guiEdt;
     };
 
 }
