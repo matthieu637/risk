@@ -50,7 +50,7 @@ public:
     int getX(int mouseX);
     int getY(int mouseY);
     
-    void spawnUnit(thor::ActionContext < string > context);
+    void spawnUnits(thor::ActionContext < string > context);
 
       
     bool getAttackMode();

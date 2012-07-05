@@ -12,7 +12,7 @@ namespace cli
 {
 
 class Joueur;
-
+class Damier;
 class Unit;
   
 class CoucheDecor: public cce::CoucheDecor{
@@ -23,21 +23,21 @@ public:
 
     ~CoucheDecor();
     
-    void init();
+    void init(int largeurRepere, int hauteurRepere);
     
     void addUnit(Unit* u);
     
     void removeUnit(Unit* u);
 
 ///
-///\brief liste des unités dont le socle est dans le rectangle
-///
-    list<Unit*> getUnitsInRect(sf::FloatRect* rectangleSelection);
-
-///
 ///\brief unité visible au point cliqué
 ///
     Unit* getUnit(sf::Vector2f position);
+
+///
+///\brief liste des unités dont le socle est dans le rectangle
+///
+    list<Unit*> getUnitsInRect(sf::FloatRect* rectangleSelection);
 
 ///
 ///\brief unité ennemie la plus proche de position dans le cercle de rayon range.
@@ -59,6 +59,7 @@ public:
 
 private:
     set<Unit*>* allUnits;
+    Damier* damier_units;
 };
 
 }

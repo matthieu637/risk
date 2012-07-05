@@ -89,6 +89,11 @@ Controleur::Controleur(cce::MoteurSFML * engine, Modele * m, GUI * gui):cce::Con
     
     //Initialize variables for Action
     shiftBool = false;
+    
+    //testo spawn
+    Action add_press(sf::Keyboard::Add, Action::PressOnce);
+    map["spawnUnits"] = add_press;
+    system.connect("spawnUnits", BIND(&Controleur::spawnUnits));
 }
 void Controleur::onStartCam(thor::ActionContext < string > context)
 {
@@ -137,6 +142,12 @@ void Controleur::onZoom(thor::ActionContext < string > context)
 bool Controleur::onWindowResized(thor::ActionContext<string> context)
 {
     m->windowResized(context.event->size.width, context.event->size.height);
+    
+    //dimensions camera une fois la fenetre resized
+    int cameraL = engine->getView()->getSize().x;
+    int cameraH = engine->getView()->getSize().y;
+    //deplacement nul pour éviter que le champ de la cam déborde de la map
+    m->moveView(0, 0, cameraL, cameraH);
     return true;
 }
 
@@ -144,6 +155,12 @@ void Controleur::onResetZoom(thor::ActionContext < string > context)
 {
     (void) context;
     m->resetZoom();
+    
+    //dimensions camera une fois le zoom effectué
+    int cameraL = engine->getView()->getSize().x;
+    int cameraH = engine->getView()->getSize().y;
+    //deplacement nul pour éviter que le champ de la cam déborde de la map
+    m->moveView(0, 0, cameraL, cameraH);
 }
 
 int Controleur::getX(int mouseX)
@@ -220,6 +237,15 @@ void Controleur::onattack(thor::ActionContext < string > context){
     sf::Vector2i attackPosition = sf::Vector2i(getX(mousePosition.x), getY(mousePosition.y));
     m->on_attack(attackPosition);
     attackMode = false;
+}
+
+void Controleur::spawnUnits(thor::ActionContext < string > context)
+{
+  (void)context;
+    for(int i=1;i<100;i++){
+      m->spawnUnit(300000000,100+i*50,150, 1);
+      m->spawnUnit(300000000,101+i*50,1000, 2);
+    }
 }
 
 }

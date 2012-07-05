@@ -24,7 +24,7 @@ Modele::Modele():cce::Modele()
 {
     carte = bib::XMLEngine::load <cli::Carte>("Carte", "data/map/sf/alpha.map");
     // carte = new Carte; FIXME
-    getCoucheDecor()->init();
+    getCoucheDecor()->init(carte->getRepere()->largeur_pixels, carte->getRepere()->hauteur_pixels);
     
     coeff_zoom = 1;
     
@@ -43,11 +43,6 @@ Modele::Modele():cce::Modele()
     
     for(int i=1; i<=nbJoueurs; i++)
       players[i] = Joueur(i, player_color::rouge, nbJoueurs);
-    
-    for(int i=1;i<1000;i++){
-      spawnUnit(300000000,100+i*2,150, 1);
-      spawnUnit(300000000,101+i*2,1000, 2);
-    }
 }
 
 Modele::~Modele() {

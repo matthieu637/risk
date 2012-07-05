@@ -99,10 +99,10 @@ int Joueur::getGold()
 
 list<Unit*> Joueur::getUnitsInRect(sf::FloatRect rectangleSelection)
 {
-    list<Unit*> liste;
-    list<Unit*>::iterator it;
-    for(it = units.begin(); it != units.end(); it++)
-      if(rectangleSelection.contains((*it)->getPosition().x + (*it)->getSocleCenter().x, (*it)->getPosition().y + (*it)->getSocleCenter().y)) 
-	liste.push_back(*it);
-    return liste;
+  list<Unit*> liste;
+  list<Unit*>::iterator it;
+  for(it = units.begin(); it != units.end(); it++)
+    if(rectangleSelection.contains((*it)->getPosition().x + (*it)->getSocleCenter().x, (*it)->getPosition().y + (*it)->getSocleCenter().y)) 
+      liste.push_back(*it);
+  return liste;
 }

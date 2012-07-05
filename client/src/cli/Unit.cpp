@@ -71,6 +71,7 @@ order Unit::getOrder()
 void Unit::orderStop()
 {
     current_order = order::stop;
+    checkAggro();
 }
 
 void Unit::orderMove(sf::Vector2i point)
@@ -82,7 +83,7 @@ void Unit::orderMove(sf::Vector2i point)
 void Unit::orderFollow(Unit* to_follow)
 {
     if(this == to_follow){
-      current_order = order::stop;
+      orderStop();
       return;
     }
     if(current_order == order::follow || current_order == order::attack)
@@ -96,7 +97,7 @@ void Unit::orderFollow(Unit* to_follow)
 void Unit::orderAttack(Unit* to_attack)
 {
     if(this == to_attack){
-      current_order = order::stop;
+      orderStop();
       return;
     }
     if(current_order == order::follow || current_order == order::attack)
@@ -110,7 +111,6 @@ void Unit::applyOrder()
 {
     switch(current_order){
       case order::stop:
-// 	checkAggro();
 	break;
       case order::move:
 	deplacer();
@@ -151,7 +151,7 @@ void Unit::deplacer()
     if(distance < speed){ //si la destination est à portée de speed
       deplacement = to_go; // on va jusqu'à destination
       if(current_order == order::move)
-	current_order = order::stop;
+	orderStop();
     }
     else
       deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
