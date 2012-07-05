@@ -51,20 +51,9 @@ Unit* CoucheDecor::closestEnemyInRange(int range, sf::Vector2f position, Joueur*
     return damier_units->closestEnemyInRange(range, position, j);
 }
 
-bool CoucheDecor::collision(cce::Decor* d, sf::Vector2f position) //optimiser avec une fonction collisionUnit (les decors sont fixes pour le pathfinding)
+bool CoucheDecor::collision(Unit* u, sf::Vector2f position) //optimiser avec une fonction collisionUnit (les decors sont fixes pour le pathfinding)
 {
-    sf::Vector2f distance;
-    float d_rad = d->getSelectionCircle()->getRadius();
-    float it_rad;
-    
-    set<cce::Decor*>::iterator it;
-    for(it = decors.begin(); it != decors.end(); it++) {
-      distance = position - (*it)->getSocleCenterGlobal();
-      it_rad = (*it)->getSelectionCircle()->getRadius();
-      if(sqrt(distance.x * distance.x + distance.y * distance.y) < d_rad + it_rad)
-	return true;
-    }
-    return false;
+    return damier_units->collision(u, position);
 }
 
 set<Unit*>* CoucheDecor::getAllUnits()

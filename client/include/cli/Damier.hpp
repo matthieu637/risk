@@ -47,8 +47,18 @@ public:
 ///\brief unité ennemie la plus proche de position dans le cercle de rayon range.
 ///
     Unit* closestEnemyInRange(int range, sf::Vector2f position, Joueur* j);
+
+///
+///\brief savoir si un décor entre en collision avec un autre
+///\param u: unit à tester
+///\param position: la position où le tester
+///\return true si ce décor entre en collision avec un autre à l'endroit indiqué
+///
+    bool collision(Unit* u, sf::Vector2f position);
     
 private:
+  
+  set<Unit*>* getSquare(int ligne, int colonne);
   
   vector<vector<set<Unit*>*>*>* damier;
   

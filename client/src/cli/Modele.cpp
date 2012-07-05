@@ -55,10 +55,11 @@ void Modele::update()
     set<Unit*>::iterator it;
     set<Unit*> allunits = *getCoucheDecor()->getAllUnits();
     for(it = allunits.begin(); it !=  allunits.end(); ++it)
-      (*it)->applyOrder();
+      if((*it) != nullptr)
+	(*it)->applyOrder();
     //detruire les unités mortes
     for(it = getCoucheDecor()->getAllUnits()->begin(); it !=  getCoucheDecor()->getAllUnits()->end(); ++it)
-      if((*it)->isDead())
+      if((*it) != nullptr && (*it)->isDead())
 	deleteUnit(*it);
 }
 
@@ -67,6 +68,7 @@ void Modele::spawnUnit(int id, int x, int y, int joueur)
     Unit* u = new Unit(this, &players[joueur]);
     u->setId(id);
     u->setPosition(x,y);
+    u->animate();
     getCoucheDecor()->addUnit(u);
     players[joueur].addUnit(u);
 }
@@ -226,7 +228,6 @@ void Modele::deleteUnit(Unit* u)
     u->getOwner()->removeUnit(u);
     this->removeUnitSelection(u);
     delete u;
-
 }
 
 void Modele::draw(sf::RenderTarget& target, sf::RenderStates states) const

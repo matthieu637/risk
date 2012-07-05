@@ -28,7 +28,7 @@ void Damier::addUnit(Unit* u)
     int ligne = u->getSocleCenterGlobal().y / size_square_damier;
     int colonne = u->getSocleCenterGlobal().x / size_square_damier;
     
-    damier->at(ligne)->at(colonne)->insert(u);
+    getSquare(ligne,colonne)->insert(u);
 }
 
 void Damier::removeUnit(Unit* u)
@@ -36,7 +36,7 @@ void Damier::removeUnit(Unit* u)
     int ligne = u->getSocleCenterGlobal().y / size_square_damier;
     int colonne = u->getSocleCenterGlobal().x / size_square_damier;
     
-    damier->at(ligne)->at(colonne)->erase(u);
+    getSquare(ligne,colonne)->erase(u);
 }
 
 Unit* Damier::getUnit(sf::Vector2f position)
@@ -61,7 +61,7 @@ Unit* Damier::getUnit(sf::Vector2f position)
     
     for(int i = ligne_max; i >= ligne_min; i--)
       for(int j = colonne_max; j >= colonne_min; j--)
-	for(it = damier->at(i)->at(j)->rbegin(); it != damier->at(i)->at(j)->rend(); it++)
+	for(it = getSquare(i,j)->rbegin(); it != getSquare(i,j)->rend(); it++)
 	  if((*it)->getGlobalBounds().contains(position)) {
 	    a = (*it)->getTexture()->copyToImage().getPixel(position.x - (*it)->getPosition().x, position.y - (*it)->getPosition().y).a;
 	    if(a > 122) //pixel transparent? Permet de détecter véritablement l'unité cliquée lorsqu'elles sont superposées
@@ -85,7 +85,7 @@ Unit* Damier::closestEnemyInRange(int range, sf::Vector2f position, Joueur* j)
     sf::Vector2f distance;
     
     for(it = liste.begin(); it != liste.end(); it++){
-      if(j->isAllied((*it)->getOwner()->getNumber()) || (*it)->isDead()) // joueur allié (ou soi) ou unité morte
+      if(((*it)->getOwner() != nullptr && j->isAllied((*it)->getOwner()->getNumber())) || (*it)->isDead()) // joueur allié (ou soi) ou unité morte
 	continue;
       
       distance = position - (*it)->getPosition();
@@ -124,9 +124,49 @@ list<Unit*> Damier::getUnitsInRect(sf::FloatRect* rectangleSelection)
     
     for(int i = ligne_max; i >= ligne_min; i--)
       for(int j = colonne_max; j >= colonne_min; j--)
-	for(it = damier->at(i)->at(j)->begin(); it != damier->at(i)->at(j)->end(); it++)
-	  if(rectangleSelection->contains((*it)->getSocleCenterGlobal().x, (*it)->getSocleCenterGlobal().y)) 
+	for(it = getSquare(i,j)->begin(); it != getSquare(i,j)->end(); it++)
+	  if(rectangleSelection->contains((*it)->getSocleCenterGlobal())) 
 	    liste.push_back(*it);
     
     return liste;
+}
+
+bool Damier::collision(Unit* u, sf::Vector2f position) //optimiser avec une fonction collisionUnit (les decors sont fixes pour le pathfinding)
+{
+    sf::Vector2f distance;
+    float d_rad = u->getSelectionCircle()->getRadius();
+    float it_rad;
+    
+    //on fouille dans le carré qui contient la position, et ceux autour.
+    int ligne_max = position.y / size_square_damier + 1;
+    int colonne_max = position.x / size_square_damier + 1;
+    int ligne_min = ligne_max - 2;
+    int colonne_min = colonne_max - 2;
+    
+    if(ligne_max >= nb_lignes)
+      ligne_max = nb_lignes - 1;
+    if(colonne_max >= nb_colonnes)
+      colonne_max = nb_colonnes - 1;
+    if(ligne_min < 0)
+      ligne_min = 0;
+    if(colonne_min < 0)
+      colonne_min = 0;
+    
+    set<Unit*>::iterator it;
+    for(int i = ligne_max; i >= ligne_min; i--)
+      for(int j = colonne_max; j >= colonne_min; j--)
+	for(it = getSquare(i,j)->begin(); it != getSquare(i,j)->end(); it++) {
+	  if((*it) == u)
+	    continue;
+	  distance = position - (*it)->getSocleCenterGlobal();
+	  it_rad = (*it)->getSelectionCircle()->getRadius();
+	  if(sqrt(distance.x * distance.x + distance.y * distance.y) < d_rad + it_rad)
+	    return true;
+    }
+    return false;
+}
+
+set<Unit*>* Damier::getSquare(int ligne, int colonne)
+{
+  return damier->at(ligne)->at(colonne);
 }

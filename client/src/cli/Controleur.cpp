@@ -270,7 +270,7 @@ void Controleur::spawnUnits(thor::ActionContext < string > context)
   (void)context;
     for(int i=1;i<100;i++){
       m->spawnUnit(300000000,100+i*50,150, 1);
-      m->spawnUnit(300000000,101+i*50,1000, 2);
+      m->spawnUnit(300000000,105+i*50,1000, 2);
     }
 }
 

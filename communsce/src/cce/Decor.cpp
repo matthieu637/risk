@@ -93,6 +93,7 @@ sf::Vector2f Decor::getSocleCenter()
 
 sf::Vector2f Decor::getSocleCenterGlobal()
 {
+    socleGlobal = getPosition() + getSocleCenter();
     return socleGlobal;
 }
 
