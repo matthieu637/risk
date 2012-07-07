@@ -2,7 +2,6 @@
 #define UNIT_HPP
 
 #include "cce/Decor.hpp"
-#include "cce/Animation.hpp"
 #include "cce/UnitTemplate.hpp"
 #include <set>
 
@@ -104,7 +103,6 @@ namespace cli{
     
     private :
 	cce::UnitTemplate *unitTemplate;
-	map<string,cce::Animation*> anim;
 	
 	sf::Vector2f destination, deplacement;
 	order current_order;

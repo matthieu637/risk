@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include <Thor/Animation.hpp>
 #include "cce/AnimationTemplate.hpp"
+#include "DecorTemplate.hpp"
 #include <map>
 
 using std::map;
@@ -27,7 +28,7 @@ enum defence_type
     tough, reflection, shield, massive
 };
 
-class UnitTemplate
+class UnitTemplate : public DecorTemplate
 {
 
 public:
@@ -54,22 +55,6 @@ public:
 	ar & make_nvp("range", range);	
 	
 	ar & make_nvp("mapAnimTemplate", mapAnimTemplate);
-	//boost::serialization::split_member(ar, *this, version);
-    }
-    
-    template<class Archive>
-    void save(Archive& ar, const unsigned int version) const {
-// 	map<std::string,AnimationTemplate>  mapAnimTemplate;
-// 	mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",0,0,6,64,47,1);
-// 	mapAnimTemplate["moveRight"] = AnimationTemplate("moveRight",1,0,6,64,47,1);
-// 	mapAnimTemplate["moveDown"] = AnimationTemplate("moveDown",2,0,6,64,47,1);
-// 	mapAnimTemplate["moveLeft"] = AnimationTemplate("moveLeft",3,0,6,64,47,1);
-// 	ar & make_nvp("mapAnimTemplate", mapAnimTemplate);
-    }
-
-    template<class Archive>
-    void load( Archive & ar, const unsigned int file_version ) {
-      
     }
 
 ///
@@ -122,7 +107,6 @@ public:
     damage_type getDamageType();
     defence_type getDefenseType();
 
-    void initAnimation();
     
 
 ///
@@ -140,10 +124,6 @@ public:
 ///\brief Vitesse de déplacement en pixels/seconde?
 ///
     int getMoveSpeed();
- 
-//     AnimationTemplate* getMapTemplate();
-    map<std::string,AnimationTemplate> * getMapTemplate();
-
     
 ///
 ///\brief Portée d'attaque de l'unité
@@ -156,14 +136,12 @@ public:
     int getHP();
 
 private:
-    int id, dmg_min, dmg_max, defence, move_speed, attack_speed, hp_max;
-    string nom, description, path;
+    int dmg_min, dmg_max, defence, move_speed, attack_speed, hp_max;
+    string nom, description;
     bool collision_;
     float range;
     damage_type dmg_type;
     defence_type def_type;
-    Texture *texture;
-    map<std::string,AnimationTemplate>  mapAnimTemplate;
     
     sf::CircleShape* selection_circle;
 

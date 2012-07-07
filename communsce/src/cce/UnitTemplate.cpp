@@ -6,39 +6,16 @@ namespace cce {
 
 UnitTemplate::UnitTemplate()
 {
-//     dmg_min = 10;
-//     dmg_max = 100;
-//     defence = 40;
-//     move_speed = 100;
-//     attack_speed = 100;
-//     nom="WOL";
-//     description = "Wake On Lan, ç é ?";
-//     collision_ = true;
-//     dmg_type = laser;
-//     def_type = acier;
-
- mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",0,0,6,64,47,1);
- mapAnimTemplate["moveRight"] = AnimationTemplate("moveRight",1,0,6,64,47,2);
- mapAnimTemplate["moveDown"] = AnimationTemplate("moveDown",2,0,6,64,47,1.5);
- mapAnimTemplate["moveLeft"] = AnimationTemplate("moveLeft",3,0,6,64,47,0.5);
-}
-
-// AnimationTemplate *UnitTemplate::getMapTemplate(){
-//     return &mapAnimTemplate["moveLeft"];
-// }
-
-map<std::string,AnimationTemplate> *UnitTemplate::getMapTemplate(){
-    return &mapAnimTemplate;
+  
 }
 
 void UnitTemplate::loadAfterXML(int id)
 {
     this->id = id;
-    
+
     //à supprimer pour ne pas charger toutes les textures des unités en mémoire
     ImageManager::getInstance()->load_asset(id, path);
     texture = &ImageManager::getInstance()->get_asset(id);
-    initAnimation();
 }
 
 UnitTemplate::~UnitTemplate()
@@ -46,15 +23,6 @@ UnitTemplate::~UnitTemplate()
 
 }
 
- void UnitTemplate::initAnimation()
-{
-   // Specify static subrect which is shown unless an other animation is active
-  thor::FrameAnimation defaultAnim;
-  defaultAnim.addFrame(1.f, sf::IntRect(0, 0, texture->getSize().x, texture->getSize().y));
-  (*getMapTemplate())["moveUp"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
-  (*getMapTemplate())["moveRight"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
-}
- 
 void UnitTemplate::setDamage(int dmg_min, int dmg_max) {
     this->dmg_min = dmg_min;
     this->dmg_max = dmg_max;
@@ -123,7 +91,7 @@ int UnitTemplate::getMoveSpeed() {
 }
 Texture* UnitTemplate::getTexture()
 {
-  return texture;
+    return texture;
 }
 
 int UnitTemplate::getRange()

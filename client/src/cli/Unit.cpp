@@ -19,11 +19,11 @@ Unit::Unit()
 
 void Unit::animate(){  
   // Update animator and apply current animation state to the sprite
-  anim["anim1"]->getTemplate()->getAnimathor()->update(frameClock.restart());
-  anim["anim1"]->getTemplate()->getAnimathor()->animate(*this);
-  
-//   anim["anim2"]->getTemplate()->getAnimathor()->update(frameClock.restart());
-//   anim["anim2"]->getTemplate()->getAnimathor()->animate(*this);
+  cce::Decor::animate();
+  /*
+  animathor.update(frameClock.restart());
+  animathor.animate(*this);
+  */
 }
   
 
@@ -45,12 +45,12 @@ void Unit::setUnitTemplate(cce::UnitTemplate *ut){
       unitTemplate = ut;
       current_hp = ut->getHP();
       attaque_prete = true;
+      ut->initAnimation(&animathor);
+
       
-      anim["anim1"] = new cce::Animation(&(*ut->getMapTemplate())["moveUp"]);
-     // anim["anim2"] = new cce::Animation(&(*ut->getMapTemplate())["moveRight"]);
+      
       if(init){
-	anim["anim1"]->makeAnimation();
-	//anim["anim2"]->makeAnimation();
+	//anim["anim1"]->makeAnimation(&animathor);
 	init = false;
       }
 }

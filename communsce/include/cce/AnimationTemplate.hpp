@@ -15,6 +15,7 @@ namespace cce {
   public:
     AnimationTemplate();
     AnimationTemplate(string n, int num, int deb,int end, float hauteur, float largeur, float tps);
+    void makeAnimation(thor::Animator<sf::Sprite,string> *animptr) const;
     virtual ~AnimationTemplate();
     
     template<class Archive>

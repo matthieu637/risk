@@ -4,20 +4,21 @@
 
 using namespace std;
 
-namespace cce{
+namespace cce {
 
 Decor::Decor(DecorTemplate *_dt, int x, int y) : Sprite()
 {
-  dt = _dt;
-  selection_circle = new sf::CircleShape();//avant setPosition qui le repositionne
-  setPosition(x,y);
-  setTexture(dt->getTexture());
+    dt = _dt;
+    selection_circle = new sf::CircleShape();//avant setPosition qui le repositionne
+    setPosition(x,y);
+    setTexture(dt->getTexture());
+    dt->initAnimation(&animathor);
 }
 
 Decor::Decor()
 {
-  dt = nullptr;
-  selection_circle = new sf::CircleShape();
+    dt = nullptr;
+    selection_circle = new sf::CircleShape();
 }
 
 Decor::~Decor()
@@ -25,14 +26,10 @@ Decor::~Decor()
     delete selection_circle;
 }
 
-void Decor::animate(){  
-  // Update animator and apply current animation state to the sprite
-//    dt->getMapTemplate()->getAnimathor()->update(frameClock.restart());
-//    dt->getMapTemplate()->getAnimathor()->animate(*this);
-  (*dt->getMapTemplate())["moveUp"].getAnimathor()->update(frameClock.restart());
-  (*dt->getMapTemplate())["moveUp"].getAnimathor()->animate(*this);
-   (*dt->getMapTemplate())["moveRight"].getAnimathor()->update(frameClock.restart());
-   (*dt->getMapTemplate())["moveRight"].getAnimathor()->animate(*this);
+void Decor::animate() {
+    // Update animator and apply current animation state to the sprite
+    animathor.update(frameClock.restart());
+    animathor.animate(*this);
 }
 
 DecorTemplate* Decor::getTemplate() const
@@ -44,14 +41,14 @@ DecorTemplate* Decor::getTemplate() const
 void Decor::setTexture(Texture* texture)
 {
     Sprite::setTexture(*texture, true);
-    
+
     yCompare = getPosition().y + getLocalBounds().height *3/4;
 }
 
 void Decor::move(float offsetX, float offsetY)
 {
     Sprite::move(offsetX, offsetY);
-    
+
     yCompare = getPosition().y + getLocalBounds().height *3/4;
     socleGlobal = getPosition() + getSocleCenter();
     selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y);
@@ -60,7 +57,7 @@ void Decor::move(float offsetX, float offsetY)
 void Decor::setPosition(float x, float y)
 {
     Sprite::setPosition(x, y);
-    
+
     yCompare = getPosition().y + getLocalBounds().height *3/4;
     socleGlobal = getPosition() + getSocleCenter();
     selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y);
@@ -69,7 +66,7 @@ void Decor::setPosition(float x, float y)
 void Decor::setPosition(const sf::Vector2f& position)
 {
     Sprite::setPosition(position);
-    
+
     yCompare = getPosition().y + getLocalBounds().height *3/4;
     socleGlobal = getPosition() + getSocleCenter();
     selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y);
@@ -100,9 +97,9 @@ sf::Vector2f Decor::getSocleCenterGlobal()
 bool Decor::inferieurA(const Decor &d) const
 {
     if(yCompare < d.yCompare)
-	return true;
+        return true;
     else if(yCompare == d.yCompare)
-	return getPosition().x < d.getPosition().x;
+        return getPosition().x < d.getPosition().x;
     return false;
 }
 
@@ -111,10 +108,9 @@ bool operator<(Decor const &d1, Decor const &d2)
     return d1.inferieurA(d2);
 }
 
-void Decor::unpause(){
-  frameClock.restart();
-  
+void Decor::unpause() {
+    frameClock.restart();
 }
-  
+
 
 }

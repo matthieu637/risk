@@ -1,7 +1,7 @@
 #include "cce/DecorTemplate.hpp"
 #include "cce/ImageManager.hpp"
 
-namespace cce{
+namespace cce {
 
 DecorTemplate::DecorTemplate()
 {
@@ -10,33 +10,20 @@ DecorTemplate::DecorTemplate()
 
 void DecorTemplate::loadAfterXML(int id)
 {
-  this->id = id;
-  
-  //à supprimer pour ne pas charger tous les décors en mémoire
-  ImageManager::getInstance()->load_asset(id, path);
-  
-  texture = &ImageManager::getInstance()->get_asset(id);
-  initAnimation(); 
+    this->id = id;
+
+    //à supprimer pour ne pas charger tous les décors en mémoire
+    ImageManager::getInstance()->load_asset(id, path);
+
+    texture = &ImageManager::getInstance()->get_asset(id);
 }
 
-// AnimationTemplate *DecorTemplate::getMapTemplate(){
-//     return &mapAnimTemplate["moveUp"];
-// }
 
-map<std::string,AnimationTemplate> *DecorTemplate::getMapTemplate(){
-    return &mapAnimTemplate;
-}
-
-void DecorTemplate::initAnimation()
+void DecorTemplate::initAnimation(thor::Animator<sf::Sprite,string> *animptr)
 {
-   // Specify static subrect which is shown unless an other animation is active
-  thor::FrameAnimation defaultAnim;
-  defaultAnim.addFrame(1.f, sf::IntRect(0, 0, texture->getSize().x, texture->getSize().y)); 
-  // Register animations with their corresponding durations
-  (*getMapTemplate())["moveUp"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
-  (*getMapTemplate())["moveRight"].getAnimathor()->setDefaultAnimation(defaultAnim, sf::seconds(1.f));
-  
-
+    map<std::string,AnimationTemplate>::const_iterator it;
+    for( it = mapAnimTemplate.begin(); it != mapAnimTemplate.end() ; it++)
+        it->second.makeAnimation(animptr);
 }
 
 
@@ -48,17 +35,17 @@ DecorTemplate::~DecorTemplate()
 
 Texture* DecorTemplate::getTexture()
 {
-  return texture;
+    return texture;
 }
 
 int DecorTemplate::getID()
 {
-  return id;
+    return id;
 }
 
 bool DecorTemplate::bloquant()
 {
-  return bloquant_;
+    return bloquant_;
 }
 
 }

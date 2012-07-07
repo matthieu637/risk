@@ -38,9 +38,7 @@ public:
 ///
     int getID();
     
-//     AnimationTemplate* getMapTemplate();
-    map<std::string,AnimationTemplate> * getMapTemplate();
-    void initAnimation();
+    void initAnimation(thor::Animator<sf::Sprite,string> *animptr);
     
 ///
 ///\brief Le Decor est-elle passable?
@@ -63,33 +61,17 @@ public:
 	ar & make_nvp("bloquant", bloquant_);
 	
 	ar & make_nvp("mapAnimTemplate", mapAnimTemplate);
-//         boost::serialization::split_member(ar, *this, version);
     }
-    
-     template<class Archive>
-    void save(Archive& ar, const unsigned int version) const {
-// 	map<std::string,AnimationTemplate>  mapAnimTemplate;
-// 	 mapAnimTemplate["moveUp"] = AnimationTemplate("moveUp",0,64,47,1);
-// 	 mapAnimTemplate["moveRight"] = AnimationTemplate("moveRight",1,64,47,1);
-// 	 mapAnimTemplate["moveDown"] = AnimationTemplate("moveDown",2,64,47,1);
-// 	 mapAnimTemplate["moveLeft"] = AnimationTemplate("moveLeft",3,64,47,1);
-// 	ar & make_nvp("mapAnimTemplate", mapAnimTemplate);
-    }
-
-    template<class Archive>
-    void load( Archive & ar, const unsigned int file_version ) {
-      
-    }
-
     
     void loadAfterXML(int id);
     
 private:
-    int id;
     bool bloquant_;
+    
+protected:
+    int id;
     string path;
     Texture *texture;
-
     map<std::string,AnimationTemplate>  mapAnimTemplate;
 };
 
