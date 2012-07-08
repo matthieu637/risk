@@ -44,7 +44,8 @@ Modele::Modele():cce::Modele()
     for(int i=1; i<=nbJoueurs; i++)
       players[i] = Joueur(i, player_color::rouge, nbJoueurs);
     
-    spawnUnit(300000000, 200, 200, 0);
+    spawnUnit(300000000, 200, 200, 1);
+    spawnUnit(300000000, 600, 200, 1);
 }
 
 Modele::~Modele() {

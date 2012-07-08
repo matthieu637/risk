@@ -50,6 +50,11 @@ namespace cli{
 ///\brief Vérifie si des unités ennemies sont à portée d'aggro.
 ///
       void checkAggro();
+      
+///
+///\brief Cherche la bonne animation pour l'unité
+///
+      void defineAnimation();
 
 ///
 ///\brief Attaque si à portée, sinon déplacement.

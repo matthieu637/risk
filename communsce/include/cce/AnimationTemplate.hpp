@@ -14,8 +14,8 @@ namespace cce {
   {
   public:
     AnimationTemplate();
-    AnimationTemplate(string n, int num, int deb,int end, float hauteur, float largeur, float tps);
-    void makeAnimation(thor::Animator<sf::Sprite,string> *animptr) const;
+    AnimationTemplate(int num, int deb,int end, float hauteur, float largeur, float tps);
+    void makeAnimation(thor::Animator<sf::Sprite,string> *animptr, const string& nom) const;
     virtual ~AnimationTemplate();
     
     template<class Archive>
@@ -25,12 +25,10 @@ namespace cce {
 	ar & make_nvp("temps",temps);
 	ar & make_nvp("rect_hauteur", rect_hauteur);
 	ar & make_nvp("rect_largeur", rect_largeur);
-	ar & make_nvp("nom", nom);
 	ar & make_nvp("debut",debut);
 	ar & make_nvp("fin", fin);
     }
     
-    string getNom();
     int getNum_Animation();// = l'animation se trouve à quelle ligne
     int getDebut();// on commence à quelle image de la ligne
     int getFin();// on finit à quelle image de la ligne
@@ -41,7 +39,6 @@ namespace cce {
     
   private:
     float temps,rect_hauteur,rect_largeur;
-    string nom;
     int num_Animation,debut,fin;
     thor::Animator<sf::Sprite, std::string> animathor;
   

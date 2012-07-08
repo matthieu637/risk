@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -rf client/build/data/ && cp -r editeur/data/ client/build/ && cp -r client/data/ client/build/
+

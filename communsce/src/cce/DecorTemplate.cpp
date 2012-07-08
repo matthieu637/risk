@@ -23,7 +23,8 @@ void DecorTemplate::initAnimation(thor::Animator<sf::Sprite,string> *animptr)
 {
     map<std::string,AnimationTemplate>::const_iterator it;
     for( it = mapAnimTemplate.begin(); it != mapAnimTemplate.end() ; it++)
-        it->second.makeAnimation(animptr);
+        it->second.makeAnimation(animptr, it->first);
+    animptr->playAnimation("static");
 }
 
 

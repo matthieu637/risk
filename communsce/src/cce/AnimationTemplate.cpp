@@ -9,9 +9,8 @@ AnimationTemplate::AnimationTemplate()
 }
 
 
-AnimationTemplate::AnimationTemplate(string n, int num,int deb,int end,float hauteur, float largeur, float tps)
+AnimationTemplate::AnimationTemplate(int num,int deb,int end,float hauteur, float largeur, float tps)
 {
-    nom = n;
     num_Animation = num;
     debut = deb;
     fin = end;
@@ -20,27 +19,20 @@ AnimationTemplate::AnimationTemplate(string n, int num,int deb,int end,float hau
     temps = tps;
 }
 
-void AnimationTemplate::makeAnimation(thor::Animator<sf::Sprite,string> *animptr)  const{
+void AnimationTemplate::makeAnimation(thor::Animator<sf::Sprite,string> *animptr, const string& nom)  const{
 
     thor::FrameAnimation *franim = new thor::FrameAnimation;
     //6 = getTexture().width / largeurFrame
-    for (unsigned int i = debut; i < fin; ++i)
+    for (unsigned int i = debut; i < fin; i++)
         franim->addFrame(1.f, sf::IntRect(rect_largeur*i, num_Animation*rect_hauteur, rect_largeur,  rect_hauteur));
 
     // Register animations with their corresponding durations
     animptr->addAnimation(nom, *franim, sf::seconds(temps));
-    animptr->playAnimation(nom, true);
 }
 
 AnimationTemplate::~AnimationTemplate()
 {
 
-}
-
-
-string AnimationTemplate::getNom()
-{
-    return nom;
 }
 
 int AnimationTemplate::getNum_Animation()

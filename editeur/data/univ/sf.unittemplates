@@ -10,7 +10,7 @@
 			<dmg_min>10</dmg_min>
 			<dmg_max>20</dmg_max>
 			<defence>40</defence>
-			<move_speed>10</move_speed>
+			<move_speed>3</move_speed>
 			<attack_speed>2</attack_speed>
 			<nom>WOL</nom>
 			<description>Wake On Lan, ç é ?</description>
@@ -18,59 +18,110 @@
 			<dmg_type>1</dmg_type>
 			<def_type>0</def_type>
 			<hp_max>1000</hp_max>
-			<path>unit2.png</path>
+			<path>shecil.png</path>
 			<range>200</range>
 			<mapAnimTemplate class_id="3" tracking_level="0" version="0">
-				<count>4</count>
+				<count>9</count>
 				<item_version>0</item_version>
 				<item class_id="4" tracking_level="0" version="0">
-					<first>moveDown</first>
+					<first>static</first>
 					<second class_id="5" tracking_level="0" version="0">
-						<num_Animation>2</num_Animation>
-						<temps>1.5</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveDown</nom>
+						<num_Animation>0</num_Animation>
+						<temps>1</temps>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
 						<debut>0</debut>
-						<fin>6</fin>
+						<fin>1</fin>
+					</second>
+				</item>
+				<item>
+					<first>moveDown</first>
+					<second>
+						<num_Animation>1</num_Animation>
+						<temps>1.</temps>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
+						<debut>0</debut>
+						<fin>8</fin>
 					</second>
 				</item>
 				<item>
 					<first>moveLeft</first>
 					<second>
 						<num_Animation>3</num_Animation>
-						<temps>0.5</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveLeft</nom>
+						<temps>1</temps>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
 						<debut>0</debut>
-						<fin>6</fin>
+						<fin>8</fin>
 					</second>
 				</item>
 				<item>
 					<first>moveRight</first>
 					<second>
-						<num_Animation>1</num_Animation>
+						<num_Animation>7</num_Animation>
 						<temps>2</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveRight</nom>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
 						<debut>0</debut>
-						<fin>6</fin>
+						<fin>8</fin>
 					</second>
 				</item>
 				<item>
 					<first>moveUp</first>
 					<second>
-						<num_Animation>0</num_Animation>
+						<num_Animation>5</num_Animation>
 						<temps>1</temps>
-						<rect_hauteur>64</rect_hauteur>
-						<rect_largeur>47</rect_largeur>
-						<nom>moveUp</nom>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
 						<debut>0</debut>
-						<fin>6</fin>
+						<fin>8</fin>
 					</second>
 				</item>
+				<item>
+					<first>moveUpLeft</first>
+					<second>
+						<num_Animation>4</num_Animation>
+						<temps>1</temps>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
+						<debut>0</debut>
+						<fin>8</fin>
+					</second>
+				</item>
+				<item>
+					<first>moveUpRight</first>
+					<second>
+						<num_Animation>8</num_Animation>
+						<temps>1</temps>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
+						<debut>0</debut>
+						<fin>8</fin>
+					</second>
+				</item>
+				<item>
+					<first>moveDownRight</first>
+					<second>
+						<num_Animation>6</num_Animation>
+						<temps>1</temps>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
+						<debut>0</debut>
+						<fin>8</fin>
+					</second>
+				</item>
+				<item>
+					<first>moveDownLeft</first>
+					<second>
+						<num_Animation>2</num_Animation>
+						<temps>1</temps>
+						<rect_hauteur>80</rect_hauteur>
+						<rect_largeur>48</rect_largeur>
+						<debut>0</debut>
+						<fin>8</fin>
+					</second>
+				</item>	
 			</mapAnimTemplate>
 		</second>
 	</item>
