@@ -194,12 +194,12 @@ void Unit::deplacer()
     }
     else
         deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
-//     if(!m->getCoucheDecor()->collision(this, getSocleCenterGlobal() + deplacement)){
+    if(!m->getCoucheDecor()->collision(this, getSocleCenterGlobal() + deplacement)){
     //déplacement et tri dans l'arbre
     m->getCoucheDecor()->removeUnit(this);
     move(deplacement.x, deplacement.y);
     m->getCoucheDecor()->addUnit(this);
-//     }
+    }
 }
 
 void Unit::attaquer()
@@ -214,12 +214,12 @@ void Unit::attaquer()
 
     if(distance > range) { // pas à portée
         deplacement = to_go / (distance / speed); // distance parcourue déterminée en fonction de la speed
-//       if(!m->getCoucheDecor()->collision(this, getSocleCenterGlobal() + deplacement)){
+      if(!m->getCoucheDecor()->collision(this, getSocleCenterGlobal() + deplacement)){
         //déplacement et tri dans l'arbre
         m->getCoucheDecor()->removeUnit(this);
         move(deplacement.x, deplacement.y);
         m->getCoucheDecor()->addUnit(this);
-//       }
+      }
     }
     else // à portée
         if(this->attaque_prete)
