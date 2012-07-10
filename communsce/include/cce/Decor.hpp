@@ -77,6 +77,11 @@ void unpause();
 ///\brief maj socle sur le changement de position
 ///
       void setPosition(const sf::Vector2f& position);
+
+///
+///\brief maj des parametres qui dépendent de la position
+///
+      void updatePosition();
     
     template<class Archive>
     void serialize(Archive& ar, const unsigned int version) {

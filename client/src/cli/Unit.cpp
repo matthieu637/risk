@@ -45,8 +45,19 @@ void Unit::setUnitTemplate(cce::UnitTemplate *ut) {
     current_hp = ut->getHP();
     attaque_prete = true;
     ut->initAnimation(&animathor);
+    
+    animate();
+    
+    socle = sf::Vector2f(getLocalBounds().width/2, getLocalBounds().height - getLocalBounds().width/2 * ((86.f/156.f) + 1));
+    socleGlobal = getPosition() + getSocleCenter();
+    
+    selection_circle = new sf::CircleShape(); //avant setPosition qui le repositionne (sinon seg fault)
+    selection_circle->setRadius(getSocleCenter().x);
+    selection_circle->setOutlineThickness(3);
+    selection_circle->setOutlineColor(sf::Color(0,150,0,255));
+    selection_circle->setFillColor(sf::Color(0,0,0,0));
+    selection_circle->setPosition(getPosition().x, getPosition().y + getSocleCenter().y - getSocleCenter().x);
 }
-
 
 order Unit::getOrder()
 {
@@ -174,7 +185,7 @@ void Unit::checkAggro()
 {
     Unit* u = m->closestEnemyInRange(distance_aggro, getPosition(), owner);
     if(u != nullptr)
-        orderAttack(u);
+      orderAttack(u);
 }
 
 void Unit::deplacer()
@@ -244,16 +255,16 @@ void Unit::takeDamages(cce::damage_type type_degat, int degats)
     }
 }
 
-bool Unit::isDead() {
-    return dead;
-}
-
 int Unit::rollDamage()
 {
     srand(time(NULL));
     int degats_range = (unitTemplate->getDamageMax() - unitTemplate->getDamageMin() + 1);
     int degats_bonus = rand() % degats_range;
     return unitTemplate->getDamageMin() + degats_bonus;
+}
+
+bool Unit::isDead() {
+    return dead;
 }
 
 Joueur* Unit::getOwner() {
