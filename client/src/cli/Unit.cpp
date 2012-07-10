@@ -78,16 +78,16 @@ void Unit::defineAnimation()
         double teta = 0;
         const double PI = 4.0 * atan(1.0);
 
-        teta = atan( (destination.x - getPosition().x) / (destination.y - getPosition().y) );
+        teta = atan( (destination.x - getSocleCenterGlobal().x) / (destination.y - getSocleCenterGlobal().y) );
 
-        if( destination.y  > getPosition().y ) {
-            if( destination.x > getPosition().x )
+        if( destination.y  > getSocleCenterGlobal().y ) {
+            if( destination.x > getSocleCenterGlobal().x )
                 teta = PI/2 + (PI/2 - teta);
             else
                 teta = PI - teta;
         }
         else {
-            if( destination.x > getPosition().x )
+            if( destination.x > getSocleCenterGlobal().x )
                 teta = - teta;
             else
                 teta = 2*PI - teta;
