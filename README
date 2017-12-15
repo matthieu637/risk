@@ -5,9 +5,15 @@
 ##################################################################
 ##################################################################
 
+Video : https://www.youtube.com/watch?v=3caDUp7Ze8Y
 
 Wiki : https://matthieu-zimmer.net/risk/trac
 
 Diagrammes UML : https://matthieu-zimmer.net/risk/trac/wiki/UML
 
 Compilation : https://matthieu-zimmer.net/risk/trac/wiki/Compiler
+
+SFML : 2
+CEGUI : 0.7.5 (with expat without xerces)
+Thor : d66a5deae72359a2b251dea0f9bdbb71b49df743
+

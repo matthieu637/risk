@@ -2,6 +2,7 @@
 #include "cli/Unit.hpp"
 #include "cli/Joueur.hpp"
 #include "bib/Logger.hpp"
+#include <cmath>
 
 using namespace cli;
 
